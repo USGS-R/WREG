@@ -145,4 +145,15 @@ these idosyncrasies may be bugs in the code.  Further analysis is needed.  For
 information on the specific idiosyncrasies, see the notes for the \code{Legacy}
 input and the links to other functions in this package.
 }
+\examples{
+data("baseData",package="WREG")
+names(baseData$Dependent[2:4])
+names(baseData$Independent[9:14])
+exY <- log(baseData$Dependent$Q1.)
+X1 <- log(baseData$Independent$DRNAREA)
+X2 <- log(baseData$Independent$PRECIP)
+X0 <- rep(1,length(X1))
+exX <- cbind(X0,X1,X2)
+Ex.OLS <- WREG.MLR(Y=exY,X=exX,Reg='OLS')
+}
 
