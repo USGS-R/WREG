@@ -3,3 +3,6 @@
 language: r
 warnings_are_errors: true
 sudo: required
+notifications:
+  email: false
+  slack: cowsc-datascience:xlwhNQU2ry5QwV9M8QsnCd3Z
