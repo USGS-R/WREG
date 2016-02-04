@@ -1,0 +1,24 @@
+# US Geological Survey
+# PeakFQ Flood Frequency Analysis, Provisional Ver. 7.0 dated 05/08/2013
+#
+# Analyzed: 06/11/2014 17:19
+#
+# Empirical Frequency Curves
+Station - 06724500  LEFT HAND CREEK NEAR BOULDER, CO.                           
+  WaterYr	  RankedQ	   EMAEst	ThreshLow	 ThreshUp	  IntvLow	 IntvHigh
+    1949	     1140.0	      0.0586	       0.	      INF
+    1951	      785.0	      0.1174	       0.	      INF
+    1957	      707.0	      0.1763	       0.	      INF
+    1980	      571.0	      0.2351	       0.	      INF
+    1948	      510.0	      0.2940	       0.	      INF
+    1931	      396.0	      0.3529	       0.	      INF
+    1930	      340.0	      0.4117	       0.	      INF
+    1978	      331.0	      0.4706	       0.	      INF
+    1947	      254.0	      0.5294	       0.	      INF
+    1952	      252.0	      0.5883	       0.	      INF
+    1953	      245.0	      0.6471	       0.	      INF
+    1950	      234.0	      0.7060	       0.	      INF
+    1956	      230.0	      0.8237	       0.	      INF
+    1977	      230.0	      0.7649	       0.	      INF
+    1929	      216.0	      0.8826	       0.	      INF
+    1979	      187.0	      0.9414	       0.	      INF

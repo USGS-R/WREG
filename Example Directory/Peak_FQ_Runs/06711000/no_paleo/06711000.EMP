@@ -1,0 +1,37 @@
+# US Geological Survey
+# PeakFQ Flood Frequency Analysis, Version 7.1 dated 3/14/2014
+#
+# Analyzed: 06/24/2014 09:08
+#
+# Empirical Frequency Curves
+Station - 06711000  TURKEY CREEK NEAR MORRISON, CO.                             
+  WaterYr	  RankedQ	   EMAEst	ThreshLow	 ThreshUp	  IntvLow	 IntvHigh
+   -1969	     2730.0	      0.0172	    2730.	      INF
+    1946	     1200.0	      0.0676	       0.	      INF
+    1980	      585.0	      0.1009	       0.	      INF
+    1984	      450.0	      0.1342	       0.	      INF
+    1949	      384.0	      0.1675	       0.	      INF
+    1983	      320.0	      0.2008	       0.	      INF
+    1979	      237.0	      0.2342	       0.	      INF
+    1948	      215.0	      0.2675	       0.	      INF
+    1985	      197.0	      0.3341	       0.	      INF
+    1987	      197.0	      0.3008	       0.	      INF
+    1988	      195.0	      0.3674	       0.	      INF
+    1952	      185.0	      0.4007	       0.	      INF
+    1944	      175.0	      0.4340	       0.	      INF
+    1982	      165.0	      0.4673	       0.	      INF
+    1953	      149.0	      0.5006	       0.	      INF
+    1947	      126.0	      0.5339	       0.	      INF
+    1991	      125.0	      0.6005	       0.	      INF
+    1992	      125.0	      0.5672	       0.	      INF
+    1950	      110.0	      0.6338	       0.	      INF
+    1994	       68.0	      0.6671	       0.	      INF
+    1951	       47.0	      0.7004	       0.	      INF
+    1990	       44.0	      0.7337	       0.	      INF
+    1993	       42.0	      0.7670	       0.	      INF
+    1942	       37.0	      0.8336	       0.	      INF
+    1986	       37.0	      0.8003	       0.	      INF
+    1989	       24.0	      0.8669	       0.	      INF
+    1943	       18.0	      0.9335	       0.	      INF
+    1945	       18.0	      0.9002	       0.	      INF
+    1981	       15.0	      0.9669	       0.	      INF
