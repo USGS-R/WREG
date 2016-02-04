@@ -1,0 +1,261 @@
+1
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.002.000
+  Prov. Ver. 7.0      Annual peak flow frequency analysis      Run Date / Time
+  05/08/2013          following Bulletin 17-B Guidelines       06/13/2014 08:21
+            Preliminary release of PeakFQ for review and testing only.
+
+                         --- PROCESSING OPTIONS ---  
+
+                      Plot option         = Graphics device   
+                      Basin char output   = WATSTORE      
+                      Print option        = Yes
+                      Debug print         = No 
+                      Input peaks listing = Long 
+                      Input peaks format  = WATSTORE peak file  
+
+                      Input files used:
+                         peaks (ascii)  - V:\CDOT_Flood_Frequency\PeakFQ\Input_files\06821400\06821400.TXT                
+                         specifications - V:\CDOT_Flood_Frequency\PeakFQ\Input_files\06821400\PKFQWPSF.TMP                
+                      Output file(s): 
+                         main - V:\CDOT_Flood_Frequency\PeakFQ\Input_files\06821400\06821400.PRT                
+                         bcd  - V:\CDOT_Flood_Frequency\PeakFQ\Input_files\06821400\06821400.BCD                
+  
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.003.001
+  Prov. Ver. 7.0      Annual peak flow frequency analysis      Run Date / Time
+  05/08/2013         using Expected Moments Algorithm (EMA)    06/13/2014 08:21
+ 
+            Preliminary release of PeakFQ for review and testing only.
+  
+        Station - 06821400  NORTH FORK BLACK WOLF CREEK NEAR VERNON, CO.        
+
+
+                     I N P U T   D A T A   S U M M A R Y
+
+                Number of peaks in record            =       11
+                Peaks not used in analysis           =        0
+                Systematic peaks in analysis         =       11
+                Historic peaks in analysis           =        0
+                Beginning Year                       =     1969
+                Ending Year                          =     1979
+                Historical Period Length             =       11
+                Generalized skew                     =   -0.030
+                     Standard error                  =    0.550
+                     Mean Square error               =    0.303
+                Skew option                          =   WEIGHTED  
+                Gage base discharge                  =      0.0
+                User supplied high outlier threshold =   --           
+                User supplied low outlier criterion  =   --           
+                Plotting position parameter          =     0.00
+                Type of analysis                            EMA
+                Low-outlier Test Method                    MGBT
+                Perception Thresholds:
+                     Begin     End       Low     High     Comment
+                      1969    1979       0.0       INF     DEFAULT                                                                         
+                      1970    1970      79.0       INF     PEAK < STATED VALUE                                                             
+                      1971    1971      79.0       INF     PEAK < STATED VALUE                                                             
+                      1974    1974      79.0       INF     PEAK < STATED VALUE                                                             
+                      1976    1976      79.0       INF     PEAK < STATED VALUE                                                             
+                      1978    1978      79.0       INF     PEAK < STATED VALUE                                                             
+                Interval Data:
+                              Year       Low     High     Comment
+                              1970       0.0      79.0                                                                                     
+                              1971       0.0      79.0                                                                                     
+                              1974       0.0      79.0                                                                                     
+                              1976       0.0      79.0                                                                                     
+                              1978       0.0      79.0                                                                                     
+
+
+
+  *********  NOTICE  --  Preliminary machine computations.        *********     
+  *********  User responsible for assessment and interpretation.  *********     
+
+  **WCF164W-HISTORIC PERIOD IGNORED.    11.0
+    WCF002J-CALCS COMPLETED.  RETURN CODE =  2
+    EMA002W-CONFIDENCE INTERVALS ARE NOT EXACT IF HISTORIC PERIOD > 0
+
+
+                                        Kendall's Tau Parameters
+
+                                                        MEDIAN   No. of
+                                       TAU    P-VALUE    SLOPE   PEAKS
+                                ---------------------------------------
+             SYSTEMATIC RECORD     -0.036      0.934      0.000    11
+
+
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.003.002
+  Prov. Ver. 7.0      Annual peak flow frequency analysis      Run Date / Time
+  05/08/2013         using Expected Moments Algorithm (EMA)    06/13/2014 08:21
+ 
+            Preliminary release of PeakFQ for review and testing only.
+  
+        Station - 06821400  NORTH FORK BLACK WOLF CREEK NEAR VERNON, CO.        
+
+
+           ANNUAL FREQUENCY CURVE PARAMETERS -- LOG-PEARSON TYPE III 
+
+                                    LOGARITHMIC         
+                         -------------------------------
+                                      STANDARD          
+                            MEAN     DEVIATION     SKEW 
+                         -------------------------------
+ EMA W/O REG. INFO         1.7186      1.6085     -1.410
+ EMA W/REG. INFO           2.0701      0.9943     -0.223
+
+ EMA ESTIMATE OF MSE OF SKEW W/O REG. INFO (AT-SITE)      0.4130
+ EMA ESTIMATE OF MSE OF SKEW W/SYSTEMATIC ONLY (AT-SITE)  0.7573
+
+
+
+    ANNUAL FREQUENCY CURVE -- DISCHARGES AT SELECTED EXCEEDANCE PROBABILITIES
+
+   ANNUAL   EMA W/    EMA W/O     <------ FOR EMA ESTIMATES ------->
+EXCEEDANCE  REG INFO  REG INFO    VARIANCE  95% CONFIDENCE INTERVALS
+PROBABILITY ESTIMATE  ESTIMATE     OF EST.       LOWER       UPPER
+
+   0.9950       0.2       0.0      0.7985         0.0          2.6
+   0.9900       0.4       0.0      0.6401         0.0          4.1
+   0.9500       2.4       0.0      0.3456         0.0         14.7
+   0.9000       5.9       0.4      0.2496         0.0         30.3
+   0.8000      17.6       3.9      0.1721         0.5         75.7
+   0.6667      47.1      24.4      0.1276         3.2        186.8
+   0.5000     127.9     121.2      0.1021        16.9        519.5
+   0.4292     191.8     213.9      0.0968        30.7        821.3
+   0.2000     823.8    1138.       0.1024       191.7       6092.0
+   0.1000    2081.     2455.       0.1308       502.1      32410.0
+   0.0400    5396.     4361.       0.1900      1180.0     250800.0
+   0.0200    9801.     5660.       0.2489      1887.0    1048000.0
+   0.0100   16550.     6740.       0.3190      2736.0    3763000.0
+   0.0050   26470.     7594.       0.4001      3694.0   10840000.0
+   0.0020   46150.     8418.       0.5234      5100.0   41720000.0
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.003.003
+  Prov. Ver. 7.0      Annual peak flow frequency analysis      Run Date / Time
+  05/08/2013         using Expected Moments Algorithm (EMA)    06/13/2014 08:21
+ 
+            Preliminary release of PeakFQ for review and testing only.
+  
+        Station - 06821400  NORTH FORK BLACK WOLF CREEK NEAR VERNON, CO.        
+
+
+                       I N P U T   D A T A   L I S T I N G
+
+
+    WATER       PEAK   PEAKFQ   <--- Intervals --->
+     YEAR      VALUE    CODES     LOW         HIGH   REMARKS
+     1969     2280.0       
+     1970       79.0   L            0.0        79.0                                                                                  
+     1971       79.0   L            0.0        79.0                                                                                  
+     1972      640.0       
+     1973      221.0       
+     1974       79.0   L            0.0        79.0                                                                                  
+     1975      948.0       
+     1976       79.0   L            0.0        79.0                                                                                  
+     1977      645.0       
+     1978       79.0   L            0.0        79.0                                                                                  
+     1979      640.0       
+
+
+        Explanation of peak discharge qualification codes
+
+       PeakFQ    NWIS
+        CODE     CODE   DEFINITION
+
+          D        3    Dam failure, non-recurrent flow anomaly
+          G        8    Discharge greater than stated value
+          X       3+8   Both of the above
+          L        4    Discharge less than stated value
+          K     6 OR C  Known effect of regulation or urbanization
+          H        7    Historic peak
+
+          -  Minus-flagged discharge -- Not used in computation
+                -8888.0 -- No discharge value given
+          -  Minus-flagged water year -- Historic peak used in computation
+
+
+
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.003.004
+  Prov. Ver. 7.0      Annual peak flow frequency analysis      Run Date / Time
+  05/08/2013         using Expected Moments Algorithm (EMA)    06/13/2014 08:21
+ 
+            Preliminary release of PeakFQ for review and testing only.
+  
+        Station - 06821400  NORTH FORK BLACK WOLF CREEK NEAR VERNON, CO.        
+
+
+   EMPIRICAL FREQUENCY CURVES -- HIRSCH-STEDINGER PLOTTING POSITIONS
+
+   WATER     RANKED      EMA         INTERVALS
+    YEAR   DISCHARGE   ESTIMATE      LOW      HIGH
+    1969     2280.0     0.0777
+    1975      948.0     0.1557
+    1977      645.0     0.2337
+    1972      640.0     0.3898
+    1979      640.0     0.3117
+    1973      221.0     0.4678
+    1970     ------     0.5455         0.0      79.0
+    1971     ------     0.5455         0.0      79.0
+    1974     ------     0.5455         0.0      79.0
+    1976     ------     0.5455         0.0      79.0
+    1978     ------     0.5455         0.0      79.0
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.003.005
+  Prov. Ver. 7.0      Annual peak flow frequency analysis      Run Date / Time
+  05/08/2013         using Expected Moments Algorithm (EMA)    06/13/2014 08:21
+ 
+            Preliminary release of PeakFQ for review and testing only.
+  
+        Station - 06821400  NORTH FORK BLACK WOLF CREEK NEAR VERNON, CO.        
+
+
+                         EMA REPRESENTATION OF DATA
+
+  WATER <----- OBSERVED-----><-------- EMA -------><-PERCEPTION THRESHOLDS->
+   YEAR    Q_LOWER    Q_UPPER    Q_LOWER    Q_UPPER        LOWER       UPPER
+   1969     2280.0     2280.0     2280.0     2280.0          0.0        INF 
+   1970        0.0       79.0        0.0       79.0         79.0        INF 
+   1971        0.0       79.0        0.0       79.0         79.0        INF 
+   1972      640.0      640.0      640.0      640.0          0.0        INF 
+   1973      221.0      221.0      221.0      221.0          0.0        INF 
+   1974        0.0       79.0        0.0       79.0         79.0        INF 
+   1975      948.0      948.0      948.0      948.0          0.0        INF 
+   1976        0.0       79.0        0.0       79.0         79.0        INF 
+   1977      645.0      645.0      645.0      645.0          0.0        INF 
+   1978        0.0       79.0        0.0       79.0         79.0        INF 
+   1979      640.0      640.0      640.0      640.0          0.0        INF 
+1
+
+
+
+ End PeakFQ analysis.
+   Stations processed :       1
+   Number of errors   :       0
+   Stations skipped   :       0
+   Station years      :      11
+
+
+Data records may have been ignored for the stations listed below.               
+(Card type must be Y, Z, N, H, I, 2, 3, 4,  or *.)                              
+(2, 4, and * records are ignored.)                                              
+                                                                                
+ For the station below, the following records were ignored:                     
+                                                                                
+ FINISHED PROCESSING STATION:  06821400       USGS NORTH FORK BLACK WOLF CREEK N
+                                                                                
+                                                                                
+ For the station below, the following records were ignored:                     
+                                                                                
+ FINISHED PROCESSING STATION:                                                   
+                                                                                

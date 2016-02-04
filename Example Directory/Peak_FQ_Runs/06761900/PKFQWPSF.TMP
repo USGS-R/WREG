@@ -1,0 +1,25 @@
+Verbose
+I ASCI 06761900.TXT
+O File 06761900.PRT
+O Plot Style Graphics
+O Plot Format PNG
+O Additional Watstore 06761900.bcd
+O Export 06761900.exp
+O Empirical 06761900.emp
+Station 06761900
+     Analyze EMA
+     PCPT_Thresh 1960 1981 0 1E+20 Default
+     PCPT_Thresh 1964 1964 15 1E+20 Peak < stated value
+     PCPT_Thresh 1966 1966 15 1E+20 Peak < stated value
+     BegYear 1960
+     EndYear 1981
+     HistPeriod 22
+     Interval 1964 0 15 
+     Interval 1966 0 15 
+     SkewOpt Weighted
+     GenSkew 0.0756222
+     SkewSE 0.55
+     LOType MGBT
+     Latitude 41.25639
+     Longitude 104.0806
+     PlotName 06761900
