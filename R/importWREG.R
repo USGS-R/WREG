@@ -62,6 +62,7 @@ importWREG <- function(wregPath,sites='') {
       '(All files must have identical order.)'))
   }
   Y <- flowChar[,2:ncol(flowChar)]
+  names(Y) <- unlist(strsplit(names(Y),split='[.]'))
   
   # Load and parse LP3*.txt
   lp3gFile <- file.path(wregPath,'LP3G.txt')
