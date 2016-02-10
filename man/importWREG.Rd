@@ -37,6 +37,13 @@ The \code{importWREG} function reads the WREG inputs from a directory
 set up for the old WREG program.
 }
 \details{
-This functions allows users to use the legacy format of WREG.
+This functions allows users to use the legacy format of WREG.  This includes
+an established directory that contains valid \dQuote{SiteInfo.txt},
+\dQuote{FlowChar.txt}, \dQuote{LP3G.txt}, \dQuote{LP3K.txt},
+\dQuote{LP3s.txt} and \dQuote{USGS##########.txt}, multiple files
+containing time series for each site.  The file \dQuote{UserWLS.txt} is
+optional.  For further information on the format of these files, see the
+program manual (Techniques and Methods 4-A8).  Files that are not valid
+inputs files for the WREG version describe therein will not be accepted.
 }
 
