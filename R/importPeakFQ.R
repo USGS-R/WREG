@@ -11,8 +11,8 @@
 #' @param gisFile A tab-delimited text file that contains a matrix whose rows 
 #' represent the sites and contains columns that include \sQuote{Station.ID}, 
 #' \sQuote{Lat}, \sQuote{Long} and any other variables to be used for analysis.
-#' @param sites (optional) A vector containing the independent variables (as above) for a 
-#' particular target site.  This variable is only used for ROI analysis.
+#' @param sites (optional) A vetor of sites that should be return.  Allows for 
+#' data subsetting.
 #' 
 #' @details
 #' This functions allows users to read output directly from PeakFQ without 
@@ -108,9 +108,10 @@ importPeakFQ <- function(pfqPath,gisFile,sites='') {
       overlap <- intersect(idata[,1],jdata[,1])
       recLen[i,j] <- recLen[j,i] <- length(overlap)
       if (length(overlap)==0) {next}
-      recCor[i,j] <- recCor[j,i] <- cor(idata[
-        which(is.element(idata[,1],overlap)),2],
-        jdata[which(is.element(jdata[,1],overlap)),2])
+      ijdata <- idata[which(is.element(idata[,1],overlap)),2]
+      jidata <- jdata[which(is.element(jdata[,1],overlap)),2]
+      if (length(unique(ijdata))==1|length(unique(jidata))==1) {next}
+      recCor[i,j] <- recCor[j,i] <- cor(ijdata,jidata)
     }
   }
   

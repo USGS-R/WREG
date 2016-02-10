@@ -16,8 +16,8 @@ subdirectories of \code{pfqPath}.  Each site should be represented by one
 represent the sites and contains columns that include \sQuote{Station.ID},
 \sQuote{Lat}, \sQuote{Long} and any other variables to be used for analysis.}
 
-\item{sites}{(optional) A vector containing the independent variables (as above) for a
-particular target site.  This variable is only used for ROI analysis.}
+\item{sites}{(optional) A vetor of sites that should be return.  Allows for
+data subsetting.}
 }
 \value{
 All outputs are returned as part of a list.  The list includes:
