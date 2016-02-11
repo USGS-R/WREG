@@ -4,16 +4,16 @@
 #' The \code{WREG.MLR} function executes the basic regression analysis that forms the 
 #' foundation of the WREG program.
 #' 
-#' @param y The dependent variable of interest, with any transformations already 
+#' @param Y The dependent variable of interest, with any transformations already 
 #' applied.
-#' @param x The independent variables in the regression, with any transformations 
+#' @param X The independent variables in the regression, with any transformations 
 #' already applied.  Each row represents a site and each column represents
 #' a particular independe variable.  (If a leading constant is used, it should be 
 #' included here as a leading column of ones.)  The rows must be in the same order as
 #' the dependent variables in \code{Y}.
 #' @param x0 A vector containing the independent variables (as above) for a 
 #' particular target site.  This variable is only used for ROI analysis.
-#' @param reg A string indicating which type of regression should be applied.
+#' @param Reg A string indicating which type of regression should be applied.
 #' The options include: \dQuote{OLS} for ordinary least-squares regression,
 #' \dQuote{WLS} for weighted least-squares regression, \dQuote{GLS} for generalized
 #' least-squares regression, with no uncertainty in regional skew, \dQuote{GLSskew}
@@ -21,7 +21,7 @@
 #' \dQuote{CustomWeight} allowing the user to provide a custom weighting matrix.  
 #' (In the case of \dQuote{GLSskew}, the uncertainty in regional skew must be provided
 #'  as the mean squared error in regional skew.)
-#' @param recordLengths This input is required for \dQuote{WLS}, \dQuote{GLS} and 
+#' @param RecordLengths This input is required for \dQuote{WLS}, \dQuote{GLS} and 
 #' \dQuote{GLSskew}.  For \dQuote{GLS} and \dQuote{GLSskew}, \code{RecordLengths} 
 #' should be a matrix whose rows and columns are in the same order as \code{Y}.  Each 
 #' \code{(r,c)} element represents the length of concurrent record between sites 
@@ -42,7 +42,7 @@
 #' \code{theta} is a parameter used in the estimated cross-correlation between site
 #' records.  See equation 20 in the WREG v. 1.05 manual.  The arbitrary, default value 
 #' is 0.98.  The user should fit a different value as needed.
-#' @param basinChars A dataframe containing three variables: \code{StationID} is the 
+#' @param BasinChars A dataframe containing three variables: \code{StationID} is the 
 #' numerical identifier (without a leading zero) of each site, \code{Lat} is the latitude
 #' of the site, in decimal degrees, and \code{Long} is the longitude of the site, in decimal
 #' degrees.  The sites must be presented in the same order as \code{Y}.  Required only for
@@ -51,10 +51,10 @@
 #' \dQuote{GLSskew}.
 #' @param TY A number.  The return period of the event being modeled.  Required only for 
 #' \dQuote{GLSskew}.  The default value is \code{2}.  (See the \code{Legacy} details below.)
-#' @param peak A logical.  Indicates if the event being modeled is a peak flow event
+#' @param Peak A logical.  Indicates if the event being modeled is a peak flow event
 #' or a low-flow event.  \code{TRUE} indicates a peak flow, while \code{FALSE} indicates
 #' a low-flow event.
-#' @param customWeight This allows the user to enter a custom weighting matrix.  It 
+#' @param CustomWeight This allows the user to enter a custom weighting matrix.  It 
 #' is included also to provide legacy code for WREG v. 1.05.  \code{CustomWeight} 
 #' can either be a square matrix of weights with a length equal to \code{length(Y)}
 #' or a list containing three elements.  The elements of the list include (1) 
@@ -62,12 +62,12 @@
 #' estimated variance of the model errors from the k-variable model (\code{k=ncol(X)}),
 #' and (3) \code{var.modelerror.0} as the variance of the model errors from a consant-only 
 #' regression.  Required for \code{Reg=} \dQuote{CustomWeight}.
-#' @param distMeth Required for \dQuote{GLS} and \dQuote{GLSskew}.  A value of \code{1} 
+#' @param DistMeth Required for \dQuote{GLS} and \dQuote{GLSskew}.  A value of \code{1} 
 #' indicates that the "Nautical Mile" approximation should be used to calculate inter-site
 #' distances.  A value of \code{2} designates the Haversine approximation.  See 
 #' \code{\link{Dist.WREG}}.  The default value is \code{2}.  (See the \code{Legacy} 
 #' details below.)
-#' @param legacy A logical.  A value of \code{TRUE} forces the WREG program to behave 
+#' @param Legacy A logical.  A value of \code{TRUE} forces the WREG program to behave 
 #' identically to WREG v. 1.05, with BUGS and all.  It will force \code{TY=2} and
 #' \code{DistMeth=1}.  For ROI regressions, it will also require a specific calculation 
 #' for weighing matrices in \dQuote{WLS} (\code{\link{Omega.WLS.ROImatchMatLab}}), 
@@ -130,11 +130,11 @@
 #'X2 <- log(baseData$Independent$PRECIP)
 #'X0 <- rep(1,length(X1))
 #'exX <- cbind(X0,X1,X2)
-#'Ex.OLS <- WREG.MLR(x=exX,y=exY,reg='OLS')
+#'Ex.OLS <- WREG.MLR(Y=exY,X=exX,Reg='OLS')
 #'@export
-WREG.MLR <- function(x,y,reg,x0=NA,
-  recordLengths=NA,LP3=NA,alpha=0.01,theta=0.98,basinChars=NA,
-  MSEGR=NA,TY=2,peak=T,customWeight=NA,distMeth=2,legacy=FALSE) {
+WREG.MLR <- function(Y,X,x0=NA,Reg=c('OLS','WLS','GLS','GLSskew','CustomWeight'),
+  RecordLengths=NA,LP3=NA,alpha=0.01,theta=0.98,BasinChars=NA,
+  MSEGR=NA,TY=2,Peak=T,CustomWeight=NA,DistMeth=2,Legacy=FALSE) {
   # William Farmer, USGS, January 05, 2015
   
   ## Add controls to meet Legacy demands
