@@ -10,29 +10,29 @@ environment:
   NOT_CRAN: "true"
 
 build_script:
-  - travis-tool.sh install_deps
+  travis-tool.sh install_deps
 
 test_script:
-  - travis-tool.sh run_tests
+  travis-tool.sh run_tests
 
 on_failure:
-  - travis-tool.sh dump_logs
+  travis-tool.sh dump_logs
 
 artifacts:
-  - path: '*.Rcheck\**\*.log'
+  path: '*.Rcheck\**\*.log'
     name: Logs
 
-  - path: '*.Rcheck\**\*.out'
+  path: '*.Rcheck\**\*.out'
     name: Logs
 
-  - path: '*.Rcheck\**\*.fail'
+  path: '*.Rcheck\**\*.fail'
     name: Logs
 
-  - path: '*.Rcheck\**\*.Rout'
+  path: '*.Rcheck\**\*.Rout'
     name: Logs
 
-  - path: '\*_*.tar.gz'
+  path: '\*_*.tar.gz'
     name: Bits
 
-  - path: '\*_*.zip'
+  path: '\*_*.zip'
     name: Bits
