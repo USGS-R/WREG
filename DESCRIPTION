@@ -7,6 +7,8 @@ Author: William Farmer
 Maintainer: William Farmer <wfarmer@usgs.gov>
 Description: This program represents an R implementation of WREG v. 1.05. (USGS)
 License: GPL (>=2)
-Suggests: knitr
+Suggests:
+    knitr
 VignetteBuilder: knitr
 LazyData: true
+RoxygenNote: 5.0.1
