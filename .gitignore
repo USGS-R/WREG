@@ -1,7 +1,5 @@
-inst/doc
 .Rproj.user
-.RData
-.Rhistory
 .Rproj
-.travis.yml
+.Rhistory
+.RData
 README.md
