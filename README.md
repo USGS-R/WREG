@@ -1,7 +1,7 @@
 # WREG
 
 
-Windows Tests: [![Build status](https://ci.appveyor.com/api/projects/status/weeq7r99k6hp6rrf?svg=true)](https://ci.appveyor.com/project/tmills-usgs/wreg)
+Windows Tests: [![Build status](https://ci.appveyor.com/api/projects/status/6646r7nnfq2hnoyx?svg=true)](https://ci.appveyor.com/project/tmills-usgs/wreg-vw1k3)
 
 Linix Tests: [![travis](https://travis-ci.org/USGS-R/WREG.svg?branch=master)](https://travis-ci.org/USGS-R/WREG)
 

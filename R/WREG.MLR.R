@@ -132,7 +132,7 @@
 #'exX <- cbind(X0,X1,X2)
 #'Ex.OLS <- WREG.MLR(Y=exY,X=exX,Reg='OLS')
 #'@export
-WREG.MLR <- function(Y,X,x0=NA,Reg=c('OLS','WLS','GLS','GLSskew','CustomWeight'),
+WREG.MLR <- function(Y,X,x0=NA,Reg='OLS',
   RecordLengths=NA,LP3=NA,alpha=0.01,theta=0.98,BasinChars=NA,
   MSEGR=NA,TY=2,Peak=T,CustomWeight=NA,DistMeth=2,Legacy=FALSE) {
   # William Farmer, USGS, January 05, 2015
