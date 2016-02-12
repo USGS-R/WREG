@@ -47,7 +47,10 @@ importPeakFQ <- function(pfqPath,gisFile,sites='') {
   # sites <- '
   
   # Load GIS file
-  gisData <- read.table(file=gisFile,sep='\t',header=T)
+  gisData <- read.table(file=gisFile,sep='\t',header=T,colClasses=c("character",
+                                                                    rep("numeric",10)
+  )
+  )
   
   # Determine which sites to search for
   if (sites==''|is.na(sites)) {
@@ -68,7 +71,7 @@ importPeakFQ <- function(pfqPath,gisFile,sites='') {
   allFiles <- file.path(pfqPath,allFiles)
   # Pulls from EXP curtesy of Janet Curran
   ## Could improve by looking for flag rather than a hard-coded skip
-  EXP_SiteID <- do.call(rbind,lapply(allFiles,read.table,skip=1,nrows=1))
+  EXP_SiteID <- do.call(rbind,lapply(allFiles,read.table,skip=1,nrows=1,colClasses="character"))
   EXP_G <- do.call(rbind,lapply(allFiles,read.table,skip=7,nrows=1))
   EXP_S <- do.call(rbind,lapply(allFiles,read.table,skip=9,nrows=1))
   EXP_GR <- do.call(rbind,lapply(allFiles,read.table,skip=14,nrows=1))
