@@ -3,3 +3,6 @@ inst/doc
 .RData
 .Rhistory
 .Rproj
+.travis.yml
+appveyor.yml
+README.md

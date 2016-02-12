@@ -120,8 +120,19 @@
 #' includes \code{Legacy} to document if a Legacy application of WREG v. 1.05 was
 #' implemented.}
 #' @import stats
+#' 
+#' @examples 
+#'data("baseData",package="WREG")
+#'names(baseData$Dependent[2:4])
+#'names(baseData$Independent[9:14])
+#'exY <- log(baseData$Dependent$Q1.)
+#'X1 <- log(baseData$Independent$DRNAREA)
+#'X2 <- log(baseData$Independent$PRECIP)
+#'X0 <- rep(1,length(X1))
+#'exX <- cbind(X0,X1,X2)
+#'Ex.OLS <- WREG.MLR(Y=exY,X=exX,Reg='OLS')
 #'@export
-WREG.MLR <- function(Y,X,x0=NA,Reg=c('OLS','WLS','GLS','GLSskew','CustomWeight'),
+WREG.MLR <- function(Y,X,x0=NA,Reg="OLS",
   RecordLengths=NA,LP3=NA,alpha=0.01,theta=0.98,BasinChars=NA,
   MSEGR=NA,TY=2,Peak=T,CustomWeight=NA,DistMeth=2,Legacy=FALSE) {
   # William Farmer, USGS, January 05, 2015
