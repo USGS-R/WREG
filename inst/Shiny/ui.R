@@ -1,39 +1,30 @@
-shinyUI(navbarPage("WREG",
-####################################
-#Welcom tab
+library(markdown)
 
+shinyUI(navbarPage("WREG",
                    tabPanel("Welcome",
-                            navlistPanel(
-                              "Information",
-                              tabPanel("Introduction",
-                                       titlePanel("Weighted-Multiple-Linear Regression Program"),
-                                       h3("WREG Version 0.1"),
-                                       hr(),
-                                       p("An R implementation of WREG v. 1.05. (USGS)"),    
-                                       hr(),
-                                       h6("Developed and maintained by William Farmer",
-                                          a(href="wfarmer@usgs.gov", target="_blank", "wfarmer@usgs.gov")
-                                       ),
-                                       h6(
-                                         "Visit on github at:",
-                                         a(href="https://github.com/USGS-R/WREG", target="_blank", "https://github.com/USGS-R/WREG")
-                                       ),
-                                       h6(
-                                         "Report issues",
-                                         a(href="https://github.com/USGS-R/WREG/issues", target="_blank", "here")
-                                       )
-                                       
-                                       
-                              ),
-                              tabPanel("Details",
-                                       includeHTML("www/Example.html")
-                              )     
+                            titlePanel("Weighted-Multiple-Linear Regression Program"),
+                            h3("WREG Version 0.1"),
+                            hr(),
+                            p("An R implementation of WREG v. 1.05. (USGS)"),    
+                            hr(),
+                            h6("Developed and maintained by William Farmer",
+                               a(href="wfarmer@usgs.gov", target="_blank", "wfarmer@usgs.gov")
+                            ),
+                            h6(
+                              "Visit on github at:",
+                              a(href="https://github.com/USGS-R/WREG", target="_blank", "https://github.com/USGS-R/WREG")
+                            ),
+                            h6(
+                              "Report issues",
+                              a(href="https://github.com/USGS-R/WREG/issues", target="_blank", "here")
                             )
+                            
+                            
                    ),
-#######################################
-#Data import tab
-                   tabPanel("Import Data",
-                            navlistPanel(
+                   
+                   #######################################
+                   #Data import tab
+                   navbarMenu("Import Data",
                               tabPanel("Import PEAK-FQ data",
                                        h2("This imports data from Peak FQ output files and prepares it for use in WREG-R."),
                                        
@@ -53,7 +44,7 @@ shinyUI(navbarPage("WREG",
                                        hr(),
                                        
                                        verbatimTextOutput("numSites")
-
+                                       
                               ),
                               tabPanel("Import MatLab WREG project",
                                        h2("This imports data from from a directory set up for the old WREG program and prepares it for use in WREG-R."),
@@ -69,35 +60,34 @@ shinyUI(navbarPage("WREG",
                                        hr()
                                        
                               )
-                            )
                    ),
                    
-################################
-#Parameterize model tab
-                   tabPanel("Parameterize model",
-                            navlistPanel(
-                                         tabPanel("Fileter and select sites"
+                   ################################
+                   #Parameterize model tab
+                   navbarMenu("Parameterize model",
+                              tabPanel("Filter and select sites",
+                                       fluidPage(
+                                         h2("Site selection"),
+                                         dataTableOutput("siteCharTable"),
+                                         radioButtons("siteSelOption",
+                                                      "Site selection",
+                                                      choices = c("Select individual sites",
+                                                                  "Select all sites on current table page",
+                                                                  "Select all sites in dataset")
                                          ),
-                                         tabPanel("Review and select variables"
-                                         )      
-                            )
-                   ),
-                   
-#######################################
-#Run wreg tab
-                   tabPanel("Run WREG and view results",
-                            navlistPanel(
-                              tabPanel("Run WREG"
+                                         actionButton("selectSites",label="Submit"),
+                                         verbatimTextOutput("selSites")
+                                       )
+                                       
                               ),
-                              tabPanel("View results"
-                              ),
-                              
-                              tabPanel("Download Output",
-                                       titlePanel("Save Results"),
-                                       p('Will allow you to download model output and figures.')
-                              )      
-                            )
+                   tabPanel("Select and transform variables",
+                            selectInput("Y","Y-variable",choices = NA)
                    )
-                   
-                   
-))
+                   ),
+
+                   #######################################
+                   #Run wreg tab
+                   tabPanel("Run WREG"
+                   )
+)
+)
