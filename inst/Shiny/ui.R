@@ -80,11 +80,62 @@ shinyUI(navbarPage("WREG",
                                        )
                                        
                               ),
-                   tabPanel("Select and transform variables",
-                            selectInput("Y","Y-variable",choices = NA)
-                   )
+                              tabPanel("Select and transform variables",
+                                       pageWithSidebar(headerPanel("Variables"),
+                                                       sidebarPanel(
+                                                         selectInput("Y","Y-variable",choices = NA),
+                                                         selectInput("X","X-variables",choices = NA,multiple=TRUE),
+                                                         actionButton("selectVars",label="Transform variables"),
+                                                         actionButton("clearVars",label="Clear variables")
+                                                       ),
+                                                       mainPanel(
+                                                         uiOutput("YvarTrans"),
+                                                         lapply(1:20, function(i) {
+                                                           uiOutput(paste0('XvarTrans', i))
+                                                         }),
+                                                         actionButton("transVars","Apply transform")
+                                                         )
+                                       )
+                                       
+                              ),
+                              tabPanel("Select regression method",
+                                       pageWithSidebar(headerPanel("Regressions"),
+                                                       sidebarPanel(
+                                                         radioButtons("regType",
+                                                                      "Parameter estimation type",
+                                                                      choices=c("Ordinary-least squares",
+                                                                                "Weighted-least squares",
+                                                                                "Generalized-least squares")
+                                                         )
+                                                       ),
+                                                       mainPanel(
+                                                         conditionalPanel(
+                                                           condition = "input.regType == 'Generalized-least squares'",
+                                                           fluidRow(
+                                                             column(4, numericInput("concYears",
+                                                                                    label="No. of concurrent years",
+                                                                                    value=10,
+                                                                                    step=1)
+                                                             ),
+                                                             column(4, numericInput("alpha",
+                                                                                    label="Alpha",
+                                                                                    value=0.002,
+                                                                                    step=0.001)
+                                                             ),
+                                                             column(4, numericInput("theta",
+                                                                                    label="Theta",
+                                                                                    value=0.98,
+                                                                                    step=0.01)
+                                                             )
+                                                           ),
+                                                           plotOutput("corrPlot")
+                                                         )
+                                                       )
+                                       )
+                                       )
+                              
                    ),
-
+                   
                    #######################################
                    #Run wreg tab
                    tabPanel("Run WREG"

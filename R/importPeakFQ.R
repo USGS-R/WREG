@@ -101,6 +101,7 @@ importPeakFQ <- function(pfqPath,gisFile,sites='') {
   siteTS <- lapply(lapply(lapply(allFiles,readLines),grep,
     pattern='^\\s{4}.[0-9]{4}\\s',value=T),temp)
   
+  names(siteTS) <- paste0("X",gisData$Station.ID[ndx])
   recLen <- recCor <- matrix(NA,ncol=length(siteTS),nrow=length(siteTS))
   
   for (i in 1:length(siteTS)) {
@@ -153,7 +154,8 @@ importPeakFQ <- function(pfqPath,gisFile,sites='') {
     BasChars=BasChars,
     MSEGR=unique(EXP_MSEGR[,2]),
     recLen=recLen,
-    recCor=recCor
+    recCor=recCor,
+    siteTS = siteTS
   )
   return(result)
   
