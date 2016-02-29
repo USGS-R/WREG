@@ -118,8 +118,33 @@ importPeakFQ <- function(pfqPath,gisFile,sites='') {
     }
   }
   
+  #Make dataframes nice with column names, station IDs, and removing extraneous variables
+  EXP_SiteID <- EXP_SiteID[2]
+  colnames(EXP_SiteID) <- "Station.ID"
+  
+  AEP <- AEP[1,]
+  
+  colnames(Y) <- paste("AEP",AEP[1,],sep="_")
+  Y$Station.ID <- EXP_SiteID$Station.ID
+  Y <- Y[c(ncol(Y),1:ncol(Y)-1)]
+  
+  X$Station.ID <- EXP_SiteID$Station.ID
+  X <- X[c(ncol(X),1:ncol(X)-1)]
+
+  LP3f$Station.ID <- EXP_SiteID$Station.ID
+  LP3f <- LP3f[c(ncol(LP3f),1:ncol(LP3f)-1)]
+  
+  LP3k$Station.ID <- EXP_SiteID$Station.ID
+  LP3k <- LP3k[c(ncol(LP3k),1:ncol(LP3k)-1)]
+  
+  row.names(recLen) <- EXP_SiteID$Station.ID
+  colnames(recLen) <- EXP_SiteID$Station.ID
+  
+  row.names(recCor) <- EXP_SiteID$Station.ID
+  colnames(recCor) <- EXP_SiteID$Station.ID
+  
   result <- list(
-    sites=EXP_SiteID,
+    sites=EXP_SiteID$Station.ID,
     Y=Y,
     AEP=AEP,
     X=X,
