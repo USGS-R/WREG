@@ -1,6 +1,6 @@
 library(markdown)
 
-shinyUI(navbarPage("WREG",
+shinyUI(fluidPage(theme="theme.css",navbarPage(img(src="Logo.png", width="80px",height = "40px"),"WREG",
                    tabPanel("Welcome",
                             titlePanel("Weighted-Multiple-Linear Regression Program"),
                             h3("WREG Version 0.1"),
@@ -140,5 +140,5 @@ shinyUI(navbarPage("WREG",
                    #Run wreg tab
                    tabPanel("Run WREG"
                    )
-)
+))
 )
