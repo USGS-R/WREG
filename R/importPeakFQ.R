@@ -144,6 +144,9 @@ importPeakFQ <- function(pfqPath,gisFile,sites='') {
   row.names(recCor) <- EXP_SiteID$Station.ID
   colnames(recCor) <- EXP_SiteID$Station.ID
   
+  BasChars$Station.ID <- EXP_SiteID$Station.ID
+  BasChars <- BasChars[c(ncol(BasChars),1:ncol(BasChars)-1)]
+  
   result <- list(
     sites=EXP_SiteID$Station.ID,
     Y=Y,
@@ -154,8 +157,7 @@ importPeakFQ <- function(pfqPath,gisFile,sites='') {
     BasChars=BasChars,
     MSEGR=unique(EXP_MSEGR[,2]),
     recLen=recLen,
-    recCor=recCor,
-    siteTS = siteTS
+    recCor=recCor
   )
   return(result)
   
