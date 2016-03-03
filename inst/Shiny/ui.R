@@ -112,7 +112,7 @@ shinyUI(fluidPage(theme="theme.css",navbarPage(img(src="Logo.png", width="80px",
                                                          conditionalPanel(
                                                            condition = "input.regType == 'Generalized-least squares'",
                                                            fluidRow(
-                                                             column(4, numericInput("concYears",
+                                                             column(4, numericInput("concMin",
                                                                                     label="No. of concurrent years",
                                                                                     value=10,
                                                                                     step=1)
