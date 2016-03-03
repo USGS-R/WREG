@@ -54,8 +54,24 @@ shinyServer(function(input, output,session) {
                  }
                  output$selSites <- renderText(c("The following sites will be used in WREG: ",
                                                  as.character(siteChars$Station.ID[selSites])
+                 ))
+                 selectData <<- list(sites = importData$sites[which(importData$sites %in% 
+                                                                      siteChars$Station.ID[selSites])],
+                                     Y = subset(importData$Y,Station.ID %in% siteChars$Station.ID[selSites]),
+                                     AEP = importData$AEP,
+                                     X = subset(importData$X,Station.ID %in% siteChars$Station.ID[selSites]),
+                                     LP3f = subset(importData$LP3f,Station.ID %in% siteChars$Station.ID[selSites]),
+                                     LP3k = subset(importData$LP3k,Station.ID %in% siteChars$Station.ID[selSites]),
+                                     BasChars = subset(importData$BasChars,Station.ID %in% siteChars$Station.ID[selSites]),
+                                     MSEGR = importData$MSEGR,
+                                     recLen = importData$recLen[siteChars$Station.ID[selSites],
+                                                                siteChars$Station.ID[selSites]],
+                                     recCor = importData$recCor[siteChars$Station.ID[selSites],
+                                                                siteChars$Station.ID[selSites]]
                  )
-                 )
+                                     
+                                                   
+                 
                }
   )
   
@@ -149,7 +165,7 @@ shinyServer(function(input, output,session) {
                        #C1
                        (input[[paste0(input$X[i],"_XvarC1")]] *
                          #X
-                         importData$X[[input$X[i]]] ^
+                         selectData$X[[input$X[i]]] ^
                          #C2
                          input[[paste0(input$X[i],"_XvarC2")]] +
                          #C3
@@ -163,7 +179,7 @@ shinyServer(function(input, output,session) {
                        #C1
                        (input[[paste0(input$X[i],"_XvarC1")]] *
                          #X
-                         importData$X[[input$X[i]]] ^
+                          selectData$X[[input$X[i]]] ^
                          #C2
                          input[[paste0(input$X[i],"_XvarC2")]] +
                          #C3
@@ -177,7 +193,7 @@ shinyServer(function(input, output,session) {
                        #C1
                        (input[[paste0(input$X[i],"_XvarC1")]] *
                          #X
-                         importData$X[[input$X[i]]] ^
+                          selectData$X[[input$X[i]]] ^
                          #C2
                          input[[paste0(input$X[i],"_XvarC2")]] +
                          #C3
@@ -187,14 +203,14 @@ shinyServer(function(input, output,session) {
                      )
                    } else
                    {
-                     importData$X[[input$X[i]]]
+                     selectData$X[[input$X[i]]]
                    }
                    
                  })
                  
                  ##Combine list into dataframe
                  Xinput <<- do.call(cbind,Xinput)
-                 Xinput <<- as.data.frame(cbind(importData$X$Station.ID,Xinput))
+                 Xinput <<- as.data.frame(cbind(selectData$X$Station.ID,Xinput))
                  colnames(Xinput) <<- c("Station.ID",input$X)
                  #Y transformation
                  if(input$YvarTransType == "log10")
@@ -203,7 +219,7 @@ shinyServer(function(input, output,session) {
                      #C1
                      (input$YvarC1 *
                        #X
-                       importData$Y[[input$Y]] ^
+                        selectData$Y[[input$Y]] ^
                        #C2
                        input$YvarC2 +
                        #C3
@@ -212,7 +228,7 @@ shinyServer(function(input, output,session) {
                        input$YvarC4
                    )
                    
-                   Yinput <<- cbind(Yinput,importData$Y$Station.ID)
+                   Yinput <<- cbind(Yinput,selectData$Y$Station.ID)
                    
                  } else if(input$YvarTransType == "ln")
                  {
@@ -220,7 +236,7 @@ shinyServer(function(input, output,session) {
                      #C1
                      (input$YvarC1 *
                        #X
-                       importData$Y[[input$Y]] ^
+                        selectData$Y[[input$Y]] ^
                        #C2
                        input$YvarC2 +
                        #C3
@@ -229,7 +245,7 @@ shinyServer(function(input, output,session) {
                        input$YvarC4
                    )
                    
-                   Yinput <<- cbind(Yinput,importData$Y$Station.ID)
+                   Yinput <<- cbind(Yinput,selectData$Y$Station.ID)
                    
                  } else if(input$YvarTransType == "exp")
                  {
@@ -237,7 +253,7 @@ shinyServer(function(input, output,session) {
                      #C1
                      (input$YvarC1 *
                        #X
-                       importData$Y[[input$Y]] ^
+                        selectData$Y[[input$Y]] ^
                        #C2
                        input$YvarC2 +
                        #C3
@@ -246,16 +262,20 @@ shinyServer(function(input, output,session) {
                        input$YvarC4
                    )
                    
-                   Yinput <<- cbind(Yinput,importData$Y$Station.ID)
+                   Yinput <<- cbind(Yinput,selectData$Y$Station.ID)
                  } else
                  {
-                   Yinput <<- importData$Y[c("Station.ID",input$Y)]
+                   Yinput <<- selectData$Y[c("Station.ID",input$Y)]
                  }
 
                })
 ####################################
   ###Select the type of regression and do plot
   
-  #output$corrPlot <- renderPlot()
+  output$corrPlot <- renderPlot(xcorPlot(object = selectData,
+                                         alpha = input$alpha,
+                                         theta = input$theta,
+                                         concurrentMin = input$concMin)
+                                )
 
 })
