@@ -42,18 +42,18 @@
 importPeakFQ <- function(pfqPath,gisFile,sites='') {
   # Developed by William Farmer, 04 February 2016
   
-  # pfqPath <- file.path('Example Directory','Peak_FQ_Runs')
-  # gisFile <- file.path('Example Directory','FakeSiteInfo.txt')
-  # sites <- '
+  # pfqPath <- file.path('exampleDirectory','Peak_FQ_Runs')
+  # gisFile <- file.path('exampleDirectory','FakeSiteInfo.txt')
+  # sites <- ''
   
   # Load GIS file
-  gisData <- read.table(file=gisFile,sep='\t',header=T,colClasses=c("character",
-                                                                    rep("numeric",10)
-  )
-  )
+  gisData <- read.table(file=gisFile,sep='\t',header=T,
+    colClasses=list(Station.ID='character'))
+  gisData$Station.ID <- ifelse(nchar(gisData$Station.ID)%%2>0,
+    paste0("0",gisData$Station.ID),gisData$Station.ID)
   
   # Determine which sites to search for
-  if (sites==''|is.na(sites)) {
+  if (sites==''||is.na(sites)) {
     sites <- gisData$Station.ID
   }
   ndx <- which(is.element(gisData$Station.ID,sites))
@@ -62,7 +62,7 @@ importPeakFQ <- function(pfqPath,gisFile,sites='') {
   BasChars <- gisData[ndx,is.element(names(gisData),
     c('Station.ID','Lat','Long'))]
   X <- gisData[ndx,!is.element(names(gisData),
-    c('Station.ID','Lat','Long'))]
+    c('Lat','Long'))]
   
   # Search for EXP for each site
   allFiles <- apply(as.matrix(paste0('*',gisData$Station.ID[ndx],'.EXP')),
@@ -128,9 +128,6 @@ importPeakFQ <- function(pfqPath,gisFile,sites='') {
   colnames(Y) <- paste("AEP",AEP[1,],sep="_")
   Y$Station.ID <- EXP_SiteID$Station.ID
   Y <- Y[c(ncol(Y),1:ncol(Y)-1)]
-  
-  X$Station.ID <- EXP_SiteID$Station.ID
-  X <- X[c(ncol(X),1:ncol(X)-1)]
 
   LP3f$Station.ID <- EXP_SiteID$Station.ID
   LP3f <- LP3f[c(ncol(LP3f),1:ncol(LP3f)-1)]
@@ -154,8 +151,7 @@ importPeakFQ <- function(pfqPath,gisFile,sites='') {
     BasChars=BasChars,
     MSEGR=unique(EXP_MSEGR[,2]),
     recLen=recLen,
-    recCor=recCor,
-    siteTS = siteTS
+    recCor=recCor
   )
   return(result)
   

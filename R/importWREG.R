@@ -21,9 +21,9 @@
 #' 
 #' @return All outputs are returned as part of a list.  The list includes:
 #' \item{sites}{A vector of site IDs.}
-#' \item{Y}{A matrix whose comlumns represent unique frequency events, 
+#' \item{Y}{A data frame whose comlumns represent unique frequency events, 
 #' while the row represent particular sites in the same order as \code{sites}.}
-#' \item{X}{A matrix whose columns represent basin characteristics to be used
+#' \item{X}{A data frame whose columns represent basin characteristics to be used
 #'  as dependent variables and whose rows represent sites corresponding 
 #'  to \code{sites}.}
 #' \item{LP3f}{A matrix containing the fitted LP# parameters that are fixed 
@@ -51,71 +51,15 @@ importWREG <- function(wregPath,sites='') {
   if (!file.exists(siteInfoFile)) {
     stop(paste('Could not find',siteInfoFile))
   }
-  siteInfo <- read.table(siteInfoFile,sep='\t',header=T)
+  siteInfo <- read.table(siteInfoFile,sep='\t',header=T,
+    colClasses = list(Station.ID='character'))
+  siteInfo$Station.ID <- ifelse(nchar(siteInfo$Station.ID)%%2>0,
+    paste0("0",siteInfo$Station.ID),siteInfo$Station.ID)
   BasChars <- siteInfo[,is.element(names(siteInfo),
     c('Station.ID','Lat','Long'))]
-  TestRecLen <- siteInfo$No..Annual.Series
-  X <- siteInfo[,9:ncol(siteInfo)]
-  
-  # Load and parse FlowChar.txt
-  flowCharFile <- file.path(wregPath,'FlowChar.txt')
-  if (!file.exists(flowCharFile)) {
-    stop(paste('Could not find',flowCharFile))
-  }
-  flowChar <- read.table(flowCharFile,sep='\t',header=T)
-  if (!identical(siteInfo$Station.ID,flowChar$Station.ID)) {
-    stop(paste0('The site order in ',siteInfoFile,' and ',
-      flowCharFile,' must be identical.  ',
-      '(All files must have identical order.)'))
-  }
-  Y <- flowChar[,2:ncol(flowChar)]
-  names(Y) <- unlist(strsplit(names(Y),split='[.]'))
-  
-  # Load and parse LP3*.txt
-  lp3gFile <- file.path(wregPath,'LP3G.txt')
-  if (!file.exists(lp3gFile)) {
-    stop(paste('Could not find',lp3gFile))
-  }
-  lp3g <- read.table(lp3gFile,sep='\t',header=T)
-  if (!identical(siteInfo$Station.ID,lp3g$Station.ID)) {
-    stop(paste0('The site order in ',siteInfoFile,' and ',
-      lp3gFile,' must be identical.  ',
-      '(All files must have identical order.)'))
-  }
-  test <- sum(unlist(
-    lapply(lapply(t(lp3g[,2:ncol(lp3g)]),FUN=unique),FUN=length))>1)
-  if (test>0) {
-    stop(paste0('For a given set of tiem series, ',
-      'the columns in LP3G.txt must be identical.'))
-  }
-  lp3kFile <- file.path(wregPath,'LP3K.txt')
-  if (!file.exists(lp3kFile)) {
-    stop(paste('Could not find',lp3kFile))
-  }
-  lp3k <- read.table(lp3kFile,sep='\t',header=T)
-  if (!identical(siteInfo$Station.ID,lp3k$Station.ID)) {
-    stop(paste0('The site order in ',siteInfoFile,' and ',
-      lp3kFile,' must be identical.  ',
-      '(All files must have identical order.)'))
-  }
-  lp3sFile <- file.path(wregPath,'LP3s.txt')
-  if (!file.exists(lp3sFile)) {
-    stop(paste('Could not find',lp3sFile))
-  }
-  lp3s <- read.table(lp3sFile,sep='\t',header=T)
-  if (!identical(siteInfo$Station.ID,lp3s$Station.ID)) {
-    stop(paste0('The site order in ',siteInfoFile,' and ',
-      lp3sFile,' must be identical.  ',
-      '(All files must have identical order.)'))
-  }
-  test <- sum(unlist(
-    lapply(lapply(t(lp3s[,2:ncol(lp3s)]),FUN=unique),FUN=length))>1)
-  if (test>0) {
-    stop(paste0('For a given set of tiem series, ',
-      'the columns in LP3s.txt must be identical.'))
-  }
-  LP3f <- data.frame(S=lp3s[,2],G=lp3g[,2],GR=siteInfo$Regional.Skew)
-  LP3k <- lp3k[,2:ncol(lp3k)]
+  TestRecLen <- siteInfo[,is.element(names(siteInfo),
+    c('Station.ID','No..Annual.Series'))]
+  X <- siteInfo[,c(1,9:ncol(siteInfo))]
   
   # Screen for particular sites
   n <- nrow(siteInfo)
@@ -123,18 +67,83 @@ importWREG <- function(wregPath,sites='') {
   if (length(sites)<2) {
     sites <- siteInfo$Station.ID
   }
-  ndx <- which(is.element(siteInfo$Station.ID,as.integer(sites)))
+  ndx <- which(is.element(siteInfo$Station.ID,sites))
   n2 <- length(ndx)
   if (n2!=length(sites)) {
     stop('You have requested sites that are not in SiteInfo.txt.')
   }
   sitesOut <- siteInfo$Station.ID[ndx]
-  Y <- Y[ndx,]
   X <- X[ndx,]
-  LP3f <- LP3f[ndx,]
-  LP3k <- LP3k[ndx,]
   BasChars <- BasChars[ndx,]
-  TestRecLen <- TestRecLen[ndx]
+  TestRecLen <- TestRecLen[ndx,]
+  site1 <- sitesOut
+  
+  # Load and parse FlowChar.txt
+  flowCharFile <- file.path(wregPath,'FlowChar.txt')
+  if (!file.exists(flowCharFile)) {
+    stop(paste('Could not find',flowCharFile))
+  }
+  Y <- read.table(flowCharFile,sep='\t',header=T,
+    colClasses = list(Station.ID='character'))
+  # Y <- Y[sort.int(runif(nrow(Y)),index.return = TRUE)$ix,] # for testing
+  Y$Station.ID <- ifelse(nchar(Y$Station.ID)%%2>0,
+      paste0("0",Y$Station.ID),Y$Station.ID)
+  names(Y)[2:ncol(Y)] <- unlist(strsplit(names(Y)[2:ncol(Y)],split='[.]'))
+  ndx <- which(is.element(Y$Station.ID,sitesOut))
+  Y <- Y[ndx,]
+  site2 <- Y$Station.ID
+  Y <- Y[match(sitesOut,Y$Station.ID),]
+  
+  # Load and parse LP3*.txt
+  lp3gFile <- file.path(wregPath,'LP3G.txt')
+  if (!file.exists(lp3gFile)) {
+    stop(paste('Could not find',lp3gFile))
+  }
+  lp3g <- read.table(lp3gFile,sep='\t',header=T)
+  lp3g$Station.ID <- ifelse(nchar(lp3g$Station.ID)%%2>0,
+    paste0("0",lp3g$Station.ID),lp3g$Station.ID)
+  test <- sum(unlist(
+    lapply(lapply(t(lp3g[,2:ncol(lp3g)]),FUN=unique),FUN=length))>1)
+  if (test>0) {
+    stop(paste0('For a given set of tiem series, ',
+      'the columns in LP3G.txt must be identical.'))
+  }
+  ndx <- which(is.element(lp3g$Station.ID,sitesOut))
+  lp3g <- lp3g[ndx,]
+  site3a <- lp3g$Station.ID
+  lp3g <- lp3g[match(sitesOut,lp3g$Station.ID),]
+  lp3kFile <- file.path(wregPath,'LP3K.txt')
+  if (!file.exists(lp3kFile)) {
+    stop(paste('Could not find',lp3kFile))
+  }
+  lp3k <- read.table(lp3kFile,sep='\t',header=T)
+  lp3k$Station.ID <- ifelse(nchar(lp3k$Station.ID)%%2>0,
+    paste0("0",lp3k$Station.ID),lp3k$Station.ID)
+  ndx <- which(is.element(lp3k$Station.ID,sitesOut))
+  lp3k <- lp3k[ndx,]
+  site3b <- lp3k$Station.ID
+  lp3k <- lp3k[match(sitesOut,lp3k$Station.ID),]
+  lp3sFile <- file.path(wregPath,'LP3s.txt')
+  if (!file.exists(lp3sFile)) {
+    stop(paste('Could not find',lp3sFile))
+  }
+  lp3s <- read.table(lp3sFile,sep='\t',header=T)
+  lp3s$Station.ID <- ifelse(nchar(lp3s$Station.ID)%%2>0,
+    paste0("0",lp3s$Station.ID),lp3s$Station.ID)
+  test <- sum(unlist(
+    lapply(lapply(t(lp3s[,2:ncol(lp3s)]),FUN=unique),FUN=length))>1)
+  if (test>0) {
+    stop(paste0('For a given set of tiem series, ',
+      'the columns in LP3s.txt must be identical.'))
+  }
+  ndx <- which(is.element(lp3s$Station.ID,sitesOut))
+  lp3s <- lp3s[ndx,]
+  site3c <- lp3s$Station.ID
+  lp3s <- lp3s[match(sitesOut,lp3s$Station.ID),]
+  
+  LP3f <- data.frame(Station.ID=sitesOut,S=lp3s[,2],G=lp3g[,2],
+    GR=siteInfo$Regional.Skew[ndx])
+  LP3k <- lp3k
   
   # Load and parse UserWLS.txt (if available)
   uwlsFile <- file.path(wregPath,'UserWLS.txt')
@@ -144,21 +153,25 @@ importWREG <- function(wregPath,sites='') {
     if (nrow(uwls)!=ncol(uwls)) {
       stop('UserWLS.txt must be a square matrix.')
     }
-    if (nrow(uwls)!=n2) {
+    if (!(identical(site1,site2)&identical(site1,site3a)&
+        identical(site1,site3b)&identical(site1,site3c))) {
+      uwls <- matrix(NA,ncol=length(site1),nrow=length(site2))
+      warning(paste0('Because the input files have a different order of sites,',
+        ' the user-provided weighting matrix is invalid.',
+        ' It has been replaced with NAs.'))
+      } else if (nrow(uwls)!=n2) {
       uwls <- uwls[ndx,ndx]
       warning(paste0('UserWLS.txt was ammended to match sites in arguments.',
         ' (Note: Be sure weights do not depend on sites that were removed.)'))
     }
     uwls <- as.matrix(uwls)
-    row.names(uwls) <- colnames(uwls) <- NULL
+    row.names(uwls) <- colnames(uwls) <- sitesOut
   }
   
   # Load and parse USGS*.txt files
   siteTS <- list()
-  allFiles <- unique(c(apply(as.matrix(paste0('USGS0',sites,'*.txt')),
-    MARGIN=1,FUN=list.files,path=wregPath),
-    apply(as.matrix(paste0('USGS',sites,'*.txt')),
-      MARGIN=1,FUN=list.files,path=wregPath)))
+  allFiles <- unique(apply(as.matrix(paste0('USGS',sitesOut,'*.txt')),
+      MARGIN=1,FUN=list.files,path=wregPath))
   if (length(allFiles)!=n2) {
     stop(paste0('Not all sites are represented with time series or ',
       'there are duplicate time series.'))
@@ -180,10 +193,14 @@ importWREG <- function(wregPath,sites='') {
       recCor[i,j] <- recCor[j,i] <- cor(ijdata,jidata)
     }
   }
-  if (!identical(diag(recLen),TestRecLen)) {
+  tester <- diag(recLen)
+  names(tester) <- NULL
+  if (!identical(tester,TestRecLen[,2])) {
     stop(paste('Reported record lengths in SiteInfo.txt do not match',
       'time series files.'))
   }
+  row.names(recLen) <- row.names(recCor) <- colnames(recLen) <- 
+    colnames(recCor) <- sitesOut
   
   # Output result
   result <- list(
