@@ -84,16 +84,13 @@ shinyUI(fluidPage(theme="theme.css",navbarPage(img(src="Logo.png", width="80px",
                                        pageWithSidebar(headerPanel("Variables"),
                                                        sidebarPanel(
                                                          selectInput("Y","Y-variable",choices = NA),
-                                                         selectInput("X","X-variables",choices = NA,multiple=TRUE),
-                                                         actionButton("selectVars",label="Transform variables"),
-                                                         actionButton("clearVars",label="Clear variables")
+                                                         selectInput("X","X-variables",choices = NA,multiple=TRUE)
                                                        ),
                                                        mainPanel(
                                                          uiOutput("YvarTrans"),
-                                                         lapply(1:20, function(i) {
-                                                           uiOutput(paste0('XvarTrans', i))
-                                                         }),
-                                                         actionButton("transVars","Apply transform")
+                                                          uiOutput('XvarTrans'),
+                                                         actionButton("transVars","Apply transform"),
+                                                         verbatimTextOutput("transformNote")
                                                          )
                                        )
                                        

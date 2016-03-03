@@ -26,6 +26,8 @@ shinyServer(function(input, output,session) {
   observeEvent(input$getData_WREG,
                {
                  importData <<- importWREG(wregPath = input$wregPath)
+                 #Set select data to import data so that it defuaults to all sites if none selected in gui
+                 selectData <<- importData
                  siteChars <<- cbind(importData$BasChars,
                                      importData$X)
                  
@@ -69,8 +71,8 @@ shinyServer(function(input, output,session) {
                                      recCor = importData$recCor[siteChars$Station.ID[selSites],
                                                                 siteChars$Station.ID[selSites]]
                  )
-                                     
-                                                   
+                 
+                 
                  
                }
   )
@@ -80,8 +82,7 @@ shinyServer(function(input, output,session) {
   
   
   ##This big chunk of code reactively builds the UI depending on variabls chosen
-  observeEvent(input$selectVars,
-               {
+
                  output$YvarTrans <- renderUI({
                    
                    ###This does the Y variable, it is simple because it does not depend
@@ -111,50 +112,41 @@ shinyServer(function(input, output,session) {
                  
                  ###This does the X variables. The lapply builds the UI basedo n the 
                  ###Number of X variables selected
+                 output$XvarTrans <- renderUI({
+                   if(length(input$X) > 0)
+                   {
                  lapply(1:length(input$X), function(i) {
                    
-                   output[[paste0('XvarTrans', i)]] <- renderUI({
+                   
                      
-                     
-                     fluidRow(
-                       column(4,
-                              radioButtons(paste0(input$X[i],"XvarTransType"),
-                                           label=input$X[i],
-                                           choices = c("none","log10","ln","exp"),
-                                           inline=TRUE)
-                       ),
-                       column(2,
-                              numericInput(paste0(input$X[i],"_XvarC1"),label="C1",value=0,step=0.1)
-                       ),
-                       column(2,
-                              numericInput(paste0(input$X[i],"_XvarC2"),label="C2",value=0,step=0.1)
-                       ),
-                       column(2,
-                              numericInput(paste0(input$X[i],"_XvarC3"),label="C3",value=0,step=0.1)
-                       ),
-                       column(2,
-                              numericInput(paste0(input$X[i],"_XvarC4"),label="C4",value=0,step=0.1)
+                        fluidRow(
+                         
+                         column(4,
+                                radioButtons(paste0(input$X[i],"XvarTransType"),
+                                             label=isolate(input$X[i]),
+                                             choices = c("none","log10","ln","exp"),
+                                             inline=TRUE)
+                         ),
+                         column(2,
+                                numericInput(paste0(input$X[i],"_XvarC1"),label="C1",value=0,step=0.1)
+                         ),
+                         column(2,
+                                numericInput(paste0(input$X[i],"_XvarC2"),label="C2",value=0,step=0.1)
+                         ),
+                         column(2,
+                                numericInput(paste0(input$X[i],"_XvarC3"),label="C3",value=0,step=0.1)
+                         ),
+                         column(2,
+                                numericInput(paste0(input$X[i],"_XvarC4"),label="C4",value=0,step=0.1)
+                         )
                        )
-                       
-                     )
+                     
                    })
+                   } else {}
                    
                  })
-               }
-  )
-  
-  ###This clears the UI to start over
-  observeEvent(input$clearVars,
-               {
-                 output$YvarTrans <- renderUI({})
-                 lapply(1:20, function(i) {
-                   
-                   output[[paste0('XvarTrans', i)]] <- renderUI({})
-                 })
-                 Xinput <<- NULL
-                 Yinput <<- NULL
-               })
-  
+
+
   ###This applies the transforms
   observeEvent(input$transVars,
                {
@@ -164,12 +156,12 @@ shinyServer(function(input, output,session) {
                      log10(
                        #C1
                        (input[[paste0(input$X[i],"_XvarC1")]] *
-                         #X
-                         selectData$X[[input$X[i]]] ^
-                         #C2
-                         input[[paste0(input$X[i],"_XvarC2")]] +
-                         #C3
-                         input[[paste0(input$X[i],"_XvarC3")]]) ^
+                          #X
+                          selectData$X[[input$X[i]]] ^
+                          #C2
+                          input[[paste0(input$X[i],"_XvarC2")]] +
+                          #C3
+                          input[[paste0(input$X[i],"_XvarC3")]]) ^
                          #C4
                          input[[paste0(input$X[i],"_XvarC4")]]
                      )
@@ -178,12 +170,12 @@ shinyServer(function(input, output,session) {
                      log(
                        #C1
                        (input[[paste0(input$X[i],"_XvarC1")]] *
-                         #X
+                          #X
                           selectData$X[[input$X[i]]] ^
-                         #C2
-                         input[[paste0(input$X[i],"_XvarC2")]] +
-                         #C3
-                         input[[paste0(input$X[i],"_XvarC3")]]) ^
+                          #C2
+                          input[[paste0(input$X[i],"_XvarC2")]] +
+                          #C3
+                          input[[paste0(input$X[i],"_XvarC3")]]) ^
                          #C4
                          input[[paste0(input$X[i],"_XvarC4")]]
                      )
@@ -192,16 +184,16 @@ shinyServer(function(input, output,session) {
                      exp(
                        #C1
                        (input[[paste0(input$X[i],"_XvarC1")]] *
-                         #X
+                          #X
                           selectData$X[[input$X[i]]] ^
-                         #C2
-                         input[[paste0(input$X[i],"_XvarC2")]] +
-                         #C3
-                         input[[paste0(input$X[i],"_XvarC3")]]) ^
+                          #C2
+                          input[[paste0(input$X[i],"_XvarC2")]] +
+                          #C3
+                          input[[paste0(input$X[i],"_XvarC3")]]) ^
                          #C4
                          input[[paste0(input$X[i],"_XvarC4")]]
                      )
-                   } else
+                   } else if(input[[paste0(input$X[i],"XvarTransType")]] == "none")
                    {
                      selectData$X[[input$X[i]]]
                    }
@@ -211,71 +203,90 @@ shinyServer(function(input, output,session) {
                  ##Combine list into dataframe
                  Xinput <<- do.call(cbind,Xinput)
                  Xinput <<- as.data.frame(cbind(selectData$X$Station.ID,Xinput))
+                 
+                 ##Set column names
                  colnames(Xinput) <<- c("Station.ID",input$X)
+                 
+                 ##Set column classes
+                 Xinput$Station.ID <<- as.character(Xinput$Station.ID)
+                 ###First have to convert factor to character
+                 Xinput[2:ncol(Xinput)] <<- sapply(Xinput[2:ncol(Xinput)],as.character)
+                 ###Next convert character to numeric
+                 Xinput[2:ncol(Xinput)] <<- sapply(Xinput[2:ncol(Xinput)],as.numeric)
+                 
+                 
                  #Y transformation
                  if(input$YvarTransType == "log10")
                  {
                    Yinput <<- log10(
                      #C1
                      (input$YvarC1 *
-                       #X
+                        #X
                         selectData$Y[[input$Y]] ^
-                       #C2
-                       input$YvarC2 +
-                       #C3
-                       input$YvarC3) ^
+                        #C2
+                        input$YvarC2 +
+                        #C3
+                        input$YvarC3) ^
                        #C4
                        input$YvarC4
                    )
                    
-                   Yinput <<- cbind(Yinput,selectData$Y$Station.ID)
-                   
+                   Yinput <<- as.data.frame(cbind(selectData$Y$Station.ID,Yinput))
                  } else if(input$YvarTransType == "ln")
                  {
                    Yinput <<- log(
                      #C1
                      (input$YvarC1 *
-                       #X
+                        #X
                         selectData$Y[[input$Y]] ^
-                       #C2
-                       input$YvarC2 +
-                       #C3
-                       input$YvarC3) ^
+                        #C2
+                        input$YvarC2 +
+                        #C3
+                        input$YvarC3) ^
                        #C4
                        input$YvarC4
                    )
                    
-                   Yinput <<- cbind(Yinput,selectData$Y$Station.ID)
+                   Yinput <<- as.data.frame(cbind(selectData$Y$Station.ID,Yinput))
                    
                  } else if(input$YvarTransType == "exp")
                  {
                    Yinput <<- exp(
                      #C1
                      (input$YvarC1 *
-                       #X
+                        #X
                         selectData$Y[[input$Y]] ^
-                       #C2
-                       input$YvarC2 +
-                       #C3
-                       input$YvarC3) ^
+                        #C2
+                        input$YvarC2 +
+                        #C3
+                        input$YvarC3) ^
                        #C4
                        input$YvarC4
                    )
                    
-                   Yinput <<- cbind(Yinput,selectData$Y$Station.ID)
-                 } else
+                   Yinput <<- as.data.frame(cbind(selectData$Y$Station.ID,Yinput))
+                 } else if(input$YvarTransType == "none")
                  {
-                   Yinput <<- selectData$Y[c("Station.ID",input$Y)]
+                   Yinput <<- selectData$Y[[input$Y]]
+                   Yinput <<- as.data.frame(cbind(selectData$Y$Station.ID,Yinput))
                  }
-
+                 
+                 ##Set columns names
+                 colnames(Yinput) <<- c("Station.ID",input$Y)
+                 
+                 ##Set column classes
+                 Yinput$Station.ID <<- as.character(Yinput$Station.ID)
+                 ###First have to convert factor to character then to numeric
+                 Yinput[,2] <<- as.numeric(as.character(Yinput[,2]))
+                 output$transformNote <<- renderText("Variable transformations applied")
                })
-####################################
+  ####################################
   ###Select the type of regression and do plot
   
   output$corrPlot <- renderPlot(xcorPlot(object = selectData,
                                          alpha = input$alpha,
                                          theta = input$theta,
                                          concurrentMin = input$concMin)
-                                )
-
+  )
+  
 })
