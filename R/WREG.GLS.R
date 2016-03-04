@@ -107,15 +107,6 @@
 #' @import stats
 #' 
 #' @examples 
-#'data("baseData",package="WREG")
-#'names(baseData$Dependent[2:4])
-#'names(baseData$independent[9:14])
-#'exY <- log(baseData$Dependent$Q1.)
-#'X1 <- log(baseData$independent$DRNAREA)
-#'X2 <- log(baseData$independent$PRECIP)
-#'X0 <- rep(1,length(X1))
-#'exX <- cbind(X0,X1,X2)
-#'Ex.OLS <- WREG.MLR(Y=exY,X=exX,Reg='OLS')
 #'@export
 
 WREG.GLS <- function(Y,X,recordLengths,LP3,basinChars,
