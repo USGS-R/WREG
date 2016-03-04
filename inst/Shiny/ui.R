@@ -89,8 +89,8 @@ shinyUI(fluidPage(theme="theme.css",navbarPage(img(src="Logo.png", width="80px",
                                                        mainPanel(
                                                          uiOutput("YvarTrans"),
                                                           uiOutput('XvarTrans'),
-                                                         actionButton("transVars","Apply transform"),
-                                                         verbatimTextOutput("transformNote")
+                                                         actionButton("transVars","Apply transform")
+                                                         #verbatimTextOutput("transformNote")
                                                          )
                                        )
                                        

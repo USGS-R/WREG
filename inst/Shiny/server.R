@@ -119,28 +119,35 @@ shinyServer(function(input, output,session) {
       lapply(1:length(input$X), function(i) {
         
         
-        
         fluidRow(
           
           column(4,
                  radioButtons(paste0(input$X[i],"XvarTransType"),
                               label=isolate(input$X[i]),
                               choices = c("none","log10","ln","exp"),
-                              inline=TRUE)
+                              inline=TRUE),
+                 fluidRow(
+                 column(6,
+                        numericInput(paste0(input$X[i],"_XvarC1"),label="C1",value=0,step=0.1)
+                 ),
+                 column(6,
+                        numericInput(paste0(input$X[i],"_XvarC2"),label="C2",value=0,step=0.1)
+                 )
+                 ),
+                 fluidRow(
+                 column(6,
+                        numericInput(paste0(input$X[i],"_XvarC3"),label="C3",value=0,step=0.1)
+                 ),
+                 column(6,
+                        numericInput(paste0(input$X[i],"_XvarC4"),label="C4",value=0,step=0.1)
+                 )
+                 )
           ),
-          column(2,
-                 numericInput(paste0(input$X[i],"_XvarC1"),label="C1",value=0,step=0.1)
-          ),
-          column(2,
-                 numericInput(paste0(input$X[i],"_XvarC2"),label="C2",value=0,step=0.1)
-          ),
-          column(2,
-                 numericInput(paste0(input$X[i],"_XvarC3"),label="C3",value=0,step=0.1)
-          ),
-          column(2,
-                 numericInput(paste0(input$X[i],"_XvarC4"),label="C4",value=0,step=0.1)
+          column(8,
+                 plotOutput(paste0(input$X[i],"_plot"))
+                 )
           )
-        )
+        
         
       })
     } else {}
@@ -149,8 +156,66 @@ shinyServer(function(input, output,session) {
   
   
   ###This applies the transforms
-  observeEvent(input$transVars,
+  observe(
                {
+                 try({
+                   
+                   #Y transformation
+                   if(input$YvarTransType == "log10")
+                   {
+                     Yinput <<- log10(
+                       #C1
+                       (input$YvarC1 *
+                          #X
+                          selectData$Y[[input$Y]] ^
+                          #C2
+                          input$YvarC2 +
+                          #C3
+                          input$YvarC3) ^
+                         #C4
+                         input$YvarC4
+                     )
+                     
+                     Yinput <<- as.data.frame(cbind(selectData$Y$Station.ID,Yinput))
+                   } else if(input$YvarTransType == "ln")
+                   {
+                     Yinput <<- log(
+                       #C1
+                       (input$YvarC1 *
+                          #X
+                          selectData$Y[[input$Y]] ^
+                          #C2
+                          input$YvarC2 +
+                          #C3
+                          input$YvarC3) ^
+                         #C4
+                         input$YvarC4
+                     )
+                     
+                     Yinput <<- as.data.frame(cbind(selectData$Y$Station.ID,Yinput))
+                     
+                   } else if(input$YvarTransType == "exp")
+                   {
+                     Yinput <<- exp(
+                       #C1
+                       (input$YvarC1 *
+                          #X
+                          selectData$Y[[input$Y]] ^
+                          #C2
+                          input$YvarC2 +
+                          #C3
+                          input$YvarC3) ^
+                         #C4
+                         input$YvarC4
+                     )
+                     
+                     Yinput <<- as.data.frame(cbind(selectData$Y$Station.ID,Yinput))
+                   } else if(input$YvarTransType == "none")
+                   {
+                     Yinput <<- selectData$Y[[input$Y]]
+                     Yinput <<- as.data.frame(cbind(selectData$Y$Station.ID,Yinput))
+                   }
+                   
                  Xinput <<- lapply(1:length(input$X), function(i) {
                    if(input[[paste0(input$X[i],"XvarTransType")]] == "log10")
                    {
@@ -198,7 +263,7 @@ shinyServer(function(input, output,session) {
                    {
                      selectData$X[[input$X[i]]]
                    }
-                   
+
                  })
                  
                  ##Combine list into dataframe
@@ -214,64 +279,7 @@ shinyServer(function(input, output,session) {
                  Xinput[2:ncol(Xinput)] <<- sapply(Xinput[2:ncol(Xinput)],as.character)
                  ###Next convert character to numeric
                  Xinput[2:ncol(Xinput)] <<- sapply(Xinput[2:ncol(Xinput)],as.numeric)
-                 
-                 
-                 #Y transformation
-                 if(input$YvarTransType == "log10")
-                 {
-                   Yinput <<- log10(
-                     #C1
-                     (input$YvarC1 *
-                        #X
-                        selectData$Y[[input$Y]] ^
-                        #C2
-                        input$YvarC2 +
-                        #C3
-                        input$YvarC3) ^
-                       #C4
-                       input$YvarC4
-                   )
-                   
-                   Yinput <<- as.data.frame(cbind(selectData$Y$Station.ID,Yinput))
-                 } else if(input$YvarTransType == "ln")
-                 {
-                   Yinput <<- log(
-                     #C1
-                     (input$YvarC1 *
-                        #X
-                        selectData$Y[[input$Y]] ^
-                        #C2
-                        input$YvarC2 +
-                        #C3
-                        input$YvarC3) ^
-                       #C4
-                       input$YvarC4
-                   )
-                   
-                   Yinput <<- as.data.frame(cbind(selectData$Y$Station.ID,Yinput))
-                   
-                 } else if(input$YvarTransType == "exp")
-                 {
-                   Yinput <<- exp(
-                     #C1
-                     (input$YvarC1 *
-                        #X
-                        selectData$Y[[input$Y]] ^
-                        #C2
-                        input$YvarC2 +
-                        #C3
-                        input$YvarC3) ^
-                       #C4
-                       input$YvarC4
-                   )
-                   
-                   Yinput <<- as.data.frame(cbind(selectData$Y$Station.ID,Yinput))
-                 } else if(input$YvarTransType == "none")
-                 {
-                   Yinput <<- selectData$Y[[input$Y]]
-                   Yinput <<- as.data.frame(cbind(selectData$Y$Station.ID,Yinput))
-                 }
-                 
+
                  ##Set columns names
                  colnames(Yinput) <<- c("Station.ID",input$Y)
                  
@@ -279,7 +287,15 @@ shinyServer(function(input, output,session) {
                  Yinput$Station.ID <<- as.character(Yinput$Station.ID)
                  ###First have to convert factor to character then to numeric
                  Yinput[,2] <<- as.numeric(as.character(Yinput[,2]))
-                 output$transformNote <<- renderText("Variable transformations applied")
+                 #output$transformNote <<- renderText("Variable transformations applied")
+                 
+                 lapply(1:length(input$X), function(i) {
+                 output[[paste0(input$X[i],"_plot")]] <- renderPlot({
+                   plot(Xinput[[input$X[i]]],Yinput[[input$Y]],ylab="Y",xlab="X")
+                 })
+                 })
+
+                 })
                })
   ####################################
   ###Select the type of regression and do plot

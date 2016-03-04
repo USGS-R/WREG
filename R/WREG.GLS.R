@@ -4,52 +4,37 @@
 #' The \code{WREG.MLR} function executes the basic regression analysis that forms the 
 #' foundation of the WREG program.
 #' 
-#' @param Y The dependent variable of interest, with any transformations already 
+#' @param Y A numeric vector of the dependent variable of interest, with any transformations already 
 #' applied.
-#' @param X The independent variables in the regression, with any transformations 
+#' @param X A numeric matrix of the independent variables in the regression, with any transformations 
 #' already applied.  Each row represents a site and each column represents
 #' a particular independe variable.  (If a leading constant is used, it should be 
 #' included here as a leading column of ones.)  The rows must be in the same order as
 #' the dependent variables in \code{Y}.
 #' @param x0 A vector containing the independent variables (as above) for a 
 #' particular target site.  This variable is only used for ROI analysis.
-#' @param Reg A string indicating which type of regression should be applied.
-#' The options include: \dQuote{OLS} for ordinary least-squares regression,
-#' \dQuote{WLS} for weighted least-squares regression, \dQuote{GLS} for generalized
-#' least-squares regression, with no uncertainty in regional skew, \dQuote{GLSskew}
-#' for generalized least-squares regression with uncertainty in regional skew, and 
-#' \dQuote{CustomWeight} allowing the user to provide a custom weighting matrix.  
-#' (In the case of \dQuote{GLSskew}, the uncertainty in regional skew must be provided
-#'  as the mean squared error in regional skew.)
-#' @param RecordLengths This input is required for \dQuote{WLS}, \dQuote{GLS} and 
-#' \dQuote{GLSskew}.  For \dQuote{GLS} and \dQuote{GLSskew}, \code{RecordLengths} 
-#' should be a matrix whose rows and columns are in the same order as \code{Y}.  Each 
+#' @param RecordLengths A numeric matrix whose rows and columns are in the same order as \code{Y}.  Each 
 #' \code{(r,c)} element represents the length of concurrent record between sites 
 #' \code{r} and \code{c}.  The diagonal elements therefore represent each site's full
-#' record length.  For \dQuote{WLS}, the only the at-site record lengths are needed.
-#' In the case of \dQuote{WLS}, \code{RecordLengths} can be a vector or the matrix 
-#' described for \dQuote{GLS} and \dQuote{GLSskew}.
-#' @param LP3 A dataframe containing the fitted Log-Pearson Type III standard
-#' deviate, standard deviation and skew for each site.  The names of this data frame are
-#' \code{S}, \code{K} and \code{G}.  For \dQuote{GLSskew}, the regional skew value must 
-#' also be provided in a variable called \code{GR}.  The order of the rows must be the same
-#' as \code{Y}.
-#' @param alpha A number, required only for \dQuote{GLS} and \dQuote{GLSskew}.  
+#' record length.  
+#' @param LP3 A numeric matrix containing the fitted Log-Pearson Type III standard
+#' deviate, standard deviation and skew for each site.  The columns of the matrix represent S, K, G, 
+#' and an option regional skew value \code{GR} required by WREG.GLS with regSkew = TRUE. 
+#' The order of the rows must be the same as \code{Y}.
+#' @param alpha A numeric.
 #' \code{alpha} is a parameter used in the estimated cross-correlation between site
 #' records.  See equation 20 in the WREG v. 1.05 manual.  The arbitrary, default value 
 #' is 0.01.  The user should fit a different value as needed.
-#' @param theta A number, required only for \dQuote{GLS} and \dQuote{GLSskew}.  
+#' @param theta A numeric.  
 #' \code{theta} is a parameter used in the estimated cross-correlation between site
 #' records.  See equation 20 in the WREG v. 1.05 manual.  The arbitrary, default value 
 #' is 0.98.  The user should fit a different value as needed.
 #' @param BasinChars A dataframe containing three variables: \code{StationID} is the 
-#' numerical identifier (without a leading zero) of each site, \code{Lat} is the latitude
+#' identifier of each site, \code{Lat} is the latitude
 #' of the site, in decimal degrees, and \code{Long} is the longitude of the site, in decimal
-#' degrees.  The sites must be presented in the same order as \code{Y}.  Required only for
-#' \dQuote{GLS} and \dQuote{GLSskew}.
-#' @param MSEGR A number. The mean squared error of the regional skew.  Required only for
-#' \dQuote{GLSskew}.
-#' @param TY A number.  The return period of the event being modeled.  Required only for 
+#' degrees.  The sites must be presented in the same order as \code{Y}.  Required only if \code{regSkew = TRUE}.
+#' @param MSEGR A numeric. The mean squared error of the regional skew.  Required only if \code{regSkew = TRUE}.
+#' @param TY A numeric.  The return period of the event being modeled.  Required only for 
 #' \dQuote{GLSskew}.  The default value is \code{2}.  (See the \code{Legacy} details below.)
 #' @param Peak A logical.  Indicates if the event being modeled is a peak flow event
 #' or a low-flow event.  \code{TRUE} indicates a peak flow, while \code{FALSE} indicates
@@ -62,7 +47,7 @@
 #' estimated variance of the model errors from the k-variable model (\code{k=ncol(X)}),
 #' and (3) \code{var.modelerror.0} as the variance of the model errors from a consant-only 
 #' regression.  Required for \code{Reg=} \dQuote{CustomWeight}.
-#' @param DistMeth Required for \dQuote{GLS} and \dQuote{GLSskew}.  A value of \code{1} 
+#' @param DistMeth A numeric. A value of \code{1} 
 #' indicates that the "Nautical Mile" approximation should be used to calculate inter-site
 #' distances.  A value of \code{2} designates the Haversine approximation.  See 
 #' \code{\link{Dist.WREG}}.  The default value is \code{2}.  (See the \code{Legacy} 
