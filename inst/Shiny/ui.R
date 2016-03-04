@@ -84,16 +84,13 @@ shinyUI(fluidPage(theme="theme.css",navbarPage(img(src="Logo.png", width="80px",
                                        pageWithSidebar(headerPanel("Variables"),
                                                        sidebarPanel(
                                                          selectInput("Y","Y-variable",choices = NA),
-                                                         selectInput("X","X-variables",choices = NA,multiple=TRUE),
-                                                         actionButton("selectVars",label="Transform variables"),
-                                                         actionButton("clearVars",label="Clear variables")
+                                                         selectInput("X","X-variables",choices = NA,multiple=TRUE)
                                                        ),
                                                        mainPanel(
                                                          uiOutput("YvarTrans"),
-                                                         lapply(1:20, function(i) {
-                                                           uiOutput(paste0('XvarTrans', i))
-                                                         }),
+                                                          uiOutput('XvarTrans'),
                                                          actionButton("transVars","Apply transform")
+                                                         #verbatimTextOutput("transformNote")
                                                          )
                                        )
                                        
@@ -103,19 +100,22 @@ shinyUI(fluidPage(theme="theme.css",navbarPage(img(src="Logo.png", width="80px",
                                                        sidebarPanel(
                                                          radioButtons("regType",
                                                                       "Parameter estimation type",
-                                                                      choices=c("Ordinary-least squares",
-                                                                                "Weighted-least squares",
-                                                                                "Generalized-least squares")
-                                                         )
+                                                                      choices=list("Ordinary-least squares"="OLS",
+                                                                                "Weighted-least squares"="WLS",
+                                                                                "Generalized-least squares"="GLS")),
+                                                                      checkboxInput("GLSskew",label="With regional skew",value=FALSE)
+                                                                      
+                                                         
                                                        ),
                                                        mainPanel(
                                                          conditionalPanel(
-                                                           condition = "input.regType == 'Generalized-least squares'",
+                                                           condition = "input.regType == 'GLS' | input.regType == 'GLSskew'",
                                                            fluidRow(
                                                              column(4, numericInput("concMin",
                                                                                     label="No. of concurrent years",
                                                                                     value=10,
                                                                                     step=1)
+                                                                    
                                                              ),
                                                              column(4, numericInput("alpha",
                                                                                     label="Alpha",
@@ -138,7 +138,8 @@ shinyUI(fluidPage(theme="theme.css",navbarPage(img(src="Logo.png", width="80px",
                    
                    #######################################
                    #Run wreg tab
-                   tabPanel("Run WREG"
+                   tabPanel("Run WREG",
+                            actionButton("runWREG",label="Run WREG")
                    )
 ))
 )
