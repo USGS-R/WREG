@@ -207,6 +207,10 @@ WREG.MLR <- function(Y,X,Reg,x0=NA,
     }
   }
   
+  #Convert X and Y from dataframes to matrices to work with matrix operations below
+  X <- as.matrix(X)
+  Y <- as.matrix(Y)
+  
   ## Basic regression calculations
   B_hat <- solve(t(X)%*%solve(Omega)%*%X)%*%t(X)%*%solve(Omega)%*%Y # Estimated regression coefficients. Eq 7 (9, 11, and 18)
   Y_hat <- X%*%B_hat # Model estimates. Eq 8

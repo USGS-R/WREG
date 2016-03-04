@@ -132,6 +132,7 @@ importPeakFQ <- function(pfqPath,gisFile,sites='') {
   LP3f$Station.ID <- EXP_SiteID$Station.ID
   LP3f <- LP3f[c(ncol(LP3f),1:ncol(LP3f)-1)]
   
+  colnames(LP3k) <- paste("AEP",AEP[1,],sep="_")
   LP3k$Station.ID <- EXP_SiteID$Station.ID
   LP3k <- LP3k[c(ncol(LP3k),1:ncol(LP3k)-1)]
   

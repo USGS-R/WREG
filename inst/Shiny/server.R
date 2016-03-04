@@ -82,71 +82,71 @@ shinyServer(function(input, output,session) {
   
   
   ##This big chunk of code reactively builds the UI depending on variabls chosen
-
-                 output$YvarTrans <- renderUI({
-                   
-                   ###This does the Y variable, it is simple because it does not depend
-                   ###On the number of Y vars since you can only choose 1
-                   fluidRow(
-                     column(4,
-                            radioButtons("YvarTransType",
-                                         label=input$Y,
-                                         choices = c("none","log10","ln","exp"),
-                                         inline=TRUE)
-                     ),
-                     column(2,
-                            numericInput("YvarC1",label="C1",value=0,step=0.1)
-                     ),
-                     column(2,
-                            numericInput("YvarC2",label="C2",value=0,step=0.1)
-                     ),
-                     column(2,
-                            numericInput("YvarC3",label="C3",value=0,step=0.1)
-                     ),
-                     column(2,
-                            numericInput("YvarC4",label="C4",value=0,step=0.1)
-                     )
-                     
-                   )
-                 })
-                 
-                 ###This does the X variables. The lapply builds the UI basedo n the 
-                 ###Number of X variables selected
-                 output$XvarTrans <- renderUI({
-                   if(length(input$X) > 0)
-                   {
-                 lapply(1:length(input$X), function(i) {
-                   
-                   
-                     
-                        fluidRow(
-                         
-                         column(4,
-                                radioButtons(paste0(input$X[i],"XvarTransType"),
-                                             label=isolate(input$X[i]),
-                                             choices = c("none","log10","ln","exp"),
-                                             inline=TRUE)
-                         ),
-                         column(2,
-                                numericInput(paste0(input$X[i],"_XvarC1"),label="C1",value=0,step=0.1)
-                         ),
-                         column(2,
-                                numericInput(paste0(input$X[i],"_XvarC2"),label="C2",value=0,step=0.1)
-                         ),
-                         column(2,
-                                numericInput(paste0(input$X[i],"_XvarC3"),label="C3",value=0,step=0.1)
-                         ),
-                         column(2,
-                                numericInput(paste0(input$X[i],"_XvarC4"),label="C4",value=0,step=0.1)
-                         )
-                       )
-                     
-                   })
-                   } else {}
-                   
-                 })
-
-
+  
+  output$YvarTrans <- renderUI({
+    
+    ###This does the Y variable, it is simple because it does not depend
+    ###On the number of Y vars since you can only choose 1
+    fluidRow(
+      column(4,
+             radioButtons("YvarTransType",
+                          label=input$Y,
+                          choices = c("none","log10","ln","exp"),
+                          inline=TRUE)
+      ),
+      column(2,
+             numericInput("YvarC1",label="C1",value=0,step=0.1)
+      ),
+      column(2,
+             numericInput("YvarC2",label="C2",value=0,step=0.1)
+      ),
+      column(2,
+             numericInput("YvarC3",label="C3",value=0,step=0.1)
+      ),
+      column(2,
+             numericInput("YvarC4",label="C4",value=0,step=0.1)
+      )
+      
+    )
+  })
+  
+  ###This does the X variables. The lapply builds the UI basedo n the 
+  ###Number of X variables selected
+  output$XvarTrans <- renderUI({
+    if(length(input$X) > 0)
+    {
+      lapply(1:length(input$X), function(i) {
+        
+        
+        
+        fluidRow(
+          
+          column(4,
+                 radioButtons(paste0(input$X[i],"XvarTransType"),
+                              label=isolate(input$X[i]),
+                              choices = c("none","log10","ln","exp"),
+                              inline=TRUE)
+          ),
+          column(2,
+                 numericInput(paste0(input$X[i],"_XvarC1"),label="C1",value=0,step=0.1)
+          ),
+          column(2,
+                 numericInput(paste0(input$X[i],"_XvarC2"),label="C2",value=0,step=0.1)
+          ),
+          column(2,
+                 numericInput(paste0(input$X[i],"_XvarC3"),label="C3",value=0,step=0.1)
+          ),
+          column(2,
+                 numericInput(paste0(input$X[i],"_XvarC4"),label="C4",value=0,step=0.1)
+          )
+        )
+        
+      })
+    } else {}
+    
+  })
+  
+  
   ###This applies the transforms
   observeEvent(input$transVars,
                {
@@ -289,4 +289,25 @@ shinyServer(function(input, output,session) {
                                          concurrentMin = input$concMin)
   )
   
+  ####################################
+  ###Run WREG
+  observeEvent(input$runWREG,
+               {
+                 if(input$regType == "OLS")
+                 {
+                   wregOUT <<- WREG.MLR(Y=Yinput[,2],
+                                       X=Xinput[,2:ncol(Xinput)],
+                                       Reg=input$regType)
+                 } else if (input$regType == "WLS")
+                 {
+                   wregOUT <<- WREG.MLR(Y=Yinput[,2],
+                                        X=Xinput[,2:ncol(Xinput)],
+                                        Reg="WLS",
+                                        RecordLengths = selectData$recLen,
+                                        LP3 = selectData$LP3f)
+                                        
+                                        
+                 }
+               }
+  )
 })

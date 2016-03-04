@@ -100,14 +100,14 @@ shinyUI(fluidPage(theme="theme.css",navbarPage(img(src="Logo.png", width="80px",
                                                        sidebarPanel(
                                                          radioButtons("regType",
                                                                       "Parameter estimation type",
-                                                                      choices=c("Ordinary-least squares",
-                                                                                "Weighted-least squares",
-                                                                                "Generalized-least squares")
+                                                                      choices=list("Ordinary-least squares"="OLS",
+                                                                                "Weighted-least squares"="WLS",
+                                                                                "Generalized-least squares"="GLS")
                                                          )
                                                        ),
                                                        mainPanel(
                                                          conditionalPanel(
-                                                           condition = "input.regType == 'Generalized-least squares'",
+                                                           condition = "input.regType == 'GLS' | input.regType == 'GLSskew'",
                                                            fluidRow(
                                                              column(4, numericInput("concMin",
                                                                                     label="No. of concurrent years",
@@ -123,6 +123,11 @@ shinyUI(fluidPage(theme="theme.css",navbarPage(img(src="Logo.png", width="80px",
                                                                                     label="Theta",
                                                                                     value=0.98,
                                                                                     step=0.01)
+                                                             ),
+                                                             fluidRow(
+                                                               column(4, 
+                                                                      checkboxInput("GLSskew",label="With regional skew",value=FALSE)
+                                                                      )
                                                              )
                                                            ),
                                                            plotOutput("corrPlot")
@@ -135,7 +140,8 @@ shinyUI(fluidPage(theme="theme.css",navbarPage(img(src="Logo.png", width="80px",
                    
                    #######################################
                    #Run wreg tab
-                   tabPanel("Run WREG"
+                   tabPanel("Run WREG",
+                            actionButton("runWREG",label="Run WREG")
                    )
 ))
 )
