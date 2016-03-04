@@ -102,8 +102,10 @@ shinyUI(fluidPage(theme="theme.css",navbarPage(img(src="Logo.png", width="80px",
                                                                       "Parameter estimation type",
                                                                       choices=list("Ordinary-least squares"="OLS",
                                                                                 "Weighted-least squares"="WLS",
-                                                                                "Generalized-least squares"="GLS")
-                                                         )
+                                                                                "Generalized-least squares"="GLS")),
+                                                                      checkboxInput("GLSskew",label="With regional skew",value=FALSE)
+                                                                      
+                                                         
                                                        ),
                                                        mainPanel(
                                                          conditionalPanel(
@@ -113,6 +115,7 @@ shinyUI(fluidPage(theme="theme.css",navbarPage(img(src="Logo.png", width="80px",
                                                                                     label="No. of concurrent years",
                                                                                     value=10,
                                                                                     step=1)
+                                                                    
                                                              ),
                                                              column(4, numericInput("alpha",
                                                                                     label="Alpha",
@@ -123,11 +126,6 @@ shinyUI(fluidPage(theme="theme.css",navbarPage(img(src="Logo.png", width="80px",
                                                                                     label="Theta",
                                                                                     value=0.98,
                                                                                     step=0.01)
-                                                             ),
-                                                             fluidRow(
-                                                               column(4, 
-                                                                      checkboxInput("GLSskew",label="With regional skew",value=FALSE)
-                                                                      )
                                                              )
                                                            ),
                                                            plotOutput("corrPlot")

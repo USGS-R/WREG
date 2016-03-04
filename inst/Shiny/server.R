@@ -9,6 +9,7 @@ shinyServer(function(input, output,session) {
                                              gisFile = input$gisFile$datapath
                                              
                  )
+                 selectData <<- importData
                  
                  siteChars <<- merge(importData$BasChars,
                                      importData$X,
@@ -293,21 +294,56 @@ shinyServer(function(input, output,session) {
   ###Run WREG
   observeEvent(input$runWREG,
                {
+                 LP3 <<- merge(selectData$LP3f,selectData$LP3k[c("Station.ID",input$Y)],by="Station.ID")
+                 LP3 <<- LP3[c(2,5,3,4)]
+                 colnames(LP3) <- c("S","K","G","GR")
                  if(input$regType == "OLS")
                  {
-                   wregOUT <<- WREG.MLR(Y=Yinput[,2],
-                                       X=Xinput[,2:ncol(Xinput)],
-                                       Reg=input$regType)
+                   wregOUT <<- WREG.OLS(Y=Yinput[,2],
+                                        X=Xinput[,2:ncol(Xinput)])
                  } else if (input$regType == "WLS")
                  {
-                   wregOUT <<- WREG.MLR(Y=Yinput[,2],
+                   
+                   wregOUT <<- WREG.WLS(Y=Yinput[,2],
                                         X=Xinput[,2:ncol(Xinput)],
-                                        Reg="WLS",
                                         RecordLengths = selectData$recLen,
-                                        LP3 = selectData$LP3f)
-                                        
-                                        
+                                        LP3 = LP3)
+                 } else if(input$regType == "GLS")
+                 {
+                   if(input$GLSskew == FALSE)
+                   {
+                   wregOUT <<- WREG.GLS(Y=Yinput[,2],
+                                        X=Xinput[,2:ncol(Xinput)],
+                                        recordLengths = selectData$recLen,
+                                        LP3 = LP3,
+                                        basinChars = selectData$BasChars,
+                                        x0=NA,
+                                        alpha=input$alpha,
+                                        theta=input$theta,
+                                        peak=T,
+                                        distMeth=2,
+                                        regSkew=FALSE,
+                                        MSEGR=NA,
+                                        TY=2)
+                   } else if(input$GLSskew == TRUE)
+                   {
+                     wregOUT <<- WREG.GLS(Y=Yinput[,2],
+                                          X=Xinput[,2:ncol(Xinput)],
+                                          recordLengths = selectData$recLen,
+                                          LP3 = LP3,
+                                          basinChars = selectData$BasChars,
+                                          x0=NA,
+                                          alpha=input$alpha,
+                                          theta=input$theta,
+                                          peak=T,
+                                          distMeth=2,
+                                          regSkew=TRUE,
+                                          MSEGR=selectData$MSEGR,
+                                          TY=2)
+                   }
                  }
+                                        
+                   
                }
   )
 })
