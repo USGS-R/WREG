@@ -1,5 +1,11 @@
 shinyServer(function(input, output,session) {
   
+  
+  session$onSessionEnded(function() {
+    stopApp()
+  })
+  
+  
   ##############################
   #Data import 
   
@@ -9,7 +15,17 @@ shinyServer(function(input, output,session) {
                                              gisFile = input$gisFile$datapath
                                              
                  )
-                 selectData <<- importData
+                 selectData <<- list(sites = importData$sites,
+                                     Y = importData$Y,
+                                     AEP = importData$AEP,
+                                     X = importData$X,
+                                     LP3f = importData$LP3f,
+                                     LP3k = importData$LP3k,
+                                     BasChars = importData$BasChars,
+                                     MSEGR = importData$MSEGR,
+                                     recLen = importData$recLen,
+                                     recCor = importData$recCor
+                 )
                  
                  siteChars <<- merge(importData$BasChars,
                                      importData$X,
@@ -28,7 +44,18 @@ shinyServer(function(input, output,session) {
                {
                  importData <<- importWREG(wregPath = input$wregPath)
                  #Set select data to import data so that it defuaults to all sites if none selected in gui
-                 selectData <<- importData
+                 selectData <<- list(sites = importData$sites,
+                                     Y = importData$Y,
+                                     AEP = importData$AEP,
+                                     X = importData$X,
+                                     LP3f = importData$LP3f,
+                                     LP3k = importData$LP3k,
+                                     BasChars = importData$BasChars,
+                                     MSEGR = importData$MSEGR,
+                                     recLen = importData$recLen,
+                                     recCor = importData$recCor
+                 )
+                 
                  siteChars <<- cbind(importData$BasChars,
                                      importData$X)
                  
@@ -130,10 +157,10 @@ shinyServer(function(input, output,session) {
                                              inline=TRUE),
                                 fluidRow(
                                   column(6,
-                                         numericInput(paste0(input$X[i],"_XvarC1"),label="C1",value=0,step=0.1)
+                                         numericInput(paste0(input$X[i],"_XvarC1"),label="C1",value=1,step=0.1)
                                   ),
                                   column(6,
-                                         numericInput(paste0(input$X[i],"_XvarC2"),label="C2",value=0,step=0.1)
+                                         numericInput(paste0(input$X[i],"_XvarC2"),label="C2",value=1,step=0.1)
                                   )
                                 ),
                                 fluidRow(
@@ -141,7 +168,7 @@ shinyServer(function(input, output,session) {
                                          numericInput(paste0(input$X[i],"_XvarC3"),label="C3",value=0,step=0.1)
                                   ),
                                   column(6,
-                                         numericInput(paste0(input$X[i],"_XvarC4"),label="C4",value=0,step=0.1)
+                                         numericInput(paste0(input$X[i],"_XvarC4"),label="C4",value=1,step=0.1)
                                   )
                                 )
                          ),
@@ -365,22 +392,33 @@ shinyServer(function(input, output,session) {
                  }
                  output$wregPrint <- renderPrint(print(wregOUT))
                  output$wregFitVsRes <- renderPlot({
-                   plot(wregOUT$residuals,wregOUT$fitted.values,
-                        xlab="Residuals",ylab="Fitted values",
+                   plot(wregOUT$fitted.values,wregOUT$residuals,
+                        xlab="Fitted values",ylab="Residuals",
                         main="Fitted vs Residual")
                  })
                  
                  output$wregYVsLev <- renderPlot({
-                   plot(wregOUT$ResLevInf$Leverage,wregOUT$Y,
-                        xlab="Leverage",ylab="Y",
+                   plot(wregOUT$Y,wregOUT$ResLevInf$Leverage,
+                        xlab="Y",ylab="Leverage",
                         main="Y vs Leverage")
                  })
                  
                  output$wregYVsInf <- renderPlot({
-                   plot(wregOUT$ResLevInf$Leverage,wregOUT$Y,
-                        xlab="Influence",ylab="Y",
+                   plot(wregOUT$Y,wregOUT$ResLevInf$Leverage,
+                        xlab="Y",ylab="Influence",
                         main="Y vs Influence")
                  })
+                 
+                 output$wregYVsInf <- renderPlot({
+                   plot(wregOUT$Y,wregOUT$ResLevInf$Leverage,
+                        xlab="Y",ylab="Influence",
+                        main="Y vs Influence")
+                 })
+                 
+                 h2("X and Y variable inputs")
+                 output$wregXY <- renderDataTable({cbind(Yinput,Xinput[2:ncol(Xinput)])})
+                 
+                 
                }
   )
   

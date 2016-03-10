@@ -48,9 +48,9 @@ importPeakFQ <- function(pfqPath,gisFile,sites='') {
   
   # Load GIS file
   gisData <- read.table(file=gisFile,sep='\t',header=T,
-    colClasses=list(Station.ID='character'))
+                        colClasses=list(Station.ID='character'))
   gisData$Station.ID <- ifelse(nchar(gisData$Station.ID)%%2>0,
-    paste0("0",gisData$Station.ID),gisData$Station.ID)
+                               paste0("0",gisData$Station.ID),gisData$Station.ID)
   
   # Determine which sites to search for
   if (sites==''||is.na(sites)) {
@@ -60,13 +60,13 @@ importPeakFQ <- function(pfqPath,gisFile,sites='') {
   
   # Independent variables
   BasChars <- gisData[ndx,is.element(names(gisData),
-    c('Station.ID','Lat','Long'))]
+                                     c('Station.ID','Lat','Long'))]
   X <- gisData[ndx,!is.element(names(gisData),
-    c('Lat','Long'))]
+                               c('Lat','Long'))]
   
   # Search for EXP for each site
-  allFiles <- apply(as.matrix(paste0('*',gisData$Station.ID[ndx],'.EXP')),
-    MARGIN=1,FUN=list.files,path=pfqPath,recursive=T)
+  allFiles <- apply(as.matrix(paste0('*',gisData$Station.ID[ndx],'\\.EXP$')),
+                    MARGIN=1,FUN=list.files,path=pfqPath,recursive=T)
   # NEED  a method to handle duplicates
   allFiles <- file.path(pfqPath,allFiles)
   # Pulls from EXP curtesy of Janet Curran
@@ -90,8 +90,8 @@ importPeakFQ <- function(pfqPath,gisFile,sites='') {
   LP3k <- EXP_K[,2:ncol(EXP_K)]
   
   # Search for PRT for each site
-  allFiles <- apply(as.matrix(paste0('*',gisData$Station.ID[ndx],'.PRT')),
-    MARGIN=1,FUN=list.files,path=pfqPath,recursive=T)
+  allFiles <- apply(as.matrix(paste0('*',gisData$Station.ID[ndx],'\\.PRT$')),
+                    MARGIN=1,FUN=list.files,path=pfqPath,recursive=T)
   # NEED  a method to handle duplicates
   allFiles <- file.path(pfqPath,allFiles)
   temp <- function(data) {
@@ -99,7 +99,7 @@ importPeakFQ <- function(pfqPath,gisFile,sites='') {
     read.table(text=data,fill=T,stringsAsFactors = F)
   }
   siteTS <- lapply(lapply(lapply(allFiles,readLines),grep,
-    pattern='^\\s{4}.[0-9]{4}\\s',value=T),temp)
+                          pattern='^\\s{4}.[0-9]{4}\\s',value=T),temp)
   
   names(siteTS) <- paste0("X",gisData$Station.ID[ndx])
   recLen <- recCor <- matrix(NA,ncol=length(siteTS),nrow=length(siteTS))
@@ -128,7 +128,7 @@ importPeakFQ <- function(pfqPath,gisFile,sites='') {
   colnames(Y) <- paste("AEP",AEP[1,],sep="_")
   Y$Station.ID <- EXP_SiteID$Station.ID
   Y <- Y[c(ncol(Y),1:ncol(Y)-1)]
-
+  
   LP3f$Station.ID <- EXP_SiteID$Station.ID
   LP3f <- LP3f[c(ncol(LP3f),1:ncol(LP3f)-1)]
   
