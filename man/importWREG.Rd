@@ -16,9 +16,9 @@ data subsetting.}
 \value{
 All outputs are returned as part of a list.  The list includes:
 \item{sites}{A vector of site IDs.}
-\item{Y}{A matrix whose comlumns represent unique frequency events, 
+\item{Y}{A data frame whose comlumns represent unique frequency events, 
 while the row represent particular sites in the same order as \code{sites}.}
-\item{X}{A matrix whose columns represent basin characteristics to be used
+\item{X}{A data frame whose columns represent basin characteristics to be used
  as dependent variables and whose rows represent sites corresponding 
  to \code{sites}.}
 \item{LP3f}{A matrix containing the fitted LP# parameters that are fixed 

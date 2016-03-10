@@ -12,7 +12,7 @@
 #' \code{theta} is a parameter used in the estimated cross-correlation between site
 #' records.  See equation 20 in the WREG v. 1.05 manual.  The arbitrary, default value 
 #' is 0.98.  The user should fit a different value as needed.
-#' @param Independent A dataframe containing three variables: \code{StationID} is the 
+#' @param independent A dataframe containing three variables: \code{StationID} is the 
 #' numerical identifier (without a leading zero) of each site, \code{Lat} is the latitude
 #' of the site, in decimal degrees, and \code{Long} is the longitude of the site, in decimal
 #' degrees.  The sites must be presented in the same order as \code{Y}.  Required only for
@@ -24,13 +24,13 @@
 #' the dependent variables in \code{Y}.
 #' @param Y The dependent variable of interest, with any transformations already 
 #' applied.
-#' @param RecordLengths This input is required for \dQuote{WLS}, \dQuote{GLS} and 
-#' \dQuote{GLSskew}.  For \dQuote{GLS} and \dQuote{GLSskew}, \code{RecordLengths} 
+#' @param recordLengths This input is required for \dQuote{WLS}, \dQuote{GLS} and 
+#' \dQuote{GLSskew}.  For \dQuote{GLS} and \dQuote{GLSskew}, \code{recordLengths} 
 #' should be a matrix whose rows and columns are in the same order as \code{Y}.  Each 
 #' \code{(r,c)} element represents the length of concurrent record between sites 
 #' \code{r} and \code{c}.  The diagonal elements therefore represent each site's full
 #' record length.  For \dQuote{WLS}, the only the at-site record lengths are needed.
-#' In the case of \dQuote{WLS}, \code{RecordLengths} can be a vector or the matrix 
+#' In the case of \dQuote{WLS}, \code{recordLengths} can be a vector or the matrix 
 #' described for \dQuote{GLS} and \dQuote{GLSskew}.
 #' @param LP3 A dataframe containing the fitted Log-Pearson Type III standard
 #' deviate, standard deviation and skew for each site.  The names of this data frame are
@@ -41,10 +41,10 @@
 #' \dQuote{GLSskew}.
 #' @param TY A number.  The return period of the event being modeled.  Required only for 
 #' \dQuote{GLSskew}.  The default value is \code{2}.  (See the \code{Legacy} details below.)
-#' @param Peak A logical.  Indicates if the event being modeled is a peak flow event
+#' @param peak A logical.  Indicates if the event being modeled is a peak flow event
 #' or a low-flow event.  \code{TRUE} indicates a peak flow, while \code{FALSE} indicates
 #' a low-flow event.
-#' @param DistMeth Required for \dQuote{GLS} and \dQuote{GLSskew}.  A value of \code{1} 
+#' @param distMeth Required for \dQuote{GLS} and \dQuote{GLSskew}.  A value of \code{1} 
 #' indicates that the "Nautical Mile" approximation should be used to calculate inter-site
 #' distances.  A value of \code{2} designates the Haversine approximation.  See 
 #' \code{\link{Dist.WREG}}.  The default value is \code{2}.  (See the \code{Legacy} 
@@ -66,8 +66,9 @@
 #'\item{GSQ}{The estimated model error variance.}
 #'\item{Omega}{The estimated weighting matrix.  A square matrix.}
 #'@export
-Omega.GLS <- function(alpha=0.01,theta=0.98,Independent,X,Y,RecordLengths,
-  LP3,MSEGR=NA,TY=2,Peak=T,DistMeth=2) {
+Omega.GLS <- function(alpha=0.01,theta=0.98,independent,X,Y,recordLengths,
+  LP3,MSEGR=NA,TY=2,peak=T,distMeth=2) {
+  
   # William Farmer, January 22, 2015
   
   ## Determining if skew adjustment is requested
@@ -77,16 +78,30 @@ Omega.GLS <- function(alpha=0.01,theta=0.98,Independent,X,Y,RecordLengths,
     #               then use skew adjustment.
   }
   
+  ###Rename LP3 columns
+  ####Check if GR was supplied so that same LP3 file can be used for all functions
+  if(ncol(LP3) == 3)
+  {
+    colnames(LP3) <- c("S","K","G")
+  } else if(ncol(LP3) == 4)
+  {
+    colnames(LP3) <- c("S","K","G","GR")
+  }
+  
+  #Convert X and Y from dataframes to matrices to work with matrix operations below
+  X <- as.matrix(X)
+  Y <- as.matrix(Y)
+  
   ## Create distance matrix and concurrent record lengths
   ##    (For skew-adjusted GLS: Also calculates the LP3 partial derivatives, mean squared-errors of at-site skew and the variance of at-site skew.)
   Dists <- matrix(NA,ncol=length(Y),nrow=length(Y)) # Empty matrix for intersite distances
-  M <- RecordLengths # Just renaming input for ease.  (Should probably correct later...)
+  M <- recordLengths # Just renaming input for ease.  (Should probably correct later...)
   if (SkewAdj) { # Make empty vectors for GLS-skew
     dKdG <- vector(length=length(Y)) # Empty vector for LP3 partial derivatives
     MSEg <- vector(length=length(Y)) # Empty vector for mean squared-error of at-site skew
     Varg <- vector(length=length(Y)) # Empty vector for variance of at-site skew
     ### Convert return period into probability
-    if (Peak) { # if a peak flow is being estimated
+    if (peak) { # if a peak flow is being estimated
       Zp <- -qnorm(1/TY) 
     } else { # if a low flow is being estimated
       Zp <- qnorm(1/TY)
@@ -96,9 +111,9 @@ Omega.GLS <- function(alpha=0.01,theta=0.98,Independent,X,Y,RecordLengths,
     for (j in 1:length(Y)) {
       if (i!=j) {
         ### Calculate intersite distance via subroutine.
-        ###     DistMeth==1 applies the 'Nautical Mile' approximation from WREG v 1.05
-        ###     DistMeth==2 applies Haversine approximation
-        Dists[i,j] <- Dist.WREG(Lat1=Independent$Lat[i],Long1=Independent$Long[i],Lat2=Independent$Lat[j],Long2=Independent$Long[j],method=DistMeth) # Intersite distance, miles
+        ###     distMeth==1 applies the 'Nautical Mile' approximation from WREG v 1.05
+        ###     distMeth==2 applies Haversine approximation
+        Dists[i,j] <- Dist.WREG(Lat1=independent$Lat[i],Long1=independent$Long[i],Lat2=independent$Lat[j],Long2=independent$Long[j],method=distMeth) # Intersite distance, miles
       }
     }
     if (SkewAdj) { # Additional calculations for skew-adjusted GLS
