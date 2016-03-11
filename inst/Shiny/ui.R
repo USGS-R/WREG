@@ -1,4 +1,3 @@
-library(markdown)
 
 shinyUI(fluidPage(theme="theme.css",navbarPage(img(src="Logo.png", width="80px",height = "40px"),"WREG",
                                                tabPanel("Welcome",
@@ -161,7 +160,11 @@ shinyUI(fluidPage(theme="theme.css",navbarPage(img(src="Logo.png", width="80px",
                                                                                 plotOutput("wregYVsInf")
                                                                               )
                                                                      ),
-                                                                     tabPanel("Tables")
+                                                                     tabPanel("Tables",
+                                                                              fluidPage(
+                                                                                dataTableOutput("wregXY")
+                                                                                )
+                                                                              )
                                                         )
                                                         
                                                         
