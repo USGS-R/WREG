@@ -1,0 +1,403 @@
+1
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.002.000
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    10/23/2014 09:01
+
+                         --- PROCESSING OPTIONS ---  
+
+                      Plot option         = Graphics device   
+                      Basin char output   = WATSTORE      
+                      Print option        = Yes
+                      Debug print         = No 
+                      Input peaks listing = Long 
+                      Input peaks format  = WATSTORE peak file  
+
+                      Input files used:
+                         peaks (ascii)  - V:\CDOT_Flood_Frequency\PeakFQ\Input_files\06707000\06707000.TXT                
+                         specifications - V:\CDOT_Flood_Frequency\PeakFQ\Input_files\06707000\PKFQWPSF.TMP                
+                      Output file(s): 
+                         main - V:\CDOT_Flood_Frequency\PeakFQ\Input_files\06707000\06707000.PRT                
+                         bcd  - V:\CDOT_Flood_Frequency\PeakFQ\Input_files\06707000\06707000.B                  
+  
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.001
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    10/23/2014 09:01
+  
+         Station - 06707000  NF SOUTH PLATTE RIVER AT SOUTH PLATTE, CO.         
+
+
+                     I N P U T   D A T A   S U M M A R Y
+
+                Number of peaks in record            =       72
+                Peaks not used in analysis           =       12
+                Systematic peaks in analysis         =       60
+                Historic peaks in analysis           =        0
+                Beginning Year                       =     1909
+                Ending Year                          =     1982
+                Historical Period Length             =       74
+                Generalized skew                     =   -0.148
+                     Standard error                  =    0.550
+                     Mean Square error               =    0.303
+                Skew option                          =   WEIGHTED  
+                Gage base discharge                  =      0.0
+                User supplied high outlier threshold =   --           
+                User supplied PILF (LO) criterion    =   --           
+                Plotting position parameter          =     0.00
+                Type of analysis                            EMA
+                PILF (LO) Test Method                      MGBT
+                Perception Thresholds:
+                     Begin     End       Low     High     Comment
+                      1909    1910       0.0       INF     DEFAULT                                                                         
+                      1911    1912       INF       INF     MISSING                                                                         
+                      1913    1982       0.0       INF     DEFAULT                                                                         
+                Interval Data                    =   None Specified
+
+
+
+  *********  NOTICE  --  Preliminary machine computations.        *********     
+  *********  User responsible for assessment and interpretation.  *********     
+
+  **WCF109W-PEAKS WITH MINUS-FLAGGED DISCHARGES WERE BYPASSED.      12
+  **WCF113W-NUMBER OF SYSTEMATIC PEAKS HAS BEEN REDUCED TO NSYS =   60
+    WCF002J-CALCS COMPLETED.  RETURN CODE =  2
+    EMA002W-CONFIDENCE INTERVALS ARE NOT EXACT IF HISTORIC PERIOD > 0
+
+
+                                        Kendall's Tau Parameters
+
+                                                        MEDIAN   No. of
+                                       TAU    P-VALUE    SLOPE   PEAKS
+                                ---------------------------------------
+             SYSTEMATIC RECORD     -0.166      0.063     -6.455    60
+
+
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.002
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    10/23/2014 09:01
+  
+         Station - 06707000  NF SOUTH PLATTE RIVER AT SOUTH PLATTE, CO.         
+
+
+           ANNUAL FREQUENCY CURVE PARAMETERS -- LOG-PEARSON TYPE III 
+
+                                    LOGARITHMIC         
+                         -------------------------------
+                                      STANDARD          
+                            MEAN     DEVIATION     SKEW 
+                         -------------------------------
+ EMA W/O REG. INFO         2.9097      0.2358     -0.381
+ EMA W/REG. INFO           2.9097      0.2358     -0.317
+
+ EMA ESTIMATE OF MSE OF SKEW W/O REG. INFO (AT-SITE)      0.1112
+ EMA ESTIMATE OF MSE OF SKEW W/SYSTEMATIC ONLY (AT-SITE)  0.1112
+
+
+
+    ANNUAL FREQUENCY CURVE -- DISCHARGES AT SELECTED EXCEEDANCE PROBABILITIES
+
+   ANNUAL   EMA W/    EMA W/O     <------ FOR EMA ESTIMATES ------->
+EXCEEDANCE  REG INFO  REG INFO    VARIANCE  95% CONFIDENCE INTERVALS
+PROBABILITY ESTIMATE  ESTIMATE     OF EST.       LOWER       UPPER
+
+   0.9950     170.7     165.3      0.0107        79.3        241.0
+   0.9900     202.7     197.7      0.0078       107.2        274.3
+   0.9500     317.5     314.7      0.0033       220.7        394.0
+   0.9000     398.6     397.6      0.0022       304.3        480.0
+   0.8000     519.6     520.9      0.0015       425.0        611.3
+   0.6667     658.7     662.1      0.0012       556.8        766.2
+   0.5000     835.8     840.6      0.0010       718.4        967.4
+   0.4292     919.5     924.5      0.0010       793.3       1064.0
+   0.2000    1291.     1292.       0.0010      1117.0       1509.0
+   0.1000    1595.     1587.       0.0013      1370.0       1930.0
+   0.0400    1976.     1950.       0.0020      1660.0       2554.0
+   0.0200    2255.     2211.       0.0028      1845.0       3080.0
+   0.0100    2529.     2464.       0.0039      2004.0       3656.0
+   0.0050    2799.     2710.       0.0052      2140.0       4293.0
+   0.0020    3153.     3025.       0.0074      2292.0       5243.0
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.003
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    10/23/2014 09:01
+  
+         Station - 06707000  NF SOUTH PLATTE RIVER AT SOUTH PLATTE, CO.         
+
+
+                       I N P U T   D A T A   L I S T I N G
+
+
+    WATER       PEAK   PEAKFQ   <--- Intervals --->
+     YEAR      VALUE    CODES     LOW         HIGH   REMARKS
+     1909     1550.0       
+     1910     1800.0       
+     1913      880.0       
+     1914     1860.0       
+     1915      980.0       
+     1916      448.0       
+     1917     1300.0       
+     1918     1080.0       
+     1919      695.0       
+     1920     1030.0       
+     1921     1910.0       
+     1922      674.0       
+     1923     1130.0       
+     1924     1380.0       
+     1925      341.0       
+     1926     1520.0       
+     1927      459.0       
+     1928      964.0       
+     1929      857.0       
+     1930      700.0       
+     1931      740.0       
+     1932      518.0       
+     1933     1490.0       
+     1934      335.0       
+     1935      833.0       
+     1936     1620.0       
+     1937      715.0       
+     1938     1050.0       
+     1939      543.0       
+     1940      232.0       
+     1941     1030.0       
+     1942     1370.0       
+     1943      571.0       
+     1944     1040.0       
+     1945     1360.0       
+     1946      350.0       
+     1947     1000.0       
+     1948     1040.0       
+     1949     2050.0       
+     1950      496.0       
+     1951      786.0       
+     1952     1390.0       
+     1953      679.0       
+     1954      324.0       
+     1955      561.0       
+     1956      556.0       
+     1957     1230.0       
+     1958      885.0       
+     1959      444.0       
+     1960      550.0       
+     1961      439.0       
+     1962      631.0       
+     1963      224.0       
+     1964      439.0       
+     1965     1260.0       
+     1966     -555.0    K  
+     1967     -440.0    K  
+     1968      529.0       
+     1969     1380.0       
+     1970     1180.0       
+     1971     -534.0    K  
+     1972      726.0       
+     1973     1550.0       
+     1974     -575.0    K  
+     1975     -755.0    K  
+     1976    -1010.0    K  
+     1977     -588.0    K  
+     1978     -854.0    K  
+     1979    -1360.0    K  
+     1980    -1600.0    K  
+     1981     -572.0    K  
+     1982     -838.0    K  
+
+
+        Explanation of peak discharge qualification codes
+
+       PeakFQ    NWIS
+        CODE     CODE   DEFINITION
+
+          D        3    Dam failure, non-recurrent flow anomaly
+          G        8    Discharge greater than stated value
+          X       3+8   Both of the above
+          L        4    Discharge less than stated value
+          K     6 OR C  Known effect of regulation or urbanization
+          H        7    Historic peak
+
+          -  Minus-flagged discharge -- Not used in computation
+                -8888.0 -- No discharge value given
+          -  Minus-flagged water year -- Historic peak used in computation
+
+
+
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.004
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    10/23/2014 09:01
+  
+         Station - 06707000  NF SOUTH PLATTE RIVER AT SOUTH PLATTE, CO.         
+
+
+   EMPIRICAL FREQUENCY CURVES -- HIRSCH-STEDINGER PLOTTING POSITIONS
+
+   WATER     RANKED      EMA         INTERVALS
+    YEAR   DISCHARGE   ESTIMATE      LOW      HIGH
+    1949     2050.0     0.0163
+    1921     1910.0     0.0327
+    1914     1860.0     0.0491
+    1910     1800.0     0.0655
+    1936     1620.0     0.0819
+    1909     1550.0     0.1147
+    1973     1550.0     0.0983
+    1926     1520.0     0.1311
+    1933     1490.0     0.1475
+    1952     1390.0     0.1639
+    1924     1380.0     0.1967
+    1969     1380.0     0.1803
+    1942     1370.0     0.2131
+    1945     1360.0     0.2295
+    1917     1300.0     0.2459
+    1965     1260.0     0.2623
+    1957     1230.0     0.2787
+    1970     1180.0     0.2951
+    1923     1130.0     0.3114
+    1918     1080.0     0.3278
+    1938     1050.0     0.3442
+    1944     1040.0     0.3770
+    1948     1040.0     0.3606
+    1920     1030.0     0.4098
+    1941     1030.0     0.3934
+    1947     1000.0     0.4262
+    1915      980.0     0.4426
+    1928      964.0     0.4590
+    1958      885.0     0.4754
+    1913      880.0     0.4918
+    1929      857.0     0.5082
+    1935      833.0     0.5246
+    1951      786.0     0.5410
+    1931      740.0     0.5574
+    1972      726.0     0.5738
+    1937      715.0     0.5902
+    1930      700.0     0.6066
+    1919      695.0     0.6230
+    1953      679.0     0.6394
+    1922      674.0     0.6558
+    1962      631.0     0.6722
+    1943      571.0     0.6886
+    1955      561.0     0.7049
+    1956      556.0     0.7213
+    1960      550.0     0.7377
+    1939      543.0     0.7541
+    1968      529.0     0.7705
+    1932      518.0     0.7869
+    1950      496.0     0.8033
+    1927      459.0     0.8197
+    1916      448.0     0.8361
+    1959      444.0     0.8525
+    1961      439.0     0.8853
+    1964      439.0     0.8689
+    1946      350.0     0.9017
+    1925      341.0     0.9181
+    1934      335.0     0.9345
+    1954      324.0     0.9509
+    1940      232.0     0.9673
+    1963      224.0     0.9837
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.005
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    10/23/2014 09:01
+  
+         Station - 06707000  NF SOUTH PLATTE RIVER AT SOUTH PLATTE, CO.         
+
+
+                         EMA REPRESENTATION OF DATA
+
+  WATER <----- OBSERVED-----><-------- EMA -------><-PERCEPTION THRESHOLDS->
+   YEAR    Q_LOWER    Q_UPPER    Q_LOWER    Q_UPPER        LOWER       UPPER
+   1909     1550.0     1550.0     1550.0     1550.0          0.0        INF 
+   1910     1800.0     1800.0     1800.0     1800.0          0.0        INF 
+   1911        0.0       INF         0.0       INF          INF         INF 
+   1912        0.0       INF         0.0       INF          INF         INF 
+   1913      880.0      880.0      880.0      880.0          0.0        INF 
+   1914     1860.0     1860.0     1860.0     1860.0          0.0        INF 
+   1915      980.0      980.0      980.0      980.0          0.0        INF 
+   1916      448.0      448.0      448.0      448.0          0.0        INF 
+   1917     1300.0     1300.0     1300.0     1300.0          0.0        INF 
+   1918     1080.0     1080.0     1080.0     1080.0          0.0        INF 
+   1919      695.0      695.0      695.0      695.0          0.0        INF 
+   1920     1030.0     1030.0     1030.0     1030.0          0.0        INF 
+   1921     1910.0     1910.0     1910.0     1910.0          0.0        INF 
+   1922      674.0      674.0      674.0      674.0          0.0        INF 
+   1923     1130.0     1130.0     1130.0     1130.0          0.0        INF 
+   1924     1380.0     1380.0     1380.0     1380.0          0.0        INF 
+   1925      341.0      341.0      341.0      341.0          0.0        INF 
+   1926     1520.0     1520.0     1520.0     1520.0          0.0        INF 
+   1927      459.0      459.0      459.0      459.0          0.0        INF 
+   1928      964.0      964.0      964.0      964.0          0.0        INF 
+   1929      857.0      857.0      857.0      857.0          0.0        INF 
+   1930      700.0      700.0      700.0      700.0          0.0        INF 
+   1931      740.0      740.0      740.0      740.0          0.0        INF 
+   1932      518.0      518.0      518.0      518.0          0.0        INF 
+   1933     1490.0     1490.0     1490.0     1490.0          0.0        INF 
+   1934      335.0      335.0      335.0      335.0          0.0        INF 
+   1935      833.0      833.0      833.0      833.0          0.0        INF 
+   1936     1620.0     1620.0     1620.0     1620.0          0.0        INF 
+   1937      715.0      715.0      715.0      715.0          0.0        INF 
+   1938     1050.0     1050.0     1050.0     1050.0          0.0        INF 
+   1939      543.0      543.0      543.0      543.0          0.0        INF 
+   1940      232.0      232.0      232.0      232.0          0.0        INF 
+   1941     1030.0     1030.0     1030.0     1030.0          0.0        INF 
+   1942     1370.0     1370.0     1370.0     1370.0          0.0        INF 
+   1943      571.0      571.0      571.0      571.0          0.0        INF 
+   1944     1040.0     1040.0     1040.0     1040.0          0.0        INF 
+   1945     1360.0     1360.0     1360.0     1360.0          0.0        INF 
+   1946      350.0      350.0      350.0      350.0          0.0        INF 
+   1947     1000.0     1000.0     1000.0     1000.0          0.0        INF 
+   1948     1040.0     1040.0     1040.0     1040.0          0.0        INF 
+   1949     2050.0     2050.0     2050.0     2050.0          0.0        INF 
+   1950      496.0      496.0      496.0      496.0          0.0        INF 
+   1951      786.0      786.0      786.0      786.0          0.0        INF 
+   1952     1390.0     1390.0     1390.0     1390.0          0.0        INF 
+   1953      679.0      679.0      679.0      679.0          0.0        INF 
+   1954      324.0      324.0      324.0      324.0          0.0        INF 
+   1955      561.0      561.0      561.0      561.0          0.0        INF 
+   1956      556.0      556.0      556.0      556.0          0.0        INF 
+   1957     1230.0     1230.0     1230.0     1230.0          0.0        INF 
+   1958      885.0      885.0      885.0      885.0          0.0        INF 
+   1959      444.0      444.0      444.0      444.0          0.0        INF 
+   1960      550.0      550.0      550.0      550.0          0.0        INF 
+   1961      439.0      439.0      439.0      439.0          0.0        INF 
+   1962      631.0      631.0      631.0      631.0          0.0        INF 
+   1963      224.0      224.0      224.0      224.0          0.0        INF 
+   1964      439.0      439.0      439.0      439.0          0.0        INF 
+   1965     1260.0     1260.0     1260.0     1260.0          0.0        INF 
+   1968      529.0      529.0      529.0      529.0          0.0        INF 
+   1969     1380.0     1380.0     1380.0     1380.0          0.0        INF 
+   1970     1180.0     1180.0     1180.0     1180.0          0.0        INF 
+   1972      726.0      726.0      726.0      726.0          0.0        INF 
+   1973     1550.0     1550.0     1550.0     1550.0          0.0        INF 
+1
+
+
+
+ End PeakFQ analysis.
+   Stations processed :       1
+   Number of errors   :       0
+   Stations skipped   :       0
+   Station years      :      72
+
+
+Data records may have been ignored for the stations listed below.               
+(Card type must be Y, Z, N, H, I, 2, 3, 4,  or *.)                              
+(2, 4, and * records are ignored.)                                              
+                                                                                
+ For the station below, the following records were ignored:                     
+                                                                                
+ FINISHED PROCESSING STATION:  06707000       USGS NF SOUTH PLATTE RIVER AT SOUT
+                                                                                
+                                                                                
+ For the station below, the following records were ignored:                     
+                                                                                
+ FINISHED PROCESSING STATION:                                                   
+                                                                                
