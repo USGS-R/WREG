@@ -95,9 +95,18 @@ importPeakFQ <- function(pfqPath,gisFile,sites='') {
   # NEED  a method to handle duplicates
   allFiles <- file.path(pfqPath,allFiles)
   temp <- function(data) {
-    # Just for efficient lapply
-    read.table(text=data,fill=T,stringsAsFactors = F)
+    out <- data.frame(matrix(NA,ncol=2,nrow=length(data)))
+    for (i in 1:length(data)) {
+      iTemp <- read.table(text=data[[i]],stringsAsFactors=F)
+      while (length(iTemp)>ncol(out)) {
+        out <- cbind(out,rep(NA,length(data)))
+      }
+      out[i,1:length(iTemp)] <- iTemp
+    }
+    names(out) <- paste0('V',c(1:ncol(out)))
+    return(out)
   }
+  
   siteTS <- lapply(lapply(lapply(allFiles,readLines),grep,
                           pattern='^\\s{4}.[0-9]{4}\\s',value=T),temp)
   
@@ -105,10 +114,12 @@ importPeakFQ <- function(pfqPath,gisFile,sites='') {
   recLen <- recCor <- matrix(NA,ncol=length(siteTS),nrow=length(siteTS))
   
   for (i in 1:length(siteTS)) {
-    recLen[i,i] <- nrow(siteTS[[i]])
-    idata <- abs(siteTS[[i]][,1:2])
+    idata <- siteTS[[i]][-which(siteTS[[i]][,2]<0),1:2]
+    idata <- abs(idata)
+    recLen[i,i] <- nrow(idata)
     for (j in 1:i) {
-      jdata <- abs(siteTS[[j]][,1:2])
+      idata <- siteTS[[j]][-which(siteTS[[j]][,2]<0),1:2]
+      jdata <- abs(jdata)
       overlap <- intersect(idata[,1],jdata[,1])
       recLen[i,j] <- recLen[j,i] <- length(overlap)
       if (length(overlap)==0) {next}
