@@ -123,16 +123,16 @@ shinyServer(function(input, output,session) {
                           inline=TRUE)
       ),
       column(2,
-             numericInput("YvarC1",label="C1",value=0,step=0.1)
+             numericInput("YvarC1",label="C1",value=1,step=0.1)
       ),
       column(2,
-             numericInput("YvarC2",label="C2",value=0,step=0.1)
+             numericInput("YvarC2",label="C2",value=1,step=0.1)
       ),
       column(2,
              numericInput("YvarC3",label="C3",value=0,step=0.1)
       ),
       column(2,
-             numericInput("YvarC4",label="C4",value=0,step=0.1)
+             numericInput("YvarC4",label="C4",value=1,step=0.1)
       )
       
     )
