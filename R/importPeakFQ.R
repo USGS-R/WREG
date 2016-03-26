@@ -42,46 +42,70 @@
 importPeakFQ <- function(pfqPath,gisFile,sites='') {
   # Developed by William Farmer, 04 February 2016
   
-  # pfqPath <- file.path('exampleDirectory','Peak_FQ_Runs')
-  # gisFile <- file.path('exampleDirectory','FakeSiteInfo.txt')
-  # sites <- ''
-  
   # Load GIS file
   gisData <- read.table(file=gisFile,sep='\t',header=T,
                         colClasses=list(Station.ID='character'))
   gisData$Station.ID <- ifelse(nchar(gisData$Station.ID)%%2>0,
                                paste0("0",gisData$Station.ID),gisData$Station.ID)
   
-  # Determine which sites to search for
-  if (sites==''||is.na(sites)) {
-    sites <- gisData$Station.ID
+  # subset to specified sites
+  if (sites!='') {
+    gisData <- subset(gisData,Station.ID %in% sites)
   }
-  ndx <- which(is.element(gisData$Station.ID,sites))
+  #ndx <- which(is.element(gisData$Station.ID,sites))
   
   # Independent variables
-  BasChars <- gisData[ndx,is.element(names(gisData),
-                                     c('Station.ID','Lat','Long'))]
-  X <- gisData[ndx,!is.element(names(gisData),
-                               c('Lat','Long'))]
+  BasChars <- gisData[c("Station.ID","Lat","Long")]
+  #X <- gisData[ndx,!is.element(names(gisData),
+  #                             c('Lat','Long'))]
   
   # Search for EXP for each site
-  allFiles <- apply(as.matrix(paste0('*',gisData$Station.ID[ndx],'\\.EXP$')),
-                    MARGIN=1,FUN=list.files,path=pfqPath,recursive=T)
+  allFilesEXP <- list.files("*\\.EXP$",
+                         path=pfqPath,recursive=T)
+  
+  ##Look for sites listed in the GIS file in the allFilesEXP vector
+  gisSites <- grep(paste(gisData$Station.ID,collapse="|"), 
+                   allFilesEXP,
+                   ignore.case=TRUE
+  )
+  
+  ##remove files for sites that are not in GIS file
+  allFilesEXP <- allFilesEXP[gisSites]
+  
+  #subset GIS file to only sites found in EXP files
+  ##Get site IDs for matching files
+  allFilesSearchEXP <- do.call(rbind,strsplit(allFilesEXP, "/"))
+  allFilesSearchEXP <- gsub(".EXP","",allFilesSearchEXP[,2])
+  
+  ###Send warning message for dropped sites
+  ###Get sites that are not in GIS file for warning message
+  droppedSites <- gisData$Station.ID[which(!(gisData$Station.ID %in% allFilesSearchEXP))]
+  if(length(droppedSites > 0))
+  {
+    warning(paste("The following sites are present in the GIS file and not found in EXP files in the Peak FQ output directory:",
+                   droppedSites,sep=",")
+    )
+  }
+
   # NEED  a method to handle duplicates
-  allFiles <- file.path(pfqPath,allFiles)
+  allFilesEXP <- file.path(pfqPath,allFilesEXP)
+  
   # Pulls from EXP curtesy of Janet Curran
   ## Could improve by looking for flag rather than a hard-coded skip
-  EXP_SiteID <- do.call(rbind,lapply(allFiles,read.table,skip=1,nrows=1,colClasses="character"))
-  EXP_G <- do.call(rbind,lapply(allFiles,read.table,skip=7,nrows=1))
-  EXP_S <- do.call(rbind,lapply(allFiles,read.table,skip=9,nrows=1))
-  EXP_GR <- do.call(rbind,lapply(allFiles,read.table,skip=14,nrows=1))
-  EXP_MSEGR <- do.call(rbind,lapply(allFiles,read.table,skip=15,nrows=1))
-  EXP_N <- do.call(rbind,lapply(allFiles,read.table,skip=16,nrows=1))[,2] + 
-    do.call(rbind,lapply(allFiles,read.table,skip=17,nrows=1))[,2]
-  EXP_AEP <- do.call(rbind,lapply(allFiles,read.table,skip=21,nrows=1))
-  EXP_Est <- do.call(rbind,lapply(allFiles,read.table,skip=22,nrows=1))
-  EXP_Var <- do.call(rbind,lapply(allFiles,read.table,skip=23,nrows=1))
-  EXP_K <- do.call(rbind,lapply(allFiles,read.table,skip=26,nrows=1))
+  
+
+  EXP_SiteID <- do.call(rbind,lapply(allFilesEXP,read.table,skip=1,nrows=1,colClasses="character"))
+  EXP_G <- do.call(rbind,lapply(allFilesEXP,read.table,skip=7,nrows=1))
+  EXP_S <- do.call(rbind,lapply(allFilesEXP,read.table,skip=9,nrows=1))
+  EXP_GR <- do.call(rbind,lapply(allFilesEXP,read.table,skip=14,nrows=1))
+  EXP_MSEGR <- do.call(rbind,lapply(allFilesEXP,read.table,skip=15,nrows=1))
+  EXP_N <- do.call(rbind,lapply(allFilesEXP,read.table,skip=16,nrows=1))[,2] + 
+    do.call(rbind,lapply(allFilesEXP,read.table,skip=17,nrows=1))[,2]
+  EXP_AEP <- do.call(rbind,lapply(allFilesEXP,read.table,skip=21,nrows=1))
+  EXP_Est <- do.call(rbind,lapply(allFilesEXP,read.table,skip=22,nrows=1))
+  EXP_Var <- do.call(rbind,lapply(allFilesEXP,read.table,skip=23,nrows=1))
+  EXP_K <- do.call(rbind,lapply(allFilesEXP,read.table,skip=26,nrows=1))
+  
   # Dependent Variables (with names)
   Y <- EXP_Est[,2:ncol(EXP_Est)]
   AEP <- EXP_AEP[,2:ncol(EXP_AEP)]
@@ -90,10 +114,42 @@ importPeakFQ <- function(pfqPath,gisFile,sites='') {
   LP3k <- EXP_K[,2:ncol(EXP_K)]
   
   # Search for PRT for each site
-  allFiles <- apply(as.matrix(paste0('*',gisData$Station.ID[ndx],'\\.PRT$')),
-                    MARGIN=1,FUN=list.files,path=pfqPath,recursive=T)
+  allFilesPRT <- list.files("*\\.PRT$",
+                         path=pfqPath,recursive=T)
+  
+  ##Look for sites listed in the GIS file in the allFilesPRT vector
+  gisSites <- grep(paste(gisData$Station.ID,collapse="|"), 
+                   allFilesPRT,
+                   ignore.case=TRUE
+  )
+  
+  
+  
+  ##remove files for sites that are not in GIS file
+  allFilesPRT <- allFilesPRT[gisSites]
+  
+  #subset GIS file to only sites found in EXP files
+  ##Get site IDs for matching files
+  allFilesSearchPRT <- do.call(rbind,strsplit(allFilesPRT, "/"))
+  allFilesSearchPRT <- gsub(".PRT","",allFilesSearchPRT[,2])
+  
+  ###Send warning message for dropped sites
+  ###Get sites that are not in GIS file for warning message
+  droppedSites <- gisData$Station.ID[which(!(gisData$Station.ID %in% allFilesSearchPRT))]
+  if(length(droppedSites > 0))
+  {
+    warning(paste("The following sites are present in the GIS file and not found in PRT files in the Peak FQ output directory:",
+                  droppedSites,sep=",")
+    )
+  }
+  
+  ##Subset the GIS file
+  gisData <- subset(gisData,Station.ID %in% allFilesSearchEXP)
+  gisData <- subset(gisData,Station.ID %in% allFilesSearchPRT)
+  
+  
   # NEED  a method to handle duplicates
-  allFiles <- file.path(pfqPath,allFiles)
+  allFilesPRT <- file.path(pfqPath,allFilesPRT)
   temp <- function(data) {
     out <- data.frame(matrix(NA,ncol=2,nrow=length(data)))
     for (i in 1:length(data)) {
@@ -107,18 +163,30 @@ importPeakFQ <- function(pfqPath,gisFile,sites='') {
     return(out)
   }
   
-  siteTS <- lapply(lapply(lapply(allFiles,readLines),grep,
-                          pattern='^\\s{4}.[0-9]{4}\\s',value=T),temp)
+  #Parse out timeseries
+  ##Get the text for each site
+  textLines <- lapply(allFilesPRT,readLines)
   
-  names(siteTS) <- paste0("X",gisData$Station.ID[ndx])
-  recLen <- recCor <- matrix(NA,ncol=length(siteTS),nrow=length(siteTS))
+  ##Parse out teh timeseries for each file
+  TSdata <- lapply(textLines,grep,
+                   pattern='^\\s{4}.[0-9]{4}\\s',value=T)
+  
+  ##Will Farmer needs to describe what this is doing
+  siteTS <- lapply(TSdata,temp)
+  
+  ##rename lists with site IDs
+  names(siteTS) <- paste0("X",allFilesSearchPRT)
+  
+  #This needs a comment
+  recCor <- matrix(NA,ncol=length(siteTS),nrow=length(siteTS))
+  recLen <- matrix(NA,ncol=length(siteTS),nrow=length(siteTS))
   
   for (i in 1:length(siteTS)) {
     idata <- siteTS[[i]][-which(siteTS[[i]][,2]<0),1:2]
     idata <- abs(idata)
     recLen[i,i] <- nrow(idata)
     for (j in 1:i) {
-      idata <- siteTS[[j]][-which(siteTS[[j]][,2]<0),1:2]
+      jdata <- siteTS[[j]][-which(siteTS[[j]][,2]<0),1:2]
       jdata <- abs(jdata)
       overlap <- intersect(idata[,1],jdata[,1])
       recLen[i,j] <- recLen[j,i] <- length(overlap)
@@ -131,6 +199,8 @@ importPeakFQ <- function(pfqPath,gisFile,sites='') {
   }
   
   #Make dataframes nice with column names, station IDs, and removing extraneous variables
+  X <- gisData[,!names(gisData) %in% c("Lat","Long")]
+  
   EXP_SiteID <- EXP_SiteID[2]
   colnames(EXP_SiteID) <- "Station.ID"
   
