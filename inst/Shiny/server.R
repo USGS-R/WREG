@@ -80,7 +80,7 @@ shinyServer(function(input, output,session) {
                    selSites <<- as.numeric(input$siteCharTable_rows_current)
                  } else if (input$siteSelOption == "Select all sites in dataset") 
                  {
-                   selSites <<- as.numeric(input$siteCharTable_rows_all)
+                   selSites <<- seq(from=1,to=length(siteChars$Station.ID))
                  }
                  output$selSites <- renderText(c("The following sites will be used in WREG: ",
                                                  as.character(siteChars$Station.ID[selSites])
