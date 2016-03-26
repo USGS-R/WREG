@@ -4,7 +4,6 @@
 #' WREGgui()
 #' }
 #' @export
-#' @import shinydashboard
 #' @import shiny
 #' @importFrom DT renderDataTable
 #' @importFrom DT dataTableOutput

@@ -9,6 +9,9 @@ Description: This program represents an R implementation of WREG v. 1.05. (USGS)
 License: GPL (>=2)
 Suggests:
     knitr
+Imports:
+  DT,
+  shiny
 VignetteBuilder: knitr
 LazyData: true
 RoxygenNote: 5.0.1
