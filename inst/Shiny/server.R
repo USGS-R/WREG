@@ -348,6 +348,7 @@ shinyServer(function(input, output,session) {
   ###Run WREG
   observeEvent(input$runWREG,
                {
+                tryCatch({
                  withProgress(message = 'Running regression', value = 0, {
                    LP3 <<- merge(selectData$LP3f,selectData$LP3k[c("Station.ID",input$Y)],by="Station.ID")
                    LP3 <<- LP3[c(2,5,3,4)]
@@ -426,7 +427,7 @@ shinyServer(function(input, output,session) {
                  
                  h2("X and Y variable inputs")
                  output$wregXY <- renderDataTable({cbind(Yinput,Xinput[2:ncol(Xinput)])})
-                 
+                },error=function(e) {output$wregPrint <- renderText("There was an error running WREG, please check inputs")})
                  
                }
   )
