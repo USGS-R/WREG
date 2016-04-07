@@ -69,6 +69,51 @@
 WREG.WLS <- function(Y,X,recordLengths,LP3,x0=NA,legacy=FALSE) {
   # William Farmer, USGS, January 05, 2015
   
+  # Some upfront error handling
+  err <- FALSE
+  if (missing(Y)) {
+    warning("Dependent variable (Y) must be provided.")
+    err <- TRUE
+  } else {
+    if (!is.numeric(Y)) {
+      warning("Dependent variable (Y) must be provided as class numeric.")
+      err <- TRUE
+    } else {
+      if (sum(is.na(Y))>0) {
+        warning(paste0("The depedent variable (Y) contains missing ",
+          "values.  These must be removed."))
+        err <- TRUE
+      }
+      if (sum(is.infinite(Y))>0) {
+        warning(paste0("The depedent variable (Y) contains infinite ",
+          "values.  These must be removed."))
+        err <- TRUE
+      }
+    }
+  }
+  if (missing(X)) {
+    warning("Independent variables (X) must be provided.")
+    err <- TRUE
+  } else {
+    if ((length(unique(apply(X,FUN=class,MARGIN=2)))!=1)|
+        (unique(apply(X,FUN=class,MARGIN=2))!="numeric")) {
+      warning("Independent variables (X) must be provided as class numeric.")
+      err <- TRUE
+    } else {
+      if (sum(is.na(as.matrix(X)))>0) {
+        warning(paste0("Some independent variables (X) contain missing ",
+          "values.  These must be removed."))
+        err <- TRUE
+      }
+      if (sum(is.infinite(as.matrix(X)))>0) {
+        warning(paste0("Some independent variables (X) contain infinite ",
+          "values.  These must be removed."))
+        err <- TRUE
+      }
+    }
+  }
+  
+  
   ## Add controls to meet legacy demands
   ##    NOTE: legacy forces program to return the same results as WREG v 1.05.
   if (legacy) { # If legacy is indicated, override custom inputs.
@@ -88,15 +133,72 @@ WREG.WLS <- function(Y,X,recordLengths,LP3,x0=NA,legacy=FALSE) {
   if(is.matrix(recordLengths)) {
     recordLengths<-diag(recordLengths)
   }
+  if (missing(recordLengths)) {
+    warning("Record lengths must be provided.")
+    err <- TRUE
+  } else {
+    if (!is.numeric(recordLengths)) {
+      warning("Record lengths must be provided as class numeric.")
+      err <- TRUE
+    } else {
+      if (sum(is.na(c(recordLengths)))>0) {
+        warning(paste0("Some record lengths contain missing ",
+          "values.  These must be removed."))
+        err <- TRUE
+      }
+      if (sum(is.infinite(c(recordLengths)))>0) {
+        warning(paste0("Some record lengths contain infinite ",
+          "values.  These must be removed."))
+        err <- TRUE
+      }
+    }
+  }
   
-  ###Rename LP3 columns
-  ####Check if GR was supplied so that same LP3 file can be used for all functions
-  if(ncol(LP3) == 3)
-  {
-  colnames(LP3) <- c("S","K","G")
-  } else if(ncol(LP3) == 4)
-  {
-    colnames(LP3) <- c("S","K","G","GR")
+  # Error checking LP3
+  if (missing(LP3)) {
+    warning("The data frame LP3 must be provided.")
+    err <- TRUE
+  } else {
+    if (!is.data.frame(LP3)) {
+      warning(paste("LP3 must be provided as a data frame with elements named",
+        "'S', 'K' and 'G' for standard deivation, deviate and skew,",
+        "respectively."))
+      err <- TRUE
+    } else {
+      if (sum(is.element(c("S","K","G"),names(LP3)))!=3) {
+        warning(paste("In valid elements: The names of the elements in LP3 are",
+          names(LP3),". LP3 must be provided as a data frame with elements named",
+          "'S', 'K' and 'G' for standard deivation, deviate and skew,",
+          "respectively."))
+        err <- TRUE
+      } else {
+        if ((length(unique(apply(cbind(LP3$S,LP3$K,LP3$G),FUN=class,MARGIN=2)))!=1)|
+            (unique(apply(cbind(LP3$S,LP3$K,LP3$G),FUN=class,MARGIN=2))!="numeric")) {
+          warning("The data frame LP3 must be provided in a numeric class")
+          err <- TRUE
+        } else {
+          if (sum(is.infinite(LP3$S),is.infinite(LP3$K),is.infinite(LP3$G))>0) {
+            warning(paste0("Some elements of LP3$S, LP3$K, and LP3$G contain infinite ",
+              "values.  These must be removed."))
+            err <- TRUE
+          }
+          if (sum(is.na(LP3$S),is.na(LP3$K),is.na(LP3$G))>0) {
+            warning(paste0("Some elements of LP3$S, LP3$K, and LP3$G contain missing ",
+              "values.  These must be removed."))
+            err <- TRUE
+          }
+        }
+      }
+    }
+  }
+  if ((!missing(X)&!missing(Y)&!missing(recordLengths)&!missing(LP3))&&
+      (length(unique(length(Y),nrow(X),nrow(LP3),length(recordLengths)))!=1)) {
+    warning(paste0("length(Y), nrow(X), nrow(LP3) and ",
+      "length(recordLengths) must all be equal"))
+    err <- TRUE
+  }
+  if (err) {
+    stop('Invalid inputs were provided.  See warnings().')
   }
     
   #Convert X and Y from dataframes to matrices to work with matrix operations below

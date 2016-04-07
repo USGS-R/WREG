@@ -107,6 +107,7 @@
 #' @import stats
 #' 
 #' @examples 
+#' \dontrun Add example
 #'@export
 
 WREG.GLS <- function(Y,X,recordLengths,LP3,basinChars,
@@ -114,37 +115,111 @@ WREG.GLS <- function(Y,X,recordLengths,LP3,basinChars,
                      regSkew=FALSE,MSEGR=NA,TY=2,legacy=FALSE) {
   # William Farmer, USGS, January 05, 2015
   
+  # Some upfront error handling
+  err <- FALSE
+  if ((!missing(X)&!missing(Y))&&
+      (length(Y)!=nrow(X))) {
+    warning(paste0("The length of Y must be the same as ",
+      "the number of rows in X."))
+    err <- TRUE
+  }
+  if (missing(Y)) {
+    warning("Dependent variable (Y) must be provided.")
+    err <- TRUE
+  } else {
+    if (!is.numeric(Y)) {
+      warning("Dependent variable (Y) must be provided as class numeric.")
+      err <- TRUE
+    } else {
+      if (sum(is.na(Y))>0) {
+        warning(paste0("The depedent variable (Y) contains missing ",
+          "values.  These must be removed."))
+        err <- TRUE
+      }
+      if (sum(is.infinite(Y))>0) {
+        warning(paste0("The depedent variable (Y) contains infinite ",
+          "values.  These must be removed."))
+        err <- TRUE
+      }
+    }
+  }
+  if (missing(X)) {
+    warning("Independent variables (X) must be provided.")
+    err <- TRUE
+  } else {
+    if ((length(unique(apply(X,FUN=class,MARGIN=2)))!=1)|
+        (unique(apply(X,FUN=class,MARGIN=2))!="numeric")) {
+      warning("Independent variables (X) must be provided as class numeric.")
+      err <- TRUE
+    } else {
+      if (sum(is.na(as.matrix(X)))>0) {
+        warning(paste0("Some independent variables (X) contain missing ",
+          "values.  These must be removed."))
+        err <- TRUE
+      }
+      if (sum(is.infinite(as.matrix(X)))>0) {
+        warning(paste0("Some independent variables (X) contain infinite ",
+          "values.  These must be removed."))
+        err <- TRUE
+      }
+    }
+  }
+  if (!is.logical(regSkew)) {
+    warning("regSkew must be either TRUE to for skew correction",
+      "or FALSE for no skew correction.")
+    err <- TRUE
+  }
+  
   ## Add controls to meet legacy demands
+  if (!is.logical(legacy)) {
+    warning("legacy must be either TRUE to force matching with previous",
+      "versions or FALSE for correct computations.")
+    err <- TRUE
+  }
   ##    NOTE: legacy forces program to return the same results as WREG v 1.05.
   if (legacy) { # If legacy is indicated, override custom inputs.
     TY <- 2 # WREG v1.05 does not read this input correctly.
     distMeth <- 1 # WREG v1.05 uses "Nautical Mile" approximation
   }
+  
   ## Determine if ROI is being applied
   if (is.na(sum(x0))) { # ROI regression is not used.
     ROI <- F
   } else { # ROI regression is used.
     ROI <- T
   }
+  if (ROI&&(length(x0)!=ncol(X))) {
+    warning(paste0("The length of x0 must be the same as ",
+      "the number of columns in X"))
+    err <- TRUE
+  }
+  if (ROI&&(!is.numeric(x0))) {
+    warning(paste0("The input x0 must be of the numeric class"))
+    err <- TRUE
+  }
+  
   ## Just initial values for control.
   var.modelerror.k <- NA
   CustomModelError <- FALSE
-  
-  ###Rename LP3 columns
-  ####Check if GR was supplied so that same LP3 file can be used for all functions
-  if(ncol(LP3) == 3)
-  {
-    colnames(LP3) <- c("S","K","G")
-  } else if(ncol(LP3) == 4)
-  {
-    colnames(LP3) <- c("S","K","G","GR")
-  }
   
   #Convert X and Y from dataframes to matrices to work with matrix operations below
   X <- as.matrix(X)
   Y <- as.matrix(Y)
   
   ## Weighting matrix
+  if (!is.na(MSEGR)) {
+    if (length(MSEGR)!=1) {
+      warning("MSEGR must be a single value")
+      err <- TRUE
+    }
+    if (!is.numeric(MSEGR)) {
+      warning("MSEGR must be a numeric value")
+      err <- TRUE
+    }
+  }
+  if (err) {
+    stop('Invalid inputs were provided. See warnings().')
+  }
   if (regSkew==FALSE) {MSEGR<-NA}
   ### Estimate k-variable model-error variance and final weighting matrix
   GLS.Weighting <- Omega.GLS(alpha=alpha,theta=theta,independent=basinChars,X=X,Y=Y,recordLengths=recordLengths,LP3=LP3,MSEGR=MSEGR,TY=TY,peak=peak,distMeth=distMeth) # Subroutine to calculate GLS weighting by iteration

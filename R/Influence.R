@@ -37,6 +37,108 @@ Influence <- function(e,X,Omega,Beta,ROI=FALSE,Lev=NA) {
   # William Farmer, USGS, January 02, 2015
   # 01/27/2015, WHF: Added abs on limit and ROI option to match MatLab WREG v 1.05, RoIMetrics, Lines 39-52
   
+  # Some upfront error handling
+  error <- FALSE
+  if ((!missing(e)&!missing(X)&!missing(Omega))&&
+      (length(unique(length(e),nrow(X),nrow(Omega),ncol(Omega)))!=1)) {
+    warning("length(e), nrow(X), nrow(Omega) and ncol(Omega) must all be equal")
+    err <- TRUE
+  }
+  if ((!missing(X)&!missing(Beta))&&
+      (length(unique(length(Beta),ncol(X)))!=1)) {
+    warning("length(Beta) and ncol(X) must be equal")
+    err <- TRUE
+  }
+  if (missing(e)) {
+    warning("Residuals (e) must be provided.")
+    err <- TRUE
+  } else {
+    if (!is.numeric(e)) {
+      warning("Residuals (e) must be provided as class numeric.")
+      err <- TRUE
+    } else {
+      if (sum(is.na(c(e)))>0) {
+        warning(paste0("Some residuals (e) contain missing ",
+          "values.  These must be removed."))
+        err <- TRUE
+      }
+      if (sum(is.infinite(c(e)))>0) {
+        warning(paste0("Some residuals (e) contain infinite ",
+          "values.  These must be removed."))
+        err <- TRUE
+      }
+    }
+  }
+  if (missing(X)) {
+    warning("Independent variables (X) must be provided.")
+    err <- TRUE
+  } else {
+    if ((length(unique(apply(X,FUN=class,MARGIN=2)))!=1)|
+        (unique(apply(X,FUN=class,MARGIN=2))!="numeric")) {
+      warning("Independent variables (X) must be provided as class numeric.")
+      err <- TRUE
+    } else {
+      if (sum(is.na(as.matrix(X)))>0) {
+        warning(paste0("Some independent variables (X) contain missing ",
+          "values.  These must be removed."))
+        err <- TRUE
+      }
+      if (sum(is.infinite(as.matrix(X)))>0) {
+        warning(paste0("Some independent variables (X) contain infinite ",
+          "values.  These must be removed."))
+        err <- TRUE
+      }
+    }
+  }
+  if (missing(Omega)) {
+    warning("A weighting matrix (Omega) must be provided.")
+    err <- TRUE
+  } else {
+    if (!is.matrix(Omega)) {
+      warning("The weighting matrix (Omega) must be provided as a matrix.")
+      err <- TRUE
+    } else {
+      if (!is.numeric(Omega)) {
+        warning("The weighting matrix (Omega) must be provided as class numeric.")
+        err <- TRUE
+      } else {
+        if (det(Omega)==0) {
+          warning(paste("The weighting matrix (Omega) is singular and, therefore,",
+            "cannot be inverted.  Reconsider the weighting matrix."))
+          err <- TRUE
+        }
+      }
+    }
+  }
+  if (missing(Beta)) {
+    warning("Coefficients (Beta) must be provided")
+    err <- TRUE
+  } else {
+    if (!is.numeric(Beta)) {
+      warning("Coefficients (Beta) must be provided as class numeric")
+      err <- TRUE
+    } else {
+      if (sum(is.na(c(X)))>0) {
+        warning(paste0("Some coefficients (Beta) contain missing ",
+          "values.  These must be removed."))
+        err <- TRUE
+      }
+      if (sum(is.infinite(c(X)))>0) {
+        warning(paste0("Some coefficients (Beta) contain infinite ",
+          "values.  These must be removed."))
+        err <- TRUE
+      }
+    }
+  }
+  if (ROI) {
+    if (length(Lev)!=length(e)) {
+      warning("The lengths of Lev and e must be identical")
+    }
+  }
+  if (err) {
+    stop("Invalid inputs were provided.  See warnings().")
+  }
+  
   L <- X%*%solve(t(X)%*%solve(Omega)%*%X)%*%t(X) # Basic leverage calculation
   if (ROI) {
     # Though not noted in the manual, GLS-ROI uses a different calculation and critical value for influence.

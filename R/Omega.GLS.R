@@ -71,21 +71,227 @@ Omega.GLS <- function(alpha=0.01,theta=0.98,independent,X,Y,recordLengths,
   
   # William Farmer, January 22, 2015
   
+  # Some basic error checking
+  err <- FALSE
+  if (missing(Y)) {
+    warning("Dependent variable (Y) must be provided.")
+    err <- TRUE
+  } else {
+    if (!is.numeric(Y)) {
+      warning("Dependent variable (Y) must be provided as class numeric.")
+      err <- TRUE
+    } else {
+      if (sum(is.na(Y))>0) {
+        warning(paste0("The depedent variable (Y) contains missing ",
+          "values.  These must be removed."))
+        err <- TRUE
+      }
+      if (sum(is.infinite(Y))>0) {
+        warning(paste0("The depedent variable (Y) contains infinite ",
+          "values.  These must be removed."))
+        err <- TRUE
+      }
+    }
+  }
+  if (missing(X)) {
+    warning("Independent variables (X) must be provided.")
+    err <- TRUE
+  } else {
+    if ((length(unique(apply(X,FUN=class,MARGIN=2)))!=1)|
+        (unique(apply(X,FUN=class,MARGIN=2))!="numeric")) {
+      warning("Independent variables (X) must be provided as class numeric.")
+      err <- TRUE
+    } else {
+      if (sum(is.na(as.matrix(X)))>0) {
+        warning(paste0("Some independent variables (X) contain missing ",
+          "values.  These must be removed."))
+        err <- TRUE
+      }
+      if (sum(is.infinite(as.matrix(X)))>0) {
+        warning(paste0("Some independent variables (X) contain infinite ",
+          "values.  These must be removed."))
+        err <- TRUE
+      }
+    }
+  }
+  if (!is.numeric(TY)) {
+    warning(paste("The return period (TY) must be a numeric value."))
+    err <- TRUE
+  }
+  if (length(TY)!=1) {
+    warning("The return period (TY) must be a single value")
+    err <- TRUE
+  }
+  if (!is.numeric(alpha)) {
+    warning(paste("alpha must be a numeric value."))
+    err <- TRUE
+  }
+  if (length(alpha)!=1) {
+    warning("alpha must be a single value")
+    err <- TRUE
+  }
+  if (!is.numeric(theta)) {
+    warning(paste("theta must be a numeric value."))
+    err <- TRUE
+  }
+  if (length(theta)!=1) {
+    warning("theta must be a single value")
+    err <- TRUE
+  }
+  if (!is.logical(peak)) {
+    warning(paste("The input 'peak' must be either TRUE when estimating a",
+      "maximum event or FALSE when estimatinga minimum event."))
+    err <- TRUE
+  }
+  if (length(peak)!=1) {
+    warning("peak must be a single value")
+    err <- TRUE
+  }
+  if (!is.element(distMeth,c(1,2))) {
+    warning("distMeth must be either 1 for use of a nautical mile ",
+      "approximation or 2 for use of the haversine formula.")
+    err <- TRUE
+  }
+  if (missing(independent)) {
+    warning("independent must be provided as input.")
+    err <- TRUE
+  } else {
+    if (!is.data.frame(independent)) {
+      warning(paste("'independent' must be provided as a data frame with elements",
+        "named 'Station.ID', 'Lat' and 'Long' for standard deivation,",
+        "deviate and skew, respectively."))
+      err <- TRUE
+    } else {
+      if (sum(is.element(c("Station.ID","Lat","Long"),names(independent)))!=3) {
+        warning(paste("In valid elements: The names of the elements in",
+          "independent are",names(independent),
+          ".  'independent' must be provided as a data frame with elements",
+          "named 'Station.ID', 'Lat' and 'Long' for standard deivation,",
+          "deviate and skew, respectively."))
+        err <- TRUE
+      } else {
+        if ((length(unique(apply(cbind(independent$Lat,independent$Long),FUN=class,MARGIN=2)))!=1)|
+            (unique(apply(cbind(independent$Lat,independent$Long),FUN=class,MARGIN=2))!="numeric")) {
+          warning("latitudes and longitudes must be provided as class numeric.")
+          err <- TRUE
+        } else {
+          if (sum(is.na(c(independent$Lat,independent$Long)))>0) {
+            warning(paste0("Some latitudes and longitudes contain missing ",
+              "values.  These must be removed."))
+            err <- TRUE
+          }
+          if (sum(is.infinite(c(independent$Lat,independent$Long)))>0) {
+            warning(paste0("Some latitudes and longitudes contain infinite ",
+              "values.  These must be removed."))
+            err <- TRUE
+          }
+        }
+      }
+    }
+  }
+  
   ## Determining if skew adjustment is requested
   SkewAdj<-F # default: no skew adjustment
   if (!is.na(MSEGR)) {
     SkewAdj<-T # If user provides a mean squared-error of regional skew, 
     #               then use skew adjustment.
   }
+  if (!is.na(MSEGR)) {
+    if (length(MSEGR)!=1) {
+      warning("MSEGR must be a single value")
+      err <- TRUE
+    }
+    if (!is.numeric(MSEGR)) {
+      warning("MSEGR must be a numeric value")
+      err <- TRUE
+    }
+  }
   
-  ###Rename LP3 columns
-  ####Check if GR was supplied so that same LP3 file can be used for all functions
-  if(ncol(LP3) == 3)
-  {
-    colnames(LP3) <- c("S","K","G")
-  } else if(ncol(LP3) == 4)
-  {
-    colnames(LP3) <- c("S","K","G","GR")
+  # Error checking LP3
+  if (missing(LP3)) {
+    warning("LP3 must be provided as an input.")
+    err <- TRUE
+  } else {
+    if (!SkewAdj) {
+      if (!is.data.frame(LP3)) {
+        warning(paste("LP3 must be provided as a data frame with elements named",
+          "'S', 'K' and 'G' for standard deivation, deviate and skew,",
+          "respectively."))
+        err <- TRUE
+      } else {
+        if (sum(is.element(c("S","K","G"),names(LP3)))!=3) {
+          warning(paste("In valid elements: The names of the elements in LP3 are",
+            names(LP3),". LP3 must be provided as a data frame with elements named",
+            "'S', 'K' and 'G' for standard deivation, deviate and skew,",
+            "respectively."))
+          err <- TRUE
+        }
+        if ((length(unique(apply(cbind(LP3$S,LP3$K,LP3$G),FUN=class,MARGIN=2)))!=1)|
+            (unique(apply(cbind(LP3$S,LP3$K,LP3$G),FUN=class,MARGIN=2))!="numeric")) {
+          warning("LP3 must be provided as a numeric array")
+          err <- TRUE
+        } else {
+          if (sum(is.infinite(LP3$S),is.infinite(LP3$K),is.infinite(LP3$G))>0) {
+            warning(paste0("Some elements of LP3$S, LP3$K, and LP3$G contain infinite ",
+              "values.  These must be removed."))
+            err <- TRUE
+          }
+          if (sum(is.na(LP3$S),is.na(LP3$K),is.na(LP3$G))>0) {
+            warning(paste0("Some elements of LP3$S, LP3$K, and LP3$G contain missing ",
+              "values.  These must be removed."))
+            err <- TRUE
+          }
+        }
+      }
+    } else {
+      if (!is.data.frame(LP3)) {
+        warning(paste("LP3 must be provided as a data frame with elements named",
+          "'S', 'K', 'G' and 'GR' for standard deivation, deviate,",
+          "skew and regional skew, respectively."))
+        err <- TRUE
+      } else {
+        if (sum(is.element(c("S","K","G","GR"),names(LP3)))!=4) {
+          warning(paste("In valid elements: The names of the elements in LP3 are",
+            names(LP3),". LP3 must be provided as a data frame with elements named",
+            "'S', 'K', 'G' and 'GR' for standard deivation, deviate,",
+            "skew and regional skew, respectively."))
+          err <- TRUE
+        }
+        if ((length(unique(apply(cbind(LP3$S,LP3$K,LP3$G,LP3$GR),FUN=class,MARGIN=2)))!=1)|
+            (unique(apply(cbind(LP3$S,LP3$K,LP3$G,LP3$GR),FUN=class,MARGIN=2))!="numeric")) {
+          warning("LP3 must be provided as a numeric array")
+          err <- TRUE
+        } else {
+          if (sum(is.infinite(LP3$S),is.infinite(LP3$K),
+            is.infinite(LP3$G),is.infinite(LP3$GR))>0) {
+            warning(paste0("Some elements of LP3$S, LP3$K, LP3$G and LP3$GR contain ",
+              "infinite values.  These must be removed."))
+            err <- TRUE
+          }
+          if (sum(is.na(LP3$S),is.na(LP3$K),is.na(LP3$G),is.na(LP3$GR))>0) {
+            warning(paste0("Some elements of LP3$S, LP3$K, LP3$G and LP3$GR contain ",
+              "missing values.  These must be removed."))
+            err <- TRUE
+          }
+        }
+      }
+    }
+  }
+  if (missing(recordLengths)) {
+    warning("A matrix of recordLengths must be provided as input.")
+    err <- TRUE
+  } else {
+    if (ncol(recordLengths)!=nrow(recordLengths)) {
+      warning("recordLengths must be provided as a square array")
+      err <- TRUE
+    }
+    if (!is.numeric(recordLengths)) {
+      warning("recordLengths must be provided as a numeric array")
+      err <- TRUE
+    }
+  }
+  if (err) {
+    stop("Invalid inputs were provided.  See warnings().")
   }
   
   #Convert X and Y from dataframes to matrices to work with matrix operations below

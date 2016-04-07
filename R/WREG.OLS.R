@@ -64,6 +64,56 @@
 WREG.OLS <- function(Y,X,x0=NA,legacy=FALSE) {
   # William Farmer, USGS, January 05, 2015
   
+  # Some upfront error handling
+  err <- FALSE
+  if ((!missing(X)&!missing(Y))&&
+      (length(Y)!=nrow(X))) {
+    warning(paste0("The length of Y must be the same as ",
+      "the number of rows in X."))
+    err <- TRUE
+  }
+  if (missing(Y)) {
+    warning("Dependent variable (Y) must be provided.")
+    err <- TRUE
+  } else {
+    if (!is.numeric(Y)) {
+      warning("Dependent variable (Y) must be provided as class numeric.")
+      err <- TRUE
+    } else {
+      if (sum(is.na(Y))>0) {
+        warning(paste0("The depedent variable (Y) contains missing ",
+          "values.  These must be removed."))
+        err <- TRUE
+      }
+      if (sum(is.infinite(Y))>0) {
+        warning(paste0("The depedent variable (Y) contains infinite ",
+          "values.  These must be removed."))
+        err <- TRUE
+      }
+    }
+  }
+  if (missing(X)) {
+    warning("Independent variables (X) must be provided.")
+    err <- TRUE
+  } else {
+    if ((length(unique(apply(X,FUN=class,MARGIN=2)))!=1)|
+        (unique(apply(X,FUN=class,MARGIN=2))!="numeric")) {
+      warning("Independent variables (X) must be provided as class numeric.")
+      err <- TRUE
+    } else {
+      if (sum(is.na(as.matrix(X)))>0) {
+        warning(paste0("Some independent variables (X) contain missing ",
+          "values.  These must be removed."))
+        err <- TRUE
+      }
+      if (sum(is.infinite(as.matrix(X)))>0) {
+        warning(paste0("Some independent variables (X) contain infinite ",
+          "values.  These must be removed."))
+        err <- TRUE
+      }
+    }
+  }
+  
   ## Add controls to meet legacy demands
   ##    NOTE: legacy forces program to return the same results as WREG v 1.05.
   if (legacy) { # If legacy is indicated, override custom inputs.
@@ -75,6 +125,18 @@ WREG.OLS <- function(Y,X,x0=NA,legacy=FALSE) {
     ROI <- F
   } else { # ROI regression is used.
     ROI <- T
+  }
+  if (ROI&&(length(x0)!=ncol(X))) {
+    warning(paste0("The length of x0 must be the same as ",
+      "the number of columns in X"))
+    err <- TRUE
+  }
+  if (ROI&&(!is.numeric(x0))) {
+    warning(paste0("The input x0 must be of the numeric class"))
+    err <- TRUE
+  }
+  if (err) {
+    stop('Invalid inputs were provided. See warnings().')
   }
   ## Just initial values for control.
   var.modelerror.k <- NA
