@@ -18,8 +18,44 @@
 #'
 #'@return Returns the distance between the two sites in miles.
 #'@export
-Dist.WREG <- function(Lat1,Long1,Lat2,Long2,method=c(1,2)) {
+Dist.WREG <- function(Lat1,Long1,Lat2,Long2,method=2) {
   # William Farmer, USGS, January 23, 2015
+  
+  # basic error checking
+  ivars <- c('Lat1','Long1','Lat2','Long2')
+  err <- FALSE
+  for (i in ivars) {
+    check <- eval(parse(text=paste0('missing(',i,')')))
+    if (check) {
+      err = TRUE
+      warning(paste(i,"must be provided."))
+      next
+    }
+    check <- eval(parse(text=paste0('sum(!is.numeric(',i,'))>0')))
+    if (check) {
+      err = TRUE
+      warning(paste(i,"is not numeric."))
+      next
+    }
+    check <- eval(parse(text=paste0('sum(is.infinite(',i,'))>0')))
+    if (check) {
+      err = TRUE
+      warning(paste(i,"contains infinite values."))
+    }
+    check <- eval(parse(text=paste0('sum(is.na(',i,'))>0')))
+    if (check) {
+      err = TRUE
+      warning(paste(i,"contains missing values."))
+    }
+  }
+  if (!is.element(method,c(1,2))) {
+    warning("'method' must be either 1 for use of a nautical mile ",
+      "approximation or 2 for use of the haversine formula.")
+    err <- TRUE
+  }
+  if (err) {
+    stop("Invalid inputs were provided.  See warnings()")
+  }
   
   if (method==1) {
     ## Nautical mile conversion
