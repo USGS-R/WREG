@@ -16,21 +16,21 @@ particular independe variable.  (If a leading constant is used, it should be
 included here as a leading column of ones.)  The rows must be in the same
 order as the dependent variables in \code{Y}.}
 
+\item{customWeight}{This allows the user to enter a custom weighting matrix.
+It is included also to provide legacy code for WREG v. 1.05.
+\code{customWeight} can either be a square matrix of weights with a length
+equal to \code{length(Y)} or a list containing three elements.  The elements
+of the list include (1) \code{Omega} as the square weighting matrix, (2)
+\code{var.modelerror.k} as the estimated variance of the model errors from
+the k-variable model (\code{k=ncol(X)}), and (3) \code{var.modelerror.0} as
+the variance of the model errors from a consant-only regression.}
+
 \item{transY}{A required character string indicating if the the
 dependentvariable was transformed by the common logarithm ('log10'),
 transformed by the natural logarithm ('ln') or untransformed ('none').}
 
 \item{x0}{A vector containing the independent variables (as above) for a
  particular target site.  This variable is only used for ROI analysis.}
-
-\item{CustomWeight}{This allows the user to enter a custom weighting matrix.
-It is included also to provide legacy code for WREG v. 1.05.
-\code{CustomWeight} can either be a square matrix of weights with a length
-equal to \code{length(Y)} or a list containing three elements.  The elements
-of the list include (1) \code{Omega} as the square weighting matrix, (2)
-\code{var.modelerror.k} as the estimated variance of the model errors from
-the k-variable model (\code{k=ncol(X)}), and (3) \code{var.modelerror.0} as
-the variance of the model errors from a consant-only regression.}
 }
 \value{
 All outputs are returned as part of a list.  The elements of the list

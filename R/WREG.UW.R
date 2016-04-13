@@ -10,9 +10,9 @@
 #'  particular independe variable.  (If a leading constant is used, it should be
 #'  included here as a leading column of ones.)  The rows must be in the same 
 #'  order as the dependent variables in \code{Y}.
-#'@param CustomWeight This allows the user to enter a custom weighting matrix. 
+#'@param customWeight This allows the user to enter a custom weighting matrix. 
 #'  It is included also to provide legacy code for WREG v. 1.05. 
-#'  \code{CustomWeight} can either be a square matrix of weights with a length 
+#'  \code{customWeight} can either be a square matrix of weights with a length 
 #'  equal to \code{length(Y)} or a list containing three elements.  The elements
 #'  of the list include (1) \code{Omega} as the square weighting matrix, (2) 
 #'  \code{var.modelerror.k} as the estimated variance of the model errors from 
