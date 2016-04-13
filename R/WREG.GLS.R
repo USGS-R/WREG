@@ -308,7 +308,7 @@ WREG.GLS <- function(Y,X,recordLengths,LP3,basinChars,transY,
   Output <- list(Coefs=Coefs,ResLevInf=ResLevInf,LevLim=Lev$Limit,
     InflLim=Infl$Limit,LevInf.Sig=cbind(Lev$Significant,Infl$Significant),
     PerformanceMetrics=PerfMet,X=X,Y=Y,fitted.values=Y_hat,residuals=e,
-    Weighting=Omega,Inputs=list(legacy=legacy))
+    Weighting=Omega,Inputs=list(legacy=legacy,transY=transY))
   if (ROI) { # Appended at-site estimates for ROI calculations
     Y_est <- x0%*%B_hat # ROI site estimate
     Output <- c(Output,Y.ROI=Y_est,x0.ROI=x0)
