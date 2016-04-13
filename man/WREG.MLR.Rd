@@ -91,12 +91,16 @@ Haversine approximation.  See \code{\link{Dist.WREG}}.  The default value is
 \code{2}.  (See the \code{Legacy} details below.)}
 
 \item{Legacy}{A logical.  A value of \code{TRUE} forces the WREG program to
- behave identically to WREG v. 1.05, with BUGS and all.  It will force
- \code{TY=2} and \code{DistMeth=1}.  For ROI regressions, it will also
- require a specific calculation for weighing matrices in \dQuote{WLS}
- (\code{\link{Omega.WLS.ROImatchMatLab}}), \dQuote{GLS}, and \dQuote{GLSskew}
- (see \code{\link{Omega.GLS.ROImatchMatLab}}) Further details are provided in
- \code{\link{WREG.RoI}}}
+behave identically to WREG v. 1.05, with BUGS and all.  It will force
+\code{TY=2} and \code{DistMeth=1}.  For ROI regressions, it will also
+require a specific calculation for weighing matrices in \dQuote{WLS}
+(\code{\link{Omega.WLS.ROImatchMatLab}}), \dQuote{GLS}, and \dQuote{GLSskew}
+(see \code{\link{Omega.GLS.ROImatchMatLab}}) Further details are provided in
+\code{\link{WREG.RoI}}}
+
+\item{regSkew}{A logical vector indicating if regional skews are provided with
+ an adjustment required for uncertainty therein (\code{TRUE}).  The default
+ is \code{FALSE}.}
 }
 \value{
 All outputs are returned as part of a list.  The elements of the list
@@ -136,22 +140,22 @@ All outputs are returned as part of a list.  The elements of the list
 }
 \description{
 The \code{WREG.MLR} function executes the basic regression
-analysis that forms the foundation of the WREG program.
+ analysis that forms the foundation of the WREG program.
 }
 \details{
 This is the main function for WREG, though it serves only as a
-wrapper for subroutines.  It builds weighing matrices, applies the specified
-regression and computes the relevant performance metrics. Additional
-information on this program can be found in the manual of WREG v. 1.0.
+ wrapper for subroutines.  It builds weighing matrices, applies the specified
+ regression and computes the relevant performance metrics. Additional
+ information on this program can be found in the manual of WREG v. 1.0.
 
-The logical handle \code{Legacy} has been included to test that this program
-returns the same results as WREG v. 1.05.  In the development of this code,
-some idiosyncrasies of the MatLab code for WREG v. 1.05 became apparent.
-Setting \code{Legacy} equal to \code{TRUE} forces the code to use the same
-idiosycrasies as WREG v. 1.05.  Some of these idosyncrasies may be bugs in the
-code.  Further analysis is needed.  For information on the specific
-idiosyncrasies, see the notes for the \code{Legacy} input and the links to
-other functions in this package.
+ The logical handle \code{Legacy} has been included to test that this program
+ returns the same results as WREG v. 1.05.  In the development of this code,
+ some idiosyncrasies of the MatLab code for WREG v. 1.05 became apparent.
+ Setting \code{Legacy} equal to \code{TRUE} forces the code to use the same
+ idiosycrasies as WREG v. 1.05.  Some of these idosyncrasies may be bugs in
+ the code.  Further analysis is needed.  For information on the specific
+ idiosyncrasies, see the notes for the \code{Legacy} input and the links to
+ other functions in this package.
 }
 \examples{
 \dontrun add examples

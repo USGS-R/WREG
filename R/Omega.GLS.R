@@ -1,70 +1,79 @@
-#' Calculate weighting matrix for GLS regression. (WREG)
+#'Calculate weighting matrix for GLS regression. (WREG)
 #'
-#'@description 
-#'THe \code{Omega.GLS} function calculates the weighting matrix required for generalized
-#'least-squares regression, without or without uncertainty in the regional skew.
+#'@description THe \code{Omega.GLS} function calculates the weighting matrix
+#'required for generalized least-squares regression, without or without
+#'uncertainty in the regional skew.
 #'
-#' @param alpha A number, required only for \dQuote{GLS} and \dQuote{GLSskew}.  
-#' \code{alpha} is a parameter used in the estimated cross-correlation between site
-#' records.  See equation 20 in the WREG v. 1.05 manual.  The arbitrary, default value 
-#' is 0.01.  The user should fit a different value as needed.
-#' @param theta A number, required only for \dQuote{GLS} and \dQuote{GLSskew}.  
-#' \code{theta} is a parameter used in the estimated cross-correlation between site
-#' records.  See equation 20 in the WREG v. 1.05 manual.  The arbitrary, default value 
-#' is 0.98.  The user should fit a different value as needed.
-#' @param independent A dataframe containing three variables: \code{StationID} is the 
-#' numerical identifier (without a leading zero) of each site, \code{Lat} is the latitude
-#' of the site, in decimal degrees, and \code{Long} is the longitude of the site, in decimal
-#' degrees.  The sites must be presented in the same order as \code{Y}.  Required only for
-#' \dQuote{GLS} and \dQuote{GLSskew}.
-#' @param X The independent variables in the regression, with any transformations 
-#' already applied.  Each row represents a site and each column represents
-#' a particular independe variable.  (If a leading constant is used, it should be 
-#' included here as a leading column of ones.)  The rows must be in the same order as
-#' the dependent variables in \code{Y}.
-#' @param Y The dependent variable of interest, with any transformations already 
-#' applied.
-#' @param recordLengths This input is required for \dQuote{WLS}, \dQuote{GLS} and 
-#' \dQuote{GLSskew}.  For \dQuote{GLS} and \dQuote{GLSskew}, \code{recordLengths} 
-#' should be a matrix whose rows and columns are in the same order as \code{Y}.  Each 
-#' \code{(r,c)} element represents the length of concurrent record between sites 
-#' \code{r} and \code{c}.  The diagonal elements therefore represent each site's full
-#' record length.  For \dQuote{WLS}, the only the at-site record lengths are needed.
-#' In the case of \dQuote{WLS}, \code{recordLengths} can be a vector or the matrix 
-#' described for \dQuote{GLS} and \dQuote{GLSskew}.
-#' @param LP3 A dataframe containing the fitted Log-Pearson Type III standard
-#' deviate, standard deviation and skew for each site.  The names of this data frame are
-#' \code{S}, \code{K} and \code{G}.  For \dQuote{GLSskew}, the regional skew value must 
-#' also be provided in a variable called \code{GR}.  The order of the rows must be the same
-#' as \code{Y}.
-#' @param MSEGR A number. The mean squared error of the regional skew.  Required only for
-#' \dQuote{GLSskew}.
-#' @param TY A number.  The return period of the event being modeled.  Required only for 
-#' \dQuote{GLSskew}.  The default value is \code{2}.  (See the \code{Legacy} details below.)
-#' @param peak A logical.  Indicates if the event being modeled is a peak flow event
-#' or a low-flow event.  \code{TRUE} indicates a peak flow, while \code{FALSE} indicates
-#' a low-flow event.
-#' @param distMeth Required for \dQuote{GLS} and \dQuote{GLSskew}.  A value of \code{1} 
-#' indicates that the "Nautical Mile" approximation should be used to calculate inter-site
-#' distances.  A value of \code{2} designates the Haversine approximation.  See 
-#' \code{\link{Dist.WREG}}.  The default value is \code{2}.  (See the \code{Legacy} 
-#' details below.)
-#'
-#'@details This function is largely a subroutine for \code{\link{WREG.MLR}} when applying
-#'generalized least-squares regression (\dQuote{GLS} and \dQuote{GLSskew}).
-#'
-#'The weighting matrix is calculated by iteration, as noted in the manual to 
-#'WREG v. 1.0.  As currently implemented the initial estimate of model error variance,
-#'\code{GSQ}, is taken to range from \code{0} and \code{2*var(Y)}.  This interval is 
-#'broken into 30 equally spaced intervals.  The weighting matrix is calculated for each
-#'interval endpoint and the deviation from equation 21 in the WREG v. 1.0 manual is
-#'recorded.  The progam then search for the interval over which the deviatioon changes 
-#'sign.  This interval is then split into 30 finer intervals and the process is repeated.
-#'The ine interval with the smallest positive deviation is selected as the best estimate.
-#'
-#'@return This function returns a list with two elements:
-#'\item{GSQ}{The estimated model error variance.}
-#'\item{Omega}{The estimated weighting matrix.  A square matrix.}
+#'@param alpha A number, required only for \dQuote{GLS} and \dQuote{GLSskew}. 
+#'  \code{alpha} is a parameter used in the estimated cross-correlation between
+#'  site records.  See equation 20 in the WREG v. 1.05 manual.  The arbitrary,
+#'  default value is 0.01.  The user should fit a different value as needed.
+#'@param theta A number, required only for \dQuote{GLS} and \dQuote{GLSskew}. 
+#'  \code{theta} is a parameter used in the estimated cross-correlation between
+#'  site records.  See equation 20 in the WREG v. 1.05 manual.  The arbitrary,
+#'  default value is 0.98.  The user should fit a different value as needed.
+#'@param independent A dataframe containing three variables: \code{StationID} is
+#'  the numerical identifier (without a leading zero) of each site, \code{Lat}
+#'  is the latitude of the site, in decimal degrees, and \code{Long} is the
+#'  longitude of the site, in decimal degrees.  The sites must be presented in
+#'  the same order as \code{Y}.  Required only for \dQuote{GLS} and
+#'  \dQuote{GLSskew}.
+#'@param X The independent variables in the regression, with any transformations
+#'  already applied.  Each row represents a site and each column represents a
+#'  particular independe variable.  (If a leading constant is used, it should be
+#'  included here as a leading column of ones.)  The rows must be in the same
+#'  order as the dependent variables in \code{Y}.
+#'@param Y The dependent variable of interest, with any transformations already 
+#'  applied.
+#'@param recordLengths This input is required for \dQuote{WLS}, \dQuote{GLS} and
+#'  \dQuote{GLSskew}.  For \dQuote{GLS} and \dQuote{GLSskew},
+#'  \code{recordLengths} should be a matrix whose rows and columns are in the
+#'  same order as \code{Y}.  Each \code{(r,c)} element represents the length of
+#'  concurrent record between sites \code{r} and \code{c}.  The diagonal
+#'  elements therefore represent each site's full record length.  For
+#'  \dQuote{WLS}, the only the at-site record lengths are needed. In the case of
+#'  \dQuote{WLS}, \code{recordLengths} can be a vector or the matrix described
+#'  for \dQuote{GLS} and \dQuote{GLSskew}.
+#'@param LP3 A dataframe containing the fitted Log-Pearson Type III standard 
+#'  deviate, standard deviation and skew for each site.  The names of this data
+#'  frame are \code{S}, \code{K} and \code{G}.  For \dQuote{GLSskew}, the
+#'  regional skew value must also be provided in a variable called \code{GR}. 
+#'  The order of the rows must be the same as \code{Y}.
+#'@param MSEGR A number. The mean squared error of the regional skew.  Required
+#'  only for \dQuote{GLSskew}.
+#'@param TY A number.  The return period of the event being modeled.  Required
+#'  only for \dQuote{GLSskew}.  The default value is \code{2}.  (See the
+#'  \code{Legacy} details below.)
+#'@param peak A logical.  Indicates if the event being modeled is a peak flow
+#'  event or a low-flow event.  \code{TRUE} indicates a peak flow, while
+#'  \code{FALSE} indicates a low-flow event.
+#'@param distMeth Required for \dQuote{GLS} and \dQuote{GLSskew}.  A value of
+#'  \code{1} indicates that the "Nautical Mile" approximation should be used to
+#'  calculate inter-site distances.  A value of \code{2} designates the
+#'  Haversine approximation.  See \code{\link{Dist.WREG}}.  The default value is
+#'  \code{2}.  (See the \code{Legacy} details below.)
+#'  
+#'@details This function is largely a subroutine for \code{\link{WREG.MLR}} when
+#'  applying generalized least-squares regression (\dQuote{GLS} and
+#'  \dQuote{GLSskew}).
+#'  
+#'  The weighting matrix is calculated by iteration, as noted in the manual to 
+#'  WREG v. 1.0.  As currently implemented the initial estimate of model error
+#'  variance, \code{GSQ}, is taken to range from \code{0} and \code{2*var(Y)}. 
+#'  This interval is broken into 30 equally spaced intervals.  The weighting
+#'  matrix is calculated for each interval endpoint and the deviation from
+#'  equation 21 in the WREG v. 1.0 manual is recorded.  The progam then search
+#'  for the interval over which the deviatioon changes sign.  This interval is
+#'  then split into 30 finer intervals and the process is repeated. The ine
+#'  interval with the smallest positive deviation is selected as the best
+#'  estimate.
+#'  
+#'@return This function returns a list with two elements: \item{GSQ}{The
+#'  estimated model error variance.} \item{Omega}{The estimated weighting
+#'  matrix.  A square matrix.}
+#'  
+#' @examples 
+#' \dontrun Add example
 #'@export
 Omega.GLS <- function(alpha=0.01,theta=0.98,independent,X,Y,recordLengths,
   LP3,MSEGR=NA,TY=2,peak=T,distMeth=2) {

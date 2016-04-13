@@ -41,6 +41,10 @@ cross-correlation between site records.  See equation 20 in the WREG v. 1.05
 manual.  The arbitrary, default value is 0.98.  The user should fit a
 different value as needed.}
 
+\item{regSkew}{A logical vector indicating if regional skews are provided with
+an adjustment required for uncertainty therein (\code{TRUE}).  The default
+is \code{FALSE}.}
+
 \item{MSEGR}{A numeric. The mean squared error of the regional skew.  Required
 only if \code{regSkew = TRUE}.}
 
@@ -123,23 +127,22 @@ All outputs are returned as part of a list.  The elements of the list
  empty.}
 }
 \description{
-The \code{WREG.MLR} function executes the basic regression
-analysis that forms the foundation of the WREG program.
+The \code{WREG.GLS} function executes the multiple linear
+ regression analysis using generalized least-squares regression.
 }
 \details{
-This is the main function for WREG.  It builds weighing matrices,
-applies the specified regression and computes the relevant performance
-metrics. Additional information on this program can be found in the manual of
-WREG v. 1.0.
+In this implementation, the weights for generalized least-squares
+ regression are defined by intersite correlations and record lengths.  See
+ manual for details.
 
-The logical handle \code{Legacy} has been included to test that this program
-returns the same results as WREG v. 1.05.  In the development of this code,
-some idiosyncrasies of the MatLab code for WREG v. 1.05 became apparent.
-Setting \code{Legacy} equal to \code{TRUE} forces the code to use the same
-idiosycrasies as WREG v. 1.05.  Some of these idosyncrasies may be bugs in the
-code.  Further analysis is needed.  For information on the specific
-idiosyncrasies, see the notes for the \code{Legacy} input and the links to
-other functions in this package.
+ The logical handle \code{Legacy} has been included to test that this program
+ returns the same results as WREG v. 1.05.  In the development of this code,
+ some idiosyncrasies of the MatLab code for WREG v. 1.05 became apparent.
+ Setting \code{Legacy} equal to \code{TRUE} forces the code to use the same
+ idiosycrasies as WREG v. 1.05.  Some of these idosyncrasies may be bugs in
+ the code.  Further analysis is needed.  For information on the specific
+ idiosyncrasies, see the notes for the \code{Legacy} input and the links to
+ other functions in this package.
 }
 \examples{
 \dontrun Add example

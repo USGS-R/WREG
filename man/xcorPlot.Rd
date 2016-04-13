@@ -33,6 +33,9 @@ If \code{plot=FALSE}, the Nash-Sutcliffe model efficieny is returned.
 }
 \description{
 \code{xcorPlot} explores the fit of the proposed approximation of
-cross-correlation.
+ cross-correlation.
+}
+\examples{
+\dontrun Add example
 }
 
