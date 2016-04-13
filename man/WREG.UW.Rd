@@ -30,8 +30,7 @@ equal to \code{length(Y)} or a list containing three elements.  The elements
 of the list include (1) \code{Omega} as the square weighting matrix, (2)
 \code{var.modelerror.k} as the estimated variance of the model errors from
 the k-variable model (\code{k=ncol(X)}), and (3) \code{var.modelerror.0} as
-the variance of the model errors from a consant-only regression.  Required
-for \code{Reg=} \dQuote{CustomWeight}.}
+the variance of the model errors from a consant-only regression.}
 }
 \value{
 All outputs are returned as part of a list.  The elements of the list
@@ -54,14 +53,15 @@ All outputs are returned as part of a list.  The elements of the list
  regression types return the mean squared error of residuals (\code{MSE}),
  the coefficient of determination (\code{R2}), the adjusted coefficient of
  determination (\code{R2_adj}) and the root mean squared error (\code{RMSE},
- in percent).  \code{WLS}, \code{GLS} and \code{GLSskew} also return the
- pseudo coefficient of regression (\code{R2_pseudo}), the average variance of
- prediction (\code{AVP}), the standard error of prediction (\code{Sp}, in
- percent), a vector of the individual variances of prediction for each site
- (\code{VP.PredVar}), the model-error variance (\code{ModErrVar}) and the
- standardized model error variance (\code{StanModErr}, in percent).  Details
- on the appropriateness and applicability of performance metrics can be found
- in the WREG manual.} \item{X}{The input predictors.} \item{Y}{The input
+ in percent).  If \code{customWeight} contains model error variances, then
+ the pseudo coefficient of regression (\code{R2_pseudo}), the average
+ variance of prediction (\code{AVP}), the standard error of prediction
+ (\code{Sp}, in percent), a vector of the individual variances of prediction
+ for each site (\code{VP.PredVar}), the model-error variance
+ (\code{ModErrVar}) and the standardized model error variance
+ (\code{StanModErr}, in percent) are also returned.  Details on the
+ appropriateness and applicability of performance metrics can be found in the
+ WREG manual.} \item{X}{The input predictors.} \item{Y}{The input
  observations.} \item{fitted.values}{A vector of model estimates from the
  regression model.} \item{residuals}{A vector of model residuals.}
  \item{Weighting}{The weighting matrix used to develop regression estimates.}
@@ -70,12 +70,12 @@ All outputs are returned as part of a list.  The elements of the list
 }
 \description{
 The \code{WREG.UW} function executes the multiple linear
-regression analysis using a user-provided weighting matrix.
+ regression analysis using a user-provided weighting matrix.
 }
 \details{
 This function allows users to develop weights outside of the WREG
-program and observe the resultant regressions.  Note that the weighting matrix
-must be invertible.
+ program and observe the resultant regressions.  Note that the weighting
+ matrix must be invertible.
 }
 \examples{
 \dontrun add examples

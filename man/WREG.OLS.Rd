@@ -4,7 +4,7 @@
 \alias{WREG.OLS}
 \title{Weighted-Multiple-Linear Regression Program (WREG)}
 \usage{
-WREG.OLS(Y, X, transY, x0 = NA, legacy = FALSE)
+WREG.OLS(Y, X, transY, x0 = NA)
 }
 \arguments{
 \item{Y}{The dependent variable of interest, with any transformations already
@@ -21,15 +21,7 @@ dependentvariable was transformed by the common logarithm ('log10'),
 transformed by the natural logarithm ('ln') or untransformed ('none').}
 
 \item{x0}{A vector containing the independent variables (as above) for a
-particular target site.  This variable is only used for ROI analysis.}
-
-\item{Legacy}{A logical.  A value of \code{TRUE} forces the WREG program to
- behave identically to WREG v. 1.05, with BUGS and all.  It will force
- \code{TY=2} and \code{DistMeth=1}.  For ROI regressions, it will also
- require a specific calculation for weighing matrices in \dQuote{WLS}
- (\code{\link{Omega.WLS.ROImatchMatLab}}), \dQuote{GLS}, and \dQuote{GLSskew}
- (see \code{\link{Omega.GLS.ROImatchMatLab}}) Further details are provided in
- \code{\link{WREG.RoI}}}
+ particular target site.  This variable is only used for ROI analysis.}
 }
 \value{
 All outputs are returned as part of a list.  The elements of the list
@@ -52,27 +44,21 @@ All outputs are returned as part of a list.  The elements of the list
  regression types return the mean squared error of residuals (\code{MSE}),
  the coefficient of determination (\code{R2}), the adjusted coefficient of
  determination (\code{R2_adj}) and the root mean squared error (\code{RMSE},
- in percent).  \code{WLS}, \code{GLS} and \code{GLSskew} also return the
- pseudo coefficient of regression (\code{R2_pseudo}), the average variance of
- prediction (\code{AVP}), the standard error of prediction (\code{Sp}, in
- percent), a vector of the individual variances of prediction for each site
- (\code{VP.PredVar}), the model-error variance (\code{ModErrVar}) and the
- standardized model error variance (\code{StanModErr}, in percent).  Details
- on the appropriateness and applicability of performance metrics can be found
- in the WREG manual.} \item{X}{The input predictors.} \item{Y}{The input
- observations.} \item{fitted.values}{A vector of model estimates from the
- regression model.} \item{residuals}{A vector of model residuals.}
- \item{Weighting}{The weighting matrix used to develop regression estimates.}
- \item{Input}{A list of input parameters for error searching.  Right now it
- only includes \code{Legacy} to document if a Legacy application of WREG v.
- 1.05 was implemented.}
+ in percent).  Details on the appropriateness and applicability of
+ performance metrics can be found in the WREG manual.} \item{X}{The input
+ predictors.} \item{Y}{The input observations.} \item{fitted.values}{A vector
+ of model estimates from the regression model.} \item{residuals}{A vector of
+ model residuals.} \item{Weighting}{The weighting matrix used to develop
+ regression estimates.} \item{Input}{A list of input parameters for error
+ searching.  Currently empty.}
 }
 \description{
-The \code{WREG.MLR} function executes the basic regression
-analysis that forms the foundation of the WREG program.
+The \code{WREG.OLS} function executes the multiple linear
+ regression analysis using ordinary least-squares regression.
 }
 \details{
-Fill in details.
+This function follows the basic implementation of ordinary
+ least-squares regression.
 }
 \examples{
 \dontrun add examples
