@@ -4,9 +4,9 @@
 \alias{WREG.GLS}
 \title{Weighted-Multiple-Linear Regression Program (WREG)}
 \usage{
-WREG.GLS(Y, X, recordLengths, LP3, basinChars, x0 = NA, alpha = 0.01,
-  theta = 0.98, peak = T, distMeth = 2, regSkew = FALSE, MSEGR = NA,
-  TY = 2, legacy = FALSE)
+WREG.GLS(Y, X, recordLengths, LP3, basinChars, transY, x0 = NA,
+  alpha = 0.01, theta = 0.98, peak = T, distMeth = 2, regSkew = FALSE,
+  MSEGR = NA, TY = 2, legacy = FALSE)
 }
 \arguments{
 \item{Y}{A numeric vector of the dependent variable of interest, with any transformations already
@@ -22,6 +22,10 @@ the dependent variables in \code{Y}.}
 deviate, standard deviation and skew for each site.  The columns of the matrix represent S, K, G,
 and an option regional skew value \code{GR} required by WREG.GLS with regSkew = TRUE.
 The order of the rows must be the same as \code{Y}.}
+
+\item{transY}{A required character string indicating if the the
+dependentvariable was transformed by the common logarithm ('log10'),
+transformed by the natural logarithm ('ln') or untransformed ('none').}
 
 \item{x0}{A vector containing the independent variables (as above) for a
 particular target site.  This variable is only used for ROI analysis.}

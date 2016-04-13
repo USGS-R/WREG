@@ -33,6 +33,9 @@
 #' identifier of each site, \code{Lat} is the latitude
 #' of the site, in decimal degrees, and \code{Long} is the longitude of the site, in decimal
 #' degrees.  The sites must be presented in the same order as \code{Y}.  Required only if \code{regSkew = TRUE}.
+#'@param transY A required character string indicating if the the
+#'  dependentvariable was transformed by the common logarithm ('log10'),
+#'  transformed by the natural logarithm ('ln') or untransformed ('none').
 #' @param MSEGR A numeric. The mean squared error of the regional skew.  Required only if \code{regSkew = TRUE}.
 #' @param TY A numeric.  The return period of the event being modeled.  Required only for 
 #' \dQuote{GLSskew}.  The default value is \code{2}.  (See the \code{Legacy} details below.)
@@ -110,7 +113,7 @@
 #' \dontrun Add example
 #'@export
 
-WREG.GLS <- function(Y,X,recordLengths,LP3,basinChars,
+WREG.GLS <- function(Y,X,recordLengths,LP3,basinChars,transY,
                      x0=NA,alpha=0.01,theta=0.98,peak=T,distMeth=2,
                      regSkew=FALSE,MSEGR=NA,TY=2,legacy=FALSE) {
   # William Farmer, USGS, January 05, 2015
@@ -167,6 +170,13 @@ WREG.GLS <- function(Y,X,recordLengths,LP3,basinChars,
   if (!is.logical(regSkew)) {
     warning("regSkew must be either TRUE to for skew correction",
       "or FALSE for no skew correction.")
+    err <- TRUE
+  }
+  if(missing(transY)|!is.character(transY)) {
+    warning("transY must be included as a character string.")
+    err <- TRUE
+  } else if (!is.element(transY,c("none","log10","ln"))) {
+    warning("transY must be either 'none', 'log10' or 'ln'.")
     err <- TRUE
   }
   
@@ -241,7 +251,12 @@ WREG.GLS <- function(Y,X,recordLengths,LP3,basinChars,
   SST <- sum((Y-mean(Y))^2) # Total sum of squares. Eq 37
   R2 <- 1 - SSR/SST # Coefficient of determination. Eq 35
   R2_adj <- 1 - SSR*(nrow(X)-1)/SST/(nrow(X)-ncol(X)) # Adjusted coefficient of determination. Eq 38
-  RMSE <-100*sqrt(exp(log(10)*log(10)*MSE)-1) # Root-mean-squared error, in percent. Eq 34
+  RMSE <- NA
+  if (transY=='log10') {
+    RMSE <-100*sqrt(exp(log(10)*log(10)*MSE)-1) # Root-mean-squared error, in percent. Eq 34
+  } else if (transY=='ln') {
+    RMSE <-100*sqrt(exp(MSE)-1) # Root-mean-squared error, in percent. transformed for natural logs.
+  }
   PerfMet <- list(MSE=MSE,R2=R2,R2_adj=R2_adj,RMSE=RMSE) # Performance metrics for output (basic, for OLS)
   R2_pseudo <- 1 - var.modelerror.k/var.modelerror.0 # Pseudo coefficient of determination. Eq 39
   AVP <- var.modelerror.k + mean(diag(X%*%solve(t(X)%*%solve(Omega)%*%X)%*%t(X))) # Average varaince of prediction. Eq 32
@@ -250,8 +265,15 @@ WREG.GLS <- function(Y,X,recordLengths,LP3,basinChars,
     VP[i] <- var.modelerror.k + X[i,]%*%solve(t(X)%*%solve(Omega)%*%X)%*%X[i,] # Individual variance of prediction.  Based on Eq 32.
   }
   VP <- data.frame(VP); names(VP) <- 'PredVar' # Formating the VP vector for output
-  Sp <- 100*sqrt(exp(log(10)*log(10)*AVP)-1) # Standard error of predictions. Eq 33.
-  Se <-100*sqrt(exp(log(10)*log(10)*var.modelerror.k)-1) # Standard model error. Not noted in the manual, but included as output in WREG 1.05.  Based on Eq 33.
+  Sp <- Se <- NA
+  if (transY=='log10') {
+    Sp <- 100*sqrt(exp(log(10)*log(10)*AVP)-1) # Standard error of predictions. Eq 33.
+    Se <-100*sqrt(exp(log(10)*log(10)*var.modelerror.k)-1) # Standard model error. Not noted in the manual, but included as output in WREG 1.05.  Based on Eq 33.
+  } else if (transY=='ln') {
+    # corrected for natural logs
+    Sp <- 100*sqrt(exp(AVP)-1)
+    Se <-100*sqrt(exp(var.modelerror.k)-1)
+  }
   PerfMet <- c(PerfMet,R2_pseudo=R2_pseudo,AVP=AVP,Sp=Sp,VP=VP,ModErrVar=var.modelerror.k,StanModErr=Se) # Performance metrics for output
   
   
