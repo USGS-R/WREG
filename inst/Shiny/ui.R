@@ -42,7 +42,7 @@ shinyUI(fluidPage(theme="theme.css",navbarPage(img(src="Logo.png", width="80px",
                                                                    actionButton("getData_peakFQ",label = "Import data"),
                                                                    hr(),
                                                                    
-                                                                   verbatimTextOutput("numSites")
+                                                                   verbatimTextOutput("numSitesPeakFQ")
                                                                    
                                                           ),
                                                           tabPanel("Import MatLab WREG project",
@@ -56,8 +56,11 @@ shinyUI(fluidPage(theme="theme.css",navbarPage(img(src="Logo.png", width="80px",
                                                                    hr(),
                                                                    h3("Import the data"),
                                                                    actionButton("getData_WREG",label = "Import data"),
-                                                                   hr()
+                                                                   hr(),
                                                                    
+                                                                   verbatimTextOutput("numSitesWREG")
+                                                                   
+
                                                           )
                                                ),
                                                
