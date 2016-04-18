@@ -33,7 +33,7 @@ shinyServer(function(input, output,session) {
                                        by="Station.ID")
                  })
                  
-                 output$numSites <- renderText(
+                 output$numSitesPeakFQ <- renderText(
                    c("Data imported for the followign sites: ",
                      as.character(unique(importData$sites)))
                    
@@ -63,17 +63,19 @@ shinyServer(function(input, output,session) {
                                        importData$X)
                  })
                  
-                 output$numSites <- renderText(
+                 output$numSitesWREG <- renderText(
                    c("Data imported for the followign sites: ",
-                     as.character(unique(importData$sites$V2)))
+                     as.character(unique(importData$sites)))
                    
                  )
+                 #updateSelectInput(session,"Y",choices=colnames(importData$Y))
+                 source("updateInputs.R",local=TRUE)$value
+                 
                })
   
   ##############################
   #Select data
   
-  output$siteCharTable <- renderDataTable(siteChars,filter="top",server=TRUE)
   observeEvent(input$selectSites,
                {
                  if(input$siteSelOption == "Select individual sites")
