@@ -1,0 +1,416 @@
+1
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.002.000
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    11/25/2014 15:16
+
+                         --- PROCESSING OPTIONS ---  
+
+                      Plot option         = Graphics device   
+                      Basin char output   = WATSTORE      
+                      Print option        = Yes
+                      Debug print         = No 
+                      Input peaks listing = Long 
+                      Input peaks format  = WATSTORE peak file  
+
+                      Input files used:
+                         peaks (ascii)  - V:\CDOT_Flood_Frequency\PeakFQ\Input_files\07107500\paleo\07107500.TXT          
+                         specifications - V:\CDOT_Flood_Frequency\PeakFQ\Input_files\07107500\paleo\PKFQWPSF.TMP          
+                      Output file(s): 
+                         main - V:\CDOT_Flood_Frequency\PeakFQ\Input_files\07107500\paleo\07107500.PRT          
+                         bcd  - V:\CDOT_Flood_Frequency\PeakFQ\Input_files\07107500\paleo\0710                  
+  
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.001
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    11/25/2014 15:16
+  
+            Station - 07107500  ST. CHARLES RIVER AT BURNT MILL, CO.            
+
+
+                     I N P U T   D A T A   S U M M A R Y
+
+                Number of peaks in record            =       27
+                Peaks not used in analysis           =        0
+                Systematic peaks in analysis         =       27
+                Historic peaks in analysis           =        0
+                Beginning Year                       =     1864
+                Ending Year                          =     2013
+                Historical Period Length             =      150
+                Generalized skew                     =   -0.101
+                     Standard error                  =    0.550
+                     Mean Square error               =    0.303
+                Skew option                          =   WEIGHTED  
+                Gage base discharge                  =      0.0
+                User supplied high outlier threshold =   --           
+                User supplied PILF (LO) criterion    =   --           
+                Plotting position parameter          =     0.00
+                Type of analysis                            EMA
+                PILF (LO) Test Method                      MGBT
+                Perception Thresholds:
+                     Begin     End       Low     High     Comment
+                      1864    2013       0.0       INF     DEFAULT                                                                         
+                      1979    1979       0.0    1040.0     PEAK > STATED VALUE                                                             
+                      1864    1922   24500.0       INF     2014 NON-EXCEEDANCE BOUND                                                       
+                      1935    1978   21800.0       INF     MISSING - 2014 NON-EXCEEDANCE BOUND                                             
+                      1994    2013   21800.0       INF     MISSING - 2014 NON-EXCEEDANCE BOUND                                             
+                Interval Data:
+                              Year       Low     High     Comment
+                              1979    1040.0       INF     PEAK > STATED VALUE                                                             
+
+
+
+  *********  NOTICE  --  Preliminary machine computations.        *********     
+  *********  User responsible for assessment and interpretation.  *********     
+
+    WCF002J-CALCS COMPLETED.  RETURN CODE =  2
+    EMA001W-VARIANCE OF ESTIMATE WARNING, HISTORIC PERIOD > 2* SYS
+    EMA002W-CONFIDENCE INTERVALS ARE NOT EXACT IF HISTORIC PERIOD > 0
+
+
+                                        Kendall's Tau Parameters
+
+                                                        MEDIAN   No. of
+                                       TAU    P-VALUE    SLOPE   PEAKS
+                                ---------------------------------------
+             SYSTEMATIC RECORD      0.043      0.770      4.600    27
+
+
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.002
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    11/25/2014 15:16
+  
+            Station - 07107500  ST. CHARLES RIVER AT BURNT MILL, CO.            
+
+
+           ANNUAL FREQUENCY CURVE PARAMETERS -- LOG-PEARSON TYPE III 
+
+                                    LOGARITHMIC         
+                         -------------------------------
+                                      STANDARD          
+                            MEAN     DEVIATION     SKEW 
+                         -------------------------------
+ EMA W/O REG. INFO         2.9547      0.5930     -0.032
+ EMA W/REG. INFO           2.9573      0.5964     -0.070
+
+ EMA ESTIMATE OF MSE OF SKEW W/O REG. INFO (AT-SITE)      0.1092
+ EMA ESTIMATE OF MSE OF SKEW W/SYSTEMATIC ONLY (AT-SITE)  0.1932
+
+
+
+    ANNUAL FREQUENCY CURVE -- DISCHARGES AT SELECTED EXCEEDANCE PROBABILITIES
+
+   ANNUAL   EMA W/    EMA W/O     <------ FOR EMA ESTIMATES ------->
+EXCEEDANCE  REG INFO  REG INFO    VARIANCE  95% CONFIDENCE INTERVALS
+PROBABILITY ESTIMATE  ESTIMATE     OF EST.       LOWER       UPPER
+
+   0.9950      24.1      25.7      0.0916         2.2         64.7
+   0.9900      34.6      36.4      0.0705         4.4         84.0
+   0.9500      92.2      94.2      0.0347        25.7        182.9
+   0.9000     154.4     155.9      0.0250        58.0        287.4
+   0.8000     286.7     286.1      0.0184       136.5        509.3
+   0.6667     508.3     503.3      0.0154       272.2        882.3
+   0.5000     921.0     907.6      0.0141       523.0       1582.0
+   0.4292    1176.     1158.       0.0138       676.7       2015.0
+   0.2000    2892.     2849.       0.0135      1686.0       4889.0
+   0.1000    5211.     5160.       0.0140      2963.0       8765.0
+   0.0400    9700.     9690.       0.0164      5218.0      16950.0
+   0.0200   14440.    14530.       0.0198      7423.0      27210.0
+   0.0100   20590.    20910.       0.0246     10110.0      43530.0
+   0.0050   28450.    29130.       0.0311     13290.0      69550.0
+   0.0020   41970.    43490.       0.0422     18200.0     128600.0
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.003
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    11/25/2014 15:16
+  
+            Station - 07107500  ST. CHARLES RIVER AT BURNT MILL, CO.            
+
+
+                       I N P U T   D A T A   L I S T I N G
+
+
+    WATER       PEAK   PEAKFQ   <--- Intervals --->
+     YEAR      VALUE    CODES     LOW         HIGH   REMARKS
+     1923     1900.0       
+     1924      226.0       
+     1925    21800.0       
+     1926     1090.0       
+     1927    19000.0       
+     1928     4400.0       
+     1929      472.0       
+     1930      159.0       
+     1931      388.0       
+     1932       51.0       
+     1933      349.0       
+     1934      136.0       
+     1979     1040.0  G          1040.0        INF   PEAK > STATED VALUE                                                             
+     1980     3300.0       
+     1981     5500.0       
+     1982     2050.0       
+     1983      340.0       
+     1984      370.0       
+     1985      590.0       
+     1986      500.0       
+     1987      560.0       
+     1988      380.0       
+     1989     2850.0       
+     1990     5400.0       
+     1991     2280.0       
+     1992     3530.0       
+     1993      403.0       
+
+
+        Explanation of peak discharge qualification codes
+
+       PeakFQ    NWIS
+        CODE     CODE   DEFINITION
+
+          D        3    Dam failure, non-recurrent flow anomaly
+          G        8    Discharge greater than stated value
+          X       3+8   Both of the above
+          L        4    Discharge less than stated value
+          K     6 OR C  Known effect of regulation or urbanization
+          H        7    Historic peak
+
+          -  Minus-flagged discharge -- Not used in computation
+                -8888.0 -- No discharge value given
+          -  Minus-flagged water year -- Historic peak used in computation
+
+
+
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.004
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    11/25/2014 15:16
+  
+            Station - 07107500  ST. CHARLES RIVER AT BURNT MILL, CO.            
+
+
+   EMPIRICAL FREQUENCY CURVES -- HIRSCH-STEDINGER PLOTTING POSITIONS
+
+   WATER     RANKED      EMA         INTERVALS
+    YEAR   DISCHARGE   ESTIMATE      LOW      HIGH
+    1925    21800.0     0.0055
+    1927    19000.0     0.0475
+    1981     5500.0     0.0841
+    1990     5400.0     0.1207
+    1928     4400.0     0.1574
+    1992     3530.0     0.1940
+    1980     3300.0     0.2307
+    1989     2850.0     0.2673
+    1991     2280.0     0.3040
+    1982     2050.0     0.3406
+    1923     1900.0     0.3772
+    1926     1090.0     0.4139
+    1979     1040.0     0.4505      1040.0     INF  
+    1985      590.0     0.4872
+    1987      560.0     0.5238
+    1986      500.0     0.5605
+    1929      472.0     0.5971
+    1993      403.0     0.6337
+    1931      388.0     0.6704
+    1988      380.0     0.7070
+    1984      370.0     0.7437
+    1933      349.0     0.7803
+    1983      340.0     0.8170
+    1924      226.0     0.8536
+    1930      159.0     0.8902
+    1934      136.0     0.9269
+    1932       51.0     0.9635
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.005
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    11/25/2014 15:16
+  
+            Station - 07107500  ST. CHARLES RIVER AT BURNT MILL, CO.            
+
+
+                         EMA REPRESENTATION OF DATA
+
+  WATER <----- OBSERVED-----><-------- EMA -------><-PERCEPTION THRESHOLDS->
+   YEAR    Q_LOWER    Q_UPPER    Q_LOWER    Q_UPPER        LOWER       UPPER
+   1864        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1865        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1866        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1867        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1868        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1869        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1870        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1871        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1872        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1873        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1874        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1875        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1876        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1877        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1878        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1879        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1880        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1881        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1882        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1883        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1884        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1885        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1886        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1887        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1888        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1889        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1890        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1891        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1892        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1893        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1894        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1895        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1896        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1897        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1898        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1899        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1900        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1901        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1902        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1903        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1904        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1905        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1906        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1907        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1908        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1909        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1910        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1911        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1912        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1913        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1914        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1915        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1916        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1917        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1918        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1919        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1920        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1921        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1922        0.0    24500.0        0.0    24500.0      24500.0        INF 
+   1923     1900.0     1900.0     1900.0     1900.0          0.0        INF 
+   1924      226.0      226.0      226.0      226.0          0.0        INF 
+   1925    21800.0    21800.0    21800.0    21800.0          0.0        INF 
+   1926     1090.0     1090.0     1090.0     1090.0          0.0        INF 
+   1927    19000.0    19000.0    19000.0    19000.0          0.0        INF 
+   1928     4400.0     4400.0     4400.0     4400.0          0.0        INF 
+   1929      472.0      472.0      472.0      472.0          0.0        INF 
+   1930      159.0      159.0      159.0      159.0          0.0        INF 
+   1931      388.0      388.0      388.0      388.0          0.0        INF 
+   1932       51.0       51.0       51.0       51.0          0.0        INF 
+   1933      349.0      349.0      349.0      349.0          0.0        INF 
+   1934      136.0      136.0      136.0      136.0          0.0        INF 
+   1935        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1936        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1937        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1938        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1939        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1940        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1941        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1942        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1943        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1944        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1945        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1946        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1947        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1948        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1949        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1950        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1951        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1952        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1953        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1954        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1955        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1956        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1957        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1958        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1959        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1960        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1961        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1962        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1963        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1964        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1965        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1966        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1967        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1968        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1969        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1970        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1971        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1972        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1973        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1974        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1975        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1976        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1977        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1978        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1979     1040.0       INF      1040.0       INF           0.0      1040.0
+   1980     3300.0     3300.0     3300.0     3300.0          0.0        INF 
+   1981     5500.0     5500.0     5500.0     5500.0          0.0        INF 
+   1982     2050.0     2050.0     2050.0     2050.0          0.0        INF 
+   1983      340.0      340.0      340.0      340.0          0.0        INF 
+   1984      370.0      370.0      370.0      370.0          0.0        INF 
+   1985      590.0      590.0      590.0      590.0          0.0        INF 
+   1986      500.0      500.0      500.0      500.0          0.0        INF 
+   1987      560.0      560.0      560.0      560.0          0.0        INF 
+   1988      380.0      380.0      380.0      380.0          0.0        INF 
+   1989     2850.0     2850.0     2850.0     2850.0          0.0        INF 
+   1990     5400.0     5400.0     5400.0     5400.0          0.0        INF 
+   1991     2280.0     2280.0     2280.0     2280.0          0.0        INF 
+   1992     3530.0     3530.0     3530.0     3530.0          0.0        INF 
+   1993      403.0      403.0      403.0      403.0          0.0        INF 
+   1994        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1995        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1996        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1997        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1998        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   1999        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   2000        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   2001        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   2002        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   2003        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   2004        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   2005        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   2006        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   2007        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   2008        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   2009        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   2010        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   2011        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   2012        0.0    21800.0        0.0    21800.0      21800.0        INF 
+   2013        0.0    21800.0        0.0    21800.0      21800.0        INF 
+1
+
+
+
+ End PeakFQ analysis.
+   Stations processed :       1
+   Number of errors   :       0
+   Stations skipped   :       0
+   Station years      :      27
+
+
+Data records may have been ignored for the stations listed below.               
+(Card type must be Y, Z, N, H, I, 2, 3, 4,  or *.)                              
+(2, 4, and * records are ignored.)                                              
+                                                                                
+ For the station below, the following records were ignored:                     
+                                                                                
+ FINISHED PROCESSING STATION:  07107500       USGS ST. CHARLES RIVER AT BURNT MI
+                                                                                
+                                                                                
+ For the station below, the following records were ignored:                     
+                                                                                
+ FINISHED PROCESSING STATION:                                                   
+                                                                                

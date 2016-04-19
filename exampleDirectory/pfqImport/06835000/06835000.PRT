@@ -1,0 +1,286 @@
+1
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.008.000
+  Prov. Ver. 7.0      Annual peak flow frequency analysis      Run Date / Time
+  05/08/2013          following Bulletin 17-B Guidelines       06/13/2014 13:54
+            Preliminary release of PeakFQ for review and testing only.
+
+                         --- PROCESSING OPTIONS ---  
+
+                      Plot option         = Graphics device   
+                      Basin char output   = WATSTORE      
+                      Print option        = Yes
+                      Debug print         = No 
+                      Input peaks listing = Long 
+                      Input peaks format  = WATSTORE peak file  
+
+                      Input files used:
+                         peaks (ascii)  - S:\hhm\CDOT_Flood_Frequency\PeakFQ\Input_files\06835000\06835000.TXT            
+                         specifications - S:\hhm\CDOT_Flood_Frequency\PeakFQ\Input_files\06835000\PKFQWPSF.TMP            
+                      Output file(s): 
+                         main - S:\hhm\CDOT_Flood_Frequency\PeakFQ\Input_files\06835000\06835000.PRT            
+                         bcd  - S:\hhm\CDOT_Flood_Frequency\PeakFQ\Input_files\06835000\06835000.BCD            
+  
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.009.001
+  Prov. Ver. 7.0      Annual peak flow frequency analysis      Run Date / Time
+  05/08/2013         using Expected Moments Algorithm (EMA)    06/13/2014 13:54
+ 
+            Preliminary release of PeakFQ for review and testing only.
+  
+         Station - 06835000  STINKING WATER CREEK NEAR PALISADE, NEBR.          
+
+
+                     I N P U T   D A T A   S U M M A R Y
+
+                Number of peaks in record            =       23
+                Peaks not used in analysis           =        0
+                Systematic peaks in analysis         =       23
+                Historic peaks in analysis           =        0
+                Beginning Year                       =     1950
+                Ending Year                          =     1972
+                Historical Period Length             =       23
+                Generalized skew                     =    0.212
+                     Standard error                  =    0.550
+                     Mean Square error               =    0.303
+                Skew option                          =   WEIGHTED  
+                Gage base discharge                  =      0.0
+                User supplied high outlier threshold =   --           
+                User supplied low outlier criterion  =   --           
+                Plotting position parameter          =     0.00
+                Type of analysis                            EMA
+                Low-outlier Test Method                    MGBT
+                Perception Thresholds:
+                     Begin     End       Low     High     Comment
+                      1950    1972       0.0       INF     DEFAULT                                                                         
+                Interval Data                    =   None Specified
+
+
+
+  *********  NOTICE  --  Preliminary machine computations.        *********     
+  *********  User responsible for assessment and interpretation.  *********     
+
+  **WCF164W-HISTORIC PERIOD IGNORED.    23.0
+    WCF002J-CALCS COMPLETED.  RETURN CODE =  2
+    EMA002W-CONFIDENCE INTERVALS ARE NOT EXACT IF HISTORIC PERIOD > 0
+
+
+                                        Kendall's Tau Parameters
+
+                                                        MEDIAN   No. of
+                                       TAU    P-VALUE    SLOPE   PEAKS
+                                ---------------------------------------
+             SYSTEMATIC RECORD     -0.198      0.195    -14.600    23
+
+
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.009.002
+  Prov. Ver. 7.0      Annual peak flow frequency analysis      Run Date / Time
+  05/08/2013         using Expected Moments Algorithm (EMA)    06/13/2014 13:54
+ 
+            Preliminary release of PeakFQ for review and testing only.
+  
+         Station - 06835000  STINKING WATER CREEK NEAR PALISADE, NEBR.          
+
+
+           ANNUAL FREQUENCY CURVE PARAMETERS -- LOG-PEARSON TYPE III 
+
+                                    LOGARITHMIC         
+                         -------------------------------
+                                      STANDARD          
+                            MEAN     DEVIATION     SKEW 
+                         -------------------------------
+ EMA W/O REG. INFO         2.6089      0.4028      0.476
+ EMA W/REG. INFO           2.6089      0.4028      0.354
+
+ EMA ESTIMATE OF MSE OF SKEW W/O REG. INFO (AT-SITE)      0.2587
+ EMA ESTIMATE OF MSE OF SKEW W/SYSTEMATIC ONLY (AT-SITE)  0.2587
+
+
+
+    ANNUAL FREQUENCY CURVE -- DISCHARGES AT SELECTED EXCEEDANCE PROBABILITIES
+
+   ANNUAL   EMA W/    EMA W/O     <------ FOR EMA ESTIMATES ------->
+EXCEEDANCE  REG INFO  REG INFO    VARIANCE  95% CONFIDENCE INTERVALS
+PROBABILITY ESTIMATE  ESTIMATE     OF EST.       LOWER       UPPER
+
+   0.9950      50.7      56.3      0.0318        14.0         92.6
+   0.9900      59.9      65.2      0.0245        19.6        102.4
+   0.9500      97.6     101.2      0.0124        46.4        148.2
+   0.9000     128.9     131.1      0.0094        71.8        191.3
+   0.8000     184.0     183.7      0.0076       116.2        272.1
+   0.6667     261.3     257.8      0.0072       173.5        391.2
+   0.5000     384.8     377.7      0.0076       258.5        595.8
+   0.4292     454.4     445.9      0.0080       304.6        720.6
+   0.2000     869.4     861.7      0.0114       564.0       1641.0
+   0.1000    1374.     1385.       0.0165       849.7       3279.0
+   0.0400    2295.     2374.       0.0268      1306.0       8179.0
+   0.0200    3241.     3428.       0.0374      1715.0      16330.0
+   0.0100    4461.     4830.       0.0506      2179.0      32630.0
+   0.0050    6024.     6683.       0.0666      2702.0      65200.0
+   0.0020    8756.    10040.       0.0921      3489.0     143900.0
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.009.003
+  Prov. Ver. 7.0      Annual peak flow frequency analysis      Run Date / Time
+  05/08/2013         using Expected Moments Algorithm (EMA)    06/13/2014 13:54
+ 
+            Preliminary release of PeakFQ for review and testing only.
+  
+         Station - 06835000  STINKING WATER CREEK NEAR PALISADE, NEBR.          
+
+
+                       I N P U T   D A T A   L I S T I N G
+
+
+    WATER       PEAK   PEAKFQ   <--- Intervals --->
+     YEAR      VALUE    CODES     LOW         HIGH   REMARKS
+     1950      442.0       
+     1951      846.0       
+     1952     1030.0       
+     1953      106.0       
+     1954      193.0       
+     1955     1250.0       
+     1956     3030.0       
+     1957      239.0       
+     1958     1270.0       
+     1959      338.0       
+     1960     1780.0       
+     1961      145.0       
+     1962      514.0       
+     1963      340.0       
+     1964      298.0       
+     1965      234.0       
+     1966      123.0       
+     1967      761.0       
+     1968      340.0       
+     1969      208.0       
+     1970      150.0       
+     1971      154.0       
+     1972      688.0       
+
+
+        Explanation of peak discharge qualification codes
+
+       PeakFQ    NWIS
+        CODE     CODE   DEFINITION
+
+          D        3    Dam failure, non-recurrent flow anomaly
+          G        8    Discharge greater than stated value
+          X       3+8   Both of the above
+          L        4    Discharge less than stated value
+          K     6 OR C  Known effect of regulation or urbanization
+          H        7    Historic peak
+
+          -  Minus-flagged discharge -- Not used in computation
+                -8888.0 -- No discharge value given
+          -  Minus-flagged water year -- Historic peak used in computation
+
+
+
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.009.004
+  Prov. Ver. 7.0      Annual peak flow frequency analysis      Run Date / Time
+  05/08/2013         using Expected Moments Algorithm (EMA)    06/13/2014 13:54
+ 
+            Preliminary release of PeakFQ for review and testing only.
+  
+         Station - 06835000  STINKING WATER CREEK NEAR PALISADE, NEBR.          
+
+
+   EMPIRICAL FREQUENCY CURVES -- HIRSCH-STEDINGER PLOTTING POSITIONS
+
+   WATER     RANKED      EMA         INTERVALS
+    YEAR   DISCHARGE   ESTIMATE      LOW      HIGH
+    1956     3030.0     0.0415
+    1960     1780.0     0.0832
+    1958     1270.0     0.1249
+    1955     1250.0     0.1665
+    1952     1030.0     0.2082
+    1951      846.0     0.2499
+    1967      761.0     0.2916
+    1972      688.0     0.3333
+    1962      514.0     0.3750
+    1950      442.0     0.4166
+    1963      340.0     0.5000
+    1968      340.0     0.4583
+    1959      338.0     0.5417
+    1964      298.0     0.5834
+    1957      239.0     0.6250
+    1965      234.0     0.6667
+    1969      208.0     0.7084
+    1954      193.0     0.7501
+    1971      154.0     0.7918
+    1970      150.0     0.8335
+    1961      145.0     0.8751
+    1966      123.0     0.9168
+    1953      106.0     0.9585
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.009.005
+  Prov. Ver. 7.0      Annual peak flow frequency analysis      Run Date / Time
+  05/08/2013         using Expected Moments Algorithm (EMA)    06/13/2014 13:54
+ 
+            Preliminary release of PeakFQ for review and testing only.
+  
+         Station - 06835000  STINKING WATER CREEK NEAR PALISADE, NEBR.          
+
+
+                         EMA REPRESENTATION OF DATA
+
+  WATER <----- OBSERVED-----><-------- EMA -------><-PERCEPTION THRESHOLDS->
+   YEAR    Q_LOWER    Q_UPPER    Q_LOWER    Q_UPPER        LOWER       UPPER
+   1950      442.0      442.0      442.0      442.0          0.0        INF 
+   1951      846.0      846.0      846.0      846.0          0.0        INF 
+   1952     1030.0     1030.0     1030.0     1030.0          0.0        INF 
+   1953      106.0      106.0      106.0      106.0          0.0        INF 
+   1954      193.0      193.0      193.0      193.0          0.0        INF 
+   1955     1250.0     1250.0     1250.0     1250.0          0.0        INF 
+   1956     3030.0     3030.0     3030.0     3030.0          0.0        INF 
+   1957      239.0      239.0      239.0      239.0          0.0        INF 
+   1958     1270.0     1270.0     1270.0     1270.0          0.0        INF 
+   1959      338.0      338.0      338.0      338.0          0.0        INF 
+   1960     1780.0     1780.0     1780.0     1780.0          0.0        INF 
+   1961      145.0      145.0      145.0      145.0          0.0        INF 
+   1962      514.0      514.0      514.0      514.0          0.0        INF 
+   1963      340.0      340.0      340.0      340.0          0.0        INF 
+   1964      298.0      298.0      298.0      298.0          0.0        INF 
+   1965      234.0      234.0      234.0      234.0          0.0        INF 
+   1966      123.0      123.0      123.0      123.0          0.0        INF 
+   1967      761.0      761.0      761.0      761.0          0.0        INF 
+   1968      340.0      340.0      340.0      340.0          0.0        INF 
+   1969      208.0      208.0      208.0      208.0          0.0        INF 
+   1970      150.0      150.0      150.0      150.0          0.0        INF 
+   1971      154.0      154.0      154.0      154.0          0.0        INF 
+   1972      688.0      688.0      688.0      688.0          0.0        INF 
+1
+
+
+
+ End PeakFQ analysis.
+   Stations processed :       1
+   Number of errors   :       0
+   Stations skipped   :       0
+   Station years      :      23
+
+
+Data records may have been ignored for the stations listed below.               
+(Card type must be Y, Z, N, H, I, 2, 3, 4,  or *.)                              
+(2, 4, and * records are ignored.)                                              
+                                                                                
+ For the station below, the following records were ignored:                     
+                                                                                
+ FINISHED PROCESSING STATION:  06835000       USGS STINKING WATER CREEK NEAR PAL
+                                                                                
+                                                                                
+ For the station below, the following records were ignored:                     
+                                                                                
+ FINISHED PROCESSING STATION:                                                   
+                                                                                

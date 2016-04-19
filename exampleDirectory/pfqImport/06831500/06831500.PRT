@@ -1,0 +1,427 @@
+1
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.002.000
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    11/25/2014 13:01
+
+                         --- PROCESSING OPTIONS ---  
+
+                      Plot option         = Graphics device   
+                      Basin char output   = WATSTORE      
+                      Print option        = Yes
+                      Debug print         = No 
+                      Input peaks listing = Long 
+                      Input peaks format  = WATSTORE peak file  
+
+                      Input files used:
+                         peaks (ascii)  - V:\CDOT_Flood_Frequency\PeakFQ\Input_files\06831500\paleo\06831500.TXT          
+                         specifications - V:\CDOT_Flood_Frequency\PeakFQ\Input_files\06831500\paleo\PKFQWPSF.TMP          
+                      Output file(s): 
+                         main - V:\CDOT_Flood_Frequency\PeakFQ\Input_files\06831500\paleo\06831500.PRT          
+                         bcd  - V:\CDOT_Flood_Frequency\PeakFQ\Input_files\06831500\paleo\0683                  
+  
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.001
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    11/25/2014 13:01
+  
+            Station - 06831500  FRENCHMAN CREEK NEAR IMPERIAL, NEBR.            
+
+
+                     I N P U T   D A T A   S U M M A R Y
+
+                Number of peaks in record            =       31
+                Peaks not used in analysis           =        0
+                Systematic peaks in analysis         =       31
+                Historic peaks in analysis           =        0
+                Beginning Year                       =     1814
+                Ending Year                          =     1971
+                Historical Period Length             =      158
+                Generalized skew                     =    0.223
+                     Standard error                  =    0.550
+                     Mean Square error               =    0.303
+                Skew option                          =   WEIGHTED  
+                Gage base discharge                  =      0.0
+                User supplied high outlier threshold =   --           
+                User supplied PILF (LO) criterion    =   --           
+                Plotting position parameter          =     0.00
+                Type of analysis                            EMA
+                PILF (LO) Test Method                      MGBT
+                Perception Thresholds:
+                     Begin     End       Low     High     Comment
+                      1814    1971       0.0       INF     DEFAULT                                                                         
+                      1814    1940    4000.0       INF     2014 NON-EXCEEDANCE BOUND                                                       
+                Interval Data                    =   None Specified
+
+
+
+  *********  NOTICE  --  Preliminary machine computations.        *********     
+  *********  User responsible for assessment and interpretation.  *********     
+
+    WCF002J-CALCS COMPLETED.  RETURN CODE =  2
+    EMA001W-VARIANCE OF ESTIMATE WARNING, HISTORIC PERIOD > 2* SYS
+    EMA002W-CONFIDENCE INTERVALS ARE NOT EXACT IF HISTORIC PERIOD > 0
+
+
+                                        Kendall's Tau Parameters
+
+                                                        MEDIAN   No. of
+                                       TAU    P-VALUE    SLOPE   PEAKS
+                                ---------------------------------------
+             SYSTEMATIC RECORD     -0.049      0.708     -1.462    31
+
+
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.002
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    11/25/2014 13:01
+  
+            Station - 06831500  FRENCHMAN CREEK NEAR IMPERIAL, NEBR.            
+
+
+           ANNUAL FREQUENCY CURVE PARAMETERS -- LOG-PEARSON TYPE III 
+
+                                    LOGARITHMIC         
+                         -------------------------------
+                                      STANDARD          
+                            MEAN     DEVIATION     SKEW 
+                         -------------------------------
+ EMA W/O REG. INFO         2.4890      0.3389      0.563
+ EMA W/REG. INFO           2.4940      0.3482      0.340
+
+ EMA ESTIMATE OF MSE OF SKEW W/O REG. INFO (AT-SITE)      0.1806
+ EMA ESTIMATE OF MSE OF SKEW W/SYSTEMATIC ONLY (AT-SITE)  0.2114
+
+
+
+    ANNUAL FREQUENCY CURVE -- DISCHARGES AT SELECTED EXCEEDANCE PROBABILITIES
+
+   ANNUAL   EMA W/    EMA W/O     <------ FOR EMA ESTIMATES ------->
+EXCEEDANCE  REG INFO  REG INFO    VARIANCE  95% CONFIDENCE INTERVALS
+PROBABILITY ESTIMATE  ESTIMATE     OF EST.       LOWER       UPPER
+
+   0.9950      51.1      62.3      0.0189        20.7         82.9
+   0.9900      59.1      69.6      0.0144        26.8         90.4
+   0.9500      90.5      97.9      0.0070        53.2        124.4
+   0.9000     115.4     120.3      0.0052        75.9        155.4
+   0.8000     157.3     158.0      0.0043       112.8        211.3
+   0.6667     213.2     208.7      0.0041       157.8        287.8
+   0.5000     298.1     286.7      0.0043       221.2        406.7
+   0.4292     344.2     329.6      0.0045       254.6        472.5
+   0.2000     602.4     576.9      0.0053       435.6        853.0
+   0.1000     893.4     868.1      0.0066       621.4       1307.0
+   0.0400    1388.     1388.       0.0094       898.1       2180.0
+   0.0200    1866.     1916.       0.0125      1136.0       3178.0
+   0.0100    2454.     2594.       0.0166      1404.0       4633.0
+   0.0050    3174.     3459.       0.0218      1704.0       6766.0
+   0.0020    4370.     4973.       0.0303      2155.0      11190.0
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.003
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    11/25/2014 13:01
+  
+            Station - 06831500  FRENCHMAN CREEK NEAR IMPERIAL, NEBR.            
+
+
+                       I N P U T   D A T A   L I S T I N G
+
+
+    WATER       PEAK   PEAKFQ   <--- Intervals --->
+     YEAR      VALUE    CODES     LOW         HIGH   REMARKS
+     1941      146.0       
+     1942      460.0       
+     1943     1860.0       
+     1944      272.0       
+     1945      328.0       
+     1946      284.0       
+     1947      208.0       
+     1948      200.0       
+     1949      230.0       
+     1950      146.0       
+     1951     1860.0       
+     1952      167.0       
+     1953      150.0       
+     1954      266.0       
+     1955      330.0       
+     1956      824.0       
+     1957      383.0       
+     1958     1070.0       
+     1959      170.0       
+     1960     2340.0       
+     1961      107.0       
+     1962      400.0       
+     1963      127.0       
+     1964      626.0       
+     1965      306.0       
+     1966      237.0       
+     1967      809.0       
+     1968       98.0       
+     1969      124.0       
+     1970      337.0       
+     1971      269.0       
+
+
+        Explanation of peak discharge qualification codes
+
+       PeakFQ    NWIS
+        CODE     CODE   DEFINITION
+
+          D        3    Dam failure, non-recurrent flow anomaly
+          G        8    Discharge greater than stated value
+          X       3+8   Both of the above
+          L        4    Discharge less than stated value
+          K     6 OR C  Known effect of regulation or urbanization
+          H        7    Historic peak
+
+          -  Minus-flagged discharge -- Not used in computation
+                -8888.0 -- No discharge value given
+          -  Minus-flagged water year -- Historic peak used in computation
+
+
+
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.004
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    11/25/2014 13:01
+  
+            Station - 06831500  FRENCHMAN CREEK NEAR IMPERIAL, NEBR.            
+
+
+   EMPIRICAL FREQUENCY CURVES -- HIRSCH-STEDINGER PLOTTING POSITIONS
+
+   WATER     RANKED      EMA         INTERVALS
+    YEAR   DISCHARGE   ESTIMATE      LOW      HIGH
+    1960     2340.0     0.0311
+    1943     1860.0     0.0936
+    1951     1860.0     0.0624
+    1958     1070.0     0.1249
+    1956      824.0     0.1561
+    1967      809.0     0.1874
+    1964      626.0     0.2187
+    1942      460.0     0.2499
+    1962      400.0     0.2812
+    1957      383.0     0.3124
+    1970      337.0     0.3437
+    1955      330.0     0.3750
+    1945      328.0     0.4062
+    1965      306.0     0.4375
+    1946      284.0     0.4687
+    1944      272.0     0.5000
+    1971      269.0     0.5313
+    1954      266.0     0.5625
+    1966      237.0     0.5938
+    1949      230.0     0.6250
+    1947      208.0     0.6563
+    1948      200.0     0.6876
+    1959      170.0     0.7188
+    1952      167.0     0.7501
+    1953      150.0     0.7813
+    1941      146.0     0.8439
+    1950      146.0     0.8126
+    1963      127.0     0.8751
+    1969      124.0     0.9064
+    1961      107.0     0.9376
+    1968       98.0     0.9689
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.005
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    11/25/2014 13:01
+  
+            Station - 06831500  FRENCHMAN CREEK NEAR IMPERIAL, NEBR.            
+
+
+                         EMA REPRESENTATION OF DATA
+
+  WATER <----- OBSERVED-----><-------- EMA -------><-PERCEPTION THRESHOLDS->
+   YEAR    Q_LOWER    Q_UPPER    Q_LOWER    Q_UPPER        LOWER       UPPER
+   1814        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1815        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1816        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1817        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1818        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1819        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1820        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1821        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1822        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1823        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1824        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1825        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1826        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1827        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1828        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1829        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1830        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1831        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1832        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1833        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1834        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1835        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1836        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1837        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1838        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1839        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1840        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1841        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1842        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1843        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1844        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1845        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1846        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1847        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1848        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1849        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1850        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1851        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1852        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1853        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1854        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1855        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1856        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1857        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1858        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1859        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1860        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1861        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1862        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1863        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1864        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1865        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1866        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1867        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1868        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1869        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1870        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1871        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1872        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1873        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1874        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1875        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1876        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1877        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1878        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1879        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1880        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1881        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1882        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1883        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1884        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1885        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1886        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1887        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1888        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1889        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1890        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1891        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1892        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1893        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1894        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1895        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1896        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1897        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1898        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1899        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1900        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1901        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1902        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1903        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1904        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1905        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1906        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1907        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1908        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1909        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1910        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1911        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1912        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1913        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1914        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1915        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1916        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1917        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1918        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1919        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1920        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1921        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1922        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1923        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1924        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1925        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1926        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1927        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1928        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1929        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1930        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1931        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1932        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1933        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1934        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1935        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1936        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1937        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1938        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1939        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1940        0.0     4000.0        0.0     4000.0       4000.0        INF 
+   1941      146.0      146.0      146.0      146.0          0.0        INF 
+   1942      460.0      460.0      460.0      460.0          0.0        INF 
+   1943     1860.0     1860.0     1860.0     1860.0          0.0        INF 
+   1944      272.0      272.0      272.0      272.0          0.0        INF 
+   1945      328.0      328.0      328.0      328.0          0.0        INF 
+   1946      284.0      284.0      284.0      284.0          0.0        INF 
+   1947      208.0      208.0      208.0      208.0          0.0        INF 
+   1948      200.0      200.0      200.0      200.0          0.0        INF 
+   1949      230.0      230.0      230.0      230.0          0.0        INF 
+   1950      146.0      146.0      146.0      146.0          0.0        INF 
+   1951     1860.0     1860.0     1860.0     1860.0          0.0        INF 
+   1952      167.0      167.0      167.0      167.0          0.0        INF 
+   1953      150.0      150.0      150.0      150.0          0.0        INF 
+   1954      266.0      266.0      266.0      266.0          0.0        INF 
+   1955      330.0      330.0      330.0      330.0          0.0        INF 
+   1956      824.0      824.0      824.0      824.0          0.0        INF 
+   1957      383.0      383.0      383.0      383.0          0.0        INF 
+   1958     1070.0     1070.0     1070.0     1070.0          0.0        INF 
+   1959      170.0      170.0      170.0      170.0          0.0        INF 
+   1960     2340.0     2340.0     2340.0     2340.0          0.0        INF 
+   1961      107.0      107.0      107.0      107.0          0.0        INF 
+   1962      400.0      400.0      400.0      400.0          0.0        INF 
+   1963      127.0      127.0      127.0      127.0          0.0        INF 
+   1964      626.0      626.0      626.0      626.0          0.0        INF 
+   1965      306.0      306.0      306.0      306.0          0.0        INF 
+   1966      237.0      237.0      237.0      237.0          0.0        INF 
+   1967      809.0      809.0      809.0      809.0          0.0        INF 
+   1968       98.0       98.0       98.0       98.0          0.0        INF 
+   1969      124.0      124.0      124.0      124.0          0.0        INF 
+   1970      337.0      337.0      337.0      337.0          0.0        INF 
+   1971      269.0      269.0      269.0      269.0          0.0        INF 
+1
+
+
+
+ End PeakFQ analysis.
+   Stations processed :       1
+   Number of errors   :       0
+   Stations skipped   :       0
+   Station years      :      31
+
+
+Data records may have been ignored for the stations listed below.               
+(Card type must be Y, Z, N, H, I, 2, 3, 4,  or *.)                              
+(2, 4, and * records are ignored.)                                              
+                                                                                
+ For the station below, the following records were ignored:                     
+                                                                                
+ FINISHED PROCESSING STATION:  06831500       USGS FRENCHMAN CREEK NEAR IMPERIAL
+                                                                                
+                                                                                
+ For the station below, the following records were ignored:                     
+                                                                                
+ FINISHED PROCESSING STATION:                                                   
+                                                                                

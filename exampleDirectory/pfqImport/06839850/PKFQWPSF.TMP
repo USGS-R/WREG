@@ -1,0 +1,21 @@
+Verbose
+I ASCI 06839850.TXT
+O File 06839850.PRT
+O Plot Style Graphics
+O Plot Format PNG
+O Additional Watstore 06839850.bcd
+O Export 06839850.exp
+O Empirical 06839850.emp
+Station 06839850
+     Analyze EMA
+     PCPT_Thresh 1952 1970 0 1E+20 Default
+     BegYear 1952
+     EndYear 1970
+     HistPeriod 19
+     SkewOpt Weighted
+     GenSkew 0.4932704
+     SkewSE 0.55
+     LOType MGBT
+     Latitude 40.82639
+     Longitude 100.5236
+     PlotName 06839850

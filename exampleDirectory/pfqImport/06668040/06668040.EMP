@@ -1,0 +1,28 @@
+# US Geological Survey
+# PeakFQ Flood Frequency Analysis, Version 7.1 dated 3/14/2014
+#
+# Analyzed: 02/03/2015 14:30
+#
+# Empirical Frequency Curves
+Station - 06668040  RABBIT CREEK NEAR WHEATLAND, WY                             
+  WaterYr	  RankedQ	   EMAEst	ThreshLow	 ThreshUp	  IntvLow	 IntvHigh
+    1983	      312.0	      0.0474	       0.	      INF
+    1981	      108.0	      0.0951	       0.	      INF
+    1976	       86.0	      0.1427	       0.	      INF
+    1980	       76.0	      0.1903	       0.	      INF
+    1978	       57.0	      0.2380	       0.	      INF
+    1977	       54.0	      0.2856	       0.	      INF
+    1967	       44.0	      0.3333	       0.	      INF
+    1965	       43.0	      0.3809	       0.	      INF
+    1975	       42.0	      0.4285	       0.	      INF
+    1971	       35.0	      0.4762	       0.	      INF
+    1968	       28.0	      0.5238	       0.	      INF
+    1970	       25.0	      0.6191	       0.	      INF
+    1979	       25.0	      0.5715	       0.	      INF
+    1982	       16.0	      0.6667	       0.	      INF
+    1984	       11.0	      0.7144	       0.	      INF
+    1966	        0.0	      0.9526	       0.	      INF
+    1969	        0.0	      0.9049	       0.	      INF
+    1972	        0.0	      0.8573	       0.	      INF
+    1973	        0.0	      0.8097	       0.	      INF
+    1974	        0.0	      0.7620	       0.	      INF

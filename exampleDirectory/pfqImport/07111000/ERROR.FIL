@@ -1,0 +1,562 @@
+ MAIN:Reading Specification file: 
+ V:\CDOT_Flood_Frequency\PeakFQ\Input_files\07111000\PKFQWPSF.TMP               
+                                                                                
+                                                                                
+    
+ Scanning Spec file for stations. Spec file contents:
+   Verbose                                                                      
+                                            
+   I ASCI 07111000.TXT                                                          
+                                            
+   O File 07111000.PRT                                                          
+                                            
+   O Plot Style Graphics                                                        
+                                            
+   O Plot Format PNG                                                            
+                                            
+   O Additional Watstore 07111000.B                                             
+                                            
+   O Export 07111000.EXP                                                        
+                                            
+   O Empirical 07111000.EMP                                                     
+                                            
+   Station 07111000                                                             
+                                            
+        Analyze EMA                                                             
+                                            
+        PCPT_Thresh 1924 2013 0 1E+20  DEFAULT                                  
+                                            
+        PCPT_Thresh 1977 1977 1E+20 1E+20  MISSING                              
+                                            
+        PCPT_Thresh 1983 1994 1E+20 1E+20  MISSING                              
+                                            
+        PCPT_Thresh 2007 2007 1E+20 1E+20  MISSING                              
+                                            
+        BegYear 1924                                                            
+                                            
+        EndYear 2013                                                            
+                                            
+        HistPeriod 90                                                           
+                                            
+        Peak 1995 274          'DWR DATA                                        
+                                            
+        Peak 1996 53          'DWR DATA                                         
+                                            
+        Peak 1997 203          'DWR DATA                                        
+                                            
+        Peak 1998 170          'DWR DATA                                        
+                                            
+        Peak 1999 122          'DWR DATA                                        
+                                            
+        Peak 2000 58          'DWR DATA                                         
+                                            
+        Peak 2001 160          'DWR DATA                                        
+                                            
+        Peak 2002 22.7000007629395          'DWR DATA                           
+                                            
+        Peak 2003 156          'DWR DATA                                        
+                                            
+        Peak 2004 380          'DWR DATA                                        
+                                            
+        Peak 2005 233          'DWR DATA                                        
+                                            
+        Peak 2006 63.2999992370605          'DWR DATA                           
+                                            
+        Peak 2008 189          'DWR DATA                                        
+                                            
+        Peak 2009 127          'DWR DATA                                        
+                                            
+        Peak 2010 153          'DWR DATA                                        
+                                            
+        Peak 2011 182          'DWR DATA                                        
+                                            
+        Peak 2012 50          'DWR DATA                                         
+                                            
+        Peak 2013 67.8000030517578   'DWR DATA                                  
+                                            
+        SkewOpt Weighted                                                        
+                                            
+        GenSkew -0.09808993                                                     
+                                            
+        SkewSE 0.55                                                             
+                                            
+        LOType MGBT                                                             
+                                            
+        Latitude 37.72778                                                       
+                                            
+        Longitude 105.3508                                                      
+                                            
+        PlotName 07111000                                                       
+                                            
+ Finished scan of Spec file.
+ MAIN:Found            1  Stations
+ MAIN:Process Record:'Verbose'
+ MAIN:Process Record:'I ASCI 07111000.TXT'
+ MAIN:Got I, Remaining:'ASCI 07111000.TXT'
+ OPNINP:Successful Open Watstore file:'07111000.TXT'
+ MAIN:Process Record:'O File 07111000.PRT'
+ MAIN:Got O, Remaining:'FILE 07111000.PRT'
+ OPENOUT:Opened Output File:'07111000.PRT'
+ MAIN:Process Record:'O Plot Style Graphics'
+ MAIN:Got O, Remaining:'PLOT STYLE GRAPHICS'
+ MAIN:Process Record:'O Plot Format PNG'
+ MAIN:Got O, Remaining:'PLOT FORMAT PNG'
+ MAIN:Process Record:'O Additional Watstore 07111000.B'
+ MAIN:Got O, Remaining:'ADDITIONAL WATSTORE 07111000.B'
+ MAIN:Process Record:'O Export 07111000.EXP'
+ MAIN:Got O, Remaining:'EXPORT 07111000.EXP'
+ OPENOUT:Opened EXPORT Output File:'07111000.EXP'
+ MAIN:Process Record:'O Empirical 07111000.EMP'
+ MAIN:Got O, Remaining:'EMPIRICAL 07111000.EMP'
+ OPENOUT:Opened EMPIRICAL Output File:'07111000.EMP'
+ MAIN:Process Record:'Station 07111000'
+ MAIN:Got STATION, Remaining:'07111000'
+ MAIN:Assigned 07111000        to index            1  of STASPECS
+ MAIN:Process RecordX:'     ANALYZE EMA'
+ MAIN:Add Record To Station Specs
+ MAIN:LNSPECS:           1
+ MAIN:Assign spec:'ANALYZE EMA'
+ MAIN:Process RecordX:'     PCPT_THRESH 1924 2013 0 1E+20  DEFAULT'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           2
+ MAIN:Assign spec:'PCPT_THRESH 1924 2013 0 1E+20  DEFAULT'
+ MAIN:Process RecordX:'     PCPT_THRESH 1977 1977 1E+20 1E+20  MISSING'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           3
+ MAIN:Assign spec:'PCPT_THRESH 1977 1977 1E+20 1E+20  MISSING'
+ MAIN:Process RecordX:'     PCPT_THRESH 1983 1994 1E+20 1E+20  MISSING'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           4
+ MAIN:Assign spec:'PCPT_THRESH 1983 1994 1E+20 1E+20  MISSING'
+ MAIN:Process RecordX:'     PCPT_THRESH 2007 2007 1E+20 1E+20  MISSING'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           5
+ MAIN:Assign spec:'PCPT_THRESH 2007 2007 1E+20 1E+20  MISSING'
+ MAIN:Process RecordX:'     BEGYEAR 1924'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           6
+ MAIN:Assign spec:'BEGYEAR 1924'
+ MAIN:Process RecordX:'     ENDYEAR 2013'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           7
+ MAIN:Assign spec:'ENDYEAR 2013'
+ MAIN:Process RecordX:'     HISTPERIOD 90'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           8
+ MAIN:Assign spec:'HISTPERIOD 90'
+ MAIN:Process RecordX:'     PEAK 1995 274          'DWR DATA'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           9
+ MAIN:Assign spec:'PEAK 1995 274          'DWR DATA'
+ MAIN:Process RecordX:'     PEAK 1996 53          'DWR DATA'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          10
+ MAIN:Assign spec:'PEAK 1996 53          'DWR DATA'
+ MAIN:Process RecordX:'     PEAK 1997 203          'DWR DATA'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          11
+ MAIN:Assign spec:'PEAK 1997 203          'DWR DATA'
+ MAIN:Process RecordX:'     PEAK 1998 170          'DWR DATA'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          12
+ MAIN:Assign spec:'PEAK 1998 170          'DWR DATA'
+ MAIN:Process RecordX:'     PEAK 1999 122          'DWR DATA'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          13
+ MAIN:Assign spec:'PEAK 1999 122          'DWR DATA'
+ MAIN:Process RecordX:'     PEAK 2000 58          'DWR DATA'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          14
+ MAIN:Assign spec:'PEAK 2000 58          'DWR DATA'
+ MAIN:Process RecordX:'     PEAK 2001 160          'DWR DATA'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          15
+ MAIN:Assign spec:'PEAK 2001 160          'DWR DATA'
+ MAIN:Process RecordX:'     PEAK 2002 22.7000007629395          'DWR DATA'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          16
+ MAIN:Assign spec:'PEAK 2002 22.7000007629395          'DWR DATA'
+ MAIN:Process RecordX:'     PEAK 2003 156          'DWR DATA'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          17
+ MAIN:Assign spec:'PEAK 2003 156          'DWR DATA'
+ MAIN:Process RecordX:'     PEAK 2004 380          'DWR DATA'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          18
+ MAIN:Assign spec:'PEAK 2004 380          'DWR DATA'
+ MAIN:Process RecordX:'     PEAK 2005 233          'DWR DATA'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          19
+ MAIN:Assign spec:'PEAK 2005 233          'DWR DATA'
+ MAIN:Process RecordX:'     PEAK 2006 63.2999992370605          'DWR DATA'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          20
+ MAIN:Assign spec:'PEAK 2006 63.2999992370605          'DWR DATA'
+ MAIN:Process RecordX:'     PEAK 2008 189          'DWR DATA'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          21
+ MAIN:Assign spec:'PEAK 2008 189          'DWR DATA'
+ MAIN:Process RecordX:'     PEAK 2009 127          'DWR DATA'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          22
+ MAIN:Assign spec:'PEAK 2009 127          'DWR DATA'
+ MAIN:Process RecordX:'     PEAK 2010 153          'DWR DATA'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          23
+ MAIN:Assign spec:'PEAK 2010 153          'DWR DATA'
+ MAIN:Process RecordX:'     PEAK 2011 182          'DWR DATA'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          24
+ MAIN:Assign spec:'PEAK 2011 182          'DWR DATA'
+ MAIN:Process RecordX:'     PEAK 2012 50          'DWR DATA'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          25
+ MAIN:Assign spec:'PEAK 2012 50          'DWR DATA'
+ MAIN:Process RecordX:'     PEAK 2013 67.8000030517578   'DWR DATA'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          26
+ MAIN:Assign spec:'PEAK 2013 67.8000030517578   'DWR DATA'
+ MAIN:Process RecordX:'     SKEWOPT WEIGHTED'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          27
+ MAIN:Assign spec:'SKEWOPT WEIGHTED'
+ MAIN:Process RecordX:'     GENSKEW -0.09808993'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          28
+ MAIN:Assign spec:'GENSKEW -0.09808993'
+ MAIN:Process RecordX:'     SKEWSE 0.55'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          29
+ MAIN:Assign spec:'SKEWSE 0.55'
+ MAIN:Process RecordX:'     LOTYPE MGBT'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          30
+ MAIN:Assign spec:'LOTYPE MGBT'
+ MAIN:Process RecordX:'     LATITUDE 37.72778'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          31
+ MAIN:Assign spec:'LATITUDE 37.72778'
+ MAIN:Process RecordX:'     LONGITUDE 105.3508'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          32
+ MAIN:Assign spec:'LONGITUDE 105.3508'
+ MAIN:Process RecordX:'     PLOTNAME 07111000'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          33
+ MAIN:Assign spec:'PLOTNAME 07111000'
+ MAIN:          33  spec(s) for station 07111000       
+   Spec           1 : 'ANALYZE EMA'
+   Spec           2 : 'PCPT_THRESH 1924 2013 0 1E+20  DEFAULT'
+   Spec           3 : 'PCPT_THRESH 1977 1977 1E+20 1E+20  MISSING'
+   Spec           4 : 'PCPT_THRESH 1983 1994 1E+20 1E+20  MISSING'
+   Spec           5 : 'PCPT_THRESH 2007 2007 1E+20 1E+20  MISSING'
+   Spec           6 : 'BEGYEAR 1924'
+   Spec           7 : 'ENDYEAR 2013'
+   Spec           8 : 'HISTPERIOD 90'
+   Spec           9 : 'PEAK 1995 274          'DWR DATA'
+   Spec          10 : 'PEAK 1996 53          'DWR DATA'
+   Spec          11 : 'PEAK 1997 203          'DWR DATA'
+   Spec          12 : 'PEAK 1998 170          'DWR DATA'
+   Spec          13 : 'PEAK 1999 122          'DWR DATA'
+   Spec          14 : 'PEAK 2000 58          'DWR DATA'
+   Spec          15 : 'PEAK 2001 160          'DWR DATA'
+   Spec          16 : 'PEAK 2002 22.7000007629395          'DWR DATA'
+   Spec          17 : 'PEAK 2003 156          'DWR DATA'
+   Spec          18 : 'PEAK 2004 380          'DWR DATA'
+   Spec          19 : 'PEAK 2005 233          'DWR DATA'
+   Spec          20 : 'PEAK 2006 63.2999992370605          'DWR DATA'
+   Spec          21 : 'PEAK 2008 189          'DWR DATA'
+   Spec          22 : 'PEAK 2009 127          'DWR DATA'
+   Spec          23 : 'PEAK 2010 153          'DWR DATA'
+   Spec          24 : 'PEAK 2011 182          'DWR DATA'
+   Spec          25 : 'PEAK 2012 50          'DWR DATA'
+   Spec          26 : 'PEAK 2013 67.8000030517578   'DWR DATA'
+   Spec          27 : 'SKEWOPT WEIGHTED'
+   Spec          28 : 'GENSKEW -0.09808993'
+   Spec          29 : 'SKEWSE 0.55'
+   Spec          30 : 'LOTYPE MGBT'
+   Spec          31 : 'LATITUDE 37.72778'
+   Spec          32 : 'LONGITUDE 105.3508'
+   Spec          33 : 'PLOTNAME 07111000'
+ Done reading spec file
+ MAIN:calling J407XE...
+ J407XE:IA1:           9  INFORM:           2  MSG1:          14
+ After INPUT - NSYS,NHIST,EMAOPT          58           0           1
+ After UPDATEPEAKS - NSYS,NHIST,EMAOPT          76           0           1
+ SETEMADATA: NTHRESH =           4
+ SETEMADATA: THRBYR,   THREYR,   THRLWR,       THRUPR
+        1924        2013  0.0000000E+00  1.0000000E+20
+        1977        1977  1.0000000E+20  1.0000000E+20
+        1983        1994  1.0000000E+20  1.0000000E+20
+        2007        2007  1.0000000E+20  1.0000000E+20
+ Debug Info for 
+ 07111000       USGS HUERFANO R AT MANZANARES XING, NR REDWING, CO.  1924-1982 *
+  HISTORIC *
+ after WCFAGB, IER=           0
+ 
+ Running EMA for station 
+ 07111000       USGS HUERFANO R AT MANZANARES XING, NR REDWING, CO.  1924-1982 *
+  HISTORIC *
+ calling RUNEMA: NPKS,NSYS,GENSKU,RMSEGS          76          76 -9.8089926E-02
+  0.5500000    
+ 
+ calling EMAFIT with the following input Args:
+ NOBS:          90
+         QLow        QUpr         TLow        TUpr        DType
+        245.0       245.0    0.1000D-98    0.1000D+21     Syst
+        295.0       295.0    0.1000D-98    0.1000D+21     Syst
+        270.0       270.0    0.1000D-98    0.1000D+21     Syst
+        192.0       192.0    0.1000D-98    0.1000D+21     Syst
+        236.0       236.0    0.1000D-98    0.1000D+21     Syst
+        780.0       780.0    0.1000D-98    0.1000D+21     Syst
+        238.0       238.0    0.1000D-98    0.1000D+21     Syst
+        230.0       230.0    0.1000D-98    0.1000D+21     Syst
+        330.0       330.0    0.1000D-98    0.1000D+21     Syst
+        480.0       480.0    0.1000D-98    0.1000D+21     Syst
+       1650.0      1650.0    0.1000D-98    0.1000D+21     Syst
+       1400.0      1400.0    0.1000D-98    0.1000D+21     Syst
+        920.0       920.0    0.1000D-98    0.1000D+21     Syst
+        428.0       428.0    0.1000D-98    0.1000D+21     Syst
+        272.0       272.0    0.1000D-98    0.1000D+21     Syst
+        153.0       153.0    0.1000D-98    0.1000D+21     Syst
+        291.0       291.0    0.1000D-98    0.1000D+21     Syst
+        792.0       792.0    0.1000D-98    0.1000D+21     Syst
+        511.0       511.0    0.1000D-98    0.1000D+21     Syst
+        200.0       200.0    0.1000D-98    0.1000D+21     Syst
+        336.0       336.0    0.1000D-98    0.1000D+21     Syst
+        780.0       780.0    0.1000D-98    0.1000D+21     Syst
+        700.0       700.0    0.1000D-98    0.1000D+21     Syst
+        380.0       380.0    0.1000D-98    0.1000D+21     Syst
+        261.0       261.0    0.1000D-98    0.1000D+21     Syst
+        222.0       222.0    0.1000D-98    0.1000D+21     Syst
+        114.0       114.0    0.1000D-98    0.1000D+21     Syst
+      10200.0     10200.0    0.1000D-98    0.1000D+21     Syst
+        778.0       778.0    0.1000D-98    0.1000D+21     Syst
+         90.0        90.0    0.1000D-98    0.1000D+21     Syst
+         98.0        98.0    0.1000D-98    0.1000D+21     Syst
+        148.0       148.0    0.1000D-98    0.1000D+21     Syst
+         58.0        58.0    0.1000D-98    0.1000D+21     Syst
+        960.0       960.0    0.1000D-98    0.1000D+21     Syst
+        160.0       160.0    0.1000D-98    0.1000D+21     Syst
+         99.0        99.0    0.1000D-98    0.1000D+21     Syst
+        149.0       149.0    0.1000D-98    0.1000D+21     Syst
+        182.0       182.0    0.1000D-98    0.1000D+21     Syst
+        102.0       102.0    0.1000D-98    0.1000D+21     Syst
+        116.0       116.0    0.1000D-98    0.1000D+21     Syst
+         62.0        62.0    0.1000D-98    0.1000D+21     Syst
+        228.0       228.0    0.1000D-98    0.1000D+21     Syst
+       2420.0      2420.0    0.1000D-98    0.1000D+21     Syst
+       1060.0      1060.0    0.1000D-98    0.1000D+21     Syst
+        355.0       355.0    0.1000D-98    0.1000D+21     Syst
+        190.0       190.0    0.1000D-98    0.1000D+21     Syst
+        162.0       162.0    0.1000D-98    0.1000D+21     Syst
+         64.0        64.0    0.1000D-98    0.1000D+21     Syst
+       6520.0      6520.0    0.1000D-98    0.1000D+21     Syst
+        350.0       350.0    0.1000D-98    0.1000D+21     Syst
+         44.0        44.0    0.1000D-98    0.1000D+21     Syst
+        120.0       120.0    0.1000D-98    0.1000D+21     Syst
+        112.0       112.0    0.1000D-98    0.1000D+21     Syst
+          0.0************    0.1000D+21    0.1000D+21     Cens
+         64.0        64.0    0.1000D-98    0.1000D+21     Syst
+        188.0       188.0    0.1000D-98    0.1000D+21     Syst
+        216.0       216.0    0.1000D-98    0.1000D+21     Syst
+         96.0        96.0    0.1000D-98    0.1000D+21     Syst
+        102.0       102.0    0.1000D-98    0.1000D+21     Syst
+          0.0************    0.1000D+21    0.1000D+21     Cens
+          0.0************    0.1000D+21    0.1000D+21     Cens
+          0.0************    0.1000D+21    0.1000D+21     Cens
+          0.0************    0.1000D+21    0.1000D+21     Cens
+          0.0************    0.1000D+21    0.1000D+21     Cens
+          0.0************    0.1000D+21    0.1000D+21     Cens
+          0.0************    0.1000D+21    0.1000D+21     Cens
+          0.0************    0.1000D+21    0.1000D+21     Cens
+          0.0************    0.1000D+21    0.1000D+21     Cens
+          0.0************    0.1000D+21    0.1000D+21     Cens
+          0.0************    0.1000D+21    0.1000D+21     Cens
+          0.0************    0.1000D+21    0.1000D+21     Cens
+        274.0       274.0    0.1000D-98    0.1000D+21     Syst
+         53.0        53.0    0.1000D-98    0.1000D+21     Syst
+        203.0       203.0    0.1000D-98    0.1000D+21     Syst
+        170.0       170.0    0.1000D-98    0.1000D+21     Syst
+        122.0       122.0    0.1000D-98    0.1000D+21     Syst
+         58.0        58.0    0.1000D-98    0.1000D+21     Syst
+        160.0       160.0    0.1000D-98    0.1000D+21     Syst
+         22.7        22.7    0.1000D-98    0.1000D+21     Syst
+        156.0       156.0    0.1000D-98    0.1000D+21     Syst
+        380.0       380.0    0.1000D-98    0.1000D+21     Syst
+        233.0       233.0    0.1000D-98    0.1000D+21     Syst
+         63.3        63.3    0.1000D-98    0.1000D+21     Syst
+          0.0************    0.1000D+21    0.1000D+21     Cens
+        189.0       189.0    0.1000D-98    0.1000D+21     Syst
+        127.0       127.0    0.1000D-98    0.1000D+21     Syst
+        153.0       153.0    0.1000D-98    0.1000D+21     Syst
+        182.0       182.0    0.1000D-98    0.1000D+21     Syst
+         50.0        50.0    0.1000D-98    0.1000D+21     Syst
+         67.8        67.8    0.1000D-98    0.1000D+21     Syst
+ REGSTD:   1.00000000000000     
+ GENSDMSE:  -999.000000000000     
+ REGSKEW: -9.808992594480515E-002
+ REGMSE:  0.302500009536743     
+ GBTYPE:MGBT
+ GBTHRSH  -99.0000000000000     
+ 
+ RESULTS
+ WRCMOM-1  0.23579466D+01  0.22114337D+00  0.59096716D+00
+ WRCMOM-2  0.23579466D+01  0.22114337D+00  0.10239922D+01
+ WRCMOM-3  0.23579466D+01  0.22114337D+00  0.62783914D+00
+ 
+ Moments:   2.357947      0.4702588      0.5909672    
+ 
+ Plotting Positions of peaks
+ Plot Pos      Obs. Q
+  0.3766083       245.0000    
+  0.2986768       295.0000    
+  0.3506312       270.0000    
+  0.5064943       192.0000    
+  0.4025855       236.0000    
+  0.1428137       780.0000    
+  0.3895969       238.0000    
+  0.4285627       230.0000    
+  0.2856882       330.0000    
+  0.1947680       480.0000    
+  5.1893495E-02   1650.000    
+  6.4882085E-02   1400.000    
+  0.1038479       920.0000    
+  0.2077566       428.0000    
+  0.3376426       272.0000    
+  0.6623574       153.0000    
+  0.3116654       291.0000    
+  0.1168365       792.0000    
+  0.1817794       511.0000    
+  0.4935057       200.0000    
+  0.2726996       336.0000    
+  0.1298251       780.0000    
+  0.1687908       700.0000    
+  0.2337338       380.0000    
+  0.3636197       261.0000    
+  0.4545399       222.0000    
+  0.7532776       114.0000    
+  1.2927710E-02   10200.00    
+  0.1558022       778.0000    
+  0.8441978       90.00000    
+  0.8182206       98.00000    
+  0.6883346       148.0000    
+  0.9351179       58.00000    
+  9.0859279E-02   960.0000    
+  0.6233916       160.0000    
+  0.8052320       99.00000    
+  0.6753460       149.0000    
+  0.5714372       182.0000    
+  0.7922434       102.0000    
+  0.7402890       116.0000    
+  0.9091407       62.00000    
+  0.4415513       228.0000    
+  3.8904898E-02   2420.000    
+  7.7870682E-02   1060.000    
+  0.2467224       355.0000    
+  0.5194829       190.0000    
+  0.5974144       162.0000    
+  0.8831635       64.00000    
+  2.5916304E-02   6520.000    
+  0.2597110       350.0000    
+  0.9740837       44.00000    
+  0.7273004       120.0000    
+  0.7662662       112.0000    
+  0.8701749       64.00000    
+  0.5454601       188.0000    
+  0.4675285       216.0000    
+  0.8312092       96.00000    
+  0.7792548       102.0000    
+  0.3246540       274.0000    
+  0.9481065       53.00000    
+  0.4805171       203.0000    
+  0.5844259       170.0000    
+  0.7143118       122.0000    
+  0.9221293       58.00000    
+  0.6104031       160.0000    
+  0.9870723       22.70000    
+  0.6363803       156.0000    
+  0.2207452       380.0000    
+  0.4155741       233.0000    
+  0.8961521       63.30000    
+  0.5324715       189.0000    
+  0.7013232       127.0000    
+  0.6493688       153.0000    
+  0.5584487       182.0000    
+  0.9610951       50.00000    
+  0.8571863       67.80000    
+ 
+ Threshold positions
+ Plot Pos     Threshold    NumPeaks
+   1.00000000000000       -99.0000000000000                0
+  0.000000000000000E+000   20.0000000087036               14
+ 
+   Prob       EMA Est.        CL Low       CL High
+ 0.0001        14.550         4.327        34.696         0.050
+ 0.0005        17.543         6.747        36.435         0.033
+ 0.0010        19.320         8.246        37.546         0.027
+ 0.0020        21.539        10.159        39.006         0.021
+ 0.0050        25.458        13.601        41.769         0.015
+ 0.0100        29.551        17.236        44.909         0.011
+ 0.0200        35.199        22.272        49.682         0.007
+ 0.0250        37.493        24.319        51.770         0.007
+ 0.0400        43.408        29.604        57.545         0.005
+ 0.0500        46.887        32.718        61.191         0.004
+ 0.1000        62.060        46.311        78.815         0.003
+ 0.2000        90.128        70.403       114.745         0.003
+ 0.3000       120.786        94.703       155.001         0.003
+ 0.3333       132.196       103.450       170.146         0.003
+ 0.4000       157.658       122.700       204.298         0.003
+ 0.4296       170.344       132.211       221.506         0.003
+ 0.5000       205.058       158.104       269.287         0.003
+ 0.5708       248.783       190.539       330.991         0.004
+ 0.6000       270.375       206.480       362.118         0.004
+ 0.7000       369.100       278.504       510.434         0.004
+ 0.8000       542.382       400.412       797.140         0.005
+ 0.9000       960.453       671.275      1644.461         0.009
+ 0.9500      1592.431      1035.992      3360.613         0.014
+ 0.9600      1855.923      1176.817      4229.950         0.016
+ 0.9750      2531.996      1516.216      6868.699         0.021
+ 0.9800      2920.080      1699.577      8646.542         0.024
+ 0.9900      4473.485      2373.667     17668.785         0.035
+ 0.9950      6715.563      3232.535     36063.609         0.049
+ 0.9980     11215.967      4720.225     92398.573         0.072
+ 0.9990     16292.634      6174.617    187908.196         0.093
+ 0.9995     23422.950      7976.670    381540.000         0.116
+ 0.9999     52696.581     13910.269   1965640.316         0.184
+ After INPUT - NSYS,NHIST,EMAOPT           0           0           1
+ After UPDATEPEAKS - NSYS,NHIST,EMAOPT           0           0           1
+ Closing output file V:\CDOT_Flood_Frequency\PeakFQ\Input_files\07111000\0711100
+ 0.PRT

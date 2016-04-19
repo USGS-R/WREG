@@ -1,0 +1,29 @@
+#---------------------------- Published Data -------------------------------
+#This system is maintained by the Colorado Division of Water Resources.
+#Contact: Colorado Division of Water Resources (303) 866-3581
+#
+#Data is returned in TAB delimited format. Data miners may find help on automating
+#queries and formatting parameters at http://www.dwr.state.co.us/help
+#
+#Gaging Station: HUERFANO R AT MANZANARES XING, NR REDWING, CO
+#Historic Peaks Data since 1991
+#Retrieved: 1/29/2014 09:07
+#-----------------------------------------------------------------------------
+Station	Water Year	Peak Q (CFS)	Peak Q Date	Peak Q CommentPeak Stage (FT)	Peak Stage Date	Peak Stage Comment
+HURREDCO	1995	274	06/18/1995 02:30		4.24	06/18/1995 02:30	
+HURREDCO	1996	53.0	05/17/1996 05:00		3.35	12/19/1995 00:00	no time
+HURREDCO	1997	203	06/07/1997 00:45		3.71	06/07/1997 00:45	
+HURREDCO	1998	170	07/07/1998 22:00		3.47	07/07/1998 22:00	
+HURREDCO	1999	122	07/09/1999 00:15		3.33	07/09/1999 00:15	
+HURREDCO	2000	58.0	05/06/2000 01:00		2.82	05/06/2000 01:00	
+HURREDCO	2001	160	05/20/2001 00:15		3.36	05/20/2001 00:15	
+HURREDCO	2002	22.7	09/11/2002 20:15		2.44	09/11/2002 20:15	Ice affected max too 3.3 GH
+HURREDCO	2003	156	05/31/2003 01:15		3.42	05/31/2003 01:15	
+HURREDCO	2004	380	09/20/2004 03:30		4.25	09/20/2004 03:30	
+HURREDCO	2005	233	05/23/2005 22:45		3.43	05/23/2005 22:45	
+HURREDCO	2006	63.3	07/09/2006 03:45		2.43	07/09/2006 03:45	
+HURREDCO	2008	189	09/01/2008 12:30		3.03	09/01/2008 12:30	
+HURREDCO	2009	127	06/26/2009 06:45		3.89	06/26/2009 06:45	
+HURREDCO	2010	153	06/06/2010 21:30		4.00	06/06/2010 21:30	
+HURREDCO	2011	182	08/28/2011 18:00		4.10	08/28/2011 18:00	
+HURREDCO	2012	50.0	05/23/2012 02:45		3.47	05/23/2012 02:45	

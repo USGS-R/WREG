@@ -1,0 +1,39 @@
+# US Geological Survey
+# PeakFQ Flood Frequency Analysis, Version 7.1 dated 3/14/2014
+#
+# Analyzed:  02/03/2015 10:14
+#
+# Summary of input parameters
+#
+STATION	OPTION	BEGYR	ENDYR	SKEWOPT	GENSKEW	SKEWSTD	SKEWMSE	LO OUT	LO TEST	HI OUT	GAGEB	URB/REG	LATITUDE	LONGITUDE
+06838200          	EMA 	1961	1999	WEIGHTED   	 0.128	 0.550	 0.303	      0.	MGBT	      0.	      0.	NO 	  40.234	 100.427
+#
+# Perception Thresholds
+#
+Station	OrderNo	Begin	End	Low	High	Comment
+06838200            	   1	1961	1999	      0.	 0.1E+21	DEFAULT                                                                         
+06838200            	   2	1980	1980	     45.	 0.1E+21	PEAK < STATED VALUE                                                             
+06838200            	   3	1985	1985	      5.	 0.1E+21	PEAK < STATED VALUE                                                             
+06838200            	   4	1986	1986	      5.	 0.1E+21	PEAK < STATED VALUE                                                             
+06838200            	   5	1987	1987	      5.	 0.1E+21	PEAK < STATED VALUE                                                             
+06838200            	   6	1989	1989	     50.	 0.1E+21	PEAK < STATED VALUE                                                             
+06838200            	   7	1991	1991	      5.	 0.1E+21	PEAK < STATED VALUE                                                             
+06838200            	   8	1996	1996	     50.	 0.1E+21	PEAK < STATED VALUE                                                             
+06838200            	   9	1997	1997	     50.	 0.1E+21	PEAK < STATED VALUE                                                             
+06838200            	  10	1998	1998	     50.	 0.1E+21	PEAK < STATED VALUE                                                             
+06838200            	  11	1999	1999	     50.	 0.1E+21	PEAK < STATED VALUE                                                             
+06838200            	  12	1994	1995	********	 0.1E+21	MISSING                                                                         
+#
+# Interval Data
+#
+Station	OrderNo	Date	Low	High	Comment
+06838200            	   1	1980	      0.	     45.	PEAK < STATED VALUE                                                             
+06838200            	   2	1985	      0.	      5.	PEAK < STATED VALUE                                                             
+06838200            	   3	1986	      0.	      5.	PEAK < STATED VALUE                                                             
+06838200            	   4	1987	      0.	      5.	PEAK < STATED VALUE                                                             
+06838200            	   5	1989	      0.	     50.	PEAK < STATED VALUE                                                             
+06838200            	   6	1991	      0.	      5.	PEAK < STATED VALUE                                                             
+06838200            	   7	1996	      0.	     50.	PEAK < STATED VALUE                                                             
+06838200            	   8	1997	      0.	     50.	PEAK < STATED VALUE                                                             
+06838200            	   9	1998	      0.	     50.	PEAK < STATED VALUE                                                             
+06838200            	  10	1999	      0.	     50.	PEAK < STATED VALUE                                                             

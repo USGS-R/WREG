@@ -1,0 +1,21 @@
+Verbose
+I ASCI 06668040.TXT
+O File 06668040.PRT
+O Plot Style Graphics
+O Plot Format PNG
+O Additional Watstore 06668040.bcd
+O Export 06668040.exp
+O Empirical 06668040.emp
+Station 06668040
+     Analyze EMA
+     PCPT_Thresh 1965 1984 0 1E+20 Default
+     BegYear 1965
+     EndYear 1984
+     HistPeriod 20
+     SkewOpt Weighted
+     GenSkew -0.007071267
+     SkewSE 0.55
+     LOType MGBT
+     Latitude 42.21584
+     Longitude 105.2286
+     PlotName 06668040

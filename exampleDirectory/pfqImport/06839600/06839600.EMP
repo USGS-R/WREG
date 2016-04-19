@@ -1,0 +1,27 @@
+# US Geological Survey
+# PeakFQ Flood Frequency Analysis, Version 7.1 dated 3/14/2014
+#
+# Analyzed: 02/03/2015 10:19
+#
+# Empirical Frequency Curves
+Station - 06839600  FRAZIER CREEK NEAR MAYWOOD, NEBR.                           
+  WaterYr	  RankedQ	   EMAEst	ThreshLow	 ThreshUp	  IntvLow	 IntvHigh
+    1956	    11200.0	      0.0498	       0.	      INF
+    1967	     9370.0	      0.0998	       0.	      INF
+    1969	     4150.0	      0.1498	       0.	      INF
+    1957	     1790.0	      0.1999	       0.	      INF
+    1963	     1730.0	      0.2499	       0.	      INF
+    1961	     1630.0	      0.2999	       0.	      INF
+    1962	     1500.0	      0.3499	       0.	      INF
+    1958	      860.0	      0.4000	       0.	      INF
+    1955	      594.0	      0.4500	       0.	      INF
+    1964	      460.0	      0.5000	       0.	      INF
+    1966	      440.0	      0.6000	       0.	      INF
+    1970	      440.0	      0.5500	       0.	      INF
+    1965	      380.0	      0.6501	       0.	      INF
+    1953	      343.0	      0.7001	       0.	      INF
+    1960	      333.0	      0.7501	       0.	      INF
+    1954	      260.0	      0.8001	       0.	      INF
+    1959	      180.0	      0.8502	       0.	      INF
+    1968	      100.0	      0.9002	       0.	      INF
+    1952	       67.0	      0.9502	       0.	      INF

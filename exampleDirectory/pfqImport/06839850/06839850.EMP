@@ -1,0 +1,27 @@
+# US Geological Survey
+# PeakFQ Flood Frequency Analysis, Version 7.1 dated 3/14/2014
+#
+# Analyzed: 02/03/2015 10:21
+#
+# Empirical Frequency Curves
+Station - 06839850  FOX CREEK NORTH OF CURTIS, NEBR.                            
+  WaterYr	  RankedQ	   EMAEst	ThreshLow	 ThreshUp	  IntvLow	 IntvHigh
+    1959	     2080.0	      0.0498	       0.	      INF
+    1957	     1320.0	      0.0998	       0.	      INF
+    1962	     1210.0	      0.1498	       0.	      INF
+    1967	     1040.0	      0.1999	       0.	      INF
+    1961	      630.0	      0.2499	       0.	      INF
+    1960	      600.0	      0.2999	       0.	      INF
+    1956	      420.0	      0.3499	       0.	      INF
+    1966	      223.0	      0.4000	       0.	      INF
+    1968	      167.0	      0.4500	       0.	      INF
+    1964	      114.0	      0.5000	       0.	      INF
+    1965	      107.0	      0.5500	       0.	      INF
+    1954	      100.0	      0.6000	       0.	      INF
+    1969	       55.0	      0.6501	       0.	      INF
+    1963	       24.0	      0.7001	       0.	      INF
+    1958	       10.0	      0.8001	       0.	      INF
+    1970	       10.0	      0.7501	       0.	      INF
+    1952	        2.0	      0.8502	       0.	      INF
+    1953	        0.0	      0.9502	       0.	      INF
+    1955	        0.0	      0.9002	       0.	      INF

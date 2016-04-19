@@ -1,0 +1,342 @@
+1
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.002.000
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 10:06
+
+                         --- PROCESSING OPTIONS ---  
+
+                      Plot option         = Graphics device   
+                      Basin char output   = WATSTORE      
+                      Print option        = Yes
+                      Debug print         = No 
+                      Input peaks listing = Long 
+                      Input peaks format  = WATSTORE peak file  
+
+                      Input files used:
+                         peaks (ascii)  - C:\Users\mkohn\Desktop\06836000\06836000.TXT                                    
+                         specifications - C:\Users\mkohn\Desktop\06836000\PKFQWPSF.TMP                                    
+                      Output file(s): 
+                         main - C:\Users\mkohn\Desktop\06836000\06836000.PRT                                    
+                         bcd  - C:\Users\mkohn\Desktop\06836000\06836000.BCD                                    
+  
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.001
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 10:06
+  
+           Station - 06836000  BLACKWOOD CREEK NEAR CULBERTSON, NEBR.           
+
+
+                     I N P U T   D A T A   S U M M A R Y
+
+                Number of peaks in record            =       42
+                Peaks not used in analysis           =        0
+                Systematic peaks in analysis         =       41
+                Historic peaks in analysis           =        1
+                Beginning Year                       =     1935
+                Ending Year                          =     1986
+                Historical Period Length             =       52
+                Generalized skew                     =    0.133
+                     Standard error                  =    0.550
+                     Mean Square error               =    0.303
+                Skew option                          =   WEIGHTED  
+                Gage base discharge                  =      0.0
+                User supplied high outlier threshold =   --           
+                User supplied PILF (LO) criterion    =   --           
+                Plotting position parameter          =     0.00
+                Type of analysis                            EMA
+                PILF (LO) Test Method                      MGBT
+                Perception Thresholds:
+                     Begin     End       Low     High     Comment
+                      1935    1986       0.0       INF     DEFAULT                                                                         
+                      1935    1945    5300.0       INF     HISTORIC 1                                                                      
+                Interval Data                    =   None Specified
+
+
+
+  *********  NOTICE  --  Preliminary machine computations.        *********     
+  *********  User responsible for assessment and interpretation.  *********     
+
+    EMA002W-CONFIDENCE INTERVALS ARE NOT EXACT IF HISTORIC PERIOD > 0
+
+
+                                        Kendall's Tau Parameters
+
+                                                        MEDIAN   No. of
+                                       TAU    P-VALUE    SLOPE   PEAKS
+                                ---------------------------------------
+             SYSTEMATIC RECORD     -0.200      0.067     -8.107    41
+
+
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.002
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 10:06
+  
+           Station - 06836000  BLACKWOOD CREEK NEAR CULBERTSON, NEBR.           
+
+
+           ANNUAL FREQUENCY CURVE PARAMETERS -- LOG-PEARSON TYPE III 
+
+                                    LOGARITHMIC         
+                         -------------------------------
+                                      STANDARD          
+                            MEAN     DEVIATION     SKEW 
+                         -------------------------------
+ EMA W/O REG. INFO         2.5874      0.4585     -0.094
+ EMA W/REG. INFO           2.5871      0.4581     -0.023
+
+ EMA ESTIMATE OF MSE OF SKEW W/O REG. INFO (AT-SITE)      0.1193
+ EMA ESTIMATE OF MSE OF SKEW W/SYSTEMATIC ONLY (AT-SITE)  0.1308
+
+
+
+    ANNUAL FREQUENCY CURVE -- DISCHARGES AT SELECTED EXCEEDANCE PROBABILITIES
+
+   ANNUAL   EMA W/    EMA W/O     <------ FOR EMA ESTIMATES ------->
+EXCEEDANCE  REG INFO  REG INFO    VARIANCE  95% CONFIDENCE INTERVALS
+PROBABILITY ESTIMATE  ESTIMATE     OF EST.       LOWER       UPPER
+
+   0.9950      25.0      23.2      0.0343         6.1         48.1
+   0.9900      32.6      30.8      0.0259         9.9         58.3
+   0.9500      67.7      66.2      0.0123        32.5        104.6
+   0.9000      99.8      98.9      0.0088        56.7        147.3
+   0.8000     159.2     159.9      0.0067       102.9        227.7
+   0.6667     246.1     248.8      0.0058       169.0        347.6
+   0.5000     388.0     393.2      0.0056       273.5        549.0
+   0.4292     468.3     474.4      0.0057       331.6        666.1
+   0.2000     940.0     944.7      0.0069       659.6       1413.0
+   0.1000    1490.     1480.       0.0092      1014.0       2462.0
+   0.0400    2430.     2373.       0.0143      1559.0       4810.0
+   0.0200    3330.     3206.       0.0199      2019.0       7746.0
+   0.0100    4418.     4192.       0.0271      2510.0      12220.0
+   0.0050    5720.     5347.       0.0360      3027.0      18960.0
+   0.0020    7817.     7163.       0.0502      3741.0      33220.0
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.003
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 10:06
+  
+           Station - 06836000  BLACKWOOD CREEK NEAR CULBERTSON, NEBR.           
+
+
+                       I N P U T   D A T A   L I S T I N G
+
+
+    WATER       PEAK   PEAKFQ   <--- Intervals --->
+     YEAR      VALUE    CODES     LOW         HIGH   REMARKS
+    -1935     5300.0  H    
+     1946      394.0       
+     1947     1600.0       
+     1948      595.0       
+     1949      238.0       
+     1950      643.0       
+     1951     1360.0       
+     1952      100.0       
+     1953      134.0       
+     1954      205.0       
+     1955     1650.0       
+     1956     1560.0       
+     1957      406.0       
+     1958      383.0       
+     1959      664.0       
+     1960     1630.0       
+     1961       79.0       
+     1962     1250.0       
+     1963      144.0       
+     1964      251.0       
+     1965      884.0       
+     1966      176.0       
+     1967      307.0       
+     1968      204.0       
+     1969      470.0       
+     1970      300.0       
+     1971      166.0       
+     1972      618.0       
+     1973      468.0       
+     1974     1260.0       
+     1975      877.0       
+     1976      912.0       
+     1977      723.0       
+     1978      276.0       
+     1979      128.0       
+     1980      184.0       
+     1981      465.0       
+     1982      373.0       
+     1983       55.0       
+     1984      277.0       
+     1985      145.0       
+     1986       26.0       
+
+
+        Explanation of peak discharge qualification codes
+
+       PeakFQ    NWIS
+        CODE     CODE   DEFINITION
+
+          D        3    Dam failure, non-recurrent flow anomaly
+          G        8    Discharge greater than stated value
+          X       3+8   Both of the above
+          L        4    Discharge less than stated value
+          K     6 OR C  Known effect of regulation or urbanization
+          H        7    Historic peak
+
+          -  Minus-flagged discharge -- Not used in computation
+                -8888.0 -- No discharge value given
+          -  Minus-flagged water year -- Historic peak used in computation
+
+
+
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.004
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 10:06
+  
+           Station - 06836000  BLACKWOOD CREEK NEAR CULBERTSON, NEBR.           
+
+
+   EMPIRICAL FREQUENCY CURVES -- HIRSCH-STEDINGER PLOTTING POSITIONS
+
+   WATER     RANKED      EMA         INTERVALS
+    YEAR   DISCHARGE   ESTIMATE      LOW      HIGH
+   -1935     5300.0     0.0096
+    1955     1650.0     0.0425
+    1960     1630.0     0.0658
+    1947     1600.0     0.0892
+    1956     1560.0     0.1125
+    1951     1360.0     0.1359
+    1974     1260.0     0.1593
+    1962     1250.0     0.1826
+    1976      912.0     0.2060
+    1965      884.0     0.2293
+    1975      877.0     0.2527
+    1977      723.0     0.2760
+    1959      664.0     0.2994
+    1950      643.0     0.3228
+    1972      618.0     0.3461
+    1948      595.0     0.3695
+    1969      470.0     0.3928
+    1973      468.0     0.4162
+    1981      465.0     0.4395
+    1957      406.0     0.4629
+    1946      394.0     0.4863
+    1958      383.0     0.5096
+    1982      373.0     0.5330
+    1967      307.0     0.5563
+    1970      300.0     0.5797
+    1984      277.0     0.6030
+    1978      276.0     0.6264
+    1964      251.0     0.6498
+    1949      238.0     0.6731
+    1954      205.0     0.6965
+    1968      204.0     0.7198
+    1980      184.0     0.7432
+    1966      176.0     0.7665
+    1971      166.0     0.7899
+    1985      145.0     0.8133
+    1963      144.0     0.8366
+    1953      134.0     0.8600
+    1979      128.0     0.8833
+    1952      100.0     0.9067
+    1961       79.0     0.9300
+    1983       55.0     0.9534
+    1986       26.0     0.9768
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.005
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 10:06
+  
+           Station - 06836000  BLACKWOOD CREEK NEAR CULBERTSON, NEBR.           
+
+
+                         EMA REPRESENTATION OF DATA
+
+  WATER <----- OBSERVED-----><-------- EMA -------><-PERCEPTION THRESHOLDS->
+   YEAR    Q_LOWER    Q_UPPER    Q_LOWER    Q_UPPER        LOWER       UPPER
+   1935     5300.0     5300.0     5300.0     5300.0       5300.0        INF 
+   1936        0.0     5300.0        0.0     5300.0       5300.0        INF 
+   1937        0.0     5300.0        0.0     5300.0       5300.0        INF 
+   1938        0.0     5300.0        0.0     5300.0       5300.0        INF 
+   1939        0.0     5300.0        0.0     5300.0       5300.0        INF 
+   1940        0.0     5300.0        0.0     5300.0       5300.0        INF 
+   1941        0.0     5300.0        0.0     5300.0       5300.0        INF 
+   1942        0.0     5300.0        0.0     5300.0       5300.0        INF 
+   1943        0.0     5300.0        0.0     5300.0       5300.0        INF 
+   1944        0.0     5300.0        0.0     5300.0       5300.0        INF 
+   1945        0.0     5300.0        0.0     5300.0       5300.0        INF 
+   1946      394.0      394.0      394.0      394.0          0.0        INF 
+   1947     1600.0     1600.0     1600.0     1600.0          0.0        INF 
+   1948      595.0      595.0      595.0      595.0          0.0        INF 
+   1949      238.0      238.0      238.0      238.0          0.0        INF 
+   1950      643.0      643.0      643.0      643.0          0.0        INF 
+   1951     1360.0     1360.0     1360.0     1360.0          0.0        INF 
+   1952      100.0      100.0      100.0      100.0          0.0        INF 
+   1953      134.0      134.0      134.0      134.0          0.0        INF 
+   1954      205.0      205.0      205.0      205.0          0.0        INF 
+   1955     1650.0     1650.0     1650.0     1650.0          0.0        INF 
+   1956     1560.0     1560.0     1560.0     1560.0          0.0        INF 
+   1957      406.0      406.0      406.0      406.0          0.0        INF 
+   1958      383.0      383.0      383.0      383.0          0.0        INF 
+   1959      664.0      664.0      664.0      664.0          0.0        INF 
+   1960     1630.0     1630.0     1630.0     1630.0          0.0        INF 
+   1961       79.0       79.0       79.0       79.0          0.0        INF 
+   1962     1250.0     1250.0     1250.0     1250.0          0.0        INF 
+   1963      144.0      144.0      144.0      144.0          0.0        INF 
+   1964      251.0      251.0      251.0      251.0          0.0        INF 
+   1965      884.0      884.0      884.0      884.0          0.0        INF 
+   1966      176.0      176.0      176.0      176.0          0.0        INF 
+   1967      307.0      307.0      307.0      307.0          0.0        INF 
+   1968      204.0      204.0      204.0      204.0          0.0        INF 
+   1969      470.0      470.0      470.0      470.0          0.0        INF 
+   1970      300.0      300.0      300.0      300.0          0.0        INF 
+   1971      166.0      166.0      166.0      166.0          0.0        INF 
+   1972      618.0      618.0      618.0      618.0          0.0        INF 
+   1973      468.0      468.0      468.0      468.0          0.0        INF 
+   1974     1260.0     1260.0     1260.0     1260.0          0.0        INF 
+   1975      877.0      877.0      877.0      877.0          0.0        INF 
+   1976      912.0      912.0      912.0      912.0          0.0        INF 
+   1977      723.0      723.0      723.0      723.0          0.0        INF 
+   1978      276.0      276.0      276.0      276.0          0.0        INF 
+   1979      128.0      128.0      128.0      128.0          0.0        INF 
+   1980      184.0      184.0      184.0      184.0          0.0        INF 
+   1981      465.0      465.0      465.0      465.0          0.0        INF 
+   1982      373.0      373.0      373.0      373.0          0.0        INF 
+   1983       55.0       55.0       55.0       55.0          0.0        INF 
+   1984      277.0      277.0      277.0      277.0          0.0        INF 
+   1985      145.0      145.0      145.0      145.0          0.0        INF 
+   1986       26.0       26.0       26.0       26.0          0.0        INF 
+1
+
+
+
+ End PeakFQ analysis.
+   Stations processed :       1
+   Number of errors   :       0
+   Stations skipped   :       0
+   Station years      :      42
+
+
+Data records may have been ignored for the stations listed below.               
+(Card type must be Y, Z, N, H, I, 2, 3, 4,  or *.)                              
+(2, 4, and * records are ignored.)                                              
+                                                                                
+ For the station below, the following records were ignored:                     
+                                                                                
+                                                                                
+ FINISHED PROCESSING STATION:  06836000       USGS BLACKWOOD CREEK NEAR CULBERTS
+                                                                                
+                                                                                
+ For the station below, the following records were ignored:                     
+                                                                                
+ FINISHED PROCESSING STATION:                                                   
+                                                                                

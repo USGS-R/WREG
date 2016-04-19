@@ -1,0 +1,16 @@
+I ASCI 06835100.TXT
+O File 06835100.PRT
+O Plot Style Graphics
+O Plot Format PNG
+O Additional Watstore 0683
+O Export 06835100.EXP
+O Empirical 06835100.
+Station 06835100
+     Analyze EMA
+     PCPT_Thresh 1664 2013 0 1E+20 Default
+     PCPT_Thresh 1664 1965 15200 1E+20 2014 non-exceedance bound
+     PCPT_Thresh 1979 2013 15200 1E+20 2014 non-exceedance bound
+     BegYear 1664
+     EndYear 2013
+     HistPeriod 350
+     LOType MGBT

@@ -1,0 +1,482 @@
+ MAIN:Reading Specification file: 
+ C:\Users\mkohn\Desktop\06838200\PKFQWPSF.TMP                                   
+                                                                                
+                                                                                
+    
+ Scanning Spec file for stations. Spec file contents:
+   Verbose                                                                      
+                                            
+   I ASCI 06838200.TXT                                                          
+                                            
+   O File 06838200.PRT                                                          
+                                            
+   O Plot Style Graphics                                                        
+                                            
+   O Plot Format PNG                                                            
+                                            
+   O Additional Watstore 06838200.bcd                                           
+                                            
+   O Export 06838200.exp                                                        
+                                            
+   O Empirical 06838200.emp                                                     
+                                            
+   Station 06838200                                                             
+                                            
+        Analyze EMA                                                             
+                                            
+        PCPT_Thresh 1961 1999 0 1E+20 Default                                   
+                                            
+        PCPT_Thresh 1980 1980 45 1E+20 Peak < stated value                      
+                                            
+        PCPT_Thresh 1985 1985 5 1E+20 Peak < stated value                       
+                                            
+        PCPT_Thresh 1986 1986 5 1E+20 Peak < stated value                       
+                                            
+        PCPT_Thresh 1987 1987 5 1E+20 Peak < stated value                       
+                                            
+        PCPT_Thresh 1989 1989 50 1E+20 Peak < stated value                      
+                                            
+        PCPT_Thresh 1991 1991 5 1E+20 Peak < stated value                       
+                                            
+        PCPT_Thresh 1996 1996 50 1E+20 Peak < stated value                      
+                                            
+        PCPT_Thresh 1997 1997 50 1E+20 Peak < stated value                      
+                                            
+        PCPT_Thresh 1998 1998 50 1E+20 Peak < stated value                      
+                                            
+        PCPT_Thresh 1999 1999 50 1E+20 Peak < stated value                      
+                                            
+        PCPT_Thresh 1994 1995 1E+20 1E+20 missing                               
+                                            
+        BegYear 1961                                                            
+                                            
+        EndYear 1999                                                            
+                                            
+        HistPeriod 39                                                           
+                                            
+        Interval 1980 0 45 Peak < stated value                                  
+                                            
+        Interval 1985 0 5 Peak < stated value                                   
+                                            
+        Interval 1986 0 5 Peak < stated value                                   
+                                            
+        Interval 1987 0 5 Peak < stated value                                   
+                                            
+        Interval 1989 0 50 Peak < stated value                                  
+                                            
+        Interval 1991 0 5 Peak < stated value                                   
+                                            
+        Interval 1996 0 50 Peak < stated value                                  
+                                            
+        Interval 1997 0 50 Peak < stated value                                  
+                                            
+        Interval 1998 0 50 Peak < stated value                                  
+                                            
+        Interval 1999 0 50 Peak < stated value                                  
+                                            
+        SkewOpt Weighted                                                        
+                                            
+        GenSkew 0.1284521                                                       
+                                            
+        SkewSE 0.55                                                             
+                                            
+        LOType MGBT                                                             
+                                            
+        Latitude 40.23417                                                       
+                                            
+        Longitude 100.4269                                                      
+                                            
+        PlotName 06838200                                                       
+                                            
+ Finished scan of Spec file.
+ MAIN:Found            1  Stations
+ MAIN:Process Record:'Verbose'
+ MAIN:Process Record:'I ASCI 06838200.TXT'
+ MAIN:Got I, Remaining:'ASCI 06838200.TXT'
+ OPNINP:Successful Open Watstore file:'06838200.TXT'
+ MAIN:Process Record:'O File 06838200.PRT'
+ MAIN:Got O, Remaining:'FILE 06838200.PRT'
+ OPENOUT:Opened Output File:'06838200.PRT'
+ MAIN:Process Record:'O Plot Style Graphics'
+ MAIN:Got O, Remaining:'PLOT STYLE GRAPHICS'
+ MAIN:Process Record:'O Plot Format PNG'
+ MAIN:Got O, Remaining:'PLOT FORMAT PNG'
+ MAIN:Process Record:'O Additional Watstore 06838200.bcd'
+ MAIN:Got O, Remaining:'ADDITIONAL WATSTORE 06838200.BCD'
+ MAIN:Process Record:'O Export 06838200.exp'
+ MAIN:Got O, Remaining:'EXPORT 06838200.EXP'
+ OPENOUT:Opened EXPORT Output File:'06838200.EXP'
+ MAIN:Process Record:'O Empirical 06838200.emp'
+ MAIN:Got O, Remaining:'EMPIRICAL 06838200.EMP'
+ OPENOUT:Opened EMPIRICAL Output File:'06838200.EMP'
+ MAIN:Process Record:'Station 06838200'
+ MAIN:Got STATION, Remaining:'06838200'
+ MAIN:Assigned 06838200        to index            1  of STASPECS
+ MAIN:Process RecordX:'     ANALYZE EMA'
+ MAIN:Add Record To Station Specs
+ MAIN:LNSPECS:           1
+ MAIN:Assign spec:'ANALYZE EMA'
+ MAIN:Process RecordX:'     PCPT_THRESH 1961 1999 0 1E+20 DEFAULT'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           2
+ MAIN:Assign spec:'PCPT_THRESH 1961 1999 0 1E+20 DEFAULT'
+ MAIN:Process RecordX:'     PCPT_THRESH 1980 1980 45 1E+20 PEAK < STATED VALUE'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           3
+ MAIN:Assign spec:'PCPT_THRESH 1980 1980 45 1E+20 PEAK < STATED VALUE'
+ MAIN:Process RecordX:'     PCPT_THRESH 1985 1985 5 1E+20 PEAK < STATED VALUE'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           4
+ MAIN:Assign spec:'PCPT_THRESH 1985 1985 5 1E+20 PEAK < STATED VALUE'
+ MAIN:Process RecordX:'     PCPT_THRESH 1986 1986 5 1E+20 PEAK < STATED VALUE'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           5
+ MAIN:Assign spec:'PCPT_THRESH 1986 1986 5 1E+20 PEAK < STATED VALUE'
+ MAIN:Process RecordX:'     PCPT_THRESH 1987 1987 5 1E+20 PEAK < STATED VALUE'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           6
+ MAIN:Assign spec:'PCPT_THRESH 1987 1987 5 1E+20 PEAK < STATED VALUE'
+ MAIN:Process RecordX:'     PCPT_THRESH 1989 1989 50 1E+20 PEAK < STATED VALUE'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           7
+ MAIN:Assign spec:'PCPT_THRESH 1989 1989 50 1E+20 PEAK < STATED VALUE'
+ MAIN:Process RecordX:'     PCPT_THRESH 1991 1991 5 1E+20 PEAK < STATED VALUE'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           8
+ MAIN:Assign spec:'PCPT_THRESH 1991 1991 5 1E+20 PEAK < STATED VALUE'
+ MAIN:Process RecordX:'     PCPT_THRESH 1996 1996 50 1E+20 PEAK < STATED VALUE'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           9
+ MAIN:Assign spec:'PCPT_THRESH 1996 1996 50 1E+20 PEAK < STATED VALUE'
+ MAIN:Process RecordX:'     PCPT_THRESH 1997 1997 50 1E+20 PEAK < STATED VALUE'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          10
+ MAIN:Assign spec:'PCPT_THRESH 1997 1997 50 1E+20 PEAK < STATED VALUE'
+ MAIN:Process RecordX:'     PCPT_THRESH 1998 1998 50 1E+20 PEAK < STATED VALUE'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          11
+ MAIN:Assign spec:'PCPT_THRESH 1998 1998 50 1E+20 PEAK < STATED VALUE'
+ MAIN:Process RecordX:'     PCPT_THRESH 1999 1999 50 1E+20 PEAK < STATED VALUE'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          12
+ MAIN:Assign spec:'PCPT_THRESH 1999 1999 50 1E+20 PEAK < STATED VALUE'
+ MAIN:Process RecordX:'     PCPT_THRESH 1994 1995 1E+20 1E+20 MISSING'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          13
+ MAIN:Assign spec:'PCPT_THRESH 1994 1995 1E+20 1E+20 MISSING'
+ MAIN:Process RecordX:'     BEGYEAR 1961'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          14
+ MAIN:Assign spec:'BEGYEAR 1961'
+ MAIN:Process RecordX:'     ENDYEAR 1999'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          15
+ MAIN:Assign spec:'ENDYEAR 1999'
+ MAIN:Process RecordX:'     HISTPERIOD 39'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          16
+ MAIN:Assign spec:'HISTPERIOD 39'
+ MAIN:Process RecordX:'     INTERVAL 1980 0 45 PEAK < STATED VALUE'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          17
+ MAIN:Assign spec:'INTERVAL 1980 0 45 PEAK < STATED VALUE'
+ MAIN:Process RecordX:'     INTERVAL 1985 0 5 PEAK < STATED VALUE'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          18
+ MAIN:Assign spec:'INTERVAL 1985 0 5 PEAK < STATED VALUE'
+ MAIN:Process RecordX:'     INTERVAL 1986 0 5 PEAK < STATED VALUE'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          19
+ MAIN:Assign spec:'INTERVAL 1986 0 5 PEAK < STATED VALUE'
+ MAIN:Process RecordX:'     INTERVAL 1987 0 5 PEAK < STATED VALUE'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          20
+ MAIN:Assign spec:'INTERVAL 1987 0 5 PEAK < STATED VALUE'
+ MAIN:Process RecordX:'     INTERVAL 1989 0 50 PEAK < STATED VALUE'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          21
+ MAIN:Assign spec:'INTERVAL 1989 0 50 PEAK < STATED VALUE'
+ MAIN:Process RecordX:'     INTERVAL 1991 0 5 PEAK < STATED VALUE'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          22
+ MAIN:Assign spec:'INTERVAL 1991 0 5 PEAK < STATED VALUE'
+ MAIN:Process RecordX:'     INTERVAL 1996 0 50 PEAK < STATED VALUE'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          23
+ MAIN:Assign spec:'INTERVAL 1996 0 50 PEAK < STATED VALUE'
+ MAIN:Process RecordX:'     INTERVAL 1997 0 50 PEAK < STATED VALUE'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          24
+ MAIN:Assign spec:'INTERVAL 1997 0 50 PEAK < STATED VALUE'
+ MAIN:Process RecordX:'     INTERVAL 1998 0 50 PEAK < STATED VALUE'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          25
+ MAIN:Assign spec:'INTERVAL 1998 0 50 PEAK < STATED VALUE'
+ MAIN:Process RecordX:'     INTERVAL 1999 0 50 PEAK < STATED VALUE'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          26
+ MAIN:Assign spec:'INTERVAL 1999 0 50 PEAK < STATED VALUE'
+ MAIN:Process RecordX:'     SKEWOPT WEIGHTED'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          27
+ MAIN:Assign spec:'SKEWOPT WEIGHTED'
+ MAIN:Process RecordX:'     GENSKEW 0.1284521'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          28
+ MAIN:Assign spec:'GENSKEW 0.1284521'
+ MAIN:Process RecordX:'     SKEWSE 0.55'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          29
+ MAIN:Assign spec:'SKEWSE 0.55'
+ MAIN:Process RecordX:'     LOTYPE MGBT'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          30
+ MAIN:Assign spec:'LOTYPE MGBT'
+ MAIN:Process RecordX:'     LATITUDE 40.23417'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          31
+ MAIN:Assign spec:'LATITUDE 40.23417'
+ MAIN:Process RecordX:'     LONGITUDE 100.4269'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          32
+ MAIN:Assign spec:'LONGITUDE 100.4269'
+ MAIN:Process RecordX:'     PLOTNAME 06838200'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          33
+ MAIN:Assign spec:'PLOTNAME 06838200'
+ MAIN:          33  spec(s) for station 06838200       
+   Spec           1 : 'ANALYZE EMA'
+   Spec           2 : 'PCPT_THRESH 1961 1999 0 1E+20 DEFAULT'
+   Spec           3 : 'PCPT_THRESH 1980 1980 45 1E+20 PEAK < STATED VALUE'
+   Spec           4 : 'PCPT_THRESH 1985 1985 5 1E+20 PEAK < STATED VALUE'
+   Spec           5 : 'PCPT_THRESH 1986 1986 5 1E+20 PEAK < STATED VALUE'
+   Spec           6 : 'PCPT_THRESH 1987 1987 5 1E+20 PEAK < STATED VALUE'
+   Spec           7 : 'PCPT_THRESH 1989 1989 50 1E+20 PEAK < STATED VALUE'
+   Spec           8 : 'PCPT_THRESH 1991 1991 5 1E+20 PEAK < STATED VALUE'
+   Spec           9 : 'PCPT_THRESH 1996 1996 50 1E+20 PEAK < STATED VALUE'
+   Spec          10 : 'PCPT_THRESH 1997 1997 50 1E+20 PEAK < STATED VALUE'
+   Spec          11 : 'PCPT_THRESH 1998 1998 50 1E+20 PEAK < STATED VALUE'
+   Spec          12 : 'PCPT_THRESH 1999 1999 50 1E+20 PEAK < STATED VALUE'
+   Spec          13 : 'PCPT_THRESH 1994 1995 1E+20 1E+20 MISSING'
+   Spec          14 : 'BEGYEAR 1961'
+   Spec          15 : 'ENDYEAR 1999'
+   Spec          16 : 'HISTPERIOD 39'
+   Spec          17 : 'INTERVAL 1980 0 45 PEAK < STATED VALUE'
+   Spec          18 : 'INTERVAL 1985 0 5 PEAK < STATED VALUE'
+   Spec          19 : 'INTERVAL 1986 0 5 PEAK < STATED VALUE'
+   Spec          20 : 'INTERVAL 1987 0 5 PEAK < STATED VALUE'
+   Spec          21 : 'INTERVAL 1989 0 50 PEAK < STATED VALUE'
+   Spec          22 : 'INTERVAL 1991 0 5 PEAK < STATED VALUE'
+   Spec          23 : 'INTERVAL 1996 0 50 PEAK < STATED VALUE'
+   Spec          24 : 'INTERVAL 1997 0 50 PEAK < STATED VALUE'
+   Spec          25 : 'INTERVAL 1998 0 50 PEAK < STATED VALUE'
+   Spec          26 : 'INTERVAL 1999 0 50 PEAK < STATED VALUE'
+   Spec          27 : 'SKEWOPT WEIGHTED'
+   Spec          28 : 'GENSKEW 0.1284521'
+   Spec          29 : 'SKEWSE 0.55'
+   Spec          30 : 'LOTYPE MGBT'
+   Spec          31 : 'LATITUDE 40.23417'
+   Spec          32 : 'LONGITUDE 100.4269'
+   Spec          33 : 'PLOTNAME 06838200'
+ Done reading spec file
+ MAIN:calling J407XE...
+ J407XE:IA1:           9  INFORM:           2  MSG1:          14
+ After INPUT - NSYS,NHIST,EMAOPT          37           0           1
+ After UPDATEPEAKS - NSYS,NHIST,EMAOPT          37           0           1
+ SETEMADATA: NTHRESH =          12
+ SETEMADATA: THRBYR,   THREYR,   THRLWR,       THRUPR
+        1961        1999  0.0000000E+00  1.0000000E+20
+        1980        1980   45.00000      1.0000000E+20
+        1985        1985   5.000000      1.0000000E+20
+        1986        1986   5.000000      1.0000000E+20
+        1987        1987   5.000000      1.0000000E+20
+        1989        1989   50.00000      1.0000000E+20
+        1991        1991   5.000000      1.0000000E+20
+        1996        1996   50.00000      1.0000000E+20
+        1997        1997   50.00000      1.0000000E+20
+        1998        1998   50.00000      1.0000000E+20
+        1999        1999   50.00000      1.0000000E+20
+        1994        1995  1.0000000E+20  1.0000000E+20
+ Debug Info for 
+ 06838200       USGS COON CREEK AT INDIANOLA, NEBR.                  1961-1999 *
+  HISTORIC *
+ after WCFAGB, IER=           2
+ 
+ Running EMA for station 
+ 06838200       USGS COON CREEK AT INDIANOLA, NEBR.                  1961-1999 *
+  HISTORIC *
+ calling RUNEMA: NPKS,NSYS,GENSKU,RMSEGS          37          37  0.1284521    
+  0.5500000    
+ 
+ calling EMAFIT with the following input Args:
+ NOBS:          39
+         QLow        QUpr         TLow        TUpr        DType
+        750.0       750.0    0.1000D-98    0.1000D+21     Syst
+        420.0       420.0    0.1000D-98    0.1000D+21     Syst
+        240.0       240.0    0.1000D-98    0.1000D+21     Syst
+        310.0       310.0    0.1000D-98    0.1000D+21     Syst
+        230.0       230.0    0.1000D-98    0.1000D+21     Syst
+        320.0       320.0    0.1000D-98    0.1000D+21     Syst
+        305.0       305.0    0.1000D-98    0.1000D+21     Syst
+        900.0       900.0    0.1000D-98    0.1000D+21     Syst
+         50.0        50.0    0.1000D-98    0.1000D+21     Syst
+        310.0       310.0    0.1000D-98    0.1000D+21     Syst
+         75.0        75.0    0.1000D-98    0.1000D+21     Syst
+         20.0        20.0    0.1000D-98    0.1000D+21     Syst
+         20.0        20.0    0.1000D-98    0.1000D+21     Syst
+        155.0       155.0    0.1000D-98    0.1000D+21     Syst
+        195.0       195.0    0.1000D-98    0.1000D+21     Syst
+          0.0         0.0    0.1000D-98    0.1000D+21     Syst
+        540.0       540.0    0.1000D-98    0.1000D+21     Syst
+          0.2         0.2    0.1000D-98    0.1000D+21     Syst
+        230.0       230.0    0.1000D-98    0.1000D+21     Syst
+          0.0        45.0    0.4500D+02    0.1000D+21     Syst
+        245.0       245.0    0.1000D-98    0.1000D+21     Syst
+         75.0        75.0    0.1000D-98    0.1000D+21     Syst
+         70.0        70.0    0.1000D-98    0.1000D+21     Syst
+         10.0        10.0    0.1000D-98    0.1000D+21     Syst
+          0.0         5.0    0.5000D+01    0.1000D+21     Syst
+          0.0         5.0    0.5000D+01    0.1000D+21     Syst
+          0.0         5.0    0.5000D+01    0.1000D+21     Syst
+        140.0       140.0    0.1000D-98    0.1000D+21     Syst
+          0.0        50.0    0.5000D+02    0.1000D+21     Syst
+          0.0         0.0    0.1000D-98    0.1000D+21     Syst
+          0.0         5.0    0.5000D+01    0.1000D+21     Syst
+        400.0       400.0    0.1000D-98    0.1000D+21     Syst
+        310.0       310.0    0.1000D-98    0.1000D+21     Syst
+          0.0************    0.1000D+21    0.1000D+21     Cens
+          0.0************    0.1000D+21    0.1000D+21     Cens
+          0.0        50.0    0.5000D+02    0.1000D+21     Syst
+          0.0        50.0    0.5000D+02    0.1000D+21     Syst
+          0.0        50.0    0.5000D+02    0.1000D+21     Syst
+          0.0        50.0    0.5000D+02    0.1000D+21     Syst
+ REGSTD:   1.00000000000000     
+ GENSDMSE:  -999.000000000000     
+ REGSKEW:  0.128452107310295     
+ REGMSE:  0.302500009536743     
+ GBTYPE:MGBT
+ GBTHRSH  -99.0000000000000     
+ 
+ RESULTS
+ WRCMOM-1  0.21130767D+01  0.18585593D+00  0.20908369D-01
+ WRCMOM-2  0.20691602D+01  0.24302078D+00 -0.36479635D+00
+ WRCMOM-3  0.21130767D+01  0.18585593D+00  0.20908369D-01
+ 
+ Moments:   2.113077      0.4311101      2.0908369E-02
+ 
+ Plotting Positions of peaks
+ Plot Pos      Obs. Q
+  5.1498067E-02   750.0000    
+  0.1031171       420.0000    
+  0.3095933       240.0000    
+  0.2321647       310.0000    
+  0.3612124       230.0000    
+  0.1547362       320.0000    
+  0.2579743       305.0000    
+  2.5688542E-02   900.0000    
+  0.5418791       50.00000    
+  0.2063552       310.0000    
+  0.4902600       75.00000    
+  0.6324325       20.00000    
+  0.5999238       20.00000    
+  0.4128314       155.0000    
+  0.3870219       195.0000    
+  0.9245021      0.0000000E+00
+  7.7307589E-02   540.0000    
+  0.7727952      0.2000000    
+  0.3354028       230.0000    
+  0.7837838       45.00000    
+  0.2837838       245.0000    
+  0.4644505       75.00000    
+  0.5160695       70.00000    
+  0.6649411       10.00000    
+  0.9396300       5.000000    
+  0.8789758       5.000000    
+  0.8183215       5.000000    
+  0.4386410       140.0000    
+  0.9281535       50.00000    
+  0.8486487      0.0000000E+00
+  0.7576672       5.000000    
+  0.1289266       400.0000    
+  0.1805457       310.0000    
+  0.8559687       50.00000    
+  0.7837838       50.00000    
+  0.7115989       50.00000    
+  0.6394141       50.00000    
+ 
+ Threshold positions
+ Plot Pos     Threshold    NumPeaks
+   1.00000000000000       -99.0000000000000                0
+  0.697297315984159       0.698970004336019                4
+  0.567567586898804        1.65321251377534                1
+  0.567567586898804        1.69897000433602                5
+  0.000000000000000E+000   20.0000000087036                2
+ 
+   Prob       EMA Est.        CL Low       CL High
+ 0.0001         3.381         0.001         8.311         0.427
+ 0.0005         5.120         0.005        12.090         0.337
+ 0.0010         6.218         0.009        14.429         0.300
+ 0.0020         7.642         0.017        17.414         0.265
+ 0.0050        10.258         0.040        22.794         0.219
+ 0.0100        13.086         0.080        28.474         0.185
+ 0.0200        17.082         0.167        36.286         0.153
+ 0.0250        18.724         0.215        39.426         0.143
+ 0.0400        22.985         0.528        46.338         0.122
+ 0.0500        25.500         0.838        50.034         0.112
+ 0.1000        36.439         2.651        66.151         0.082
+ 0.2000        56.210         6.933        94.072         0.053
+ 0.3000        76.898        12.541       120.525         0.037
+ 0.3333        84.358        14.935       129.332         0.033
+ 0.4000       100.566        20.724       147.583         0.026
+ 0.4296       108.430        23.796       156.132         0.023
+ 0.5000       129.293        32.406       178.479         0.018
+ 0.5708       154.360        42.036       206.045         0.014
+ 0.6000       166.299        46.229       219.649         0.012
+ 0.7000       217.800        76.258       278.802         0.008
+ 0.8000       298.857       126.918       411.412         0.006
+ 0.9000       464.005       309.894      1177.072         0.009
+ 0.9500       667.948       424.328      2999.369         0.017
+ 0.9600       742.862       460.018      3796.137         0.020
+ 0.9750       916.849       536.302      6152.606         0.027
+ 0.9800      1007.617       573.404      7684.831         0.030
+ 0.9900      1326.209       698.015     14261.515         0.043
+ 0.9950      1706.109       840.439     23838.452         0.058
+ 0.9980      2316.489      1043.366     46732.141         0.079
+ 0.9990      2871.857      1209.375     76824.465         0.097
+ 0.9995      3519.091      1386.885    124818.132         0.116
+ 0.9999      5440.925      1845.773    369398.436         0.164
+ After INPUT - NSYS,NHIST,EMAOPT           0           0           1
+ After UPDATEPEAKS - NSYS,NHIST,EMAOPT           0           0           1
+ Closing output file C:\Users\mkohn\Desktop\06838200\06838200.PRT

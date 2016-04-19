@@ -1,0 +1,401 @@
+1
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.002.000
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    10/23/2014 13:17
+
+                         --- PROCESSING OPTIONS ---  
+
+                      Plot option         = Graphics device   
+                      Basin char output   = WATSTORE      
+                      Print option        = Yes
+                      Debug print         = No 
+                      Input peaks listing = Long 
+                      Input peaks format  = WATSTORE peak file  
+
+                      Input files used:
+                         peaks (ascii)  - V:\CDOT_Flood_Frequency\PeakFQ\Input_files\07108900\07108900.TXT                
+                         specifications - V:\CDOT_Flood_Frequency\PeakFQ\Input_files\07108900\PKFQWPSF.TMP                
+                      Output file(s): 
+                         main - V:\CDOT_Flood_Frequency\PeakFQ\Input_files\07108900\07108900.PRT                
+                         bcd  - V:\CDOT_Flood_Frequency\PeakFQ\Input_files\07108900\07108900.BCD                
+  
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.001
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    10/23/2014 13:17
+  
+             Station - 07108900  ST. CHARLES RIVER AT VINELAND, CO.             
+
+
+                     I N P U T   D A T A   S U M M A R Y
+
+                Number of peaks in record            =       36
+                Peaks not used in analysis           =        0
+                Systematic peaks in analysis         =       35
+                Historic peaks in analysis           =        1
+                Beginning Year                       =     1921
+                Ending Year                          =     2013
+                Historical Period Length             =       93
+                Generalized skew                     =   -0.102
+                     Standard error                  =    0.550
+                     Mean Square error               =    0.303
+                Skew option                          =   WEIGHTED  
+                Gage base discharge                  =      0.0
+                User supplied high outlier threshold =   --           
+                User supplied PILF (LO) criterion    =   --           
+                Plotting position parameter          =     0.00
+                Type of analysis                            EMA
+                PILF (LO) Test Method                      MGBT
+                Perception Thresholds:
+                     Begin     End       Low     High     Comment
+                      1921    2013       0.0       INF     DEFAULT                                                                         
+                      1921    1978   56000.0       INF     HISTORIC 1                                                                      
+                      1901    1920   56000.0       INF     FROM STATION DESCRIPTION                                                        
+                Interval Data                    =   None Specified
+
+
+
+  *********  NOTICE  --  Preliminary machine computations.        *********     
+  *********  User responsible for assessment and interpretation.  *********     
+
+    EMA003I-PILFS (LOS) WERE DETECTED USING MULTIPLE GRUBBS-BECK TEST   4     763.0
+      THE FOLLOWING PEAKS (WITH CORRESPONDING P-VALUES) WERE CENSORED:
+            76.0    (0.0060)
+           342.0    (0.0957)
+           444.0    (0.0583)
+           471.0    (0.0090)
+    EMA001W-VARIANCE OF ESTIMATE WARNING, HISTORIC PERIOD > 2* SYS
+    EMA002W-CONFIDENCE INTERVALS ARE NOT EXACT IF HISTORIC PERIOD > 0
+
+
+                                        Kendall's Tau Parameters
+
+                                                        MEDIAN   No. of
+                                       TAU    P-VALUE    SLOPE   PEAKS
+                                ---------------------------------------
+             SYSTEMATIC RECORD     -0.269      0.024    -91.727    35
+
+
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.002
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    10/23/2014 13:17
+  
+             Station - 07108900  ST. CHARLES RIVER AT VINELAND, CO.             
+
+
+           ANNUAL FREQUENCY CURVE PARAMETERS -- LOG-PEARSON TYPE III 
+
+                                    LOGARITHMIC         
+                         -------------------------------
+                                      STANDARD          
+                            MEAN     DEVIATION     SKEW 
+                         -------------------------------
+ EMA W/O REG. INFO         3.3882      0.4075      0.430
+ EMA W/REG. INFO           3.3870      0.4212      0.187
+
+ EMA ESTIMATE OF MSE OF SKEW W/O REG. INFO (AT-SITE)      0.0679
+ EMA ESTIMATE OF MSE OF SKEW W/SYSTEMATIC ONLY (AT-SITE)  0.1794
+
+
+
+    ANNUAL FREQUENCY CURVE -- DISCHARGES AT SELECTED EXCEEDANCE PROBABILITIES
+
+   ANNUAL   EMA W/    EMA W/O     <------ FOR EMA ESTIMATES ------->
+EXCEEDANCE  REG INFO  REG INFO    VARIANCE  95% CONFIDENCE INTERVALS
+PROBABILITY ESTIMATE  ESTIMATE     OF EST.       LOWER       UPPER
+
+   0.9950     237.7     318.0      0.0575        26.8        485.4
+   0.9900     292.0     371.7      0.0426        44.8        536.6
+   0.9500     521.6     590.5      0.0176       153.9        772.4
+   0.9000     718.4     773.1      0.0110       262.9       1004.0
+   0.8000    1070.     1095.       0.0070       590.2       1478.0
+   0.6667    1567.     1551.       0.0057      1059.0       2210.0
+   0.5000    2365.     2286.       0.0056      1680.0       3400.0
+   0.4292    2814.     2704.       0.0058      1999.0       4084.0
+   0.2000    5459.     5247.       0.0074      3766.0       8387.0
+   0.1000    8599.     8425.       0.0094      5691.0      14010.0
+   0.0400   14150.    14390.       0.0136      8639.0      25600.0
+   0.0200   19660.    20690.       0.0184     11160.0      39830.0
+   0.0100   26560.    29010.       0.0248     13960.0      62130.0
+   0.0050   35130.    39910.       0.0330     17040.0      97470.0
+   0.0020   49560.    59490.       0.0467     21570.0     178400.0
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.003
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    10/23/2014 13:17
+  
+             Station - 07108900  ST. CHARLES RIVER AT VINELAND, CO.             
+
+
+                       I N P U T   D A T A   L I S T I N G
+
+
+    WATER       PEAK   PEAKFQ   <--- Intervals --->
+     YEAR      VALUE    CODES     LOW         HIGH   REMARKS
+    -1921    56000.0  H    
+     1979      342.0       
+     1980     4940.0       
+     1981     5910.0       
+     1982     7560.0       
+     1983     1040.0       
+     1984     6310.0       
+     1985      990.0       
+     1986     1580.0       
+     1987     5180.0       
+     1988     3760.0       
+     1989     5400.0       
+     1990     7300.0       
+     1991     4480.0       
+     1992     3810.0       
+     1993     1960.0       
+     1994     1700.0       
+     1995     2330.0       
+     1996     3440.0       
+     1997     1480.0       
+     1998     2170.0       
+     1999     5250.0       
+     2000     3140.0       
+     2001     4190.0       
+     2002      790.0       
+     2003     1580.0       
+     2004      763.0       
+     2005      444.0       
+     2006     1240.0       
+     2007     4760.0       
+     2008      471.0       
+     2009     1580.0       
+     2010     2510.0       
+     2011     3740.0       
+     2012       76.0       
+     2013     2430.0       
+
+
+        Explanation of peak discharge qualification codes
+
+       PeakFQ    NWIS
+        CODE     CODE   DEFINITION
+
+          D        3    Dam failure, non-recurrent flow anomaly
+          G        8    Discharge greater than stated value
+          X       3+8   Both of the above
+          L        4    Discharge less than stated value
+          K     6 OR C  Known effect of regulation or urbanization
+          H        7    Historic peak
+
+          -  Minus-flagged discharge -- Not used in computation
+                -8888.0 -- No discharge value given
+          -  Minus-flagged water year -- Historic peak used in computation
+
+
+
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.004
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    10/23/2014 13:17
+  
+             Station - 07108900  ST. CHARLES RIVER AT VINELAND, CO.             
+
+
+   EMPIRICAL FREQUENCY CURVES -- HIRSCH-STEDINGER PLOTTING POSITIONS
+
+   WATER     RANKED      EMA         INTERVALS
+    YEAR   DISCHARGE   ESTIMATE      LOW      HIGH
+   -1921    56000.0     0.0044
+    1982     7560.0     0.0363
+    1990     7300.0     0.0638
+    1984     6310.0     0.0913
+    1981     5910.0     0.1189
+    1989     5400.0     0.1464
+    1999     5250.0     0.1740
+    1987     5180.0     0.2015
+    1980     4940.0     0.2290
+    2007     4760.0     0.2566
+    1991     4480.0     0.2841
+    2001     4190.0     0.3117
+    1992     3810.0     0.3392
+    1988     3760.0     0.3667
+    2011     3740.0     0.3943
+    1996     3440.0     0.4218
+    2000     3140.0     0.4493
+    2010     2510.0     0.4769
+    2013     2430.0     0.5044
+    1995     2330.0     0.5320
+    1998     2170.0     0.5595
+    1993     1960.0     0.5870
+    1994     1700.0     0.6146
+    1986     1580.0     0.6972
+    2003     1580.0     0.6697
+    2009     1580.0     0.6421
+    1997     1480.0     0.7247
+    2006     1240.0     0.7523
+    1983     1040.0     0.7798
+    1985      990.0     0.8074
+    2002      790.0     0.8349
+    2004      763.0     0.8624
+  * 2008      471.0     0.8900
+  * 2005      444.0     0.9175
+  * 1979      342.0     0.9451
+  * 2012       76.0     0.9726
+
+    * DENOTES PILF (LO)
+
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.005
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    10/23/2014 13:17
+  
+             Station - 07108900  ST. CHARLES RIVER AT VINELAND, CO.             
+
+
+                         EMA REPRESENTATION OF DATA
+
+  WATER <----- OBSERVED-----><-------- EMA -------><-PERCEPTION THRESHOLDS->
+   YEAR    Q_LOWER    Q_UPPER    Q_LOWER    Q_UPPER        LOWER       UPPER
+   1901        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1902        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1903        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1904        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1905        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1906        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1907        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1908        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1909        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1910        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1911        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1912        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1913        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1914        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1915        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1916        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1917        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1918        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1919        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1920        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1921    56000.0    56000.0    56000.0    56000.0      56000.0        INF 
+   1922        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1923        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1924        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1925        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1926        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1927        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1928        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1929        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1930        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1931        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1932        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1933        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1934        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1935        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1936        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1937        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1938        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1939        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1940        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1941        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1942        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1943        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1944        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1945        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1946        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1947        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1948        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1949        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1950        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1951        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1952        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1953        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1954        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1955        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1956        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1957        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1958        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1959        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1960        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1961        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1962        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1963        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1964        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1965        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1966        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1967        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1968        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1969        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1970        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1971        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1972        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1973        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1974        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1975        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1976        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1977        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1978        0.0    56000.0        0.0    56000.0      56000.0        INF 
+   1979      342.0      342.0        0.0      763.0        763.0        INF 
+   1980     4940.0     4940.0     4940.0     4940.0        763.0        INF 
+   1981     5910.0     5910.0     5910.0     5910.0        763.0        INF 
+   1982     7560.0     7560.0     7560.0     7560.0        763.0        INF 
+   1983     1040.0     1040.0     1040.0     1040.0        763.0        INF 
+   1984     6310.0     6310.0     6310.0     6310.0        763.0        INF 
+   1985      990.0      990.0      990.0      990.0        763.0        INF 
+   1986     1580.0     1580.0     1580.0     1580.0        763.0        INF 
+   1987     5180.0     5180.0     5180.0     5180.0        763.0        INF 
+   1988     3760.0     3760.0     3760.0     3760.0        763.0        INF 
+   1989     5400.0     5400.0     5400.0     5400.0        763.0        INF 
+   1990     7300.0     7300.0     7300.0     7300.0        763.0        INF 
+   1991     4480.0     4480.0     4480.0     4480.0        763.0        INF 
+   1992     3810.0     3810.0     3810.0     3810.0        763.0        INF 
+   1993     1960.0     1960.0     1960.0     1960.0        763.0        INF 
+   1994     1700.0     1700.0     1700.0     1700.0        763.0        INF 
+   1995     2330.0     2330.0     2330.0     2330.0        763.0        INF 
+   1996     3440.0     3440.0     3440.0     3440.0        763.0        INF 
+   1997     1480.0     1480.0     1480.0     1480.0        763.0        INF 
+   1998     2170.0     2170.0     2170.0     2170.0        763.0        INF 
+   1999     5250.0     5250.0     5250.0     5250.0        763.0        INF 
+   2000     3140.0     3140.0     3140.0     3140.0        763.0        INF 
+   2001     4190.0     4190.0     4190.0     4190.0        763.0        INF 
+   2002      790.0      790.0      790.0      790.0        763.0        INF 
+   2003     1580.0     1580.0     1580.0     1580.0        763.0        INF 
+   2004      763.0      763.0      763.0      763.0        763.0        INF 
+   2005      444.0      444.0        0.0      763.0        763.0        INF 
+   2006     1240.0     1240.0     1240.0     1240.0        763.0        INF 
+   2007     4760.0     4760.0     4760.0     4760.0        763.0        INF 
+   2008      471.0      471.0        0.0      763.0        763.0        INF 
+   2009     1580.0     1580.0     1580.0     1580.0        763.0        INF 
+   2010     2510.0     2510.0     2510.0     2510.0        763.0        INF 
+   2011     3740.0     3740.0     3740.0     3740.0        763.0        INF 
+   2012       76.0       76.0        0.0      763.0        763.0        INF 
+   2013     2430.0     2430.0     2430.0     2430.0        763.0        INF 
+1
+
+
+
+ End PeakFQ analysis.
+   Stations processed :       1
+   Number of errors   :       0
+   Stations skipped   :       0
+   Station years      :      36
+
+
+Data records may have been ignored for the stations listed below.               
+(Card type must be Y, Z, N, H, I, 2, 3, 4,  or *.)                              
+(2, 4, and * records are ignored.)                                              
+                                                                                
+ For the station below, the following records were ignored:                     
+                                                                                
+ FINISHED PROCESSING STATION:  07108900       USGS ST. CHARLES RIVER AT VINELAND
+                                                                                
+                                                                                
+ For the station below, the following records were ignored:                     
+                                                                                
+ FINISHED PROCESSING STATION:                                                   
+                                                                                

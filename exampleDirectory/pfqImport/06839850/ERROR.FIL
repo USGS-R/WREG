@@ -1,0 +1,261 @@
+ MAIN:Reading Specification file: 
+ C:\Users\mkohn\Desktop\06839850\PKFQWPSF.TMP                                   
+                                                                                
+                                                                                
+    
+ Scanning Spec file for stations. Spec file contents:
+   Verbose                                                                      
+                                            
+   I ASCI 06839850.TXT                                                          
+                                            
+   O File 06839850.PRT                                                          
+                                            
+   O Plot Style Graphics                                                        
+                                            
+   O Plot Format PNG                                                            
+                                            
+   O Additional Watstore 06839850.bcd                                           
+                                            
+   O Export 06839850.exp                                                        
+                                            
+   O Empirical 06839850.emp                                                     
+                                            
+   Station 06839850                                                             
+                                            
+        Analyze EMA                                                             
+                                            
+        PCPT_Thresh 1952 1970 0 1E+20 Default                                   
+                                            
+        BegYear 1952                                                            
+                                            
+        EndYear 1970                                                            
+                                            
+        HistPeriod 19                                                           
+                                            
+        SkewOpt Weighted                                                        
+                                            
+        GenSkew 0.4932704                                                       
+                                            
+        SkewSE 0.55                                                             
+                                            
+        LOType MGBT                                                             
+                                            
+        Latitude 40.82639                                                       
+                                            
+        Longitude 100.5236                                                      
+                                            
+        PlotName 06839850                                                       
+                                            
+ Finished scan of Spec file.
+ MAIN:Found            1  Stations
+ MAIN:Process Record:'Verbose'
+ MAIN:Process Record:'I ASCI 06839850.TXT'
+ MAIN:Got I, Remaining:'ASCI 06839850.TXT'
+ OPNINP:Successful Open Watstore file:'06839850.TXT'
+ MAIN:Process Record:'O File 06839850.PRT'
+ MAIN:Got O, Remaining:'FILE 06839850.PRT'
+ OPENOUT:Opened Output File:'06839850.PRT'
+ MAIN:Process Record:'O Plot Style Graphics'
+ MAIN:Got O, Remaining:'PLOT STYLE GRAPHICS'
+ MAIN:Process Record:'O Plot Format PNG'
+ MAIN:Got O, Remaining:'PLOT FORMAT PNG'
+ MAIN:Process Record:'O Additional Watstore 06839850.bcd'
+ MAIN:Got O, Remaining:'ADDITIONAL WATSTORE 06839850.BCD'
+ MAIN:Process Record:'O Export 06839850.exp'
+ MAIN:Got O, Remaining:'EXPORT 06839850.EXP'
+ OPENOUT:Opened EXPORT Output File:'06839850.EXP'
+ MAIN:Process Record:'O Empirical 06839850.emp'
+ MAIN:Got O, Remaining:'EMPIRICAL 06839850.EMP'
+ OPENOUT:Opened EMPIRICAL Output File:'06839850.EMP'
+ MAIN:Process Record:'Station 06839850'
+ MAIN:Got STATION, Remaining:'06839850'
+ MAIN:Assigned 06839850        to index            1  of STASPECS
+ MAIN:Process RecordX:'     ANALYZE EMA'
+ MAIN:Add Record To Station Specs
+ MAIN:LNSPECS:           1
+ MAIN:Assign spec:'ANALYZE EMA'
+ MAIN:Process RecordX:'     PCPT_THRESH 1952 1970 0 1E+20 DEFAULT'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           2
+ MAIN:Assign spec:'PCPT_THRESH 1952 1970 0 1E+20 DEFAULT'
+ MAIN:Process RecordX:'     BEGYEAR 1952'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           3
+ MAIN:Assign spec:'BEGYEAR 1952'
+ MAIN:Process RecordX:'     ENDYEAR 1970'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           4
+ MAIN:Assign spec:'ENDYEAR 1970'
+ MAIN:Process RecordX:'     HISTPERIOD 19'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           5
+ MAIN:Assign spec:'HISTPERIOD 19'
+ MAIN:Process RecordX:'     SKEWOPT WEIGHTED'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           6
+ MAIN:Assign spec:'SKEWOPT WEIGHTED'
+ MAIN:Process RecordX:'     GENSKEW 0.4932704'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           7
+ MAIN:Assign spec:'GENSKEW 0.4932704'
+ MAIN:Process RecordX:'     SKEWSE 0.55'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           8
+ MAIN:Assign spec:'SKEWSE 0.55'
+ MAIN:Process RecordX:'     LOTYPE MGBT'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           9
+ MAIN:Assign spec:'LOTYPE MGBT'
+ MAIN:Process RecordX:'     LATITUDE 40.82639'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          10
+ MAIN:Assign spec:'LATITUDE 40.82639'
+ MAIN:Process RecordX:'     LONGITUDE 100.5236'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          11
+ MAIN:Assign spec:'LONGITUDE 100.5236'
+ MAIN:Process RecordX:'     PLOTNAME 06839850'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          12
+ MAIN:Assign spec:'PLOTNAME 06839850'
+ MAIN:          12  spec(s) for station 06839850       
+   Spec           1 : 'ANALYZE EMA'
+   Spec           2 : 'PCPT_THRESH 1952 1970 0 1E+20 DEFAULT'
+   Spec           3 : 'BEGYEAR 1952'
+   Spec           4 : 'ENDYEAR 1970'
+   Spec           5 : 'HISTPERIOD 19'
+   Spec           6 : 'SKEWOPT WEIGHTED'
+   Spec           7 : 'GENSKEW 0.4932704'
+   Spec           8 : 'SKEWSE 0.55'
+   Spec           9 : 'LOTYPE MGBT'
+   Spec          10 : 'LATITUDE 40.82639'
+   Spec          11 : 'LONGITUDE 100.5236'
+   Spec          12 : 'PLOTNAME 06839850'
+ Done reading spec file
+ MAIN:calling J407XE...
+ J407XE:IA1:           9  INFORM:           2  MSG1:          14
+ After INPUT - NSYS,NHIST,EMAOPT          19           0           1
+ After UPDATEPEAKS - NSYS,NHIST,EMAOPT          19           0           1
+ SETEMADATA: NTHRESH =           1
+ SETEMADATA: THRBYR,   THREYR,   THRLWR,       THRUPR
+        1952        1970  0.0000000E+00  1.0000000E+20
+ Debug Info for 
+ 06839850       USGS FOX CREEK NORTH OF CURTIS, NEBR.                1952-1970 *
+  HISTORIC *
+ after WCFAGB, IER=           2
+ 
+ Running EMA for station 
+ 06839850       USGS FOX CREEK NORTH OF CURTIS, NEBR.                1952-1970 *
+  HISTORIC *
+ calling RUNEMA: NPKS,NSYS,GENSKU,RMSEGS          19          19  0.4932704    
+  0.5500000    
+ 
+ calling EMAFIT with the following input Args:
+ NOBS:          19
+         QLow        QUpr         TLow        TUpr        DType
+          2.0         2.0    0.1000D-98    0.1000D+21     Syst
+          0.0         0.0    0.1000D-98    0.1000D+21     Syst
+        100.0       100.0    0.1000D-98    0.1000D+21     Syst
+          0.0         0.0    0.1000D-98    0.1000D+21     Syst
+        420.0       420.0    0.1000D-98    0.1000D+21     Syst
+       1320.0      1320.0    0.1000D-98    0.1000D+21     Syst
+         10.0        10.0    0.1000D-98    0.1000D+21     Syst
+       2080.0      2080.0    0.1000D-98    0.1000D+21     Syst
+        600.0       600.0    0.1000D-98    0.1000D+21     Syst
+        630.0       630.0    0.1000D-98    0.1000D+21     Syst
+       1210.0      1210.0    0.1000D-98    0.1000D+21     Syst
+         24.0        24.0    0.1000D-98    0.1000D+21     Syst
+        114.0       114.0    0.1000D-98    0.1000D+21     Syst
+        107.0       107.0    0.1000D-98    0.1000D+21     Syst
+        223.0       223.0    0.1000D-98    0.1000D+21     Syst
+       1040.0      1040.0    0.1000D-98    0.1000D+21     Syst
+        167.0       167.0    0.1000D-98    0.1000D+21     Syst
+         55.0        55.0    0.1000D-98    0.1000D+21     Syst
+         10.0        10.0    0.1000D-98    0.1000D+21     Syst
+ REGSTD:   1.00000000000000     
+ GENSDMSE:  -999.000000000000     
+ REGSKEW:  0.493270397186279     
+ REGMSE:  0.302500009536743     
+ GBTYPE:MGBT
+ GBTHRSH  -99.0000000000000     
+ 
+ RESULTS
+ WRCMOM-1  0.20067739D+01  0.89282050D+00  0.85837718D-01
+ WRCMOM-2  0.19598680D+01  0.10962682D+01 -0.77214035D+00
+ WRCMOM-3  0.20067739D+01  0.89282050D+00  0.85837718D-01
+ 
+ Moments:   2.006774      0.9448918      8.5837722E-02
+ 
+ Plotting Positions of peaks
+ Plot Pos      Obs. Q
+  0.8501641       2.000000    
+  0.9502110      0.0000000E+00
+  0.6000469       100.0000    
+  0.9001876      0.0000000E+00
+  0.3499297       420.0000    
+  9.9812411E-02   1320.000    
+  0.8001407       10.00000    
+  4.9788963E-02   2080.000    
+  0.2999062       600.0000    
+  0.2498828       630.0000    
+  0.1498359       1210.000    
+  0.7000938       24.00000    
+  0.5000000       114.0000    
+  0.5500234       107.0000    
+  0.3999531       223.0000    
+  0.1998593       1040.000    
+  0.4499766       167.0000    
+  0.6500704       55.00000    
+  0.7501172       10.00000    
+ 
+ Threshold positions
+ Plot Pos     Threshold    NumPeaks
+   1.00000000000000       -99.0000000000000                0
+ 
+   Prob       EMA Est.        CL Low       CL High
+ 0.0001         0.046         0.000         1.276         1.394
+ 0.0005         0.107         0.000         1.619         0.959
+ 0.0010         0.159         0.000         1.856         0.797
+ 0.0020         0.243         0.000         2.187         0.650
+ 0.0050         0.446         0.001         2.869         0.479
+ 0.0100         0.739         0.003         3.721         0.368
+ 0.0200         1.288         0.011         5.148         0.274
+ 0.0250         1.561         0.017         5.817         0.246
+ 0.0400         2.403         0.041         7.800         0.195
+ 0.0500         2.992         0.063         9.151         0.173
+ 0.1000         6.381         0.239        16.852         0.115
+ 0.2000        16.138         0.948        40.595         0.074
+ 0.3000        31.743         4.697        83.397         0.059
+ 0.3333        38.800         7.190       104.068         0.056
+ 0.4000        56.862        14.348       159.277         0.052
+ 0.4296        67.008        18.562       191.375         0.051
+ 0.5000        98.459        31.677       294.792         0.050
+ 0.5708       145.280        50.611       458.825         0.051
+ 0.6000       171.169        60.730       554.657         0.051
+ 0.7000       310.675       112.156      1134.428         0.056
+ 0.8000       627.794       218.733      2844.463         0.066
+ 0.9000      1682.878       531.474     12311.497         0.091
+ 0.9500      3834.371      1071.461     49985.207         0.126
+ 0.9600      4881.571      1306.577     77415.862         0.139
+ 0.9750      7885.595      1914.882    191736.543         0.171
+ 0.9800      9785.016      2262.290    293204.876         0.187
+ 0.9900     18381.132      3611.878   1077383.202         0.247
+ 0.9950     32867.452      5421.183   3887286.398         0.317
+ 0.9980     66826.334      8624.294  20935573.895         0.429
+ 0.9990    110315.393     11735.773  74750751.597         0.528
+ 0.9995    177570.745     15499.216 267290145.341         0.639
+ 0.9999    495924.570     27014.4603509788122.314         0.947
+ After INPUT - NSYS,NHIST,EMAOPT           0           0           1
+ After UPDATEPEAKS - NSYS,NHIST,EMAOPT           0           0           1
+ Closing output file C:\Users\mkohn\Desktop\06839850\06839850.PRT

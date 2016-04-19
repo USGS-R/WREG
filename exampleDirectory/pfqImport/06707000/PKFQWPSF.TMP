@@ -1,0 +1,23 @@
+Verbose
+I ASCI 06707000.TXT
+O File 06707000.PRT
+O Plot Style Graphics
+O Plot Format PNG
+O Additional Watstore 06707000.B
+O Export 06707000.EXP
+O Empirical 06707000.EMP
+Station 06707000
+     Analyze EMA
+     PCPT_Thresh 1909 1910 0 1E+20  DEFAULT
+     PCPT_Thresh 1911 1912 1E+20 1E+20  MISSING
+     PCPT_Thresh 1913 1982 0 1E+20  DEFAULT
+     BegYear 1909
+     EndYear 1982
+     HistPeriod 74
+     SkewOpt Weighted
+     GenSkew -0.1476696
+     SkewSE 0.55
+     LOType MGBT
+     Latitude 39.40889
+     Longitude 105.1753
+     PlotName 06707000

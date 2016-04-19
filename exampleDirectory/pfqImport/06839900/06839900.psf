@@ -1,0 +1,14 @@
+I ASCI 06839900.TXT
+O File 06839900.PRT
+O Plot Style Graphics
+O Plot Format PNG
+O Additional Watstore 06839900.bcd
+O Export 06839900.exp
+O Empirical 06839900.emp
+Station 06839900
+     Analyze EMA
+     PCPT_Thresh 1951 1978 0 1E+20 Default
+     BegYear 1951
+     EndYear 1978
+     HistPeriod 28
+     LOType MGBT

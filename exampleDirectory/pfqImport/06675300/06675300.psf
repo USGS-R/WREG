@@ -1,0 +1,28 @@
+I ASCI 06675300.TXT
+O File 06675300.PRT
+O Plot Style Graphics
+O Plot Format PNG
+O Additional Watstore 06675300.bcd
+O Export 06675300.exp
+O Empirical 06675300.emp
+Station 06675300
+     Analyze EMA
+     PCPT_Thresh 1961 1981 0 1E+20 Default
+     PCPT_Thresh 1962 1962 40 1E+20 Peak < stated value
+     PCPT_Thresh 1964 1964 40 1E+20 Peak < stated value
+     PCPT_Thresh 1965 1965 40 1E+20 Peak < stated value
+     PCPT_Thresh 1966 1966 40 1E+20 Peak < stated value
+     PCPT_Thresh 1968 1968 14 1E+20 Peak < stated value
+     PCPT_Thresh 1972 1972 1 1E+20 Peak < stated value
+     PCPT_Thresh 1976 1976 1 1E+20 Peak < stated value
+     Interval 1962 0 40 
+     Interval 1964 0 40 
+     Interval 1965 0 40 
+     Interval 1966 0 40 
+     Interval 1968 0 14 
+     Interval 1972 0 1 
+     Interval 1976 0 1 
+     BegYear 1961
+     EndYear 1981
+     HistPeriod 21
+     LOType MGBT

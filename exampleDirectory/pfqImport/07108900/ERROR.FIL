@@ -1,0 +1,402 @@
+ MAIN:Reading Specification file: 
+ V:\CDOT_Flood_Frequency\PeakFQ\Input_files\07108900\PKFQWPSF.TMP               
+                                                                                
+                                                                                
+    
+ Scanning Spec file for stations. Spec file contents:
+   Verbose                                                                      
+                                            
+   I ASCI 07108900.TXT                                                          
+                                            
+   O File 07108900.PRT                                                          
+                                            
+   O Plot Style Graphics                                                        
+                                            
+   O Plot Format PNG                                                            
+                                            
+   O Additional Watstore 07108900.bcd                                           
+                                            
+   O Export 07108900.exp                                                        
+                                            
+   O Empirical 07108900.emp                                                     
+                                            
+   Station 07108900                                                             
+                                            
+        Analyze EMA                                                             
+                                            
+        PCPT_Thresh 1921 2013 0 1E+20 Default                                   
+                                            
+        PCPT_Thresh 1921 1978 56000 1E+20 Historic 1                            
+                                            
+        PCPT_Thresh 1901 1920 56000 1E+20 From station description              
+                                            
+        BegYear 1921                                                            
+                                            
+        EndYear 2013                                                            
+                                            
+        HistPeriod 93                                                           
+                                            
+        Peak 1921 56000 H                                                       
+                                            
+        SkewOpt Weighted                                                        
+                                            
+        GenSkew -0.102386                                                       
+                                            
+        SkewSE 0.55                                                             
+                                            
+        LOType MGBT                                                             
+                                            
+        Latitude 38.24556                                                       
+                                            
+        Longitude 104.4858                                                      
+                                            
+        PlotName 07108900                                                       
+                                            
+ Finished scan of Spec file.
+ MAIN:Found            1  Stations
+ MAIN:Process Record:'Verbose'
+ MAIN:Process Record:'I ASCI 07108900.TXT'
+ MAIN:Got I, Remaining:'ASCI 07108900.TXT'
+ OPNINP:Successful Open Watstore file:'07108900.TXT'
+ MAIN:Process Record:'O File 07108900.PRT'
+ MAIN:Got O, Remaining:'FILE 07108900.PRT'
+ OPENOUT:Opened Output File:'07108900.PRT'
+ MAIN:Process Record:'O Plot Style Graphics'
+ MAIN:Got O, Remaining:'PLOT STYLE GRAPHICS'
+ MAIN:Process Record:'O Plot Format PNG'
+ MAIN:Got O, Remaining:'PLOT FORMAT PNG'
+ MAIN:Process Record:'O Additional Watstore 07108900.bcd'
+ MAIN:Got O, Remaining:'ADDITIONAL WATSTORE 07108900.BCD'
+ MAIN:Process Record:'O Export 07108900.exp'
+ MAIN:Got O, Remaining:'EXPORT 07108900.EXP'
+ OPENOUT:Opened EXPORT Output File:'07108900.EXP'
+ MAIN:Process Record:'O Empirical 07108900.emp'
+ MAIN:Got O, Remaining:'EMPIRICAL 07108900.EMP'
+ OPENOUT:Opened EMPIRICAL Output File:'07108900.EMP'
+ MAIN:Process Record:'Station 07108900'
+ MAIN:Got STATION, Remaining:'07108900'
+ MAIN:Assigned 07108900        to index            1  of STASPECS
+ MAIN:Process RecordX:'     ANALYZE EMA'
+ MAIN:Add Record To Station Specs
+ MAIN:LNSPECS:           1
+ MAIN:Assign spec:'ANALYZE EMA'
+ MAIN:Process RecordX:'     PCPT_THRESH 1921 2013 0 1E+20 DEFAULT'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           2
+ MAIN:Assign spec:'PCPT_THRESH 1921 2013 0 1E+20 DEFAULT'
+ MAIN:Process RecordX:'     PCPT_THRESH 1921 1978 56000 1E+20 HISTORIC 1'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           3
+ MAIN:Assign spec:'PCPT_THRESH 1921 1978 56000 1E+20 HISTORIC 1'
+ MAIN:Process RecordX:'     PCPT_THRESH 1901 1920 56000 1E+20 FROM STATION DESCR
+ IPTION'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           4
+ MAIN:Assign spec:'PCPT_THRESH 1901 1920 56000 1E+20 FROM STATION DESCRIPTION'
+ MAIN:Process RecordX:'     BEGYEAR 1921'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           5
+ MAIN:Assign spec:'BEGYEAR 1921'
+ MAIN:Process RecordX:'     ENDYEAR 2013'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           6
+ MAIN:Assign spec:'ENDYEAR 2013'
+ MAIN:Process RecordX:'     HISTPERIOD 93'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           7
+ MAIN:Assign spec:'HISTPERIOD 93'
+ MAIN:Process RecordX:'     PEAK 1921 56000 H'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           8
+ MAIN:Assign spec:'PEAK 1921 56000 H'
+ MAIN:Process RecordX:'     SKEWOPT WEIGHTED'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           9
+ MAIN:Assign spec:'SKEWOPT WEIGHTED'
+ MAIN:Process RecordX:'     GENSKEW -0.102386'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          10
+ MAIN:Assign spec:'GENSKEW -0.102386'
+ MAIN:Process RecordX:'     SKEWSE 0.55'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          11
+ MAIN:Assign spec:'SKEWSE 0.55'
+ MAIN:Process RecordX:'     LOTYPE MGBT'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          12
+ MAIN:Assign spec:'LOTYPE MGBT'
+ MAIN:Process RecordX:'     LATITUDE 38.24556'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          13
+ MAIN:Assign spec:'LATITUDE 38.24556'
+ MAIN:Process RecordX:'     LONGITUDE 104.4858'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          14
+ MAIN:Assign spec:'LONGITUDE 104.4858'
+ MAIN:Process RecordX:'     PLOTNAME 07108900'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          15
+ MAIN:Assign spec:'PLOTNAME 07108900'
+ MAIN:          15  spec(s) for station 07108900       
+   Spec           1 : 'ANALYZE EMA'
+   Spec           2 : 'PCPT_THRESH 1921 2013 0 1E+20 DEFAULT'
+   Spec           3 : 'PCPT_THRESH 1921 1978 56000 1E+20 HISTORIC 1'
+   Spec           4 
+ : 'PCPT_THRESH 1901 1920 56000 1E+20 FROM STATION DESCRIPTION'
+   Spec           5 : 'BEGYEAR 1921'
+   Spec           6 : 'ENDYEAR 2013'
+   Spec           7 : 'HISTPERIOD 93'
+   Spec           8 : 'PEAK 1921 56000 H'
+   Spec           9 : 'SKEWOPT WEIGHTED'
+   Spec          10 : 'GENSKEW -0.102386'
+   Spec          11 : 'SKEWSE 0.55'
+   Spec          12 : 'LOTYPE MGBT'
+   Spec          13 : 'LATITUDE 38.24556'
+   Spec          14 : 'LONGITUDE 104.4858'
+   Spec          15 : 'PLOTNAME 07108900'
+ Done reading spec file
+ MAIN:calling J407XE...
+ J407XE:IA1:           9  INFORM:           2  MSG1:          14
+ After INPUT - NSYS,NHIST,EMAOPT          35           1           1
+ After UPDATEPEAKS - NSYS,NHIST,EMAOPT          35           1           1
+ SETEMADATA: NTHRESH =           3
+ SETEMADATA: THRBYR,   THREYR,   THRLWR,       THRUPR
+        1921        2013  0.0000000E+00  1.0000000E+20
+        1921        1978   56000.00      1.0000000E+20
+        1901        1920   56000.00      1.0000000E+20
+ Debug Info for 
+ 07108900       USGS ST. CHARLES RIVER AT VINELAND, CO.              1921-2013 *
+  HISTORIC *
+ after WCFAGB, IER=           0
+ 
+ Running EMA for station 
+ 07108900       USGS ST. CHARLES RIVER AT VINELAND, CO.              1921-2013 *
+  HISTORIC *
+ calling RUNEMA: NPKS,NSYS,GENSKU,RMSEGS          36          35 -0.1023860    
+  0.5500000    
+ 
+ calling EMAFIT with the following input Args:
+ NOBS:         113
+         QLow        QUpr         TLow        TUpr        DType
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+      56000.0     56000.0    0.5600D+05    0.1000D+21     Hist
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+          0.0     56000.0    0.5600D+05    0.1000D+21     Cens
+        342.0       342.0    0.1000D-98    0.1000D+21     Syst
+       4940.0      4940.0    0.1000D-98    0.1000D+21     Syst
+       5910.0      5910.0    0.1000D-98    0.1000D+21     Syst
+       7560.0      7560.0    0.1000D-98    0.1000D+21     Syst
+       1040.0      1040.0    0.1000D-98    0.1000D+21     Syst
+       6310.0      6310.0    0.1000D-98    0.1000D+21     Syst
+        990.0       990.0    0.1000D-98    0.1000D+21     Syst
+       1580.0      1580.0    0.1000D-98    0.1000D+21     Syst
+       5180.0      5180.0    0.1000D-98    0.1000D+21     Syst
+       3760.0      3760.0    0.1000D-98    0.1000D+21     Syst
+       5400.0      5400.0    0.1000D-98    0.1000D+21     Syst
+       7300.0      7300.0    0.1000D-98    0.1000D+21     Syst
+       4480.0      4480.0    0.1000D-98    0.1000D+21     Syst
+       3810.0      3810.0    0.1000D-98    0.1000D+21     Syst
+       1960.0      1960.0    0.1000D-98    0.1000D+21     Syst
+       1700.0      1700.0    0.1000D-98    0.1000D+21     Syst
+       2330.0      2330.0    0.1000D-98    0.1000D+21     Syst
+       3440.0      3440.0    0.1000D-98    0.1000D+21     Syst
+       1480.0      1480.0    0.1000D-98    0.1000D+21     Syst
+       2170.0      2170.0    0.1000D-98    0.1000D+21     Syst
+       5250.0      5250.0    0.1000D-98    0.1000D+21     Syst
+       3140.0      3140.0    0.1000D-98    0.1000D+21     Syst
+       4190.0      4190.0    0.1000D-98    0.1000D+21     Syst
+        790.0       790.0    0.1000D-98    0.1000D+21     Syst
+       1580.0      1580.0    0.1000D-98    0.1000D+21     Syst
+        763.0       763.0    0.1000D-98    0.1000D+21     Syst
+        444.0       444.0    0.1000D-98    0.1000D+21     Syst
+       1240.0      1240.0    0.1000D-98    0.1000D+21     Syst
+       4760.0      4760.0    0.1000D-98    0.1000D+21     Syst
+        471.0       471.0    0.1000D-98    0.1000D+21     Syst
+       1580.0      1580.0    0.1000D-98    0.1000D+21     Syst
+       2510.0      2510.0    0.1000D-98    0.1000D+21     Syst
+       3740.0      3740.0    0.1000D-98    0.1000D+21     Syst
+         76.0        76.0    0.1000D-98    0.1000D+21     Syst
+       2430.0      2430.0    0.1000D-98    0.1000D+21     Syst
+ REGSTD:   1.00000000000000     
+ GENSDMSE:  -999.000000000000     
+ REGSKEW: -0.102385990321636     
+ REGMSE:  0.302500009536743     
+ GBTYPE:MGBT
+ GBTHRSH  -99.0000000000000     
+ 
+ RESULTS
+ WRCMOM-1  0.33869746D+01  0.17739303D+00  0.18707891D+00
+ WRCMOM-2  0.33881861D+01  0.16606495D+00  0.42957918D+00
+ WRCMOM-3  0.33869746D+01  0.17739303D+00  0.18707891D+00
+ 
+ Moments:   3.386975      0.4211805      0.1870789    
+ 
+ Plotting Positions of peaks
+ Plot Pos      Obs. Q
+  4.4247787E-03   56000.00    
+  0.9450508       342.0000    
+  0.2290335       4940.000    
+  0.1188770       5910.000    
+  3.6259595E-02   7560.000    
+  0.7798161       1040.000    
+  9.1337852E-02   6310.000    
+  0.8073552       990.0000    
+  0.6971987       1580.000    
+  0.2014944       5180.000    
+  0.3667291       3760.000    
+  0.1464161       5400.000    
+  6.3798726E-02   7300.000    
+  0.2841117       4480.000    
+  0.3391900       3810.000    
+  0.5870422       1960.000    
+  0.6145813       1700.000    
+  0.5319639       2330.000    
+  0.4218074       3440.000    
+  0.7247378       1480.000    
+  0.5595030       2170.000    
+  0.1739552       5250.000    
+  0.4493465       3140.000    
+  0.3116509       4190.000    
+  0.8348943       790.0000    
+  0.6696596       1580.000    
+  0.8624334       763.0000    
+  0.9175117       444.0000    
+  0.7522770       1240.000    
+  0.2565726       4760.000    
+  0.8899726       471.0000    
+  0.6421204       1580.000    
+  0.4768856       2510.000    
+  0.3942683       3740.000    
+  0.9725900       76.00000    
+  0.5044248       2430.000    
+ 
+ Threshold positions
+ Plot Pos     Threshold    NumPeaks
+   1.00000000000000       -99.0000000000000                0
+  8.849557489156723E-003   4.74818802700620               77
+ 
+   Prob       EMA Est.        CL Low       CL High
+ 0.0001        96.873         1.848       361.336         0.185
+ 0.0005       134.479         5.327       392.668         0.124
+ 0.0010       157.308         8.547       412.551         0.101
+ 0.0020       186.171        13.869       438.254         0.081
+ 0.0050       237.743        26.810       485.406         0.057
+ 0.0100       292.031        44.815       536.590         0.043
+ 0.0200       367.104        75.842       610.079         0.030
+ 0.0250       397.557        90.035       640.847         0.027
+ 0.0400       475.803       129.492       722.629         0.020
+ 0.0500       521.560       153.935       772.377         0.018
+ 0.1000       718.368       262.931      1003.732         0.011
+ 0.2000      1069.587       590.247      1478.352         0.007
+ 0.3000      1435.335       942.341      2014.832         0.006
+ 0.3333      1567.234      1058.841      2210.154         0.006
+ 0.4000      1854.244      1294.755      2637.026         0.006
+ 0.4296      1993.767      1403.612      2844.204         0.006
+ 0.5000      2365.097      1680.000      3400.329         0.006
+ 0.5708      2813.734      1998.537      4084.322         0.006
+ 0.6000      3028.424      2147.565      4416.756         0.006
+ 0.7000      3962.466      2782.153      5900.239         0.006
+ 0.8000      5458.591      3766.368      8386.774         0.007
+ 0.9000      8599.447      5691.344     14007.172         0.009
+ 0.9500     12630.464      7881.264     22179.011         0.012
+ 0.9600     14149.052      8639.077     25598.592         0.014
+ 0.9750     17747.298     10321.721     34550.854         0.017
+ 0.9800     19661.653     11163.127     39833.667         0.018
+ 0.9900     26564.578     13960.221     62131.572         0.025
+ 0.9950     35131.859     17044.732     97469.602         0.033
+ 0.9980     49560.280     21570.271    178359.650         0.047
+ 0.9990     63310.085     25329.520    283378.534         0.059
+ 0.9995     79993.659     29372.227    452138.375         0.074
+ 0.9999    133097.074     39823.250   1356612.093         0.117
+ After INPUT - NSYS,NHIST,EMAOPT           0           0           1
+ After UPDATEPEAKS - NSYS,NHIST,EMAOPT           0           0           1
+ Closing output file V:\CDOT_Flood_Frequency\PeakFQ\Input_files\07108900\0710890
+ 0.PRT
