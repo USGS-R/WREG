@@ -33,8 +33,10 @@
 #'  vector the same size as \code{Influence}. It indicates if the influence is
 #'  significant for each observation.}
 #'  
-#' @examples 
-#' \dontrun Add example
+#' @examples
+#' \dontrun{
+#' #add examples
+#' }
 #'@export
 Influence <- function(e,X,Omega,Beta,ROI=FALSE,Lev=NA) {
   # William Farmer, USGS, January 02, 2015

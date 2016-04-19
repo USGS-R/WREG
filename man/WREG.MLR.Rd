@@ -158,6 +158,8 @@ This is the main function for WREG, though it serves only as a
  other functions in this package.
 }
 \examples{
-\dontrun add examples
+\dontrun{
+#add examples
+}
 }
 

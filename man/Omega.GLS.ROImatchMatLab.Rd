@@ -104,6 +104,8 @@ This is a legacy function that matches the idiosyncrasies of WREG v.
  This function will become obsolete once all idiosyncrasies are assessed.
 }
 \examples{
-\dontrun Add example
+\dontrun{
+#add examples
+}
 }
 

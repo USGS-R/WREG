@@ -61,8 +61,10 @@
 #'  empty.}
 #'@import stats
 #'  
-#' @examples 
-#' \dontrun Add example
+#' @examples
+#' \dontrun{
+#' #add examples
+#' }
 #'@export
 
 WREG.WLS <- function(Y,X,recordLengths,LP3,transY,x0=NA) {

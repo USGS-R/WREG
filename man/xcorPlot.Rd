@@ -36,6 +36,8 @@ If \code{plot=FALSE}, the Nash-Sutcliffe model efficieny is returned.
  cross-correlation.
 }
 \examples{
-\dontrun Add example
+\dontrun{
+#add examples
+}
 }
 

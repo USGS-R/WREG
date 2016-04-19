@@ -24,8 +24,10 @@
 #'  
 #'@import stats graphics
 #'  
-#' @examples 
-#' \dontrun Add example
+#' @examples
+#' \dontrun{
+#' #add examples
+#' }
 #'@export
 xcorPlot <- function(object,alpha,theta,concurrentMin,
   DistMeth=2,plot=TRUE) {

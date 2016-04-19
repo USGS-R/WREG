@@ -19,7 +19,9 @@
 #'@return Returns the distance between the two sites in miles.
 #'  
 #' @examples 
-#' \dontrun Add example
+#' \dontrun{
+#' #add examples
+#' }
 #'@export
 Dist.WREG <- function(Lat1,Long1,Lat2,Long2,method=2) {
   # William Farmer, USGS, January 23, 2015

@@ -72,8 +72,10 @@
 #'  estimated model error variance.} \item{Omega}{The estimated weighting
 #'  matrix.  A square matrix.}
 #'  
-#' @examples 
-#' \dontrun Add example
+#' @examples
+#' \dontrun{
+#' #add examples
+#' }
 #'@export
 Omega.GLS <- function(alpha=0.01,theta=0.98,independent,X,Y,recordLengths,
   LP3,MSEGR=NA,TY=2,peak=T,distMeth=2) {

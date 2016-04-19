@@ -118,8 +118,10 @@
 #'  empty.}
 #'@import stats
 #'  
-#' @examples 
-#' \dontrun Add example
+#' @examples
+#' \dontrun{
+#' #add examples
+#' }
 #'@export
 
 WREG.GLS <- function(Y,X,recordLengths,LP3,basinChars,transY,

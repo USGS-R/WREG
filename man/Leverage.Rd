@@ -44,6 +44,8 @@ than the critical value.  These calculations are based on equations 40, 41 and
 42 of the WREG v. 1.0 manual.
 }
 \examples{
-\dontrun Add example
+\dontrun{
+#add examples
+}
 }
 

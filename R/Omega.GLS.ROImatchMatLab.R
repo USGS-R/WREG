@@ -82,8 +82,10 @@
 #'  weighting matrix.}
 #'@import stats
 #'  
-#' @examples 
-#' \dontrun Add example
+#' @examples
+#' \dontrun{
+#' #add examples
+#' }
 #'@export
 Omega.GLS.ROImatchMatLab <- function(alpha=0.01,theta=0.98,Independent,X,Y,RecordLengths,
   LP3,MSEGR=NA,TY=2,Peak=T,X.all,LP3.all,DistMeth=2,regSkew=FALSE) {
