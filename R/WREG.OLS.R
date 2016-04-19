@@ -49,9 +49,27 @@
 #'@import stats
 #'  
 #' @examples
-#' \dontrun{
-#' #add examples
-#' }
+#'#Import the data
+#'peakFQdir <- paste0(system.file("exampleDirectory", package = "WREG"),
+#'                    "/pfqImport")
+#'gisFilePath <- paste0(peakFQdir,"/pfqSiteInfo.txt")
+#'importedData <- importPeakFQ(pfqPath = peakFQdir,
+#'                             gisFile = gisFilePath)
+#'#Parameterize model.
+#'#all rows must be ordered identically between dataframes that contain site-specific information.
+#'##Select Y variable
+#'Y <- importedData$Y$AEP_0.5
+#'
+#'##Select X variables
+#'X <- importedData$X[c("Sand",
+#'                      "OutletElev",
+#'                      "Slope")]
+#'##Specify Y transformation if any
+#'transY <- "none"
+
+#'#Run WREG.OLS
+#'WREG.OLS(Y, X, transY)
+#'
 #'@export
 
 WREG.OLS <- function(Y,X,transY,x0=NA) {

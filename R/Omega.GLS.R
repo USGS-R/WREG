@@ -177,8 +177,7 @@ Omega.GLS <- function(alpha=0.01,theta=0.98,independent,X,Y,recordLengths,
         warning(paste("In valid elements: The names of the elements in",
           "independent are",names(independent),
           ".  'independent' must be provided as a data frame with elements",
-          "named 'Station.ID', 'Lat' and 'Long' for standard deivation,",
-          "deviate and skew, respectively."))
+          "named 'Station.ID', 'Lat' and 'Long"))
         err <- TRUE
       } else {
         if ((length(unique(apply(cbind(independent$Lat,independent$Long),FUN=class,MARGIN=2)))!=1)|
