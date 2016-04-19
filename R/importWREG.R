@@ -52,11 +52,11 @@ importWREG <- function(wregPath,sites='') {
     stop(paste('Could not find',siteInfoFile))
   }
   siteInfo <- read.table(siteInfoFile,sep='\t',header=T,
-    colClasses = list(Station.ID='character'))
+                         colClasses = list(Station.ID='character'))
   siteInfo$Station.ID <- ifelse(nchar(siteInfo$Station.ID)%%2>0,
-    paste0("0",siteInfo$Station.ID),siteInfo$Station.ID)
+                                paste0("0",siteInfo$Station.ID),siteInfo$Station.ID)
   BasChars <- siteInfo[,is.element(names(siteInfo),
-    c('Station.ID','Lat','Long'))]
+                                   c('Station.ID','Lat','Long'))]
   X <- siteInfo[,c(1,9:ncol(siteInfo))]
   
   # Screen for particular sites
@@ -73,6 +73,8 @@ importWREG <- function(wregPath,sites='') {
   sitesOut <- siteInfo$Station.ID[ndx]
   X <- X[ndx,]
   BasChars <- BasChars[ndx,]
+  TestRecLen <- siteInfo[,is.element(names(siteInfo),
+                                     c('Station.ID','No..Annual.Series'))]
   TestRecLen <- TestRecLen[ndx,]
   site1 <- sitesOut
   
@@ -82,10 +84,10 @@ importWREG <- function(wregPath,sites='') {
     stop(paste('Could not find',flowCharFile))
   }
   Y <- read.table(flowCharFile,sep='\t',header=T,
-    colClasses = list(Station.ID='character'))
+                  colClasses = list(Station.ID='character'))
   # Y <- Y[sort.int(runif(nrow(Y)),index.return = TRUE)$ix,] # for testing
   Y$Station.ID <- ifelse(nchar(Y$Station.ID)%%2>0,
-      paste0("0",Y$Station.ID),Y$Station.ID)
+                         paste0("0",Y$Station.ID),Y$Station.ID)
   names(Y)[2:ncol(Y)] <- unlist(strsplit(names(Y)[2:ncol(Y)],split='[.]'))
   ndx <- which(is.element(Y$Station.ID,sitesOut))
   Y <- Y[ndx,]
@@ -99,12 +101,12 @@ importWREG <- function(wregPath,sites='') {
   }
   lp3g <- read.table(lp3gFile,sep='\t',header=T)
   lp3g$Station.ID <- ifelse(nchar(lp3g$Station.ID)%%2>0,
-    paste0("0",lp3g$Station.ID),lp3g$Station.ID)
+                            paste0("0",lp3g$Station.ID),lp3g$Station.ID)
   test <- sum(unlist(
     lapply(lapply(t(lp3g[,2:ncol(lp3g)]),FUN=unique),FUN=length))>1)
   if (test>0) {
     stop(paste0('For a given set of tiem series, ',
-      'the columns in LP3G.txt must be identical.'))
+                'the columns in LP3G.txt must be identical.'))
   }
   ndx <- which(is.element(lp3g$Station.ID,sitesOut))
   lp3g <- lp3g[ndx,]
@@ -116,7 +118,7 @@ importWREG <- function(wregPath,sites='') {
   }
   lp3k <- read.table(lp3kFile,sep='\t',header=T)
   lp3k$Station.ID <- ifelse(nchar(lp3k$Station.ID)%%2>0,
-    paste0("0",lp3k$Station.ID),lp3k$Station.ID)
+                            paste0("0",lp3k$Station.ID),lp3k$Station.ID)
   ndx <- which(is.element(lp3k$Station.ID,sitesOut))
   lp3k <- lp3k[ndx,]
   site3b <- lp3k$Station.ID
@@ -127,12 +129,12 @@ importWREG <- function(wregPath,sites='') {
   }
   lp3s <- read.table(lp3sFile,sep='\t',header=T)
   lp3s$Station.ID <- ifelse(nchar(lp3s$Station.ID)%%2>0,
-    paste0("0",lp3s$Station.ID),lp3s$Station.ID)
+                            paste0("0",lp3s$Station.ID),lp3s$Station.ID)
   test <- sum(unlist(
     lapply(lapply(t(lp3s[,2:ncol(lp3s)]),FUN=unique),FUN=length))>1)
   if (test>0) {
     stop(paste0('For a given set of tiem series, ',
-      'the columns in LP3s.txt must be identical.'))
+                'the columns in LP3s.txt must be identical.'))
   }
   ndx <- which(is.element(lp3s$Station.ID,sitesOut))
   lp3s <- lp3s[ndx,]
@@ -140,7 +142,7 @@ importWREG <- function(wregPath,sites='') {
   lp3s <- lp3s[match(sitesOut,lp3s$Station.ID),]
   
   LP3f <- data.frame(Station.ID=sitesOut,S=lp3s[,2],G=lp3g[,2],
-    GR=siteInfo$Regional.Skew[ndx])
+                     GR=siteInfo$Regional.Skew[ndx])
   LP3k <- lp3k
   
   # Load and parse UserWLS.txt (if available)
@@ -152,15 +154,15 @@ importWREG <- function(wregPath,sites='') {
       stop('UserWLS.txt must be a square matrix.')
     }
     if (!(identical(site1,site2)&identical(site1,site3a)&
-        identical(site1,site3b)&identical(site1,site3c))) {
+          identical(site1,site3b)&identical(site1,site3c))) {
       uwls <- matrix(NA,ncol=length(site1),nrow=length(site2))
       warning(paste0('Because the input files have a different order of sites,',
-        ' the user-provided weighting matrix is invalid.',
-        ' It has been replaced with NAs.'))
-      } else if (nrow(uwls)!=n2) {
+                     ' the user-provided weighting matrix is invalid.',
+                     ' It has been replaced with NAs.'))
+    } else if (nrow(uwls)!=n2) {
       uwls <- uwls[ndx,ndx]
       warning(paste0('UserWLS.txt was ammended to match sites in arguments.',
-        ' (Note: Be sure weights do not depend on sites that were removed.)'))
+                     ' (Note: Be sure weights do not depend on sites that were removed.)'))
     }
     uwls <- as.matrix(uwls)
     row.names(uwls) <- colnames(uwls) <- sitesOut
@@ -169,10 +171,10 @@ importWREG <- function(wregPath,sites='') {
   # Load and parse USGS*.txt files
   siteTS <- list()
   allFiles <- unique(apply(as.matrix(paste0('USGS',sitesOut,'*.txt')),
-      MARGIN=1,FUN=list.files,path=wregPath))
+                           MARGIN=1,FUN=list.files,path=wregPath))
   if (any(lapply(allFiles,length) == 0)) {
     warning(paste("The following sites do not have timeseries data",
-                   sitesOut[which(lapply(allFiles,length) == 0)]))
+                  sitesOut[which(lapply(allFiles,length) == 0)]))
     #Remove missing file from all files list
     sitesOut <- sitesOut[-which(lapply(allFiles,length) == 0)]
     allFiles <- allFiles[-which(lapply(allFiles,length) == 0)]
@@ -184,8 +186,8 @@ importWREG <- function(wregPath,sites='') {
     LP3k <- subset(LP3k, Station.ID %in% sitesOut)
     BasChars <- subset(BasChars, Station.ID %in% sitesOut)
     siteInfo <- subset(siteInfo, Station.ID %in% sitesOut)
+    TestRecLen <- subset(TestRecLen, Station.ID %in% sitesOut )
     
-
   }
   if(length(allFiles) > length(sitesOut))
   {
@@ -194,8 +196,6 @@ importWREG <- function(wregPath,sites='') {
   allFiles <- file.path(wregPath,allFiles)
   siteTS <- lapply(allFiles,read.table)
   
-  TestRecLen <- siteInfo[,is.element(names(siteInfo),
-                                     c('Station.ID','No..Annual.Series'))]
   recLen <- recCor <- matrix(NA,ncol=length(siteTS),nrow=length(siteTS))
   
   for (i in 1:length(siteTS)) {
@@ -216,7 +216,7 @@ importWREG <- function(wregPath,sites='') {
   names(tester) <- NULL
   if (!identical(tester,TestRecLen[,2])) {
     stop(paste('Reported record lengths in SiteInfo.txt do not match',
-      'time series files.'))
+               'time series files.'))
   }
   row.names(recLen) <- row.names(recCor) <- colnames(recLen) <- 
     colnames(recCor) <- sitesOut
