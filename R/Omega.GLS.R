@@ -1,75 +1,203 @@
-#' Calculate weighting matrix for GLS regression. (WREG)
+#'Calculate weighting matrix for GLS regression. (WREG)
 #'
-#'@description 
-#'THe \code{Omega.GLS} function calculates the weighting matrix required for generalized
-#'least-squares regression, without or without uncertainty in the regional skew.
+#'@description THe \code{Omega.GLS} function calculates the weighting matrix
+#'required for generalized least-squares regression, without or without
+#'uncertainty in the regional skew.
 #'
-#' @param alpha A number, required only for \dQuote{GLS} and \dQuote{GLSskew}.  
-#' \code{alpha} is a parameter used in the estimated cross-correlation between site
-#' records.  See equation 20 in the WREG v. 1.05 manual.  The arbitrary, default value 
-#' is 0.01.  The user should fit a different value as needed.
-#' @param theta A number, required only for \dQuote{GLS} and \dQuote{GLSskew}.  
-#' \code{theta} is a parameter used in the estimated cross-correlation between site
-#' records.  See equation 20 in the WREG v. 1.05 manual.  The arbitrary, default value 
-#' is 0.98.  The user should fit a different value as needed.
-#' @param independent A dataframe containing three variables: \code{StationID} is the 
-#' numerical identifier (without a leading zero) of each site, \code{Lat} is the latitude
-#' of the site, in decimal degrees, and \code{Long} is the longitude of the site, in decimal
-#' degrees.  The sites must be presented in the same order as \code{Y}.  Required only for
-#' \dQuote{GLS} and \dQuote{GLSskew}.
-#' @param X The independent variables in the regression, with any transformations 
-#' already applied.  Each row represents a site and each column represents
-#' a particular independe variable.  (If a leading constant is used, it should be 
-#' included here as a leading column of ones.)  The rows must be in the same order as
-#' the dependent variables in \code{Y}.
-#' @param Y The dependent variable of interest, with any transformations already 
-#' applied.
-#' @param recordLengths This input is required for \dQuote{WLS}, \dQuote{GLS} and 
-#' \dQuote{GLSskew}.  For \dQuote{GLS} and \dQuote{GLSskew}, \code{recordLengths} 
-#' should be a matrix whose rows and columns are in the same order as \code{Y}.  Each 
-#' \code{(r,c)} element represents the length of concurrent record between sites 
-#' \code{r} and \code{c}.  The diagonal elements therefore represent each site's full
-#' record length.  For \dQuote{WLS}, the only the at-site record lengths are needed.
-#' In the case of \dQuote{WLS}, \code{recordLengths} can be a vector or the matrix 
-#' described for \dQuote{GLS} and \dQuote{GLSskew}.
-#' @param LP3 A dataframe containing the fitted Log-Pearson Type III standard
-#' deviate, standard deviation and skew for each site.  The names of this data frame are
-#' \code{S}, \code{K} and \code{G}.  For \dQuote{GLSskew}, the regional skew value must 
-#' also be provided in a variable called \code{GR}.  The order of the rows must be the same
-#' as \code{Y}.
-#' @param MSEGR A number. The mean squared error of the regional skew.  Required only for
-#' \dQuote{GLSskew}.
-#' @param TY A number.  The return period of the event being modeled.  Required only for 
-#' \dQuote{GLSskew}.  The default value is \code{2}.  (See the \code{Legacy} details below.)
-#' @param peak A logical.  Indicates if the event being modeled is a peak flow event
-#' or a low-flow event.  \code{TRUE} indicates a peak flow, while \code{FALSE} indicates
-#' a low-flow event.
-#' @param distMeth Required for \dQuote{GLS} and \dQuote{GLSskew}.  A value of \code{1} 
-#' indicates that the "Nautical Mile" approximation should be used to calculate inter-site
-#' distances.  A value of \code{2} designates the Haversine approximation.  See 
-#' \code{\link{Dist.WREG}}.  The default value is \code{2}.  (See the \code{Legacy} 
-#' details below.)
-#'
-#'@details This function is largely a subroutine for \code{\link{WREG.MLR}} when applying
-#'generalized least-squares regression (\dQuote{GLS} and \dQuote{GLSskew}).
-#'
-#'The weighting matrix is calculated by iteration, as noted in the manual to 
-#'WREG v. 1.0.  As currently implemented the initial estimate of model error variance,
-#'\code{GSQ}, is taken to range from \code{0} and \code{2*var(Y)}.  This interval is 
-#'broken into 30 equally spaced intervals.  The weighting matrix is calculated for each
-#'interval endpoint and the deviation from equation 21 in the WREG v. 1.0 manual is
-#'recorded.  The progam then search for the interval over which the deviatioon changes 
-#'sign.  This interval is then split into 30 finer intervals and the process is repeated.
-#'The ine interval with the smallest positive deviation is selected as the best estimate.
-#'
-#'@return This function returns a list with two elements:
-#'\item{GSQ}{The estimated model error variance.}
-#'\item{Omega}{The estimated weighting matrix.  A square matrix.}
+#'@param alpha A number, required only for \dQuote{GLS} and \dQuote{GLSskew}. 
+#'  \code{alpha} is a parameter used in the estimated cross-correlation between
+#'  site records.  See equation 20 in the WREG v. 1.05 manual.  The arbitrary,
+#'  default value is 0.01.  The user should fit a different value as needed.
+#'@param theta A number, required only for \dQuote{GLS} and \dQuote{GLSskew}. 
+#'  \code{theta} is a parameter used in the estimated cross-correlation between
+#'  site records.  See equation 20 in the WREG v. 1.05 manual.  The arbitrary,
+#'  default value is 0.98.  The user should fit a different value as needed.
+#'@param independent A dataframe containing three variables: \code{StationID} is
+#'  the numerical identifier (without a leading zero) of each site, \code{Lat}
+#'  is the latitude of the site, in decimal degrees, and \code{Long} is the
+#'  longitude of the site, in decimal degrees.  The sites must be presented in
+#'  the same order as \code{Y}.  Required only for \dQuote{GLS} and
+#'  \dQuote{GLSskew}.
+#'@param X The independent variables in the regression, with any transformations
+#'  already applied.  Each row represents a site and each column represents a
+#'  particular independe variable.  (If a leading constant is used, it should be
+#'  included here as a leading column of ones.)  The rows must be in the same
+#'  order as the dependent variables in \code{Y}.
+#'@param Y The dependent variable of interest, with any transformations already 
+#'  applied.
+#'@param recordLengths This input is required for \dQuote{WLS}, \dQuote{GLS} and
+#'  \dQuote{GLSskew}.  For \dQuote{GLS} and \dQuote{GLSskew},
+#'  \code{recordLengths} should be a matrix whose rows and columns are in the
+#'  same order as \code{Y}.  Each \code{(r,c)} element represents the length of
+#'  concurrent record between sites \code{r} and \code{c}.  The diagonal
+#'  elements therefore represent each site's full record length.  For
+#'  \dQuote{WLS}, the only the at-site record lengths are needed. In the case of
+#'  \dQuote{WLS}, \code{recordLengths} can be a vector or the matrix described
+#'  for \dQuote{GLS} and \dQuote{GLSskew}.
+#'@param LP3 A dataframe containing the fitted Log-Pearson Type III standard 
+#'  deviate, standard deviation and skew for each site.  The names of this data
+#'  frame are \code{S}, \code{K} and \code{G}.  For \dQuote{GLSskew}, the
+#'  regional skew value must also be provided in a variable called \code{GR}. 
+#'  The order of the rows must be the same as \code{Y}.
+#'@param MSEGR A number. The mean squared error of the regional skew.  Required
+#'  only for \dQuote{GLSskew}.
+#'@param TY A number.  The return period of the event being modeled.  Required
+#'  only for \dQuote{GLSskew}.  The default value is \code{2}.  (See the
+#'  \code{Legacy} details below.)
+#'@param peak A logical.  Indicates if the event being modeled is a peak flow
+#'  event or a low-flow event.  \code{TRUE} indicates a peak flow, while
+#'  \code{FALSE} indicates a low-flow event.
+#'@param distMeth Required for \dQuote{GLS} and \dQuote{GLSskew}.  A value of
+#'  \code{1} indicates that the "Nautical Mile" approximation should be used to
+#'  calculate inter-site distances.  A value of \code{2} designates the
+#'  Haversine approximation.  See \code{\link{Dist.WREG}}.  The default value is
+#'  \code{2}.  (See the \code{Legacy} details below.)
+#'  
+#'@details This function is largely a subroutine for \code{\link{WREG.MLR}} when
+#'  applying generalized least-squares regression (\dQuote{GLS} and
+#'  \dQuote{GLSskew}).
+#'  
+#'  The weighting matrix is calculated by iteration, as noted in the manual to 
+#'  WREG v. 1.0.  As currently implemented the initial estimate of model error
+#'  variance, \code{GSQ}, is taken to range from \code{0} and \code{2*var(Y)}. 
+#'  This interval is broken into 30 equally spaced intervals.  The weighting
+#'  matrix is calculated for each interval endpoint and the deviation from
+#'  equation 21 in the WREG v. 1.0 manual is recorded.  The progam then search
+#'  for the interval over which the deviatioon changes sign.  This interval is
+#'  then split into 30 finer intervals and the process is repeated. The ine
+#'  interval with the smallest positive deviation is selected as the best
+#'  estimate.
+#'  
+#'@return This function returns a list with two elements: \item{GSQ}{The
+#'  estimated model error variance.} \item{Omega}{The estimated weighting
+#'  matrix.  A square matrix.}
+#'  
+#' @examples 
+#' \dontrun Add example
 #'@export
 Omega.GLS <- function(alpha=0.01,theta=0.98,independent,X,Y,recordLengths,
   LP3,MSEGR=NA,TY=2,peak=T,distMeth=2) {
   
   # William Farmer, January 22, 2015
+  
+  # Some basic error checking
+  err <- FALSE
+  if (missing(Y)) {
+    warning("Dependent variable (Y) must be provided.")
+    err <- TRUE
+  } else {
+    if (!is.numeric(Y)) {
+      warning("Dependent variable (Y) must be provided as class numeric.")
+      err <- TRUE
+    } else {
+      if (sum(is.na(Y))>0) {
+        warning(paste0("The depedent variable (Y) contains missing ",
+          "values.  These must be removed."))
+        err <- TRUE
+      }
+      if (sum(is.infinite(Y))>0) {
+        warning(paste0("The depedent variable (Y) contains infinite ",
+          "values.  These must be removed."))
+        err <- TRUE
+      }
+    }
+  }
+  if (missing(X)) {
+    warning("Independent variables (X) must be provided.")
+    err <- TRUE
+  } else {
+    if ((length(unique(apply(X,FUN=class,MARGIN=2)))!=1)|
+        (unique(apply(X,FUN=class,MARGIN=2))!="numeric")) {
+      warning("Independent variables (X) must be provided as class numeric.")
+      err <- TRUE
+    } else {
+      if (sum(is.na(as.matrix(X)))>0) {
+        warning(paste0("Some independent variables (X) contain missing ",
+          "values.  These must be removed."))
+        err <- TRUE
+      }
+      if (sum(is.infinite(as.matrix(X)))>0) {
+        warning(paste0("Some independent variables (X) contain infinite ",
+          "values.  These must be removed."))
+        err <- TRUE
+      }
+    }
+  }
+  if (!is.numeric(TY)) {
+    warning(paste("The return period (TY) must be a numeric value."))
+    err <- TRUE
+  }
+  if (length(TY)!=1) {
+    warning("The return period (TY) must be a single value")
+    err <- TRUE
+  }
+  if (!is.numeric(alpha)) {
+    warning(paste("alpha must be a numeric value."))
+    err <- TRUE
+  }
+  if (length(alpha)!=1) {
+    warning("alpha must be a single value")
+    err <- TRUE
+  }
+  if (!is.numeric(theta)) {
+    warning(paste("theta must be a numeric value."))
+    err <- TRUE
+  }
+  if (length(theta)!=1) {
+    warning("theta must be a single value")
+    err <- TRUE
+  }
+  if (!is.logical(peak)) {
+    warning(paste("The input 'peak' must be either TRUE when estimating a",
+      "maximum event or FALSE when estimatinga minimum event."))
+    err <- TRUE
+  }
+  if (length(peak)!=1) {
+    warning("peak must be a single value")
+    err <- TRUE
+  }
+  if (!is.element(distMeth,c(1,2))) {
+    warning("distMeth must be either 1 for use of a nautical mile ",
+      "approximation or 2 for use of the haversine formula.")
+    err <- TRUE
+  }
+  if (missing(independent)) {
+    warning("independent must be provided as input.")
+    err <- TRUE
+  } else {
+    if (!is.data.frame(independent)) {
+      warning(paste("'independent' must be provided as a data frame with elements",
+        "named 'Station.ID', 'Lat' and 'Long' for standard deivation,",
+        "deviate and skew, respectively."))
+      err <- TRUE
+    } else {
+      if (sum(is.element(c("Station.ID","Lat","Long"),names(independent)))!=3) {
+        warning(paste("In valid elements: The names of the elements in",
+          "independent are",names(independent),
+          ".  'independent' must be provided as a data frame with elements",
+          "named 'Station.ID', 'Lat' and 'Long' for standard deivation,",
+          "deviate and skew, respectively."))
+        err <- TRUE
+      } else {
+        if ((length(unique(apply(cbind(independent$Lat,independent$Long),FUN=class,MARGIN=2)))!=1)|
+            (unique(apply(cbind(independent$Lat,independent$Long),FUN=class,MARGIN=2))!="numeric")) {
+          warning("latitudes and longitudes must be provided as class numeric.")
+          err <- TRUE
+        } else {
+          if (sum(is.na(c(independent$Lat,independent$Long)))>0) {
+            warning(paste0("Some latitudes and longitudes contain missing ",
+              "values.  These must be removed."))
+            err <- TRUE
+          }
+          if (sum(is.infinite(c(independent$Lat,independent$Long)))>0) {
+            warning(paste0("Some latitudes and longitudes contain infinite ",
+              "values.  These must be removed."))
+            err <- TRUE
+          }
+        }
+      }
+    }
+  }
   
   ## Determining if skew adjustment is requested
   SkewAdj<-F # default: no skew adjustment
@@ -77,15 +205,102 @@ Omega.GLS <- function(alpha=0.01,theta=0.98,independent,X,Y,recordLengths,
     SkewAdj<-T # If user provides a mean squared-error of regional skew, 
     #               then use skew adjustment.
   }
+  if (!is.na(MSEGR)) {
+    if (length(MSEGR)!=1) {
+      warning("MSEGR must be a single value")
+      err <- TRUE
+    }
+    if (!is.numeric(MSEGR)) {
+      warning("MSEGR must be a numeric value")
+      err <- TRUE
+    }
+  }
   
-  ###Rename LP3 columns
-  ####Check if GR was supplied so that same LP3 file can be used for all functions
-  if(ncol(LP3) == 3)
-  {
-    colnames(LP3) <- c("S","K","G")
-  } else if(ncol(LP3) == 4)
-  {
-    colnames(LP3) <- c("S","K","G","GR")
+  # Error checking LP3
+  if (missing(LP3)) {
+    warning("LP3 must be provided as an input.")
+    err <- TRUE
+  } else {
+    if (!SkewAdj) {
+      if (!is.data.frame(LP3)) {
+        warning(paste("LP3 must be provided as a data frame with elements named",
+          "'S', 'K' and 'G' for standard deivation, deviate and skew,",
+          "respectively."))
+        err <- TRUE
+      } else {
+        if (sum(is.element(c("S","K","G"),names(LP3)))!=3) {
+          warning(paste("In valid elements: The names of the elements in LP3 are",
+            names(LP3),". LP3 must be provided as a data frame with elements named",
+            "'S', 'K' and 'G' for standard deivation, deviate and skew,",
+            "respectively."))
+          err <- TRUE
+        }
+        if ((length(unique(apply(cbind(LP3$S,LP3$K,LP3$G),FUN=class,MARGIN=2)))!=1)|
+            (unique(apply(cbind(LP3$S,LP3$K,LP3$G),FUN=class,MARGIN=2))!="numeric")) {
+          warning("LP3 must be provided as a numeric array")
+          err <- TRUE
+        } else {
+          if (sum(is.infinite(LP3$S),is.infinite(LP3$K),is.infinite(LP3$G))>0) {
+            warning(paste0("Some elements of LP3$S, LP3$K, and LP3$G contain infinite ",
+              "values.  These must be removed."))
+            err <- TRUE
+          }
+          if (sum(is.na(LP3$S),is.na(LP3$K),is.na(LP3$G))>0) {
+            warning(paste0("Some elements of LP3$S, LP3$K, and LP3$G contain missing ",
+              "values.  These must be removed."))
+            err <- TRUE
+          }
+        }
+      }
+    } else {
+      if (!is.data.frame(LP3)) {
+        warning(paste("LP3 must be provided as a data frame with elements named",
+          "'S', 'K', 'G' and 'GR' for standard deivation, deviate,",
+          "skew and regional skew, respectively."))
+        err <- TRUE
+      } else {
+        if (sum(is.element(c("S","K","G","GR"),names(LP3)))!=4) {
+          warning(paste("In valid elements: The names of the elements in LP3 are",
+            names(LP3),". LP3 must be provided as a data frame with elements named",
+            "'S', 'K', 'G' and 'GR' for standard deivation, deviate,",
+            "skew and regional skew, respectively."))
+          err <- TRUE
+        }
+        if ((length(unique(apply(cbind(LP3$S,LP3$K,LP3$G,LP3$GR),FUN=class,MARGIN=2)))!=1)|
+            (unique(apply(cbind(LP3$S,LP3$K,LP3$G,LP3$GR),FUN=class,MARGIN=2))!="numeric")) {
+          warning("LP3 must be provided as a numeric array")
+          err <- TRUE
+        } else {
+          if (sum(is.infinite(LP3$S),is.infinite(LP3$K),
+            is.infinite(LP3$G),is.infinite(LP3$GR))>0) {
+            warning(paste0("Some elements of LP3$S, LP3$K, LP3$G and LP3$GR contain ",
+              "infinite values.  These must be removed."))
+            err <- TRUE
+          }
+          if (sum(is.na(LP3$S),is.na(LP3$K),is.na(LP3$G),is.na(LP3$GR))>0) {
+            warning(paste0("Some elements of LP3$S, LP3$K, LP3$G and LP3$GR contain ",
+              "missing values.  These must be removed."))
+            err <- TRUE
+          }
+        }
+      }
+    }
+  }
+  if (missing(recordLengths)) {
+    warning("A matrix of recordLengths must be provided as input.")
+    err <- TRUE
+  } else {
+    if (ncol(recordLengths)!=nrow(recordLengths)) {
+      warning("recordLengths must be provided as a square array")
+      err <- TRUE
+    }
+    if (!is.numeric(recordLengths)) {
+      warning("recordLengths must be provided as a numeric array")
+      err <- TRUE
+    }
+  }
+  if (err) {
+    stop("Invalid inputs were provided.  See warnings().")
   }
   
   #Convert X and Y from dataframes to matrices to work with matrix operations below
