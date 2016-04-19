@@ -4,75 +4,76 @@
 \alias{WREG.WLS}
 \title{Weighted-Multiple-Linear Regression Program (WREG)}
 \usage{
-WREG.WLS(Y, X, recordLengths, LP3, x0 = NA, legacy = FALSE)
+WREG.WLS(Y, X, recordLengths, LP3, transY, x0 = NA)
 }
 \arguments{
-\item{Y}{A numeric vector of the dependent variable of interest, with any transformations already
-applied.}
+\item{Y}{A numeric vector of the dependent variable of interest, with any
+transformations already applied.}
 
-\item{X}{A numeric matrix of the independent variables in the regression, with any transformations
-already applied.  Each row represents a site and each column represents
-a particular independe variable.  (If a leading constant is used, it should be
-included here as a leading column of ones.)  The rows must be in the same order as
-the dependent variables in \code{Y}.}
+\item{X}{A numeric matrix of the independent variables in the regression, with
+any transformations already applied.  Each row represents a site and each
+column represents a particular independe variable.  (If a leading constant
+is used, it should be included here as a leading column of ones.)  The rows
+must be in the same order as the dependent variables in \code{Y}.}
 
-\item{LP3}{A numeric matrix containing the fitted Log-Pearson Type III standard
-deviate, standard deviation and skew for each site.  The columns of the matrix represent S, K, G,
-and an option regional skew value \code{GR} required by WREG.GLS with regSkew = TRUE.
-The order of the rows must be the same as \code{Y}.}
+\item{LP3}{A numeric matrix containing the fitted Log-Pearson Type III
+standard deviate, standard deviation and skew for each site.  The columns of
+the matrix represent S, K, G, and an option regional skew value \code{GR}
+required by WREG.GLS with regSkew = TRUE. The order of the rows must be the
+same as \code{Y}.}
+
+\item{transY}{A required character string indicating if the the
+dependentvariable was transformed by the common logarithm ('log10'),
+transformed by the natural logarithm ('ln') or untransformed ('none').}
 
 \item{x0}{A vector containing the independent variables (as above) for a
-particular target site.  This variable is only used for ROI analysis.}
+ particular target site.  This variable is only used for ROI analysis.}
 
-\item{RecordLengths}{A numeric vector whose rows are in the same order as \code{Y} and represent the at-site record length.}
-
-\item{Legacy}{A logical.  A value of \code{TRUE} forces the WREG program to behave
-identically to WREG v. 1.05, with BUGS and all.  It will force \code{TY=2} and
-\code{DistMeth=1}.  For ROI regressions, it will also require a specific calculation
-for weighing matrices in \dQuote{WLS} (\code{\link{Omega.WLS.ROImatchMatLab}}),
-\dQuote{GLS}, and \dQuote{GLSskew} (see \code{\link{Omega.GLS.ROImatchMatLab}})
-Further details are provided in \code{\link{WREG.RoI}}}
+\item{RecordLengths}{A numeric vector whose rows are in the same order as
+\code{Y} and represent the at-site record length.}
 }
 \value{
-All outputs are returned as part of a list.  The elements of the list depend
-on the type of regression performed.  The elements of the list may include:
-\item{Coefs}{A data frame composed of four variables: (1) \code{Coefficient} contains
-the regression coefficeints estimated for the model, (2) \code{\sQuote{Standard Error}}
-contains the standard errors of each regression coefficient, (3) \code{tStatistic}
-contains the Student's T-statistic of each regression coefficient and (4)
-\code{pValue} contains the significance probability of each regression coefficient.}
-\item{ResLevInf}{A data frame composed of three variables for each site in the
-regression.  \code{Residual} contains the model residuals.  \code{Leverage} contains
-the leverage of each site.  \code{Influence} contains the influence of each site.}
-\item{LevLim}{The critical value of leverage.  See \code{\link{Leverage}}}
-\item{InflLim}{The critical value of influence.  See \code{\link{Influence}}}
-\item{LevInf.Sig}{A logical matrix indicating if the leverage (column 1) is significant
-and the influence (column 2) is significant for each site in the regression.}
-\item{PerformanceMetrics}{A list of not more than ten elements.  All regression
-types return the mean squared error of residuals (\code{MSE}), the coefficient of
-determination (\code{R2}), the adjusted coefficient of determination (\code{R2_adj})
-and the root mean squared error (\code{RMSE}, in percent).  \code{WLS}, \code{GLS}
-and \code{GLSskew} also return the pseudo coefficient of regression (\code{R2_pseudo}),
-the average variance of prediction (\code{AVP}), the standard error of prediction
-(\code{Sp}, in percent), a vector of the individual variances of prediction for
-each site (\code{VP.PredVar}), the model-error variance (\code{ModErrVar}) and the
-standardized model error variance (\code{StanModErr}, in percent).  Details on the
-appropriateness and applicability of performance metrics can be found in the WREG manual.}
-\item{X}{The input predictors.}
-\item{Y}{The input observations.}
-\item{fitted.values}{A vector of model estimates from the regression model.}
-\item{residuals}{A vector of model residuals.}
-\item{Weighting}{The weighting matrix used to develop regression estimates.}
-\item{Input}{A list of input parameters for error searching.  Right now it only
-includes \code{Legacy} to document if a Legacy application of WREG v. 1.05 was
-implemented.}
+All outputs are returned as part of a list.  The elements of the list
+ depend on the type of regression performed.  The elements of the list may
+ include: \item{Coefs}{A data frame composed of four variables: (1)
+ \code{Coefficient} contains the regression coefficeints estimated for the
+ model, (2) \code{\sQuote{Standard Error}} contains the standard errors of
+ each regression coefficient, (3) \code{tStatistic} contains the Student's
+ T-statistic of each regression coefficient and (4) \code{pValue} contains
+ the significance probability of each regression coefficient.}
+ \item{ResLevInf}{A data frame composed of three variables for each site in
+ the regression.  \code{Residual} contains the model residuals.
+ \code{Leverage} contains the leverage of each site.  \code{Influence}
+ contains the influence of each site.} \item{LevLim}{The critical value of
+ leverage.  See \code{\link{Leverage}}} \item{InflLim}{The critical value of
+ influence.  See \code{\link{Influence}}} \item{LevInf.Sig}{A logical matrix
+ indicating if the leverage (column 1) is significant and the influence
+ (column 2) is significant for each site in the regression.}
+ \item{PerformanceMetrics}{A list of not more than ten elements.  All
+ regression types return the mean squared error of residuals (\code{MSE}),
+ the coefficient of determination (\code{R2}), the adjusted coefficient of
+ determination (\code{R2_adj}) and the root mean squared error (\code{RMSE},
+ in percent).  The pseudo coefficient of regression (\code{R2_pseudo}), the
+ average variance of prediction (\code{AVP}), the standard error of
+ prediction (\code{Sp}, in percent), a vector of the individual variances of
+ prediction for each site (\code{VP.PredVar}), the model-error variance
+ (\code{ModErrVar}) and the standardized model error variance
+ (\code{StanModErr}, in percent) are also returned.  Details on the
+ appropriateness and applicability of performance metrics can be found in the
+ WREG manual.} \item{X}{The input predictors.} \item{Y}{The input
+ observations.} \item{fitted.values}{A vector of model estimates from the
+ regression model.} \item{residuals}{A vector of model residuals.}
+ \item{Weighting}{The weighting matrix used to develop regression estimates.}
+ \item{Input}{A list of input parameters for error searching.  Currently
+ empty.}
 }
 \description{
-The \code{WREG.MLR} function executes the basic regression analysis that forms the
-foundation of the WREG program.
+The \code{WREG.WLS} function executes the multiple linear
+ regression analysis using weighted least-squares regression.
 }
 \details{
-add details
+In this implementation, the weights for weighted least-squares
+ regression are defined by record lengths.  See manual for details.
 }
 \examples{
 \dontrun Add example

@@ -1,7 +1,7 @@
 #'Weighted-Multiple-Linear Regression Program (WREG)
 #'
-#'@description The \code{WREG.OLS} function executes the multiple linear 
-#'  regression analysis using ordinary least-squares regression.
+#'@description The \code{WREG.UW} function executes the multiple linear 
+#'  regression analysis using a user-provided weighting matrix.
 #'  
 #'@param Y The dependent variable of interest, with any transformations already 
 #'  applied.
@@ -10,14 +10,24 @@
 #'  particular independe variable.  (If a leading constant is used, it should be
 #'  included here as a leading column of ones.)  The rows must be in the same 
 #'  order as the dependent variables in \code{Y}.
+#'@param customWeight This allows the user to enter a custom weighting matrix. 
+#'  It is included also to provide legacy code for WREG v. 1.05. 
+#'  \code{customWeight} can either be a square matrix of weights with a length 
+#'  equal to \code{length(Y)} or a list containing three elements.  The elements
+#'  of the list include (1) \code{Omega} as the square weighting matrix, (2) 
+#'  \code{var.modelerror.k} as the estimated variance of the model errors from 
+#'  the k-variable model (\code{k=ncol(X)}), and (3) \code{var.modelerror.0} as 
+#'  the variance of the model errors from a consant-only regression.
 #'@param transY A required character string indicating if the the 
 #'  dependentvariable was transformed by the common logarithm ('log10'), 
 #'  transformed by the natural logarithm ('ln') or untransformed ('none').
 #'@param x0 A vector containing the independent variables (as above) for a 
 #'  particular target site.  This variable is only used for ROI analysis.
 #'  
-#'@details This function follows the basic implementation of ordinary 
-#'  least-squares regression.
+#'  
+#'@details This function allows users to develop weights outside of the WREG 
+#'  program and observe the resultant regressions.  Note that the weighting
+#'  matrix must be invertible.
 #'  
 #'@return All outputs are returned as part of a list.  The elements of the list 
 #'  depend on the type of regression performed.  The elements of the list may 
@@ -39,22 +49,28 @@
 #'  regression types return the mean squared error of residuals (\code{MSE}), 
 #'  the coefficient of determination (\code{R2}), the adjusted coefficient of 
 #'  determination (\code{R2_adj}) and the root mean squared error (\code{RMSE}, 
-#'  in percent).  Details on the appropriateness and applicability of
-#'  performance metrics can be found in the WREG manual.} \item{X}{The input
-#'  predictors.} \item{Y}{The input observations.} \item{fitted.values}{A vector
-#'  of model estimates from the regression model.} \item{residuals}{A vector of
-#'  model residuals.} \item{Weighting}{The weighting matrix used to develop
-#'  regression estimates.} \item{Input}{A list of input parameters for error
-#'  searching.  Currently empty.}
+#'  in percent).  If \code{customWeight} contains model error variances, then
+#'  the pseudo coefficient of regression (\code{R2_pseudo}), the average
+#'  variance of prediction (\code{AVP}), the standard error of prediction
+#'  (\code{Sp}, in percent), a vector of the individual variances of prediction
+#'  for each site (\code{VP.PredVar}), the model-error variance
+#'  (\code{ModErrVar}) and the standardized model error variance
+#'  (\code{StanModErr}, in percent) are also returned.  Details on the
+#'  appropriateness and applicability of performance metrics can be found in the
+#'  WREG manual.} \item{X}{The input predictors.} \item{Y}{The input 
+#'  observations.} \item{fitted.values}{A vector of model estimates from the 
+#'  regression model.} \item{residuals}{A vector of model residuals.} 
+#'  \item{Weighting}{The weighting matrix used to develop regression estimates.}
+#'  \item{Input}{A list of input parameters for error searching.  Currently 
+#'  empty.}
 #'@import stats
 #'  
 #' @examples 
 #' \dontrun add examples
 #'@export
-
-WREG.OLS <- function(Y,X,transY,x0=NA) {
+WREG.UW <- function(Y,X,customWeight,transY,x0=NA) {
   # William Farmer, USGS, January 05, 2015
-  
+
   # Some upfront error handling
   err <- FALSE
   if ((!missing(X)&!missing(Y))&&
@@ -111,31 +127,40 @@ WREG.OLS <- function(Y,X,transY,x0=NA) {
     warning("transY must be either 'none', 'log10' or 'ln'.")
     err <- TRUE
   }
-
+  if(missing(customWeight)|(!is.matrix(customWeight)&!is.list(customWeight))) {
+    warning("Custom weighting matrix must be provided as a list or matrix.")
+  }
+  
   ## Determine if ROI is being applied
   if (is.na(sum(x0))) { # ROI regression is not used.
     ROI <- F
   } else { # ROI regression is used.
     ROI <- T
   }
-  if (ROI&&(length(x0)!=ncol(X))) {
-    warning(paste0("The length of x0 must be the same as ",
-      "the number of columns in X"))
-    err <- TRUE
+  ## Just initial values for control.
+  var.modelerror.k <- NA
+  customModelError <- FALSE
+  
+  ## Weighting matrix
+  # Allows user to specify particular weighting scheme.  Useful for legacy code.
+  if (is.list(customWeight)) { # Omega from legacy code; Also contains information on model-error variances.
+    Omega <- customWeight$Omega # Custom weighting
+    var.modelerror.k <- customWeight$var.modelerror.k # Custom k-variable model-error variance
+    var.modelerror.0 <- customWeight$var.modelerror.0 # Custom constant-model model-error variance
+    customModelError=TRUE # Logical to note that the user has provided information on the model-error variance
+  } else { # User-defined weighting, with no informaiton on model-error variance.
+    Omega <- customWeight # Custom weighting
+    var.modelerror.k <- NA # NULL custom k-variable model-error variance to control for errors.
+    var.modelerror.0 <- NA # NULL custom constant-model model-error variance to control for errors.
   }
-  if (ROI&&(!is.numeric(x0))) {
-    warning(paste0("The input x0 must be of the numeric class"))
+  if (det(Omega)==0) {
+    warning(paste("The weighting matrix is singular and, therefore,",
+      "cannot be inverted.  Reconsider the weighting matrix."))
     err <- TRUE
   }
   if (err) {
     stop('Invalid inputs were provided. See warnings().')
   }
-  ## Just initial values for control.
-  var.modelerror.k <- NA
-
-  ## Weighting matrix
-  # Ordinary Least Squares
-  Omega <- diag(nrow(X)) # weighting matrix
   
   #Convert X and Y from dataframes to matrices to work with matrix operations below
   X <- as.matrix(X)
@@ -159,16 +184,32 @@ WREG.OLS <- function(Y,X,transY,x0=NA) {
     RMSE <-100*sqrt(exp(MSE)-1) # Root-mean-squared error, in percent. transformed for natural logs.
   }
   PerfMet <- list(MSE=MSE,R2=R2,R2_adj=R2_adj,RMSE=RMSE) # Performance metrics for output (basic, for OLS)
-
+  if (customModelError==T) { # non-OLS requires additional performance metrics
+    R2_pseudo <- 1 - var.modelerror.k/var.modelerror.0 # Pseudo coefficient of determination. Eq 39
+    AVP <- var.modelerror.k + mean(diag(X%*%solve(t(X)%*%solve(Omega)%*%X)%*%t(X))) # Average varaince of prediction. Eq 32
+    VP <- vector(length=length(Y)) # Empty vector for individual variances of prediction
+    for (i in 1:length(VP)) { # Individual variances of prediction
+      VP[i] <- var.modelerror.k + X[i,]%*%solve(t(X)%*%solve(Omega)%*%X)%*%X[i,] # Individual variance of prediction.  Based on Eq 32.
+    }
+    VP <- data.frame(VP); names(VP) <- 'PredVar' # Formating the VP vector for output
+    Sp <- Se <- NA
+    if (transY=='log10') {
+      Sp <- 100*sqrt(exp(log(10)*log(10)*AVP)-1) # Standard error of predictions. Eq 33.
+      Se <-100*sqrt(exp(log(10)*log(10)*var.modelerror.k)-1) # Standard model error. Not noted in the manual, but included as output in WREG 1.05.  Based on Eq 33.
+    } else if (transY=='ln') {
+      # corrected for natural logs
+      Sp <- 100*sqrt(exp(AVP)-1)
+      Se <-100*sqrt(exp(var.modelerror.k)-1)
+    }
+    PerfMet <- c(PerfMet,R2_pseudo=R2_pseudo,AVP=AVP,Sp=Sp,VP=VP,ModErrVar=var.modelerror.k,StanModErr=Se) # Performance metrics for output
+  }
+  
   ## Leverage and influence statistics
   Lev <- Leverage(X=X,Omega=Omega,x0=x0,ROI=ROI) # Leverage subroutine
   Infl <- Influence(e=e,X=X,Omega=Omega,Beta=B_hat,ROI=ROI,Lev=Lev$Leverage) # Influence subroutine
   
   ## Significance of regression parameters
   B_var <- diag(solve(t(X)%*%solve(Omega)%*%X)) # Covariances of regression coefficients. Eq 46
-  # Eq 46 in Manual for v1.05 is incoorect.  As reflected in code for v1.05 and independent verification, formula is altered for OLS.
-    B_var <- MSE*B_var # Altered Eq 46 for OLS
-  
   B_tval <- B_hat/sqrt(B_var) # T-value statistics of regression coefficients. Eq 45.
   B_pval <- 2*stats::pt(-abs(B_tval),df=(nrow(X)-ncol(X))) # Significnace of regression coefficients
   
@@ -190,7 +231,7 @@ WREG.OLS <- function(Y,X,transY,x0=NA) {
     Output <- c(Output,Y.ROI=Y_est,x0.ROI=x0)
   }
   
-    class(Output) <- 'WREG.OLS'
-    
-    return(Output)
+  class(Output) <- 'WREG.UW'
+  
+  return(Output)
 }
