@@ -41,7 +41,7 @@ Influence <- function(e,X,Omega,Beta,ROI=FALSE,Lev=NA) {
   # 01/27/2015, WHF: Added abs on limit and ROI option to match MatLab WREG v 1.05, RoIMetrics, Lines 39-52
   
   # Some upfront error handling
-  error <- FALSE
+  err <- FALSE
   if ((!missing(e)&!missing(X)&!missing(Omega))&&
       (length(unique(length(e),nrow(X),nrow(Omega),ncol(Omega)))!=1)) {
     warning("length(e), nrow(X), nrow(Omega) and ncol(Omega) must all be equal")

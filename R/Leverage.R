@@ -37,7 +37,7 @@ Leverage <- function(X,Omega,Ch=NA,x0=NA,ROI=FALSE) {
   # 01/27/2015, WHF: Added ABS on limits
   
   # Some upfront error handling
-  error <- FALSE
+  err <- FALSE
   if (missing(X)) {
     warning("Independent variables (X) must be provided.")
     err <- TRUE
