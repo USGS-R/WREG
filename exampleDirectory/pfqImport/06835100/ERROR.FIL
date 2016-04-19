@@ -1,0 +1,610 @@
+ MAIN:Reading Specification file: 
+ V:\CDOT_Flood_Frequency\PeakFQ\Input_files\06835100\paleo\PKFQWPSF.TMP         
+                                                                                
+                                                                                
+    
+ Scanning Spec file for stations. Spec file contents:
+   Verbose                                                                      
+                                            
+   I ASCI 06835100.TXT                                                          
+                                            
+   O File 06835100.PRT                                                          
+                                            
+   O Plot Style Graphics                                                        
+                                            
+   O Plot Format PNG                                                            
+                                            
+   O Additional Watstore 0683                                                   
+                                            
+   O Export 06835100.EXP                                                        
+                                            
+   O Empirical 06835100.                                                        
+                                            
+   Station 06835100                                                             
+                                            
+        Analyze EMA                                                             
+                                            
+        PCPT_Thresh 1664 2013 0 1E+20 Default                                   
+                                            
+        PCPT_Thresh 1664 1965 15200 1E+20 2014 non-exceedance bound             
+                                            
+        PCPT_Thresh 1979 2013 15200 1E+20 2014 non-exceedance bound             
+                                            
+        BegYear 1664                                                            
+                                            
+        EndYear 2013                                                            
+                                            
+        HistPeriod 350                                                          
+                                            
+        SkewOpt Weighted                                                        
+                                            
+        GenSkew 0.1717221                                                       
+                                            
+        SkewSE 0.55                                                             
+                                            
+        LOType MGBT                                                             
+                                            
+        Latitude 40.30472                                                       
+                                            
+        Longitude 101.1111                                                      
+                                            
+        PlotName 06835100                                                       
+                                            
+ Finished scan of Spec file.
+ MAIN:Found            1  Stations
+ MAIN:Process Record:'Verbose'
+ MAIN:Process Record:'I ASCI 06835100.TXT'
+ MAIN:Got I, Remaining:'ASCI 06835100.TXT'
+ OPNINP:Successful Open Watstore file:'06835100.TXT'
+ MAIN:Process Record:'O File 06835100.PRT'
+ MAIN:Got O, Remaining:'FILE 06835100.PRT'
+ OPENOUT:Opened Output File:'06835100.PRT'
+ MAIN:Process Record:'O Plot Style Graphics'
+ MAIN:Got O, Remaining:'PLOT STYLE GRAPHICS'
+ MAIN:Process Record:'O Plot Format PNG'
+ MAIN:Got O, Remaining:'PLOT FORMAT PNG'
+ MAIN:Process Record:'O Additional Watstore 0683'
+ MAIN:Got O, Remaining:'ADDITIONAL WATSTORE 0683'
+ MAIN:Process Record:'O Export 06835100.EXP'
+ MAIN:Got O, Remaining:'EXPORT 06835100.EXP'
+ OPENOUT:Opened EXPORT Output File:'06835100.EXP'
+ MAIN:Process Record:'O Empirical 06835100.'
+ MAIN:Got O, Remaining:'EMPIRICAL 06835100.'
+ OPENOUT:Opened EMPIRICAL Output File:'06835100.'
+ MAIN:Process Record:'Station 06835100'
+ MAIN:Got STATION, Remaining:'06835100'
+ MAIN:Assigned 06835100        to index            1  of STASPECS
+ MAIN:Process RecordX:'     ANALYZE EMA'
+ MAIN:Add Record To Station Specs
+ MAIN:LNSPECS:           1
+ MAIN:Assign spec:'ANALYZE EMA'
+ MAIN:Process RecordX:'     PCPT_THRESH 1664 2013 0 1E+20 DEFAULT'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           2
+ MAIN:Assign spec:'PCPT_THRESH 1664 2013 0 1E+20 DEFAULT'
+ MAIN:Process RecordX:'     PCPT_THRESH 1664 1965 15200 1E+20 2014 NON-EXCEEDANC
+ E BOUND'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           3
+ MAIN:Assign spec:'PCPT_THRESH 1664 1965 15200 1E+20 2014 NON-EXCEEDANCE BOUND'
+ MAIN:Process RecordX:'     PCPT_THRESH 1979 2013 15200 1E+20 2014 NON-EXCEEDANC
+ E BOUND'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           4
+ MAIN:Assign spec:'PCPT_THRESH 1979 2013 15200 1E+20 2014 NON-EXCEEDANCE BOUND'
+ MAIN:Process RecordX:'     BEGYEAR 1664'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           5
+ MAIN:Assign spec:'BEGYEAR 1664'
+ MAIN:Process RecordX:'     ENDYEAR 2013'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           6
+ MAIN:Assign spec:'ENDYEAR 2013'
+ MAIN:Process RecordX:'     HISTPERIOD 350'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           7
+ MAIN:Assign spec:'HISTPERIOD 350'
+ MAIN:Process RecordX:'     SKEWOPT WEIGHTED'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           8
+ MAIN:Assign spec:'SKEWOPT WEIGHTED'
+ MAIN:Process RecordX:'     GENSKEW 0.1717221'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:           9
+ MAIN:Assign spec:'GENSKEW 0.1717221'
+ MAIN:Process RecordX:'     SKEWSE 0.55'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          10
+ MAIN:Assign spec:'SKEWSE 0.55'
+ MAIN:Process RecordX:'     LOTYPE MGBT'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          11
+ MAIN:Assign spec:'LOTYPE MGBT'
+ MAIN:Process RecordX:'     LATITUDE 40.30472'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          12
+ MAIN:Assign spec:'LATITUDE 40.30472'
+ MAIN:Process RecordX:'     LONGITUDE 101.1111'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          13
+ MAIN:Assign spec:'LONGITUDE 101.1111'
+ MAIN:Process RecordX:'     PLOTNAME 06835100'
+ MAIN:Add Record To Station Specs
+ MAIN:Add to existing specs
+ MAIN:LNSPECS:          14
+ MAIN:Assign spec:'PLOTNAME 06835100'
+ MAIN:          14  spec(s) for station 06835100       
+   Spec           1 : 'ANALYZE EMA'
+   Spec           2 : 'PCPT_THRESH 1664 2013 0 1E+20 DEFAULT'
+   Spec           3 
+ : 'PCPT_THRESH 1664 1965 15200 1E+20 2014 NON-EXCEEDANCE BOUND'
+   Spec           4 
+ : 'PCPT_THRESH 1979 2013 15200 1E+20 2014 NON-EXCEEDANCE BOUND'
+   Spec           5 : 'BEGYEAR 1664'
+   Spec           6 : 'ENDYEAR 2013'
+   Spec           7 : 'HISTPERIOD 350'
+   Spec           8 : 'SKEWOPT WEIGHTED'
+   Spec           9 : 'GENSKEW 0.1717221'
+   Spec          10 : 'SKEWSE 0.55'
+   Spec          11 : 'LOTYPE MGBT'
+   Spec          12 : 'LATITUDE 40.30472'
+   Spec          13 : 'LONGITUDE 101.1111'
+   Spec          14 : 'PLOTNAME 06835100'
+ Done reading spec file
+ MAIN:calling J407XE...
+ J407XE:IA1:           9  INFORM:           2  MSG1:          14
+ After INPUT - NSYS,NHIST,EMAOPT          13           0           1
+ After UPDATEPEAKS - NSYS,NHIST,EMAOPT          13           0           1
+ SETEMADATA: NTHRESH =           3
+ SETEMADATA: THRBYR,   THREYR,   THRLWR,       THRUPR
+        1664        2013  0.0000000E+00  1.0000000E+20
+        1664        1965   15200.00      1.0000000E+20
+        1979        2013   15200.00      1.0000000E+20
+ Debug Info for 
+ 06835100       USGS BOBTAIL CREEK NEAR PALISADE, NEBR.              1966-1978 *
+  HISTORIC *
+ after WCFAGB, IER=           1
+ 
+ Running EMA for station 
+ 06835100       USGS BOBTAIL CREEK NEAR PALISADE, NEBR.              1966-1978 *
+  HISTORIC *
+ calling RUNEMA: NPKS,NSYS,GENSKU,RMSEGS          13          13  0.1717221    
+  0.5500000    
+ 
+ calling EMAFIT with the following input Args:
+ NOBS:         350
+         QLow        QUpr         TLow        TUpr        DType
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+        230.0       230.0    0.1000D-98    0.1000D+21     Syst
+        650.0       650.0    0.1000D-98    0.1000D+21     Syst
+        835.0       835.0    0.1000D-98    0.1000D+21     Syst
+       1100.0      1100.0    0.1000D-98    0.1000D+21     Syst
+       1100.0      1100.0    0.1000D-98    0.1000D+21     Syst
+         81.0        81.0    0.1000D-98    0.1000D+21     Syst
+      15200.0     15200.0    0.1000D-98    0.1000D+21     Syst
+         90.0        90.0    0.1000D-98    0.1000D+21     Syst
+        175.0       175.0    0.1000D-98    0.1000D+21     Syst
+       1850.0      1850.0    0.1000D-98    0.1000D+21     Syst
+        290.0       290.0    0.1000D-98    0.1000D+21     Syst
+        112.0       112.0    0.1000D-98    0.1000D+21     Syst
+         67.0        67.0    0.1000D-98    0.1000D+21     Syst
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+          0.0     15200.0    0.1520D+05    0.1000D+21     Cens
+ REGSTD:   1.00000000000000     
+ GENSDMSE:  -999.000000000000     
+ REGSKEW:  0.171722099184990     
+ REGMSE:  0.302500009536743     
+ GBTYPE:MGBT
+ GBTHRSH  -99.0000000000000     
+ 
+ RESULTS
+ WRCMOM-1  0.25175029D+01  0.29087873D+00  0.19226180D+00
+ WRCMOM-2  0.25064978D+01  0.26910165D+00  0.34238205D+00
+ WRCMOM-3  0.25123284D+01  0.28077195D+00  0.26010673D+00
+ 
+ Moments:   2.517503      0.5393317      0.1922618    
+ 
+ Plotting Positions of peaks
+ Plot Pos      Obs. Q
+  0.5398079       230.0000    
+  0.3862906       650.0000    
+  0.3095320       835.0000    
+  0.2327733       1100.000    
+  0.1560146       1100.000    
+  0.8468425       81.00000    
+  1.4285714E-03   15200.00    
+  0.7700838       90.00000    
+  0.6165665       175.0000    
+  7.9255991E-02   1850.000    
+  0.4630492       290.0000    
+  0.6933252       112.0000    
+  0.9236012       67.00000    
+ 
+ Threshold positions
+ Plot Pos     Threshold    NumPeaks
+   1.00000000000000       -99.0000000000000                0
+  2.857142826542258E-003   4.18184358794477              337
+ 
+   Prob       EMA Est.        CL Low       CL High
+ 0.0001         5.365         0.067        26.720         0.266
+ 0.0005         8.141         0.214        31.582         0.186
+ 0.0010         9.938         0.357        34.664         0.156
+ 0.0020        12.315         0.604        38.700         0.129
+ 0.0050        16.815         1.237        46.312         0.098
+ 0.0100        21.853         2.186        54.911         0.078
+ 0.0200        29.256         3.998        67.846         0.060
+ 0.0250        32.386         4.942        73.336         0.056
+ 0.0400        40.731         7.762        88.569         0.046
+ 0.0500        45.795         9.719        98.071         0.042
+ 0.1000        68.924        20.433       143.421         0.033
+ 0.2000       114.627        45.440       237.460         0.026
+ 0.3000       166.972        74.517       346.128         0.024
+ 0.3333       186.848        85.287       387.295         0.024
+ 0.4000       231.710       108.865       480.771         0.024
+ 0.4296       254.256       120.569       527.280         0.024
+ 0.5000       316.395       152.138       655.372         0.024
+ 0.5708       395.213       191.107       817.616         0.024
+ 0.6000       434.244       210.072       897.826         0.024
+ 0.7000       612.800       294.772      1263.098         0.025
+ 0.8000       923.948       436.307      1892.004         0.025
+ 0.9000      1655.134       745.495      3342.790         0.027
+ 0.9500      2710.865      1148.550      5436.998         0.028
+ 0.9600      3136.291      1300.724      6298.239         0.029
+ 0.9750      4195.582      1662.878      8516.085         0.031
+ 0.9800      4785.621      1857.209      9806.321         0.032
+ 0.9900      7044.499      2573.312     15178.547         0.036
+ 0.9950     10090.001      3501.695     23648.061         0.041
+ 0.9980     15705.144      5152.467     43368.354         0.050
+ 0.9990     21519.338      6792.606     69843.420         0.059
+ 0.9995     29075.973      8848.228    113713.859         0.069
+ 0.9999     55996.088     15336.320    370251.973         0.101
+ After INPUT - NSYS,NHIST,EMAOPT           0           0           1
+ After UPDATEPEAKS - NSYS,NHIST,EMAOPT           0           0           1
+ Closing output file V:\CDOT_Flood_Frequency\PeakFQ\Input_files\06835100\paleo\0
+ 6835100.PRT

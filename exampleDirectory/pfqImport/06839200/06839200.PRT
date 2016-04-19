@@ -1,0 +1,287 @@
+1
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.002.000
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 10:18
+
+                         --- PROCESSING OPTIONS ---  
+
+                      Plot option         = Graphics device   
+                      Basin char output   = WATSTORE      
+                      Print option        = Yes
+                      Debug print         = No 
+                      Input peaks listing = Long 
+                      Input peaks format  = WATSTORE peak file  
+
+                      Input files used:
+                         peaks (ascii)  - C:\Users\mkohn\Desktop\06839200\06839200.TXT                                    
+                         specifications - C:\Users\mkohn\Desktop\06839200\PKFQWPSF.TMP                                    
+                      Output file(s): 
+                         main - C:\Users\mkohn\Desktop\06839200\06839200.PRT                                    
+                         bcd  - C:\Users\mkohn\Desktop\06839200\06839200.BCD                                    
+  
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.001
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 10:18
+  
+             Station - 06839200  ELKHORN CANYON NEAR MAYWOOD, NEBR.             
+
+
+                     I N P U T   D A T A   S U M M A R Y
+
+                Number of peaks in record            =       27
+                Peaks not used in analysis           =        0
+                Systematic peaks in analysis         =       27
+                Historic peaks in analysis           =        0
+                Beginning Year                       =     1952
+                Ending Year                          =     1978
+                Historical Period Length             =       27
+                Generalized skew                     =    0.357
+                     Standard error                  =    0.550
+                     Mean Square error               =    0.303
+                Skew option                          =   WEIGHTED  
+                Gage base discharge                  =      0.0
+                User supplied high outlier threshold =   --           
+                User supplied PILF (LO) criterion    =   --           
+                Plotting position parameter          =     0.00
+                Type of analysis                            EMA
+                PILF (LO) Test Method                      MGBT
+                Perception Thresholds:
+                     Begin     End       Low     High     Comment
+                      1952    1978       0.0       INF     DEFAULT                                                                         
+                Interval Data                    =   None Specified
+
+
+
+  *********  NOTICE  --  Preliminary machine computations.        *********     
+  *********  User responsible for assessment and interpretation.  *********     
+
+    WCF002J-CALCS COMPLETED.  RETURN CODE =  2
+    EMA003I-PILFS (LOS) WERE DETECTED USING MULTIPLE GRUBBS-BECK TEST   0      16.0
+      THE FOLLOWING PEAKS (WITH CORRESPONDING P-VALUES) WERE CENSORED:
+               1 ZERO VALUES
+    EMA002W-CONFIDENCE INTERVALS ARE NOT EXACT IF HISTORIC PERIOD > 0
+
+
+                                        Kendall's Tau Parameters
+
+                                                        MEDIAN   No. of
+                                       TAU    P-VALUE    SLOPE   PEAKS
+                                ---------------------------------------
+             SYSTEMATIC RECORD     -0.206      0.146     -5.000    26
+
+
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.002
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 10:18
+  
+             Station - 06839200  ELKHORN CANYON NEAR MAYWOOD, NEBR.             
+
+
+           ANNUAL FREQUENCY CURVE PARAMETERS -- LOG-PEARSON TYPE III 
+
+                                    LOGARITHMIC         
+                         -------------------------------
+                                      STANDARD          
+                            MEAN     DEVIATION     SKEW 
+                         -------------------------------
+ EMA W/O REG. INFO         2.2823      0.6350      0.127
+ EMA W/REG. INFO           2.2831      0.6330      0.229
+
+ EMA ESTIMATE OF MSE OF SKEW W/O REG. INFO (AT-SITE)      0.1945
+ EMA ESTIMATE OF MSE OF SKEW W/SYSTEMATIC ONLY (AT-SITE)  0.1945
+
+
+
+    ANNUAL FREQUENCY CURVE -- DISCHARGES AT SELECTED EXCEEDANCE PROBABILITIES
+
+   ANNUAL   EMA W/    EMA W/O     <------ FOR EMA ESTIMATES ------->
+EXCEEDANCE  REG INFO  REG INFO    VARIANCE  95% CONFIDENCE INTERVALS
+PROBABILITY ESTIMATE  ESTIMATE     OF EST.       LOWER       UPPER
+
+   0.9500      19.3      18.3      0.0338         4.0         35.7
+   0.9000      30.8      30.0      0.0238        10.1         54.9
+   0.8000      55.5      55.5      0.0178        26.0         98.7
+   0.6667      98.1      99.5      0.0159        52.9        176.5
+   0.5000     181.6     185.7      0.0161       101.5        337.5
+   0.4292     235.7     241.2      0.0168       131.7        449.6
+   0.2000     642.1     649.2      0.0227       343.8       1499.0
+   0.1000    1283.     1271.       0.0320       643.8       3981.0
+   0.0400    2751.     2638.       0.0513      1232.0      14080.0
+   0.0200    4565.     4258.       0.0718      1842.0      36480.0
+   0.0100    7265.     6585.       0.0977      2614.0      94330.0
+   0.0050   11200.     9854.       0.1293      3562.0     243300.0
+   0.0020   19120.    16150.       0.1803      5112.0     848800.0
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.003
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 10:18
+  
+             Station - 06839200  ELKHORN CANYON NEAR MAYWOOD, NEBR.             
+
+
+                       I N P U T   D A T A   L I S T I N G
+
+
+    WATER       PEAK   PEAKFQ   <--- Intervals --->
+     YEAR      VALUE    CODES     LOW         HIGH   REMARKS
+     1952      108.0       
+     1953      324.0       
+     1954      132.0       
+     1955      162.0       
+     1956     1220.0       
+     1957      900.0       
+     1958      146.0       
+     1959      142.0       
+     1960      230.0       
+     1961      340.0       
+     1962     1250.0       
+     1963     1330.0       
+     1964     1040.0       
+     1965      117.0       
+     1966      125.0       
+     1967     1920.0       
+     1968      170.0       
+     1969     3370.0       
+     1970       62.0       
+     1971       16.0       
+     1972       48.0       
+     1973       29.0       
+     1974       58.0       
+     1975      130.0       
+     1976       85.0       
+     1977        0.0       
+     1978      137.0       
+
+
+        Explanation of peak discharge qualification codes
+
+       PeakFQ    NWIS
+        CODE     CODE   DEFINITION
+
+          D        3    Dam failure, non-recurrent flow anomaly
+          G        8    Discharge greater than stated value
+          X       3+8   Both of the above
+          L        4    Discharge less than stated value
+          K     6 OR C  Known effect of regulation or urbanization
+          H        7    Historic peak
+
+          -  Minus-flagged discharge -- Not used in computation
+                -8888.0 -- No discharge value given
+          -  Minus-flagged water year -- Historic peak used in computation
+
+
+
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.004
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 10:18
+  
+             Station - 06839200  ELKHORN CANYON NEAR MAYWOOD, NEBR.             
+
+
+   EMPIRICAL FREQUENCY CURVES -- HIRSCH-STEDINGER PLOTTING POSITIONS
+
+   WATER     RANKED      EMA         INTERVALS
+    YEAR   DISCHARGE   ESTIMATE      LOW      HIGH
+    1969     3370.0     0.0356
+    1967     1920.0     0.0713
+    1963     1330.0     0.1070
+    1962     1250.0     0.1427
+    1956     1220.0     0.1785
+    1964     1040.0     0.2142
+    1957      900.0     0.2499
+    1961      340.0     0.2856
+    1953      324.0     0.3214
+    1960      230.0     0.3571
+    1968      170.0     0.3928
+    1955      162.0     0.4285
+    1958      146.0     0.4643
+    1959      142.0     0.5000
+    1978      137.0     0.5357
+    1954      132.0     0.5715
+    1975      130.0     0.6072
+    1966      125.0     0.6429
+    1965      117.0     0.6786
+    1952      108.0     0.7144
+    1976       85.0     0.7501
+    1970       62.0     0.7858
+    1974       58.0     0.8215
+    1972       48.0     0.8573
+    1973       29.0     0.8930
+    1971       16.0     0.9287
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.005
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 10:18
+  
+             Station - 06839200  ELKHORN CANYON NEAR MAYWOOD, NEBR.             
+
+
+                         EMA REPRESENTATION OF DATA
+
+  WATER <----- OBSERVED-----><-------- EMA -------><-PERCEPTION THRESHOLDS->
+   YEAR    Q_LOWER    Q_UPPER    Q_LOWER    Q_UPPER        LOWER       UPPER
+   1952      108.0      108.0      108.0      108.0         16.0        INF 
+   1953      324.0      324.0      324.0      324.0         16.0        INF 
+   1954      132.0      132.0      132.0      132.0         16.0        INF 
+   1955      162.0      162.0      162.0      162.0         16.0        INF 
+   1956     1220.0     1220.0     1220.0     1220.0         16.0        INF 
+   1957      900.0      900.0      900.0      900.0         16.0        INF 
+   1958      146.0      146.0      146.0      146.0         16.0        INF 
+   1959      142.0      142.0      142.0      142.0         16.0        INF 
+   1960      230.0      230.0      230.0      230.0         16.0        INF 
+   1961      340.0      340.0      340.0      340.0         16.0        INF 
+   1962     1250.0     1250.0     1250.0     1250.0         16.0        INF 
+   1963     1330.0     1330.0     1330.0     1330.0         16.0        INF 
+   1964     1040.0     1040.0     1040.0     1040.0         16.0        INF 
+   1965      117.0      117.0      117.0      117.0         16.0        INF 
+   1966      125.0      125.0      125.0      125.0         16.0        INF 
+   1967     1920.0     1920.0     1920.0     1920.0         16.0        INF 
+   1968      170.0      170.0      170.0      170.0         16.0        INF 
+   1969     3370.0     3370.0     3370.0     3370.0         16.0        INF 
+   1970       62.0       62.0       62.0       62.0         16.0        INF 
+   1971       16.0       16.0       16.0       16.0         16.0        INF 
+   1972       48.0       48.0       48.0       48.0         16.0        INF 
+   1973       29.0       29.0       29.0       29.0         16.0        INF 
+   1974       58.0       58.0       58.0       58.0         16.0        INF 
+   1975      130.0      130.0      130.0      130.0         16.0        INF 
+   1976       85.0       85.0       85.0       85.0         16.0        INF 
+   1977        0.0        0.0        0.0       16.0         16.0        INF 
+   1978      137.0      137.0      137.0      137.0         16.0        INF 
+1
+
+
+
+ End PeakFQ analysis.
+   Stations processed :       1
+   Number of errors   :       0
+   Stations skipped   :       0
+   Station years      :      27
+
+
+Data records may have been ignored for the stations listed below.               
+(Card type must be Y, Z, N, H, I, 2, 3, 4,  or *.)                              
+(2, 4, and * records are ignored.)                                              
+                                                                                
+ For the station below, the following records were ignored:                     
+                                                                                
+                                                                                
+ FINISHED PROCESSING STATION:  06839200       USGS ELKHORN CANYON NEAR MAYWOOD, 
+                                                                                
+                                                                                
+ For the station below, the following records were ignored:                     
+                                                                                
+ FINISHED PROCESSING STATION:                                                   
+                                                                                

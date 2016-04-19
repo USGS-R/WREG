@@ -1,0 +1,42 @@
+Verbose
+I ASCI 06838200.TXT
+O File 06838200.PRT
+O Plot Style Graphics
+O Plot Format PNG
+O Additional Watstore 06838200.bcd
+O Export 06838200.exp
+O Empirical 06838200.emp
+Station 06838200
+     Analyze EMA
+     PCPT_Thresh 1961 1999 0 1E+20 Default
+     PCPT_Thresh 1980 1980 45 1E+20 Peak < stated value
+     PCPT_Thresh 1985 1985 5 1E+20 Peak < stated value
+     PCPT_Thresh 1986 1986 5 1E+20 Peak < stated value
+     PCPT_Thresh 1987 1987 5 1E+20 Peak < stated value
+     PCPT_Thresh 1989 1989 50 1E+20 Peak < stated value
+     PCPT_Thresh 1991 1991 5 1E+20 Peak < stated value
+     PCPT_Thresh 1996 1996 50 1E+20 Peak < stated value
+     PCPT_Thresh 1997 1997 50 1E+20 Peak < stated value
+     PCPT_Thresh 1998 1998 50 1E+20 Peak < stated value
+     PCPT_Thresh 1999 1999 50 1E+20 Peak < stated value
+     PCPT_Thresh 1994 1995 1E+20 1E+20 missing
+     BegYear 1961
+     EndYear 1999
+     HistPeriod 39
+     Interval 1980 0 45 Peak < stated value
+     Interval 1985 0 5 Peak < stated value
+     Interval 1986 0 5 Peak < stated value
+     Interval 1987 0 5 Peak < stated value
+     Interval 1989 0 50 Peak < stated value
+     Interval 1991 0 5 Peak < stated value
+     Interval 1996 0 50 Peak < stated value
+     Interval 1997 0 50 Peak < stated value
+     Interval 1998 0 50 Peak < stated value
+     Interval 1999 0 50 Peak < stated value
+     SkewOpt Weighted
+     GenSkew 0.1284521
+     SkewSE 0.55
+     LOType MGBT
+     Latitude 40.23417
+     Longitude 100.4269
+     PlotName 06838200

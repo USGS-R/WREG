@@ -145,8 +145,10 @@
 #'  \code{Legacy} is a logical indicating if the WREG v. 1.05 idiosycrasies were
 #'  implemented.}
 #'  
-#' @examples 
-#' \dontrun Add example
+#' @examples
+#' \dontrun{
+#' #add examples
+#' }
 #'@export
 WREG.RoI <- function(Y,X,Reg,transY=NA,
   RecordLengths,LP3,regSkew=FALSE,

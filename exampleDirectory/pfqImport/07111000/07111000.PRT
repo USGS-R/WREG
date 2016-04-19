@@ -1,0 +1,449 @@
+1
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.002.000
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    10/23/2014 11:01
+
+                         --- PROCESSING OPTIONS ---  
+
+                      Plot option         = Graphics device   
+                      Basin char output   = WATSTORE      
+                      Print option        = Yes
+                      Debug print         = No 
+                      Input peaks listing = Long 
+                      Input peaks format  = WATSTORE peak file  
+
+                      Input files used:
+                         peaks (ascii)  - V:\CDOT_Flood_Frequency\PeakFQ\Input_files\07111000\07111000.TXT                
+                         specifications - V:\CDOT_Flood_Frequency\PeakFQ\Input_files\07111000\PKFQWPSF.TMP                
+                      Output file(s): 
+                         main - V:\CDOT_Flood_Frequency\PeakFQ\Input_files\07111000\07111000.PRT                
+                         bcd  - V:\CDOT_Flood_Frequency\PeakFQ\Input_files\07111000\07111000.B                  
+  
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.001
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    10/23/2014 11:01
+  
+       Station - 07111000  HUERFANO R AT MANZANARES XING, NR REDWING, CO.       
+
+
+                     I N P U T   D A T A   S U M M A R Y
+
+                Number of peaks in record            =       76
+                Peaks not used in analysis           =        0
+                Systematic peaks in analysis         =       76
+                Historic peaks in analysis           =        0
+                Beginning Year                       =     1924
+                Ending Year                          =     2013
+                Historical Period Length             =       90
+                Generalized skew                     =   -0.098
+                     Standard error                  =    0.550
+                     Mean Square error               =    0.303
+                Skew option                          =   WEIGHTED  
+                Gage base discharge                  =      0.0
+                User supplied high outlier threshold =   --           
+                User supplied PILF (LO) criterion    =   --           
+                Plotting position parameter          =     0.00
+                Type of analysis                            EMA
+                PILF (LO) Test Method                      MGBT
+                Perception Thresholds:
+                     Begin     End       Low     High     Comment
+                      1924    2013       0.0       INF     DEFAULT                                                                         
+                      1977    1977       INF       INF     MISSING                                                                         
+                      1983    1994       INF       INF     MISSING                                                                         
+                      2007    2007       INF       INF     MISSING                                                                         
+                Interval Data                    =   None Specified
+
+
+
+  *********  NOTICE  --  Preliminary machine computations.        *********     
+  *********  User responsible for assessment and interpretation.  *********     
+
+    EMA002W-CONFIDENCE INTERVALS ARE NOT EXACT IF HISTORIC PERIOD > 0
+
+
+                                        Kendall's Tau Parameters
+
+                                                        MEDIAN   No. of
+                                       TAU    P-VALUE    SLOPE   PEAKS
+                                ---------------------------------------
+             SYSTEMATIC RECORD     -0.331      0.000     -3.049    76
+
+
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.002
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    10/23/2014 11:01
+  
+       Station - 07111000  HUERFANO R AT MANZANARES XING, NR REDWING, CO.       
+
+
+           ANNUAL FREQUENCY CURVE PARAMETERS -- LOG-PEARSON TYPE III 
+
+                                    LOGARITHMIC         
+                         -------------------------------
+                                      STANDARD          
+                            MEAN     DEVIATION     SKEW 
+                         -------------------------------
+ EMA W/O REG. INFO         2.3579      0.4703      1.024
+ EMA W/REG. INFO           2.3579      0.4703      0.591
+
+ EMA ESTIMATE OF MSE OF SKEW W/O REG. INFO (AT-SITE)      0.1605
+ EMA ESTIMATE OF MSE OF SKEW W/SYSTEMATIC ONLY (AT-SITE)  0.1562
+
+
+
+    ANNUAL FREQUENCY CURVE -- DISCHARGES AT SELECTED EXCEEDANCE PROBABILITIES
+
+   ANNUAL   EMA W/    EMA W/O     <------ FOR EMA ESTIMATES ------->
+EXCEEDANCE  REG INFO  REG INFO    VARIANCE  95% CONFIDENCE INTERVALS
+PROBABILITY ESTIMATE  ESTIMATE     OF EST.       LOWER       UPPER
+
+   0.9950      25.5      38.5      0.0147        13.6         41.8
+   0.9900      29.6      41.6      0.0107        17.2         44.9
+   0.9500      46.9      55.3      0.0044        32.7         61.2
+   0.9000      62.1      67.6      0.0032        46.3         78.8
+   0.8000      90.1      90.7      0.0028        70.4        114.7
+   0.6667     132.2     126.3      0.0029       103.4        170.1
+   0.5000     205.1     190.1      0.0033       158.1        269.3
+   0.4292     248.8     229.7      0.0036       190.5        331.0
+   0.2000     542.4     516.2      0.0053       400.4        797.1
+   0.1000     960.5     973.6      0.0085       671.3       1645.0
+   0.0400    1856.     2095.       0.0159      1177.0       4230.0
+   0.0200    2920.     3616.       0.0244      1700.0       8647.0
+   0.0100    4474.     6118.       0.0354      2374.0      17670.0
+   0.0050    6716.    10190.       0.0492      3233.0      36060.0
+   0.0020   11220.    19670.       0.0720      4720.0      92400.0
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.003
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    10/23/2014 11:01
+  
+       Station - 07111000  HUERFANO R AT MANZANARES XING, NR REDWING, CO.       
+
+
+                       I N P U T   D A T A   L I S T I N G
+
+
+    WATER       PEAK   PEAKFQ   <--- Intervals --->
+     YEAR      VALUE    CODES     LOW         HIGH   REMARKS
+     1924      245.0       
+     1925      295.0       
+     1926      270.0       
+     1927      192.0       
+     1928      236.0       
+     1929      780.0       
+     1930      238.0       
+     1931      230.0       
+     1932      330.0       
+     1933      480.0       
+     1934     1650.0       
+     1935     1400.0       
+     1936      920.0       
+     1937      428.0       
+     1938      272.0       
+     1939      153.0       
+     1940      291.0       
+     1941      792.0       
+     1942      511.0       
+     1943      200.0       
+     1944      336.0       
+     1945      780.0       
+     1946      700.0       
+     1947      380.0       
+     1948      261.0       
+     1949      222.0       
+     1950      114.0       
+     1951    10200.0       
+     1952      778.0       
+     1953       90.0       
+     1954       98.0       
+     1955      148.0       
+     1956       58.0       
+     1957      960.0       
+     1958      160.0       
+     1959       99.0       
+     1960      149.0       
+     1961      182.0       
+     1962      102.0       
+     1963      116.0       
+     1964       62.0       
+     1965      228.0       
+     1966     2420.0       
+     1967     1060.0       
+     1968      355.0       
+     1969      190.0       
+     1970      162.0       
+     1971       64.0       
+     1972     6520.0       
+     1973      350.0       
+     1974       44.0       
+     1975      120.0       
+     1976      112.0       
+     1978       64.0       
+     1979      188.0       
+     1980      216.0       
+     1981       96.0       
+     1982      102.0       
+     1995      274.0       
+     1996       53.0       
+     1997      203.0       
+     1998      170.0       
+     1999      122.0       
+     2000       58.0       
+     2001      160.0       
+     2002       22.7       
+     2003      156.0       
+     2004      380.0       
+     2005      233.0       
+     2006       63.3       
+     2008      189.0       
+     2009      127.0       
+     2010      153.0       
+     2011      182.0       
+     2012       50.0       
+     2013       67.8       
+
+
+        Explanation of peak discharge qualification codes
+
+       PeakFQ    NWIS
+        CODE     CODE   DEFINITION
+
+          D        3    Dam failure, non-recurrent flow anomaly
+          G        8    Discharge greater than stated value
+          X       3+8   Both of the above
+          L        4    Discharge less than stated value
+          K     6 OR C  Known effect of regulation or urbanization
+          H        7    Historic peak
+
+          -  Minus-flagged discharge -- Not used in computation
+                -8888.0 -- No discharge value given
+          -  Minus-flagged water year -- Historic peak used in computation
+
+
+
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.004
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    10/23/2014 11:01
+  
+       Station - 07111000  HUERFANO R AT MANZANARES XING, NR REDWING, CO.       
+
+
+   EMPIRICAL FREQUENCY CURVES -- HIRSCH-STEDINGER PLOTTING POSITIONS
+
+   WATER     RANKED      EMA         INTERVALS
+    YEAR   DISCHARGE   ESTIMATE      LOW      HIGH
+    1951    10200.0     0.0129
+    1972     6520.0     0.0259
+    1966     2420.0     0.0389
+    1934     1650.0     0.0519
+    1935     1400.0     0.0649
+    1967     1060.0     0.0779
+    1957      960.0     0.0909
+    1936      920.0     0.1038
+    1941      792.0     0.1168
+    1929      780.0     0.1428
+    1945      780.0     0.1298
+    1952      778.0     0.1558
+    1946      700.0     0.1688
+    1942      511.0     0.1818
+    1933      480.0     0.1948
+    1937      428.0     0.2078
+    1947      380.0     0.2337
+    2004      380.0     0.2207
+    1968      355.0     0.2467
+    1973      350.0     0.2597
+    1944      336.0     0.2727
+    1932      330.0     0.2857
+    1925      295.0     0.2987
+    1940      291.0     0.3117
+    1995      274.0     0.3247
+    1938      272.0     0.3376
+    1926      270.0     0.3506
+    1948      261.0     0.3636
+    1924      245.0     0.3766
+    1930      238.0     0.3896
+    1928      236.0     0.4026
+    2005      233.0     0.4156
+    1931      230.0     0.4286
+    1965      228.0     0.4416
+    1949      222.0     0.4545
+    1980      216.0     0.4675
+    1997      203.0     0.4805
+    1943      200.0     0.4935
+    1927      192.0     0.5065
+    1969      190.0     0.5195
+    2008      189.0     0.5325
+    1979      188.0     0.5455
+    1961      182.0     0.5714
+    2011      182.0     0.5584
+    1998      170.0     0.5844
+    1970      162.0     0.5974
+    1958      160.0     0.6234
+    2001      160.0     0.6104
+    2003      156.0     0.6364
+    1939      153.0     0.6624
+    2010      153.0     0.6494
+    1960      149.0     0.6753
+    1955      148.0     0.6883
+    2009      127.0     0.7013
+    1999      122.0     0.7143
+    1975      120.0     0.7273
+    1963      116.0     0.7403
+    1950      114.0     0.7533
+    1976      112.0     0.7663
+    1962      102.0     0.7922
+    1982      102.0     0.7793
+    1959       99.0     0.8052
+    1954       98.0     0.8182
+    1981       96.0     0.8312
+    1953       90.0     0.8442
+    2013       67.8     0.8572
+    1971       64.0     0.8832
+    1978       64.0     0.8702
+    2006       63.3     0.8962
+    1964       62.0     0.9091
+    1956       58.0     0.9351
+    2000       58.0     0.9221
+    1996       53.0     0.9481
+    2012       50.0     0.9611
+    1974       44.0     0.9741
+    2002       22.7     0.9871
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.005
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    10/23/2014 11:01
+  
+       Station - 07111000  HUERFANO R AT MANZANARES XING, NR REDWING, CO.       
+
+
+                         EMA REPRESENTATION OF DATA
+
+  WATER <----- OBSERVED-----><-------- EMA -------><-PERCEPTION THRESHOLDS->
+   YEAR    Q_LOWER    Q_UPPER    Q_LOWER    Q_UPPER        LOWER       UPPER
+   1924      245.0      245.0      245.0      245.0          0.0        INF 
+   1925      295.0      295.0      295.0      295.0          0.0        INF 
+   1926      270.0      270.0      270.0      270.0          0.0        INF 
+   1927      192.0      192.0      192.0      192.0          0.0        INF 
+   1928      236.0      236.0      236.0      236.0          0.0        INF 
+   1929      780.0      780.0      780.0      780.0          0.0        INF 
+   1930      238.0      238.0      238.0      238.0          0.0        INF 
+   1931      230.0      230.0      230.0      230.0          0.0        INF 
+   1932      330.0      330.0      330.0      330.0          0.0        INF 
+   1933      480.0      480.0      480.0      480.0          0.0        INF 
+   1934     1650.0     1650.0     1650.0     1650.0          0.0        INF 
+   1935     1400.0     1400.0     1400.0     1400.0          0.0        INF 
+   1936      920.0      920.0      920.0      920.0          0.0        INF 
+   1937      428.0      428.0      428.0      428.0          0.0        INF 
+   1938      272.0      272.0      272.0      272.0          0.0        INF 
+   1939      153.0      153.0      153.0      153.0          0.0        INF 
+   1940      291.0      291.0      291.0      291.0          0.0        INF 
+   1941      792.0      792.0      792.0      792.0          0.0        INF 
+   1942      511.0      511.0      511.0      511.0          0.0        INF 
+   1943      200.0      200.0      200.0      200.0          0.0        INF 
+   1944      336.0      336.0      336.0      336.0          0.0        INF 
+   1945      780.0      780.0      780.0      780.0          0.0        INF 
+   1946      700.0      700.0      700.0      700.0          0.0        INF 
+   1947      380.0      380.0      380.0      380.0          0.0        INF 
+   1948      261.0      261.0      261.0      261.0          0.0        INF 
+   1949      222.0      222.0      222.0      222.0          0.0        INF 
+   1950      114.0      114.0      114.0      114.0          0.0        INF 
+   1951    10200.0    10200.0    10200.0    10200.0          0.0        INF 
+   1952      778.0      778.0      778.0      778.0          0.0        INF 
+   1953       90.0       90.0       90.0       90.0          0.0        INF 
+   1954       98.0       98.0       98.0       98.0          0.0        INF 
+   1955      148.0      148.0      148.0      148.0          0.0        INF 
+   1956       58.0       58.0       58.0       58.0          0.0        INF 
+   1957      960.0      960.0      960.0      960.0          0.0        INF 
+   1958      160.0      160.0      160.0      160.0          0.0        INF 
+   1959       99.0       99.0       99.0       99.0          0.0        INF 
+   1960      149.0      149.0      149.0      149.0          0.0        INF 
+   1961      182.0      182.0      182.0      182.0          0.0        INF 
+   1962      102.0      102.0      102.0      102.0          0.0        INF 
+   1963      116.0      116.0      116.0      116.0          0.0        INF 
+   1964       62.0       62.0       62.0       62.0          0.0        INF 
+   1965      228.0      228.0      228.0      228.0          0.0        INF 
+   1966     2420.0     2420.0     2420.0     2420.0          0.0        INF 
+   1967     1060.0     1060.0     1060.0     1060.0          0.0        INF 
+   1968      355.0      355.0      355.0      355.0          0.0        INF 
+   1969      190.0      190.0      190.0      190.0          0.0        INF 
+   1970      162.0      162.0      162.0      162.0          0.0        INF 
+   1971       64.0       64.0       64.0       64.0          0.0        INF 
+   1972     6520.0     6520.0     6520.0     6520.0          0.0        INF 
+   1973      350.0      350.0      350.0      350.0          0.0        INF 
+   1974       44.0       44.0       44.0       44.0          0.0        INF 
+   1975      120.0      120.0      120.0      120.0          0.0        INF 
+   1976      112.0      112.0      112.0      112.0          0.0        INF 
+   1977        0.0       INF         0.0       INF          INF         INF 
+   1978       64.0       64.0       64.0       64.0          0.0        INF 
+   1979      188.0      188.0      188.0      188.0          0.0        INF 
+   1980      216.0      216.0      216.0      216.0          0.0        INF 
+   1981       96.0       96.0       96.0       96.0          0.0        INF 
+   1982      102.0      102.0      102.0      102.0          0.0        INF 
+   1983        0.0       INF         0.0       INF          INF         INF 
+   1984        0.0       INF         0.0       INF          INF         INF 
+   1985        0.0       INF         0.0       INF          INF         INF 
+   1986        0.0       INF         0.0       INF          INF         INF 
+   1987        0.0       INF         0.0       INF          INF         INF 
+   1988        0.0       INF         0.0       INF          INF         INF 
+   1989        0.0       INF         0.0       INF          INF         INF 
+   1990        0.0       INF         0.0       INF          INF         INF 
+   1991        0.0       INF         0.0       INF          INF         INF 
+   1992        0.0       INF         0.0       INF          INF         INF 
+   1993        0.0       INF         0.0       INF          INF         INF 
+   1994        0.0       INF         0.0       INF          INF         INF 
+   1995      274.0      274.0      274.0      274.0          0.0        INF 
+   1996       53.0       53.0       53.0       53.0          0.0        INF 
+   1997      203.0      203.0      203.0      203.0          0.0        INF 
+   1998      170.0      170.0      170.0      170.0          0.0        INF 
+   1999      122.0      122.0      122.0      122.0          0.0        INF 
+   2000       58.0       58.0       58.0       58.0          0.0        INF 
+   2001      160.0      160.0      160.0      160.0          0.0        INF 
+   2002       22.7       22.7       22.7       22.7          0.0        INF 
+   2003      156.0      156.0      156.0      156.0          0.0        INF 
+   2004      380.0      380.0      380.0      380.0          0.0        INF 
+   2005      233.0      233.0      233.0      233.0          0.0        INF 
+   2006       63.3       63.3       63.3       63.3          0.0        INF 
+   2007        0.0       INF         0.0       INF          INF         INF 
+   2008      189.0      189.0      189.0      189.0          0.0        INF 
+   2009      127.0      127.0      127.0      127.0          0.0        INF 
+   2010      153.0      153.0      153.0      153.0          0.0        INF 
+   2011      182.0      182.0      182.0      182.0          0.0        INF 
+   2012       50.0       50.0       50.0       50.0          0.0        INF 
+   2013       67.8       67.8       67.8       67.8          0.0        INF 
+1
+
+
+
+ End PeakFQ analysis.
+   Stations processed :       1
+   Number of errors   :       0
+   Stations skipped   :       0
+   Station years      :      76
+
+
+Data records may have been ignored for the stations listed below.               
+(Card type must be Y, Z, N, H, I, 2, 3, 4,  or *.)                              
+(2, 4, and * records are ignored.)                                              
+                                                                                
+ For the station below, the following records were ignored:                     
+                                                                                
+ FINISHED PROCESSING STATION:  07111000       USGS HUERFANO R AT MANZANARES XING
+                                                                                
+                                                                                
+ For the station below, the following records were ignored:                     
+                                                                                
+ FINISHED PROCESSING STATION:                                                   
+                                                                                

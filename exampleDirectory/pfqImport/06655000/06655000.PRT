@@ -1,0 +1,303 @@
+1
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.002.000
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 14:29
+
+                         --- PROCESSING OPTIONS ---  
+
+                      Plot option         = Graphics device   
+                      Basin char output   = WATSTORE      
+                      Print option        = Yes
+                      Debug print         = No 
+                      Input peaks listing = Long 
+                      Input peaks format  = WATSTORE peak file  
+
+                      Input files used:
+                         peaks (ascii)  - C:\Users\mkohn\Desktop\06655000\06655000.TXT                                    
+                         specifications - C:\Users\mkohn\Desktop\06655000\PKFQWPSF.TMP                                    
+                      Output file(s): 
+                         main - C:\Users\mkohn\Desktop\06655000\06655000.PRT                                    
+                         bcd  - C:\Users\mkohn\Desktop\06655000\06655000.BCD                                    
+  
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.001
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 14:29
+  
+              Station - 06655000  COTTONWOOD CREEK AT WENDOVER, WY              
+
+
+                     I N P U T   D A T A   S U M M A R Y
+
+                Number of peaks in record            =       24
+                Peaks not used in analysis           =        0
+                Systematic peaks in analysis         =       24
+                Historic peaks in analysis           =        0
+                Beginning Year                       =     1929
+                Ending Year                          =     1974
+                Historical Period Length             =       46
+                Generalized skew                     =    0.071
+                     Standard error                  =    0.550
+                     Mean Square error               =    0.303
+                Skew option                          =   WEIGHTED  
+                Gage base discharge                  =      0.0
+                User supplied high outlier threshold =   --           
+                User supplied PILF (LO) criterion    =   --           
+                Plotting position parameter          =     0.00
+                Type of analysis                            EMA
+                PILF (LO) Test Method                      MGBT
+                Perception Thresholds:
+                     Begin     End       Low     High     Comment
+                      1929    1974       0.0       INF     DEFAULT                                                                         
+                      1934    1934       INF       INF     MISSING                                                                         
+                      1943    1945       INF       INF     MISSING                                                                         
+                      1956    1973       INF       INF     MISSING                                                                         
+                Interval Data                    =   None Specified
+
+
+
+  *********  NOTICE  --  Preliminary machine computations.        *********     
+  *********  User responsible for assessment and interpretation.  *********     
+
+    WCF002J-CALCS COMPLETED.  RETURN CODE =  2
+    EMA002W-CONFIDENCE INTERVALS ARE NOT EXACT IF HISTORIC PERIOD > 0
+
+
+                                        Kendall's Tau Parameters
+
+                                                        MEDIAN   No. of
+                                       TAU    P-VALUE    SLOPE   PEAKS
+                                ---------------------------------------
+             SYSTEMATIC RECORD     -0.174      0.244    -10.467    24
+
+
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.002
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 14:29
+  
+              Station - 06655000  COTTONWOOD CREEK AT WENDOVER, WY              
+
+
+           ANNUAL FREQUENCY CURVE PARAMETERS -- LOG-PEARSON TYPE III 
+
+                                    LOGARITHMIC         
+                         -------------------------------
+                                      STANDARD          
+                            MEAN     DEVIATION     SKEW 
+                         -------------------------------
+ EMA W/O REG. INFO         2.4687      0.5977      0.267
+ EMA W/REG. INFO           2.4687      0.5977      0.155
+
+ EMA ESTIMATE OF MSE OF SKEW W/O REG. INFO (AT-SITE)      0.2110
+ EMA ESTIMATE OF MSE OF SKEW W/SYSTEMATIC ONLY (AT-SITE)  0.2293
+
+
+
+    ANNUAL FREQUENCY CURVE -- DISCHARGES AT SELECTED EXCEEDANCE PROBABILITIES
+
+   ANNUAL   EMA W/    EMA W/O     <------ FOR EMA ESTIMATES ------->
+EXCEEDANCE  REG INFO  REG INFO    VARIANCE  95% CONFIDENCE INTERVALS
+PROBABILITY ESTIMATE  ESTIMATE     OF EST.       LOWER       UPPER
+
+   0.9950      10.4      12.0      0.0809         1.2         26.7
+   0.9900      14.0      15.7      0.0624         2.2         32.6
+   0.9500      32.6      34.1      0.0316         9.8         63.2
+   0.9000      51.7      52.7      0.0235        20.3         95.5
+   0.8000      91.6      91.1      0.0182        44.3        164.7
+   0.6667     158.1     155.0      0.0162        84.3        284.2
+   0.5000     284.0     276.8      0.0161       157.3        525.1
+   0.4292     363.3     354.2      0.0166       202.1        688.3
+   0.2000     926.2     917.0      0.0217       500.8       2134.0
+   0.1000    1753.     1777.       0.0301       897.4       5298.0
+   0.0400    3517.     3697.       0.0472      1624.0      16920.0
+   0.0200    5561.     6025.       0.0649      2339.0      39720.0
+   0.0100    8446.     9444.       0.0870      3203.0      91730.0
+   0.0050   12440.    14370.       0.1136      4220.0     209000.0
+   0.0020   20020.    24170.       0.1557      5808.0     611000.0
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.003
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 14:29
+  
+              Station - 06655000  COTTONWOOD CREEK AT WENDOVER, WY              
+
+
+                       I N P U T   D A T A   L I S T I N G
+
+
+    WATER       PEAK   PEAKFQ   <--- Intervals --->
+     YEAR      VALUE    CODES     LOW         HIGH   REMARKS
+     1929      840.0       
+     1930      450.0       
+     1931       56.0       
+     1932      280.0       
+     1933      212.0       
+     1935     3600.0       
+     1936      299.0       
+     1937      236.0       
+     1938      284.0       
+     1939       52.0       
+     1940     4140.0       
+     1941      818.0       
+     1942     2220.0       
+     1946      254.0       
+     1947      102.0       
+     1948      691.0       
+     1949      122.0       
+     1950       32.0       
+     1951      320.0       
+     1952      326.0       
+     1953      190.0       
+     1954       58.0       
+     1955     1730.0       
+     1974       36.0       
+
+
+        Explanation of peak discharge qualification codes
+
+       PeakFQ    NWIS
+        CODE     CODE   DEFINITION
+
+          D        3    Dam failure, non-recurrent flow anomaly
+          G        8    Discharge greater than stated value
+          X       3+8   Both of the above
+          L        4    Discharge less than stated value
+          K     6 OR C  Known effect of regulation or urbanization
+          H        7    Historic peak
+
+          -  Minus-flagged discharge -- Not used in computation
+                -8888.0 -- No discharge value given
+          -  Minus-flagged water year -- Historic peak used in computation
+
+
+
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.004
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 14:29
+  
+              Station - 06655000  COTTONWOOD CREEK AT WENDOVER, WY              
+
+
+   EMPIRICAL FREQUENCY CURVES -- HIRSCH-STEDINGER PLOTTING POSITIONS
+
+   WATER     RANKED      EMA         INTERVALS
+    YEAR   DISCHARGE   ESTIMATE      LOW      HIGH
+    1940     4140.0     0.0398
+    1935     3600.0     0.0798
+    1942     2220.0     0.1199
+    1955     1730.0     0.1599
+    1929      840.0     0.1999
+    1941      818.0     0.2399
+    1948      691.0     0.2799
+    1930      450.0     0.3199
+    1952      326.0     0.3599
+    1951      320.0     0.4000
+    1936      299.0     0.4400
+    1938      284.0     0.4800
+    1932      280.0     0.5200
+    1946      254.0     0.5600
+    1937      236.0     0.6000
+    1933      212.0     0.6401
+    1953      190.0     0.6801
+    1949      122.0     0.7201
+    1947      102.0     0.7601
+    1954       58.0     0.8001
+    1931       56.0     0.8401
+    1939       52.0     0.8801
+    1974       36.0     0.9202
+    1950       32.0     0.9602
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.005
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 14:29
+  
+              Station - 06655000  COTTONWOOD CREEK AT WENDOVER, WY              
+
+
+                         EMA REPRESENTATION OF DATA
+
+  WATER <----- OBSERVED-----><-------- EMA -------><-PERCEPTION THRESHOLDS->
+   YEAR    Q_LOWER    Q_UPPER    Q_LOWER    Q_UPPER        LOWER       UPPER
+   1929      840.0      840.0      840.0      840.0          0.0        INF 
+   1930      450.0      450.0      450.0      450.0          0.0        INF 
+   1931       56.0       56.0       56.0       56.0          0.0        INF 
+   1932      280.0      280.0      280.0      280.0          0.0        INF 
+   1933      212.0      212.0      212.0      212.0          0.0        INF 
+   1934        0.0       INF         0.0       INF          INF         INF 
+   1935     3600.0     3600.0     3600.0     3600.0          0.0        INF 
+   1936      299.0      299.0      299.0      299.0          0.0        INF 
+   1937      236.0      236.0      236.0      236.0          0.0        INF 
+   1938      284.0      284.0      284.0      284.0          0.0        INF 
+   1939       52.0       52.0       52.0       52.0          0.0        INF 
+   1940     4140.0     4140.0     4140.0     4140.0          0.0        INF 
+   1941      818.0      818.0      818.0      818.0          0.0        INF 
+   1942     2220.0     2220.0     2220.0     2220.0          0.0        INF 
+   1943        0.0       INF         0.0       INF          INF         INF 
+   1944        0.0       INF         0.0       INF          INF         INF 
+   1945        0.0       INF         0.0       INF          INF         INF 
+   1946      254.0      254.0      254.0      254.0          0.0        INF 
+   1947      102.0      102.0      102.0      102.0          0.0        INF 
+   1948      691.0      691.0      691.0      691.0          0.0        INF 
+   1949      122.0      122.0      122.0      122.0          0.0        INF 
+   1950       32.0       32.0       32.0       32.0          0.0        INF 
+   1951      320.0      320.0      320.0      320.0          0.0        INF 
+   1952      326.0      326.0      326.0      326.0          0.0        INF 
+   1953      190.0      190.0      190.0      190.0          0.0        INF 
+   1954       58.0       58.0       58.0       58.0          0.0        INF 
+   1955     1730.0     1730.0     1730.0     1730.0          0.0        INF 
+   1956        0.0       INF         0.0       INF          INF         INF 
+   1957        0.0       INF         0.0       INF          INF         INF 
+   1958        0.0       INF         0.0       INF          INF         INF 
+   1959        0.0       INF         0.0       INF          INF         INF 
+   1960        0.0       INF         0.0       INF          INF         INF 
+   1961        0.0       INF         0.0       INF          INF         INF 
+   1962        0.0       INF         0.0       INF          INF         INF 
+   1963        0.0       INF         0.0       INF          INF         INF 
+   1964        0.0       INF         0.0       INF          INF         INF 
+   1965        0.0       INF         0.0       INF          INF         INF 
+   1966        0.0       INF         0.0       INF          INF         INF 
+   1967        0.0       INF         0.0       INF          INF         INF 
+   1968        0.0       INF         0.0       INF          INF         INF 
+   1969        0.0       INF         0.0       INF          INF         INF 
+   1970        0.0       INF         0.0       INF          INF         INF 
+   1971        0.0       INF         0.0       INF          INF         INF 
+   1972        0.0       INF         0.0       INF          INF         INF 
+   1973        0.0       INF         0.0       INF          INF         INF 
+   1974       36.0       36.0       36.0       36.0          0.0        INF 
+1
+
+
+
+ End PeakFQ analysis.
+   Stations processed :       1
+   Number of errors   :       0
+   Stations skipped   :       0
+   Station years      :      24
+
+
+Data records may have been ignored for the stations listed below.               
+(Card type must be Y, Z, N, H, I, 2, 3, 4,  or *.)                              
+(2, 4, and * records are ignored.)                                              
+                                                                                
+ For the station below, the following records were ignored:                     
+                                                                                
+                                                                                
+ FINISHED PROCESSING STATION:  06655000       USGS COTTONWOOD CREEK AT WENDOVER,
+                                                                                
+                                                                                
+ For the station below, the following records were ignored:                     
+                                                                                
+ FINISHED PROCESSING STATION:                                                   
+                                                                                

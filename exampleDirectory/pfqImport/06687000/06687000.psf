@@ -1,0 +1,34 @@
+I ASCI 06687000.TXT
+O File 06687000.PRT
+O Plot Style Graphics
+O Plot Format PNG
+O Additional Watstore 0668
+O Export 06687000.EXP
+O Empirical 06687000
+Station 06687000
+     Analyze EMA
+     PCPT_Thresh 1931 2013 0 1E+20  DEFAULT
+     PCPT_Thresh 1664 1930 3970 1E+20  2014 NON-EXCEEDANCE BOUND
+     PCPT_Thresh 2012 2013 3970 1E+20  MISSING FROM NE DNR WEBSITE AND 2014 NON-EXCEE
+     Peak 1994 187          'DNR DATA
+     Peak 1995 177          'DNR DATA
+     Peak 1996 152          'DNR DATA
+     Peak 1997 174          'DNR DATA
+     Peak 1998 180          'DNR DATA
+     Peak 1999 159          'DNR DATA
+     Peak 2000 141          'DNR DATA
+     Peak 2001 189          'DNR DATA
+     Peak 2002 125          'DNR DATA
+     Peak 2003 170          'DNR DATA
+     Peak 2004 140          'DNR DATA
+     Peak 2005 141          'DNR DATA
+     Peak 2006 110          'DNR DATA
+     Peak 2007 213          'DNR DATA
+     Peak 2008 114          'DNR DATA
+     Peak 2009 176          'DNR DATA
+     Peak 2010 179          'DNR DATA
+     Peak 2011 149          'DNR DATA
+     BegYear 1664
+     EndYear 2013
+     HistPeriod 350
+     LOType MGBT

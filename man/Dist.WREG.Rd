@@ -33,6 +33,8 @@ Returns the distance between the two sites in miles.
  \code{method==2} indicates that the Haversine approximation should be used.
 }
 \examples{
-\dontrun Add example
+\dontrun{
+#add examples
+}
 }
 

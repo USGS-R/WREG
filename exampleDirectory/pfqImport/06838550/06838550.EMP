@@ -1,0 +1,31 @@
+# US Geological Survey
+# PeakFQ Flood Frequency Analysis, Version 7.1 dated 3/14/2014
+#
+# Analyzed: 02/03/2015 10:16
+#
+# Empirical Frequency Curves
+Station - 06838550  DRY CREEK AT BARTLEY, NEBR.                                 
+  WaterYr	  RankedQ	   EMAEst	ThreshLow	 ThreshUp	  IntvLow	 IntvHigh
+    1965	      712.0	      0.0415	       0.	      INF
+    1976	      633.0	      0.0832	       0.	      INF
+    1963	      600.0	      0.1249	       0.	      INF
+    1962	      420.0	      0.1665	       0.	      INF
+    1977	      370.0	      0.2082	       0.	      INF
+    1979	      330.0	      0.2499	       0.	      INF
+    1961	      315.0	      0.2916	       0.	      INF
+    1969	      295.0	      0.3333	       0.	      INF
+    1981	      285.0	      0.3750	       0.	      INF
+    1975	      280.0	      0.4166	       0.	      INF
+    1974	      260.0	      0.4583	       0.	      INF
+    1970	      245.0	      0.5000	       0.	      INF
+    1967	      240.0	      0.5417	       0.	      INF
+    1966	      230.0	      0.5834	       0.	      INF
+    1968	      205.0	      0.6250	       0.	      INF
+    1971	      204.0	      0.6667	       0.	      INF
+    1983	      200.0	      0.7084	       0.	      INF
+    1978	      175.0	      0.7501	       0.	      INF
+    1964	      125.0	      0.7918	       0.	      INF
+    1980	       69.0	      0.8335	       0.	      INF
+    1972	       15.0	      0.8751	       0.	      INF
+    1973	       10.0	      0.9168	       0.	      INF
+    1982	        9.0	      0.9585	       0.	      INF

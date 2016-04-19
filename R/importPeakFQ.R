@@ -37,7 +37,10 @@
 #' \item{recLen}{A square matrix indicating the number of overlapping years
 #'  for each site pair.}
 #' \item{recCor}{A matrix of the correlaiton between site paris.}
-#' 
+#' @examples
+#' \dontrun{
+#' #add examples
+#' }
 #'@export
 importPeakFQ <- function(pfqPath,gisFile,sites='') {
   # Developed by William Farmer, 04 February 2016

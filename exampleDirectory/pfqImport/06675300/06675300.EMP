@@ -1,0 +1,29 @@
+# US Geological Survey
+# PeakFQ Flood Frequency Analysis, Provisional Ver. 7.0 dated 05/08/2013
+#
+# Analyzed: 06/12/2014 13:59
+#
+# Empirical Frequency Curves
+Station - 06675300  HORSE CREEK TRIBUTARY NEAR LITTLE BEAR, WY                  
+  WaterYr	  RankedQ	   EMAEst	ThreshLow	 ThreshUp	  IntvLow	 IntvHigh
+    1963	      286.0	      0.0407	       0.	      INF
+    1961	       78.0	      0.0816	       0.	      INF
+    1979	       75.0	      0.1224	       0.	      INF
+    1967	       68.0	      0.1633	       0.	      INF
+    1962	       40.0	      0.2857	      40.	      INF
+    1964	       40.0	      0.2857	      40.	      INF
+    1965	       40.0	      0.2857	      40.	      INF
+    1966	       40.0	      0.2857	      40.	      INF
+    1973	       40.0	      0.2450	       0.	      INF
+    1981	       40.0	      0.2042	       0.	      INF
+    1971	       34.0	      0.3375	       0.	      INF
+    1974	       24.0	      0.3896	       0.	      INF
+    1969	       21.0	      0.4416	       0.	      INF
+    1977	       15.0	      0.4937	       0.	      INF
+    1968	       14.0	      0.5455	      14.	      INF
+    1975	       10.0	      0.6059	       0.	      INF
+    1970	        8.0	      0.7273	       0.	      INF
+    1978	        8.0	      0.6666	       0.	      INF
+    1980	        7.0	      0.7880	       0.	      INF
+    1972	        1.0	      0.9496	       1.	      INF
+    1976	        1.0	      0.8989	       1.	      INF

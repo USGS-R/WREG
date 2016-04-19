@@ -39,8 +39,10 @@
 #'  model.}
 #'  
 #'  
-#' @examples 
-#' \dontrun Add example
+#' @examples
+#' \dontrun{
+#' #add examples
+#' }
 #'@export
 Omega.WLS.ROImatchMatLab <- function(Y.all,X.all,LP3.all,RecordLengths.all,NDX) {
   # William Farmer, USGS, January 26, 2015

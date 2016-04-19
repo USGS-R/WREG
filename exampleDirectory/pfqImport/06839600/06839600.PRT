@@ -1,0 +1,263 @@
+1
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.002.000
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 10:19
+
+                         --- PROCESSING OPTIONS ---  
+
+                      Plot option         = Graphics device   
+                      Basin char output   = WATSTORE      
+                      Print option        = Yes
+                      Debug print         = No 
+                      Input peaks listing = Long 
+                      Input peaks format  = WATSTORE peak file  
+
+                      Input files used:
+                         peaks (ascii)  - C:\Users\mkohn\Desktop\06839600\06839600.TXT                                    
+                         specifications - C:\Users\mkohn\Desktop\06839600\PKFQWPSF.TMP                                    
+                      Output file(s): 
+                         main - C:\Users\mkohn\Desktop\06839600\06839600.PRT                                    
+                         bcd  - C:\Users\mkohn\Desktop\06839600\06839600.BCD                                    
+  
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.001
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 10:19
+  
+             Station - 06839600  FRAZIER CREEK NEAR MAYWOOD, NEBR.              
+
+
+                     I N P U T   D A T A   S U M M A R Y
+
+                Number of peaks in record            =       19
+                Peaks not used in analysis           =        0
+                Systematic peaks in analysis         =       19
+                Historic peaks in analysis           =        0
+                Beginning Year                       =     1952
+                Ending Year                          =     1970
+                Historical Period Length             =       19
+                Generalized skew                     =    0.345
+                     Standard error                  =    0.550
+                     Mean Square error               =    0.303
+                Skew option                          =   WEIGHTED  
+                Gage base discharge                  =      0.0
+                User supplied high outlier threshold =   --           
+                User supplied PILF (LO) criterion    =   --           
+                Plotting position parameter          =     0.00
+                Type of analysis                            EMA
+                PILF (LO) Test Method                      MGBT
+                Perception Thresholds:
+                     Begin     End       Low     High     Comment
+                      1952    1970       0.0       INF     DEFAULT                                                                         
+                Interval Data                    =   None Specified
+
+
+
+  *********  NOTICE  --  Preliminary machine computations.        *********     
+  *********  User responsible for assessment and interpretation.  *********     
+
+    WCF002J-CALCS COMPLETED.  RETURN CODE =  2
+    EMA002W-CONFIDENCE INTERVALS ARE NOT EXACT IF HISTORIC PERIOD > 0
+
+
+                                        Kendall's Tau Parameters
+
+                                                        MEDIAN   No. of
+                                       TAU    P-VALUE    SLOPE   PEAKS
+                                ---------------------------------------
+             SYSTEMATIC RECORD      0.140      0.421     15.000    19
+
+
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.002
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 10:19
+  
+             Station - 06839600  FRAZIER CREEK NEAR MAYWOOD, NEBR.              
+
+
+           ANNUAL FREQUENCY CURVE PARAMETERS -- LOG-PEARSON TYPE III 
+
+                                    LOGARITHMIC         
+                         -------------------------------
+                                      STANDARD          
+                            MEAN     DEVIATION     SKEW 
+                         -------------------------------
+ EMA W/O REG. INFO         2.8584      0.6038      0.434
+ EMA W/REG. INFO           2.8584      0.6038      0.390
+
+ EMA ESTIMATE OF MSE OF SKEW W/O REG. INFO (AT-SITE)      0.2980
+ EMA ESTIMATE OF MSE OF SKEW W/SYSTEMATIC ONLY (AT-SITE)  0.2980
+
+
+
+    ANNUAL FREQUENCY CURVE -- DISCHARGES AT SELECTED EXCEEDANCE PROBABILITIES
+
+   ANNUAL   EMA W/    EMA W/O     <------ FOR EMA ESTIMATES ------->
+EXCEEDANCE  REG INFO  REG INFO    VARIANCE  95% CONFIDENCE INTERVALS
+PROBABILITY ESTIMATE  ESTIMATE     OF EST.       LOWER       UPPER
+
+   0.9950      33.4      35.4      0.0802         4.0         86.9
+   0.9900      42.5      44.5      0.0623         6.7        100.1
+   0.9500      86.4      88.1      0.0324        25.3        170.5
+   0.9000     130.1     131.3      0.0247        49.4        248.8
+   0.8000     219.9     219.7      0.0202       103.1        420.9
+   0.6667     370.1     367.4      0.0193       189.4        725.6
+   0.5000     659.6     652.9      0.0206       344.0       1376.0
+   0.4292     846.1     837.5      0.0219       439.2       1843.0
+   0.2000    2248.     2237.       0.0315      1097.0       6616.0
+   0.1000    4498.     4517.       0.0456      2023.0      19540.0
+   0.0400    9816.    10000.       0.0731      3854.0      82240.0
+   0.0200   16620.    17140.       0.1011      5807.0     245200.0
+   0.0100   27120.    28320.       0.1359      8346.0     736200.0
+   0.0050   42990.    45500.       0.1776     11570.0    2211000.0
+   0.0020   76410.    82350.       0.2438     17060.0    7439000.0
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.003
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 10:19
+  
+             Station - 06839600  FRAZIER CREEK NEAR MAYWOOD, NEBR.              
+
+
+                       I N P U T   D A T A   L I S T I N G
+
+
+    WATER       PEAK   PEAKFQ   <--- Intervals --->
+     YEAR      VALUE    CODES     LOW         HIGH   REMARKS
+     1952       67.0       
+     1953      343.0       
+     1954      260.0       
+     1955      594.0       
+     1956    11200.0       
+     1957     1790.0       
+     1958      860.0       
+     1959      180.0       
+     1960      333.0       
+     1961     1630.0       
+     1962     1500.0       
+     1963     1730.0       
+     1964      460.0       
+     1965      380.0       
+     1966      440.0       
+     1967     9370.0       
+     1968      100.0       
+     1969     4150.0       
+     1970      440.0       
+
+
+        Explanation of peak discharge qualification codes
+
+       PeakFQ    NWIS
+        CODE     CODE   DEFINITION
+
+          D        3    Dam failure, non-recurrent flow anomaly
+          G        8    Discharge greater than stated value
+          X       3+8   Both of the above
+          L        4    Discharge less than stated value
+          K     6 OR C  Known effect of regulation or urbanization
+          H        7    Historic peak
+
+          -  Minus-flagged discharge -- Not used in computation
+                -8888.0 -- No discharge value given
+          -  Minus-flagged water year -- Historic peak used in computation
+
+
+
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.004
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 10:19
+  
+             Station - 06839600  FRAZIER CREEK NEAR MAYWOOD, NEBR.              
+
+
+   EMPIRICAL FREQUENCY CURVES -- HIRSCH-STEDINGER PLOTTING POSITIONS
+
+   WATER     RANKED      EMA         INTERVALS
+    YEAR   DISCHARGE   ESTIMATE      LOW      HIGH
+    1956    11200.0     0.0498
+    1967     9370.0     0.0998
+    1969     4150.0     0.1498
+    1957     1790.0     0.1999
+    1963     1730.0     0.2499
+    1961     1630.0     0.2999
+    1962     1500.0     0.3499
+    1958      860.0     0.4000
+    1955      594.0     0.4500
+    1964      460.0     0.5000
+    1966      440.0     0.6000
+    1970      440.0     0.5500
+    1965      380.0     0.6501
+    1953      343.0     0.7001
+    1960      333.0     0.7501
+    1954      260.0     0.8001
+    1959      180.0     0.8502
+    1968      100.0     0.9002
+    1952       67.0     0.9502
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.005
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 10:19
+  
+             Station - 06839600  FRAZIER CREEK NEAR MAYWOOD, NEBR.              
+
+
+                         EMA REPRESENTATION OF DATA
+
+  WATER <----- OBSERVED-----><-------- EMA -------><-PERCEPTION THRESHOLDS->
+   YEAR    Q_LOWER    Q_UPPER    Q_LOWER    Q_UPPER        LOWER       UPPER
+   1952       67.0       67.0       67.0       67.0          0.0        INF 
+   1953      343.0      343.0      343.0      343.0          0.0        INF 
+   1954      260.0      260.0      260.0      260.0          0.0        INF 
+   1955      594.0      594.0      594.0      594.0          0.0        INF 
+   1956    11200.0    11200.0    11200.0    11200.0          0.0        INF 
+   1957     1790.0     1790.0     1790.0     1790.0          0.0        INF 
+   1958      860.0      860.0      860.0      860.0          0.0        INF 
+   1959      180.0      180.0      180.0      180.0          0.0        INF 
+   1960      333.0      333.0      333.0      333.0          0.0        INF 
+   1961     1630.0     1630.0     1630.0     1630.0          0.0        INF 
+   1962     1500.0     1500.0     1500.0     1500.0          0.0        INF 
+   1963     1730.0     1730.0     1730.0     1730.0          0.0        INF 
+   1964      460.0      460.0      460.0      460.0          0.0        INF 
+   1965      380.0      380.0      380.0      380.0          0.0        INF 
+   1966      440.0      440.0      440.0      440.0          0.0        INF 
+   1967     9370.0     9370.0     9370.0     9370.0          0.0        INF 
+   1968      100.0      100.0      100.0      100.0          0.0        INF 
+   1969     4150.0     4150.0     4150.0     4150.0          0.0        INF 
+   1970      440.0      440.0      440.0      440.0          0.0        INF 
+1
+
+
+
+ End PeakFQ analysis.
+   Stations processed :       1
+   Number of errors   :       0
+   Stations skipped   :       0
+   Station years      :      19
+
+
+Data records may have been ignored for the stations listed below.               
+(Card type must be Y, Z, N, H, I, 2, 3, 4,  or *.)                              
+(2, 4, and * records are ignored.)                                              
+                                                                                
+ For the station below, the following records were ignored:                     
+                                                                                
+                                                                                
+ FINISHED PROCESSING STATION:  06839600       USGS FRAZIER CREEK NEAR MAYWOOD, N
+                                                                                
+                                                                                
+ For the station below, the following records were ignored:                     
+                                                                                
+ FINISHED PROCESSING STATION:                                                   
+                                                                                

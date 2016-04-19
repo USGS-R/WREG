@@ -76,6 +76,8 @@ In this implementation, the weights for weighted least-squares
  regression are defined by record lengths.  See manual for details.
 }
 \examples{
-\dontrun Add example
+\dontrun{
+#add examples
+}
 }
 

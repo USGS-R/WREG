@@ -48,4 +48,9 @@ This functions allows users to read output directly from PeakFQ without
 the need to manipulate additional files.  The site selection is driven 
 by the sites in the GIS table.
 }
+\examples{
+\dontrun{
+#add examples
+}
+}
 

@@ -1,0 +1,15 @@
+I ASCI 06831500.TXT
+O File 06831500.PRT
+O Plot Style Graphics
+O Plot Format PNG
+O Additional Watstore 0683
+O Export 06831500.EXP
+O Empirical 06831500.
+Station 06831500
+     Analyze EMA
+     PCPT_Thresh 1814 1971 0 1E+20 Default
+     PCPT_Thresh 1814 1940 4000 1E+20 2014 non-exceedance bound
+     BegYear 1814
+     EndYear 1971
+     HistPeriod 158
+     LOType MGBT

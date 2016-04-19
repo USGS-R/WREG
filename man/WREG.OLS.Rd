@@ -61,6 +61,8 @@ This function follows the basic implementation of ordinary
  least-squares regression.
 }
 \examples{
-\dontrun add examples
+\dontrun{
+#add examples
+}
 }
 

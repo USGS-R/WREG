@@ -65,8 +65,10 @@
 #'  empty.}
 #'@import stats
 #'  
-#' @examples 
-#' \dontrun add examples
+#' @examples
+#' \dontrun{
+#' #add examples
+#' }
 #'@export
 WREG.UW <- function(Y,X,customWeight,transY,x0=NA) {
   # William Farmer, USGS, January 05, 2015

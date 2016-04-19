@@ -1,0 +1,11 @@
+I ASCI 06835000.TXT
+O File 06835000.PRT
+O Plot Style Graphics
+O Plot Format PNG
+Station 06835000
+     Analyze EMA
+     PCPT_Thresh 1950 1972 0 1E+20 Default
+     BegYear 1950
+     EndYear 1972
+     HistPeriod 23
+     LOType MGBT

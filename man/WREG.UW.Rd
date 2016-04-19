@@ -78,6 +78,8 @@ This function allows users to develop weights outside of the WREG
  matrix must be invertible.
 }
 \examples{
-\dontrun add examples
+\dontrun{
+#add examples
+}
 }
 

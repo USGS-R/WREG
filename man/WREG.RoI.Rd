@@ -175,6 +175,8 @@ The support for region-of-influence regression is described in the
  other functions in this package.
 }
 \examples{
-\dontrun Add example
+\dontrun{
+#add examples
+}
 }
 

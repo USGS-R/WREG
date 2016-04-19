@@ -32,6 +32,9 @@
 \description{
 Print methods for WREG output lists
 }
+\details{
+print.WREG
+}
 \note{
 \code{print} is a generic name for the functions documented.
 \cr

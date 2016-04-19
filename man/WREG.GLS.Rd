@@ -145,6 +145,8 @@ In this implementation, the weights for generalized least-squares
  other functions in this package.
 }
 \examples{
-\dontrun Add example
+\dontrun{
+#add examples
+}
 }
 

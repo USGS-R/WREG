@@ -48,8 +48,10 @@
 #'  searching.  Currently empty.}
 #'@import stats
 #'  
-#' @examples 
-#' \dontrun add examples
+#' @examples
+#' \dontrun{
+#' #add examples
+#' }
 #'@export
 
 WREG.OLS <- function(Y,X,transY,x0=NA) {

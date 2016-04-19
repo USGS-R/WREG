@@ -1,0 +1,21 @@
+# US Geological Survey
+# PeakFQ Flood Frequency Analysis, Version 7.1 dated 3/14/2014
+#
+# Analyzed: 11/25/2014 13:51
+#
+# Empirical Frequency Curves
+Station - 06835100  BOBTAIL CREEK NEAR PALISADE, NEBR.                          
+  WaterYr	  RankedQ	   EMAEst	ThreshLow	 ThreshUp	  IntvLow	 IntvHigh
+    1972	    15200.0	      0.0014	       0.	      INF
+    1975	     1850.0	      0.0793	       0.	      INF
+    1969	     1100.0	      0.2328	       0.	      INF
+    1970	     1100.0	      0.1560	       0.	      INF
+    1968	      835.0	      0.3095	       0.	      INF
+    1967	      650.0	      0.3863	       0.	      INF
+    1976	      290.0	      0.4630	       0.	      INF
+    1966	      230.0	      0.5398	       0.	      INF
+    1974	      175.0	      0.6166	       0.	      INF
+    1977	      112.0	      0.6933	       0.	      INF
+    1973	       90.0	      0.7701	       0.	      INF
+    1971	       81.0	      0.8468	       0.	      INF
+    1978	       67.0	      0.9236	       0.	      INF

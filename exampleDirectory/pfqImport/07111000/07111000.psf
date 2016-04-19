@@ -1,0 +1,35 @@
+I ASCI 07111000.TXT
+O File 07111000.PRT
+O Plot Style Graphics
+O Plot Format PNG
+O Additional Watstore 07111000.B
+O Export 07111000.EXP
+O Empirical 07111000.EMP
+Station 07111000
+     Analyze EMA
+     PCPT_Thresh 1924 2013 0 1E+20  DEFAULT
+     PCPT_Thresh 1977 1977 1E+20 1E+20  MISSING
+     PCPT_Thresh 1983 1994 1E+20 1E+20  MISSING
+     PCPT_Thresh 2007 2007 1E+20 1E+20  MISSING
+     Peak 1995 274          'DWR DATA
+     Peak 1996 53          'DWR DATA
+     Peak 1997 203          'DWR DATA
+     Peak 1998 170          'DWR DATA
+     Peak 1999 122          'DWR DATA
+     Peak 2000 58          'DWR DATA
+     Peak 2001 160          'DWR DATA
+     Peak 2002 22.7000007629395          'DWR DATA
+     Peak 2003 156          'DWR DATA
+     Peak 2004 380          'DWR DATA
+     Peak 2005 233          'DWR DATA
+     Peak 2006 63.2999992370605          'DWR DATA
+     Peak 2008 189          'DWR DATA
+     Peak 2009 127          'DWR DATA
+     Peak 2010 153          'DWR DATA
+     Peak 2011 182          'DWR DATA
+     Peak 2012 50          'DWR DATA
+     Peak 2013 67.8000030517578   'DWR DATA
+     BegYear 1924
+     EndYear 2013
+     HistPeriod 90
+     LOType MGBT

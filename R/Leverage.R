@@ -29,15 +29,17 @@
 #'  \item{Significant}{A logical vector the same size as \code{Leverage}. It
 #'  indicates if the leverage is significant for each observation.}
 #'  
-#' @examples 
-#' \dontrun Add example
+#'@examples
+#' \dontrun{
+#' #add examples
+#' }
 #'@export
 Leverage <- function(X,Omega,Ch=NA,x0=NA,ROI=FALSE) {
   # William Farmer, USGS, January 02, 2015
   # 01/27/2015, WHF: Added ABS on limits
   
   # Some upfront error handling
-  error <- FALSE
+  err <- FALSE
   if (missing(X)) {
     warning("Independent variables (X) must be provided.")
     err <- TRUE

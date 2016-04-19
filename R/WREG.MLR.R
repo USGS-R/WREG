@@ -132,8 +132,10 @@
 #'  1.05 was implemented.}
 #'@import stats
 #'  
-#' @examples 
-#' \dontrun add examples
+#' @examples
+#' \dontrun{
+#' #add examples
+#' }
 #'@export
 WREG.MLR <- function(Reg,...) {
   # William Farmer, USGS, January 05, 2015

@@ -1,0 +1,264 @@
+1
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.002.000
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 10:21
+
+                         --- PROCESSING OPTIONS ---  
+
+                      Plot option         = Graphics device   
+                      Basin char output   = WATSTORE      
+                      Print option        = Yes
+                      Debug print         = No 
+                      Input peaks listing = Long 
+                      Input peaks format  = WATSTORE peak file  
+
+                      Input files used:
+                         peaks (ascii)  - C:\Users\mkohn\Desktop\06839850\06839850.TXT                                    
+                         specifications - C:\Users\mkohn\Desktop\06839850\PKFQWPSF.TMP                                    
+                      Output file(s): 
+                         main - C:\Users\mkohn\Desktop\06839850\06839850.PRT                                    
+                         bcd  - C:\Users\mkohn\Desktop\06839850\06839850.BCD                                    
+  
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.001
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 10:21
+  
+              Station - 06839850  FOX CREEK NORTH OF CURTIS, NEBR.              
+
+
+                     I N P U T   D A T A   S U M M A R Y
+
+                Number of peaks in record            =       19
+                Peaks not used in analysis           =        0
+                Systematic peaks in analysis         =       19
+                Historic peaks in analysis           =        0
+                Beginning Year                       =     1952
+                Ending Year                          =     1970
+                Historical Period Length             =       19
+                Generalized skew                     =    0.493
+                     Standard error                  =    0.550
+                     Mean Square error               =    0.303
+                Skew option                          =   WEIGHTED  
+                Gage base discharge                  =      0.0
+                User supplied high outlier threshold =   --           
+                User supplied PILF (LO) criterion    =   --           
+                Plotting position parameter          =     0.00
+                Type of analysis                            EMA
+                PILF (LO) Test Method                      MGBT
+                Perception Thresholds:
+                     Begin     End       Low     High     Comment
+                      1952    1970       0.0       INF     DEFAULT                                                                         
+                Interval Data                    =   None Specified
+
+
+
+  *********  NOTICE  --  Preliminary machine computations.        *********     
+  *********  User responsible for assessment and interpretation.  *********     
+
+    WCF002J-CALCS COMPLETED.  RETURN CODE =  2
+    EMA003I-PILFS (LOS) WERE DETECTED USING MULTIPLE GRUBBS-BECK TEST   1      10.0
+      THE FOLLOWING PEAKS (WITH CORRESPONDING P-VALUES) WERE CENSORED:
+               2 ZERO VALUES
+             2.0    (0.0212)
+    EMA002W-CONFIDENCE INTERVALS ARE NOT EXACT IF HISTORIC PERIOD > 0
+
+
+                                        Kendall's Tau Parameters
+
+                                                        MEDIAN   No. of
+                                       TAU    P-VALUE    SLOPE   PEAKS
+                                ---------------------------------------
+             SYSTEMATIC RECORD     -0.066      0.742     -8.250    17
+
+
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.002
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 10:21
+  
+              Station - 06839850  FOX CREEK NORTH OF CURTIS, NEBR.              
+
+
+           ANNUAL FREQUENCY CURVE PARAMETERS -- LOG-PEARSON TYPE III 
+
+                                    LOGARITHMIC         
+                         -------------------------------
+                                      STANDARD          
+                            MEAN     DEVIATION     SKEW 
+                         -------------------------------
+ EMA W/O REG. INFO         1.9599      1.0470     -0.772
+ EMA W/REG. INFO           2.0068      0.9449      0.086
+
+ EMA ESTIMATE OF MSE OF SKEW W/O REG. INFO (AT-SITE)      0.3355
+ EMA ESTIMATE OF MSE OF SKEW W/SYSTEMATIC ONLY (AT-SITE)  0.3355
+
+
+
+    ANNUAL FREQUENCY CURVE -- DISCHARGES AT SELECTED EXCEEDANCE PROBABILITIES
+
+   ANNUAL   EMA W/    EMA W/O     <------ FOR EMA ESTIMATES ------->
+EXCEEDANCE  REG INFO  REG INFO    VARIANCE  95% CONFIDENCE INTERVALS
+PROBABILITY ESTIMATE  ESTIMATE     OF EST.       LOWER       UPPER
+
+   0.8000      16.1      13.8      0.0744         0.9         40.6
+   0.6667      38.8      42.7      0.0560         7.2        104.1
+   0.5000      98.5     124.0      0.0500        31.7        294.8
+   0.4292     145.3     186.4      0.0505        50.6        458.8
+   0.2000     627.8     718.7      0.0661       218.7       2845.0
+   0.1000    1683.     1534.       0.0913       531.5      12310.0
+   0.0400    4882.     3076.       0.1393      1307.0      77420.0
+   0.0200    9785.     4551.       0.1875      2262.0     293200.0
+   0.0100   18380.     6244.       0.2466      3612.0    1077000.0
+   0.0050   32870.     8104.       0.3172      5421.0    3887000.0
+   0.0020   66830.    10740.       0.4289      8624.0   20940000.0
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.003
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 10:21
+  
+              Station - 06839850  FOX CREEK NORTH OF CURTIS, NEBR.              
+
+
+                       I N P U T   D A T A   L I S T I N G
+
+
+    WATER       PEAK   PEAKFQ   <--- Intervals --->
+     YEAR      VALUE    CODES     LOW         HIGH   REMARKS
+     1952        2.0       
+     1953        0.0       
+     1954      100.0       
+     1955        0.0       
+     1956      420.0       
+     1957     1320.0       
+     1958       10.0       
+     1959     2080.0       
+     1960      600.0       
+     1961      630.0       
+     1962     1210.0       
+     1963       24.0       
+     1964      114.0       
+     1965      107.0       
+     1966      223.0       
+     1967     1040.0       
+     1968      167.0       
+     1969       55.0       
+     1970       10.0       
+
+
+        Explanation of peak discharge qualification codes
+
+       PeakFQ    NWIS
+        CODE     CODE   DEFINITION
+
+          D        3    Dam failure, non-recurrent flow anomaly
+          G        8    Discharge greater than stated value
+          X       3+8   Both of the above
+          L        4    Discharge less than stated value
+          K     6 OR C  Known effect of regulation or urbanization
+          H        7    Historic peak
+
+          -  Minus-flagged discharge -- Not used in computation
+                -8888.0 -- No discharge value given
+          -  Minus-flagged water year -- Historic peak used in computation
+
+
+
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.004
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 10:21
+  
+              Station - 06839850  FOX CREEK NORTH OF CURTIS, NEBR.              
+
+
+   EMPIRICAL FREQUENCY CURVES -- HIRSCH-STEDINGER PLOTTING POSITIONS
+
+   WATER     RANKED      EMA         INTERVALS
+    YEAR   DISCHARGE   ESTIMATE      LOW      HIGH
+    1959     2080.0     0.0498
+    1957     1320.0     0.0998
+    1962     1210.0     0.1498
+    1967     1040.0     0.1999
+    1961      630.0     0.2499
+    1960      600.0     0.2999
+    1956      420.0     0.3499
+    1966      223.0     0.4000
+    1968      167.0     0.4500
+    1964      114.0     0.5000
+    1965      107.0     0.5500
+    1954      100.0     0.6000
+    1969       55.0     0.6501
+    1963       24.0     0.7001
+    1958       10.0     0.8001
+    1970       10.0     0.7501
+  * 1952        2.0     0.8502
+
+    * DENOTES PILF (LO)
+
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.005
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 10:21
+  
+              Station - 06839850  FOX CREEK NORTH OF CURTIS, NEBR.              
+
+
+                         EMA REPRESENTATION OF DATA
+
+  WATER <----- OBSERVED-----><-------- EMA -------><-PERCEPTION THRESHOLDS->
+   YEAR    Q_LOWER    Q_UPPER    Q_LOWER    Q_UPPER        LOWER       UPPER
+   1952        2.0        2.0        0.0       10.0         10.0        INF 
+   1953        0.0        0.0        0.0       10.0         10.0        INF 
+   1954      100.0      100.0      100.0      100.0         10.0        INF 
+   1955        0.0        0.0        0.0       10.0         10.0        INF 
+   1956      420.0      420.0      420.0      420.0         10.0        INF 
+   1957     1320.0     1320.0     1320.0     1320.0         10.0        INF 
+   1958       10.0       10.0       10.0       10.0         10.0        INF 
+   1959     2080.0     2080.0     2080.0     2080.0         10.0        INF 
+   1960      600.0      600.0      600.0      600.0         10.0        INF 
+   1961      630.0      630.0      630.0      630.0         10.0        INF 
+   1962     1210.0     1210.0     1210.0     1210.0         10.0        INF 
+   1963       24.0       24.0       24.0       24.0         10.0        INF 
+   1964      114.0      114.0      114.0      114.0         10.0        INF 
+   1965      107.0      107.0      107.0      107.0         10.0        INF 
+   1966      223.0      223.0      223.0      223.0         10.0        INF 
+   1967     1040.0     1040.0     1040.0     1040.0         10.0        INF 
+   1968      167.0      167.0      167.0      167.0         10.0        INF 
+   1969       55.0       55.0       55.0       55.0         10.0        INF 
+   1970       10.0       10.0       10.0       10.0         10.0        INF 
+1
+
+
+
+ End PeakFQ analysis.
+   Stations processed :       1
+   Number of errors   :       0
+   Stations skipped   :       0
+   Station years      :      19
+
+
+Data records may have been ignored for the stations listed below.               
+(Card type must be Y, Z, N, H, I, 2, 3, 4,  or *.)                              
+(2, 4, and * records are ignored.)                                              
+                                                                                
+ For the station below, the following records were ignored:                     
+                                                                                
+                                                                                
+ FINISHED PROCESSING STATION:  06839850       USGS FOX CREEK NORTH OF CURTIS, NE
+                                                                                
+                                                                                
+ For the station below, the following records were ignored:                     
+                                                                                
+ FINISHED PROCESSING STATION:                                                   
+                                                                                

@@ -1,0 +1,31 @@
+# US Geological Survey
+# PeakFQ Flood Frequency Analysis, Provisional Ver. 7.0 dated 05/08/2013
+#
+# Analyzed: 06/13/2014 13:54
+#
+# Empirical Frequency Curves
+Station - 06835000  STINKING WATER CREEK NEAR PALISADE, NEBR.                   
+  WaterYr	  RankedQ	   EMAEst	ThreshLow	 ThreshUp	  IntvLow	 IntvHigh
+    1956	     3030.0	      0.0415	       0.	      INF
+    1960	     1780.0	      0.0832	       0.	      INF
+    1958	     1270.0	      0.1249	       0.	      INF
+    1955	     1250.0	      0.1665	       0.	      INF
+    1952	     1030.0	      0.2082	       0.	      INF
+    1951	      846.0	      0.2499	       0.	      INF
+    1967	      761.0	      0.2916	       0.	      INF
+    1972	      688.0	      0.3333	       0.	      INF
+    1962	      514.0	      0.3750	       0.	      INF
+    1950	      442.0	      0.4166	       0.	      INF
+    1963	      340.0	      0.5000	       0.	      INF
+    1968	      340.0	      0.4583	       0.	      INF
+    1959	      338.0	      0.5417	       0.	      INF
+    1964	      298.0	      0.5834	       0.	      INF
+    1957	      239.0	      0.6250	       0.	      INF
+    1965	      234.0	      0.6667	       0.	      INF
+    1969	      208.0	      0.7084	       0.	      INF
+    1954	      193.0	      0.7501	       0.	      INF
+    1971	      154.0	      0.7918	       0.	      INF
+    1970	      150.0	      0.8335	       0.	      INF
+    1961	      145.0	      0.8751	       0.	      INF
+    1966	      123.0	      0.9168	       0.	      INF
+    1953	      106.0	      0.9585	       0.	      INF

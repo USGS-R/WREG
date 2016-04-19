@@ -94,6 +94,8 @@ This function is largely a subroutine for \code{\link{WREG.MLR}} when
  estimate.
 }
 \examples{
-\dontrun Add example
+\dontrun{
+#add examples
+}
 }
 

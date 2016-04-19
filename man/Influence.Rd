@@ -49,6 +49,8 @@ of the observation.  This is a departure from the WREG v. 1.0, but reflects
 the WREG v. 1.05 code.
 }
 \examples{
-\dontrun Add example
+\dontrun{
+#add examples
+}
 }
 

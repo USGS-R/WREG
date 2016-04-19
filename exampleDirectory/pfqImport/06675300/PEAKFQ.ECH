@@ -1,0 +1,32 @@
+# US Geological Survey
+# PeakFQ Flood Frequency Analysis, Provisional version 7.0 dated 05/08/2013
+#
+# Analyzed:  06/12/2014 13:59
+#
+# Summary of input parameters
+#
+STATION	OPTION	BEGYR	ENDYR	SKEWOPT	GENSKEW	SKEWSTD	SKEWMSE	LO OUT	LO TEST	HI OUT	GAGEB	URB/REG	LATITUDE	LONGITUDE
+06675300          	EMA 	1961	1981	WEIGHTED   	-0.022	 0.550	 0.303	      0.	MGBT	      0.	      0.	NO 	  41.456	 104.883
+#
+# Perception Thresholds
+#
+Station	OrderNo	Begin	End	Low	High	Comment
+06675300            	   1	1961	1981	      0.	 0.1E+21	DEFAULT                                                                         
+06675300            	   2	1962	1962	     40.	 0.1E+21	PEAK < STATED VALUE                                                             
+06675300            	   3	1964	1964	     40.	 0.1E+21	PEAK < STATED VALUE                                                             
+06675300            	   4	1965	1965	     40.	 0.1E+21	PEAK < STATED VALUE                                                             
+06675300            	   5	1966	1966	     40.	 0.1E+21	PEAK < STATED VALUE                                                             
+06675300            	   6	1968	1968	     14.	 0.1E+21	PEAK < STATED VALUE                                                             
+06675300            	   7	1972	1972	      1.	 0.1E+21	PEAK < STATED VALUE                                                             
+06675300            	   8	1976	1976	      1.	 0.1E+21	PEAK < STATED VALUE                                                             
+#
+# Interval Data
+#
+Station	OrderNo	Date	Low	High	Comment
+06675300            	   1	1962	      0.	     40.	                                                                                
+06675300            	   2	1964	      0.	     40.	                                                                                
+06675300            	   3	1965	      0.	     40.	                                                                                
+06675300            	   4	1966	      0.	     40.	                                                                                
+06675300            	   5	1968	      0.	     14.	                                                                                
+06675300            	   6	1972	      0.	      1.	                                                                                
+06675300            	   7	1976	      0.	      1.	                                                                                
