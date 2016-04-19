@@ -38,9 +38,10 @@
 #'  for each site pair.}
 #' \item{recCor}{A matrix of the correlaiton between site paris.}
 #' @examples
-#' \dontrun{
-#' #add examples
-#' }
+#'peakFQdir <- paste0(system.file("exampleDirectory", package = "WREG"),"/pfqImport")
+#'gisFilePath <- paste0(peakFQdir,"/pfqSiteInfo.txt")
+#'importPeakFQ(pfqPath = peakFQdir,
+#'             gisFile = gisFilePath)
 #'@export
 importPeakFQ <- function(pfqPath,gisFile,sites='') {
   # Developed by William Farmer, 04 February 2016

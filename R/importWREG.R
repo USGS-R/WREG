@@ -37,9 +37,10 @@
 #' \item{recCor}{A matrix of the correlaiton between site paris.}
 #' \item{UW}{A matrix of user weights, if included.}
 #'@examples
-#' \dontrun{
-#' #add examples
-#' } 
+#'wregDir <- paste0(system.file("exampleDirectory", package = "WREG"),"/matlabImport")
+#'importWREG(wregPath = wregDir)
+
+
 #'@export
 importWREG <- function(wregPath,sites='') {
   # Developed by William Farmer, 10 February 2016
