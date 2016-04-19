@@ -57,8 +57,6 @@ importWREG <- function(wregPath,sites='') {
     paste0("0",siteInfo$Station.ID),siteInfo$Station.ID)
   BasChars <- siteInfo[,is.element(names(siteInfo),
     c('Station.ID','Lat','Long'))]
-  TestRecLen <- siteInfo[,is.element(names(siteInfo),
-    c('Station.ID','No..Annual.Series'))]
   X <- siteInfo[,c(1,9:ncol(siteInfo))]
   
   # Screen for particular sites
@@ -172,13 +170,34 @@ importWREG <- function(wregPath,sites='') {
   siteTS <- list()
   allFiles <- unique(apply(as.matrix(paste0('USGS',sitesOut,'*.txt')),
       MARGIN=1,FUN=list.files,path=wregPath))
-  if (length(allFiles)!=n2) {
-    stop(paste0('Not all sites are represented with time series or ',
-      'there are duplicate time series.'))
+  if (any(lapply(allFiles,length) == 0)) {
+    warning(paste("The following sites do not have timeseries data",
+                   sitesOut[which(lapply(allFiles,length) == 0)]))
+    #Remove missing file from all files list
+    sitesOut <- sitesOut[-which(lapply(allFiles,length) == 0)]
+    allFiles <- allFiles[-which(lapply(allFiles,length) == 0)]
+    
+    #Remove missing site from all files
+    Y <- subset(Y, Station.ID %in% sitesOut)
+    X <- subset(X, Station.ID %in% sitesOut)
+    LP3f <- subset(LP3f, Station.ID %in% sitesOut)
+    LP3k <- subset(LP3k, Station.ID %in% sitesOut)
+    BasChars <- subset(BasChars, Station.ID %in% sitesOut)
+    siteInfo <- subset(siteInfo, Station.ID %in% sitesOut)
+    
+
+  }
+  if(length(allFiles) > length(sitesOut))
+  {
+    stop("Duplicate timeseries were found.")
   }
   allFiles <- file.path(wregPath,allFiles)
   siteTS <- lapply(allFiles,read.table)
+  
+  TestRecLen <- siteInfo[,is.element(names(siteInfo),
+                                     c('Station.ID','No..Annual.Series'))]
   recLen <- recCor <- matrix(NA,ncol=length(siteTS),nrow=length(siteTS))
+  
   for (i in 1:length(siteTS)) {
     recLen[i,i] <- nrow(siteTS[[i]])
     idata <- abs(siteTS[[i]][,2:3])
