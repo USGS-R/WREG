@@ -214,6 +214,7 @@ shinyServer(function(input, output,session) {
                          input$YvarC4
                      )
                      
+                     transY <<- "log10"
                      Yinput <<- as.data.frame(cbind(selectData$Y$Station.ID,Yinput))
                    } else if(input$YvarTransType == "ln")
                    {
@@ -230,6 +231,7 @@ shinyServer(function(input, output,session) {
                          input$YvarC4
                      )
                      
+                     transY <<- "ln"
                      Yinput <<- as.data.frame(cbind(selectData$Y$Station.ID,Yinput))
                      
                    } else if(input$YvarTransType == "exp")
@@ -245,13 +247,15 @@ shinyServer(function(input, output,session) {
                           input$YvarC3) ^
                          #C4
                          input$YvarC4
+                       
                      )
-                     
+                     transY <<- "exp"
                      Yinput <<- as.data.frame(cbind(selectData$Y$Station.ID,Yinput))
                    } else if(input$YvarTransType == "none")
                    {
                      Yinput <<- selectData$Y[[input$Y]]
                      Yinput <<- as.data.frame(cbind(selectData$Y$Station.ID,Yinput))
+                     transY <<- "none"
                    }
                    
                    Xinput <<- lapply(1:length(input$X), function(i) {
@@ -358,12 +362,14 @@ shinyServer(function(input, output,session) {
                    if(input$regType == "OLS")
                    {
                      wregOUT <<- WREG.OLS(Y=Yinput[,2],
-                                          X=Xinput[,2:ncol(Xinput)])
+                                          X=Xinput[,2:ncol(Xinput)],
+                                          transY = transY)
                    } else if (input$regType == "WLS")
                    {
                      
                      wregOUT <<- WREG.WLS(Y=Yinput[,2],
                                           X=Xinput[,2:ncol(Xinput)],
+                                          transY = transY,
                                           recordLengths = selectData$recLen,
                                           LP3 = LP3)
                    } else if(input$regType == "GLS")
@@ -372,6 +378,7 @@ shinyServer(function(input, output,session) {
                      {
                        wregOUT <<- WREG.GLS(Y=Yinput[,2],
                                             X=Xinput[,2:ncol(Xinput)],
+                                            transY = transY,
                                             recordLengths = selectData$recLen,
                                             LP3 = LP3,
                                             basinChars = selectData$BasChars,
@@ -387,6 +394,7 @@ shinyServer(function(input, output,session) {
                      {
                        wregOUT <<- WREG.GLS(Y=Yinput[,2],
                                             X=Xinput[,2:ncol(Xinput)],
+                                            transY = transY,
                                             recordLengths = selectData$recLen,
                                             LP3 = LP3,
                                             basinChars = selectData$BasChars,
