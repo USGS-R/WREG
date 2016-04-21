@@ -127,7 +127,7 @@ importWREG <- function(wregPath,sites='') {
   lp3k <- lp3k[ndx,]
   site3b <- lp3k$Station.ID
   lp3k <- lp3k[match(sitesOut,lp3k$Station.ID),]
-  lp3sFile <- file.path(wregPath,'LP3s.txt')
+  lp3sFile <- file.path(wregPath,'LP3S.txt')
   if (!file.exists(lp3sFile)) {
     stop(paste('Could not find',lp3sFile))
   }
@@ -138,7 +138,7 @@ importWREG <- function(wregPath,sites='') {
     lapply(lapply(t(lp3s[,2:ncol(lp3s)]),FUN=unique),FUN=length))>1)
   if (test>0) {
     stop(paste0('For a given set of tiem series, ',
-                'the columns in LP3s.txt must be identical.'))
+                'the columns in LP3S.txt must be identical.'))
   }
   ndx <- which(is.element(lp3s$Station.ID,sitesOut))
   lp3s <- lp3s[ndx,]
