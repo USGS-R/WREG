@@ -3,7 +3,7 @@
 #Import the data
 test_that("importPeakFQ", {
   #Load comparison dataset
-  expect_silent(load(paste0(system.file("exampleDirectory", package = "WREG"),"/staticData_peakFQ.rda")))
+  expect_silent(load(paste0(system.file("testData", package = "WREG"),"/staticData_peakFQ.rda")))
   
   #Import the data
   expect_silent({
