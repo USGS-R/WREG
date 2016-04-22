@@ -1,0 +1,24 @@
+Verbose
+I ASCI 07108900.TXT
+O File 07108900.PRT
+O Plot Style Graphics
+O Plot Format PNG
+O Additional Watstore 07108900.bcd
+O Export 07108900.exp
+O Empirical 07108900.emp
+Station 07108900
+     Analyze EMA
+     PCPT_Thresh 1921 2013 0 1E+20 Default
+     PCPT_Thresh 1921 1978 56000 1E+20 Historic 1
+     PCPT_Thresh 1901 1920 56000 1E+20 From station description
+     BegYear 1921
+     EndYear 2013
+     HistPeriod 93
+     Peak 1921 56000 H
+     SkewOpt Weighted
+     GenSkew -0.102386
+     SkewSE 0.55
+     LOType MGBT
+     Latitude 38.24556
+     Longitude 104.4858
+     PlotName 07108900

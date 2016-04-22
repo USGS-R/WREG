@@ -1,0 +1,24 @@
+Verbose
+I ASCI 06655000.TXT
+O File 06655000.PRT
+O Plot Style Graphics
+O Plot Format PNG
+O Additional Watstore 06655000.bcd
+O Export 06655000.exp
+O Empirical 06655000.emp
+Station 06655000
+     Analyze EMA
+     PCPT_Thresh 1929 1974 0 1E+20 Default
+     PCPT_Thresh 1934 1934 1E+20 1E+20 missing
+     PCPT_Thresh 1943 1945 1E+20 1E+20 missing
+     PCPT_Thresh 1956 1973 1E+20 1E+20 missing
+     BegYear 1929
+     EndYear 1974
+     HistPeriod 46
+     SkewOpt Weighted
+     GenSkew 0.07063854
+     SkewSE 0.55
+     LOType MGBT
+     Latitude 42.32583
+     Longitude 104.8758
+     PlotName 06655000

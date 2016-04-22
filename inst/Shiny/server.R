@@ -11,27 +11,29 @@ shinyServer(function(input, output,session) {
   
   observeEvent(input$getData_peakFQ,
                {
-                 importData <<- importPeakFQ(pfqPath = input$pfqPath,
-                                             gisFile = input$gisFile$datapath
-                                             
-                 )
-                 selectData <<- list(sites = importData$sites,
-                                     Y = importData$Y,
-                                     AEP = importData$AEP,
-                                     X = importData$X,
-                                     LP3f = importData$LP3f,
-                                     LP3k = importData$LP3k,
-                                     BasChars = importData$BasChars,
-                                     MSEGR = importData$MSEGR,
-                                     recLen = importData$recLen,
-                                     recCor = importData$recCor
-                 )
+                 withProgress(message = 'Importing data', value = 0, {
+                   importData <<- importPeakFQ(pfqPath = input$pfqPath,
+                                               gisFile = input$gisFile$datapath
+                                               
+                   )
+                   selectData <<- list(sites = importData$sites,
+                                       Y = importData$Y,
+                                       AEP = importData$AEP,
+                                       X = importData$X,
+                                       LP3f = importData$LP3f,
+                                       LP3k = importData$LP3k,
+                                       BasChars = importData$BasChars,
+                                       MSEGR = importData$MSEGR,
+                                       recLen = importData$recLen,
+                                       recCor = importData$recCor
+                   )
+                   
+                   siteChars <<- merge(importData$BasChars,
+                                       importData$X,
+                                       by="Station.ID")
+                 })
                  
-                 siteChars <<- merge(importData$BasChars,
-                                     importData$X,
-                                     by="Station.ID")
-                 
-                 output$numSites <- renderText(
+                 output$numSitesPeakFQ <- renderText(
                    c("Data imported for the followign sites: ",
                      as.character(unique(importData$sites)))
                    
@@ -42,34 +44,38 @@ shinyServer(function(input, output,session) {
   
   observeEvent(input$getData_WREG,
                {
-                 importData <<- importWREG(wregPath = input$wregPath)
-                 #Set select data to import data so that it defuaults to all sites if none selected in gui
-                 selectData <<- list(sites = importData$sites,
-                                     Y = importData$Y,
-                                     AEP = importData$AEP,
-                                     X = importData$X,
-                                     LP3f = importData$LP3f,
-                                     LP3k = importData$LP3k,
-                                     BasChars = importData$BasChars,
-                                     MSEGR = importData$MSEGR,
-                                     recLen = importData$recLen,
-                                     recCor = importData$recCor
-                 )
+                 withProgress(message = 'Importing data', value = 0, {
+                   importData <<- importWREG(wregPath = input$wregPath)
+                   #Set select data to import data so that it defuaults to all sites if none selected in gui
+                   selectData <<- list(sites = importData$sites,
+                                       Y = importData$Y,
+                                       AEP = importData$AEP,
+                                       X = importData$X,
+                                       LP3f = importData$LP3f,
+                                       LP3k = importData$LP3k,
+                                       BasChars = importData$BasChars,
+                                       MSEGR = importData$MSEGR,
+                                       recLen = importData$recLen,
+                                       recCor = importData$recCor
+                   )
+                   
+                   siteChars <<- cbind(importData$BasChars,
+                                       importData$X)
+                 })
                  
-                 siteChars <<- cbind(importData$BasChars,
-                                     importData$X)
-                 
-                 output$numSites <- renderText(
+                 output$numSitesWREG <- renderText(
                    c("Data imported for the followign sites: ",
-                     as.character(unique(importData$sites$V2)))
+                     as.character(unique(importData$sites)))
                    
                  )
+                 #updateSelectInput(session,"Y",choices=colnames(importData$Y))
+                 source("updateInputs.R",local=TRUE)$value
+                 
                })
   
   ##############################
   #Select data
   
-  output$siteCharTable <- renderDataTable(siteChars,filter="top",server=TRUE)
   observeEvent(input$selectSites,
                {
                  if(input$siteSelOption == "Select individual sites")
@@ -80,7 +86,7 @@ shinyServer(function(input, output,session) {
                    selSites <<- as.numeric(input$siteCharTable_rows_current)
                  } else if (input$siteSelOption == "Select all sites in dataset") 
                  {
-                   selSites <<- as.numeric(input$siteCharTable_rows_all)
+                   selSites <<- seq(from=1,to=length(siteChars$Station.ID))
                  }
                  output$selSites <- renderText(c("The following sites will be used in WREG: ",
                                                  as.character(siteChars$Station.ID[selSites])
@@ -110,33 +116,35 @@ shinyServer(function(input, output,session) {
   
   
   ##This big chunk of code reactively builds the UI depending on variabls chosen
-  
-  output$YvarTrans <- renderUI({
-    
-    ###This does the Y variable, it is simple because it does not depend
-    ###On the number of Y vars since you can only choose 1
-    fluidRow(
-      column(4,
-             radioButtons("YvarTransType",
-                          label=input$Y,
-                          choices = c("none","log10","ln","exp"),
-                          inline=TRUE)
-      ),
-      column(2,
-             numericInput("YvarC1",label="C1",value=1,step=0.1)
-      ),
-      column(2,
-             numericInput("YvarC2",label="C2",value=1,step=0.1)
-      ),
-      column(2,
-             numericInput("YvarC3",label="C3",value=0,step=0.1)
-      ),
-      column(2,
-             numericInput("YvarC4",label="C4",value=1,step=0.1)
-      )
-      
-    )
-  })
+  observeEvent(input$selectVars,
+               {
+                 output$YvarTrans <- renderUI({
+                   
+                   ###This does the Y variable, it is simple because it does not depend
+                   ###On the number of Y vars since you can only choose 1
+                   fluidRow(
+                     column(4,
+                            radioButtons("YvarTransType",
+                                         label=isolate(input$Y),
+                                         choices = c("none","log10","ln","exp"),
+                                         inline=TRUE)
+                     ),
+                     column(2,
+                            numericInput("YvarC1",label="C1",value=1,step=0.1)
+                     ),
+                     column(2,
+                            numericInput("YvarC2",label="C2",value=1,step=0.1)
+                     ),
+                     column(2,
+                            numericInput("YvarC3",label="C3",value=0,step=0.1)
+                     ),
+                     column(2,
+                            numericInput("YvarC4",label="C4",value=1,step=0.1)
+                     )
+                     
+                   )
+                 })
+               })
   
   ###This does the X variables. The lapply builds the UI basedo n the 
   ###Number of X variables selected
@@ -206,6 +214,7 @@ shinyServer(function(input, output,session) {
                          input$YvarC4
                      )
                      
+                     transY <<- "log10"
                      Yinput <<- as.data.frame(cbind(selectData$Y$Station.ID,Yinput))
                    } else if(input$YvarTransType == "ln")
                    {
@@ -222,6 +231,7 @@ shinyServer(function(input, output,session) {
                          input$YvarC4
                      )
                      
+                     transY <<- "ln"
                      Yinput <<- as.data.frame(cbind(selectData$Y$Station.ID,Yinput))
                      
                    } else if(input$YvarTransType == "exp")
@@ -237,13 +247,15 @@ shinyServer(function(input, output,session) {
                           input$YvarC3) ^
                          #C4
                          input$YvarC4
+                       
                      )
-                     
+                     transY <<- "exp"
                      Yinput <<- as.data.frame(cbind(selectData$Y$Station.ID,Yinput))
                    } else if(input$YvarTransType == "none")
                    {
                      Yinput <<- selectData$Y[[input$Y]]
                      Yinput <<- as.data.frame(cbind(selectData$Y$Station.ID,Yinput))
+                     transY <<- "none"
                    }
                    
                    Xinput <<- lapply(1:length(input$X), function(i) {
@@ -322,7 +334,7 @@ shinyServer(function(input, output,session) {
                    
                    lapply(1:length(input$X), function(i) {
                      output[[paste0(input$X[i],"_plot")]] <- renderPlot({
-                       plot(Xinput[[input$X[i]]],Yinput[[input$Y]],ylab="Y",xlab="X")
+                       plot(Xinput[[isolate(input$X[i])]],Yinput[[isolate(input$Y)]],ylab="Y",xlab="X")
                      })
                    })
                    output$transformNote <- renderText("Variables selected and transformations applied")
@@ -342,54 +354,62 @@ shinyServer(function(input, output,session) {
   ###Run WREG
   observeEvent(input$runWREG,
                {
-                 LP3 <<- merge(selectData$LP3f,selectData$LP3k[c("Station.ID",input$Y)],by="Station.ID")
-                 LP3 <<- LP3[c(2,5,3,4)]
-                 colnames(LP3) <- c("S","K","G","GR")
-                 if(input$regType == "OLS")
-                 {
-                   wregOUT <<- WREG.OLS(Y=Yinput[,2],
-                                        X=Xinput[,2:ncol(Xinput)])
-                 } else if (input$regType == "WLS")
-                 {
-                   
-                   wregOUT <<- WREG.WLS(Y=Yinput[,2],
-                                        X=Xinput[,2:ncol(Xinput)],
-                                        recordLengths = selectData$recLen,
-                                        LP3 = LP3)
-                 } else if(input$regType == "GLS")
-                 {
-                   if(input$GLSskew == FALSE)
+                tryCatch({
+                 withProgress(message = 'Running regression', value = 0, {
+                   LP3 <<- merge(selectData$LP3f,selectData$LP3k[c("Station.ID",input$Y)],by="Station.ID")
+                   LP3 <<- LP3[c(2,5,3,4)]
+                   colnames(LP3) <- c("S","K","G","GR")
+                   if(input$regType == "OLS")
                    {
-                     wregOUT <<- WREG.GLS(Y=Yinput[,2],
+                     wregOUT <<- WREG.OLS(Y=Yinput[,2],
                                           X=Xinput[,2:ncol(Xinput)],
-                                          recordLengths = selectData$recLen,
-                                          LP3 = LP3,
-                                          basinChars = selectData$BasChars,
-                                          x0=NA,
-                                          alpha=input$alpha,
-                                          theta=input$theta,
-                                          peak=T,
-                                          distMeth=2,
-                                          regSkew=FALSE,
-                                          MSEGR=NA,
-                                          TY=2)
-                   } else if(input$GLSskew == TRUE)
+                                          transY = transY)
+                   } else if (input$regType == "WLS")
                    {
-                     wregOUT <<- WREG.GLS(Y=Yinput[,2],
+                     
+                     wregOUT <<- WREG.WLS(Y=Yinput[,2],
                                           X=Xinput[,2:ncol(Xinput)],
+                                          transY = transY,
                                           recordLengths = selectData$recLen,
-                                          LP3 = LP3,
-                                          basinChars = selectData$BasChars,
-                                          x0=NA,
-                                          alpha=input$alpha,
-                                          theta=input$theta,
-                                          peak=T,
-                                          distMeth=2,
-                                          regSkew=TRUE,
-                                          MSEGR=selectData$MSEGR,
-                                          TY=2)
+                                          LP3 = LP3)
+                   } else if(input$regType == "GLS")
+                   {
+                     if(input$GLSskew == FALSE)
+                     {
+                       wregOUT <<- WREG.GLS(Y=Yinput[,2],
+                                            X=Xinput[,2:ncol(Xinput)],
+                                            transY = transY,
+                                            recordLengths = selectData$recLen,
+                                            LP3 = LP3,
+                                            basinChars = selectData$BasChars,
+                                            x0=NA,
+                                            alpha=input$alpha,
+                                            theta=input$theta,
+                                            peak=T,
+                                            distMeth=2,
+                                            regSkew=FALSE,
+                                            MSEGR=NA,
+                                            TY=2)
+                     } else if(input$GLSskew == TRUE)
+                     {
+                       wregOUT <<- WREG.GLS(Y=Yinput[,2],
+                                            X=Xinput[,2:ncol(Xinput)],
+                                            transY = transY,
+                                            recordLengths = selectData$recLen,
+                                            LP3 = LP3,
+                                            basinChars = selectData$BasChars,
+                                            x0=NA,
+                                            alpha=input$alpha,
+                                            theta=input$theta,
+                                            peak=T,
+                                            distMeth=2,
+                                            regSkew=TRUE,
+                                            MSEGR=selectData$MSEGR,
+                                            TY=2)
+                     }
                    }
-                 }
+                 })
+                 
                  output$wregPrint <- renderPrint(print(wregOUT))
                  output$wregFitVsRes <- renderPlot({
                    plot(wregOUT$fitted.values,wregOUT$residuals,
@@ -417,7 +437,7 @@ shinyServer(function(input, output,session) {
                  
                  h2("X and Y variable inputs")
                  output$wregXY <- renderDataTable({cbind(Yinput,Xinput[2:ncol(Xinput)])})
-                 
+                },error=function(e) {output$wregPrint <- renderText("There was an error running WREG, please check inputs")})
                  
                }
   )

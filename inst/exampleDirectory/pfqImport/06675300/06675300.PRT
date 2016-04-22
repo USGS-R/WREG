@@ -1,0 +1,295 @@
+1
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.002.000
+  Prov. Ver. 7.0      Annual peak flow frequency analysis      Run Date / Time
+  05/08/2013          following Bulletin 17-B Guidelines       06/12/2014 13:59
+            Preliminary release of PeakFQ for review and testing only.
+
+                         --- PROCESSING OPTIONS ---  
+
+                      Plot option         = Graphics device   
+                      Basin char output   = WATSTORE      
+                      Print option        = Yes
+                      Debug print         = No 
+                      Input peaks listing = Long 
+                      Input peaks format  = WATSTORE peak file  
+
+                      Input files used:
+                         peaks (ascii)  - V:\CDOT_Flood_Frequency\PeakFQ\Input_files\06675300\06675300.TXT                
+                         specifications - V:\CDOT_Flood_Frequency\PeakFQ\Input_files\06675300\PKFQWPSF.TMP                
+                      Output file(s): 
+                         main - V:\CDOT_Flood_Frequency\PeakFQ\Input_files\06675300\06675300.PRT                
+                         bcd  - V:\CDOT_Flood_Frequency\PeakFQ\Input_files\06675300\06675300.BCD                
+  
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.003.001
+  Prov. Ver. 7.0      Annual peak flow frequency analysis      Run Date / Time
+  05/08/2013         using Expected Moments Algorithm (EMA)    06/12/2014 13:59
+ 
+            Preliminary release of PeakFQ for review and testing only.
+  
+         Station - 06675300  HORSE CREEK TRIBUTARY NEAR LITTLE BEAR, WY         
+
+
+                     I N P U T   D A T A   S U M M A R Y
+
+                Number of peaks in record            =       21
+                Peaks not used in analysis           =        0
+                Systematic peaks in analysis         =       21
+                Historic peaks in analysis           =        0
+                Beginning Year                       =     1961
+                Ending Year                          =     1981
+                Historical Period Length             =       21
+                Generalized skew                     =   -0.022
+                     Standard error                  =    0.550
+                     Mean Square error               =    0.303
+                Skew option                          =   WEIGHTED  
+                Gage base discharge                  =      0.0
+                User supplied high outlier threshold =   --           
+                User supplied low outlier criterion  =   --           
+                Plotting position parameter          =     0.00
+                Type of analysis                            EMA
+                Low-outlier Test Method                    MGBT
+                Perception Thresholds:
+                     Begin     End       Low     High     Comment
+                      1961    1981       0.0       INF     DEFAULT                                                                         
+                      1962    1962      40.0       INF     PEAK < STATED VALUE                                                             
+                      1964    1964      40.0       INF     PEAK < STATED VALUE                                                             
+                      1965    1965      40.0       INF     PEAK < STATED VALUE                                                             
+                      1966    1966      40.0       INF     PEAK < STATED VALUE                                                             
+                      1968    1968      14.0       INF     PEAK < STATED VALUE                                                             
+                      1972    1972       1.0       INF     PEAK < STATED VALUE                                                             
+                      1976    1976       1.0       INF     PEAK < STATED VALUE                                                             
+                Interval Data:
+                              Year       Low     High     Comment
+                              1962       0.0      40.0                                                                                     
+                              1964       0.0      40.0                                                                                     
+                              1965       0.0      40.0                                                                                     
+                              1966       0.0      40.0                                                                                     
+                              1968       0.0      14.0                                                                                     
+                              1972       0.0       1.0                                                                                     
+                              1976       0.0       1.0                                                                                     
+
+
+
+  *********  NOTICE  --  Preliminary machine computations.        *********     
+  *********  User responsible for assessment and interpretation.  *********     
+
+  **WCF164W-HISTORIC PERIOD IGNORED.    21.0
+    WCF002J-CALCS COMPLETED.  RETURN CODE =  2
+    EMA002W-CONFIDENCE INTERVALS ARE NOT EXACT IF HISTORIC PERIOD > 0
+
+
+                                        Kendall's Tau Parameters
+
+                                                        MEDIAN   No. of
+                                       TAU    P-VALUE    SLOPE   PEAKS
+                                ---------------------------------------
+             SYSTEMATIC RECORD     -0.376      0.017     -2.142    21
+
+
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.003.002
+  Prov. Ver. 7.0      Annual peak flow frequency analysis      Run Date / Time
+  05/08/2013         using Expected Moments Algorithm (EMA)    06/12/2014 13:59
+ 
+            Preliminary release of PeakFQ for review and testing only.
+  
+         Station - 06675300  HORSE CREEK TRIBUTARY NEAR LITTLE BEAR, WY         
+
+
+           ANNUAL FREQUENCY CURVE PARAMETERS -- LOG-PEARSON TYPE III 
+
+                                    LOGARITHMIC         
+                         -------------------------------
+                                      STANDARD          
+                            MEAN     DEVIATION     SKEW 
+                         -------------------------------
+ EMA W/O REG. INFO         1.0200      0.9435     -1.410
+ EMA W/REG. INFO           1.1011      0.7568     -0.309
+
+ EMA ESTIMATE OF MSE OF SKEW W/O REG. INFO (AT-SITE)      0.4224
+ EMA ESTIMATE OF MSE OF SKEW W/SYSTEMATIC ONLY (AT-SITE)  0.6109
+
+
+
+    ANNUAL FREQUENCY CURVE -- DISCHARGES AT SELECTED EXCEEDANCE PROBABILITIES
+
+   ANNUAL   EMA W/    EMA W/O     <------ FOR EMA ESTIMATES ------->
+EXCEEDANCE  REG INFO  REG INFO    VARIANCE  95% CONFIDENCE INTERVALS
+PROBABILITY ESTIMATE  ESTIMATE     OF EST.       LOWER       UPPER
+
+   0.9950       0.1       0.0      0.2932         0.0          0.4
+   0.9900       0.1       0.0      0.2269         0.0          0.7
+   0.9500       0.6       0.2      0.1116         0.0          1.9
+   0.9000       1.3       0.6      0.0779         0.2          3.5
+   0.8000       3.0       2.3      0.0529         0.7          7.3
+   0.6667       6.4       6.7      0.0397         2.0         14.6
+   0.5000      13.8      17.1      0.0324         5.2         30.2
+   0.4292      18.8      23.9      0.0307         7.5         41.0
+   0.2000      55.8      63.8      0.0310        24.6        140.8
+   0.1000     110.3     100.1      0.0382        49.1        369.8
+   0.0400     219.9     140.2      0.0558        92.3       1192.0
+   0.0200     336.8     163.4      0.0748       129.8       2681.0
+   0.0100     487.9     181.0      0.0987       169.2       5681.0
+   0.0050     677.8     194.1      0.1274       208.6      11620.0
+   0.0020     996.1     206.2      0.1726       258.8      28940.0
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.003.003
+  Prov. Ver. 7.0      Annual peak flow frequency analysis      Run Date / Time
+  05/08/2013         using Expected Moments Algorithm (EMA)    06/12/2014 13:59
+ 
+            Preliminary release of PeakFQ for review and testing only.
+  
+         Station - 06675300  HORSE CREEK TRIBUTARY NEAR LITTLE BEAR, WY         
+
+
+                       I N P U T   D A T A   L I S T I N G
+
+
+    WATER       PEAK   PEAKFQ   <--- Intervals --->
+     YEAR      VALUE    CODES     LOW         HIGH   REMARKS
+     1961       78.0       
+     1962       40.0   L            0.0        40.0                                                                                  
+     1963      286.0       
+     1964       40.0   L            0.0        40.0                                                                                  
+     1965       40.0   L            0.0        40.0                                                                                  
+     1966       40.0   L            0.0        40.0                                                                                  
+     1967       68.0       
+     1968       14.0   L            0.0        14.0                                                                                  
+     1969       21.0       
+     1970        8.0       
+     1971       34.0       
+     1972        1.0   L            0.0         1.0                                                                                  
+     1973       40.0       
+     1974       24.0       
+     1975       10.0       
+     1976        1.0   L            0.0         1.0                                                                                  
+     1977       15.0       
+     1978        8.0       
+     1979       75.0       
+     1980        7.0       
+     1981       40.0       
+
+
+        Explanation of peak discharge qualification codes
+
+       PeakFQ    NWIS
+        CODE     CODE   DEFINITION
+
+          D        3    Dam failure, non-recurrent flow anomaly
+          G        8    Discharge greater than stated value
+          X       3+8   Both of the above
+          L        4    Discharge less than stated value
+          K     6 OR C  Known effect of regulation or urbanization
+          H        7    Historic peak
+
+          -  Minus-flagged discharge -- Not used in computation
+                -8888.0 -- No discharge value given
+          -  Minus-flagged water year -- Historic peak used in computation
+
+
+
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.003.004
+  Prov. Ver. 7.0      Annual peak flow frequency analysis      Run Date / Time
+  05/08/2013         using Expected Moments Algorithm (EMA)    06/12/2014 13:59
+ 
+            Preliminary release of PeakFQ for review and testing only.
+  
+         Station - 06675300  HORSE CREEK TRIBUTARY NEAR LITTLE BEAR, WY         
+
+
+   EMPIRICAL FREQUENCY CURVES -- HIRSCH-STEDINGER PLOTTING POSITIONS
+
+   WATER     RANKED      EMA         INTERVALS
+    YEAR   DISCHARGE   ESTIMATE      LOW      HIGH
+    1963      286.0     0.0407
+    1961       78.0     0.0816
+    1979       75.0     0.1224
+    1967       68.0     0.1633
+    1962     ------     0.2857         0.0      40.0
+    1964     ------     0.2857         0.0      40.0
+    1965     ------     0.2857         0.0      40.0
+    1966     ------     0.2857         0.0      40.0
+    1973       40.0     0.2450
+    1981       40.0     0.2042
+    1971       34.0     0.3375
+    1974       24.0     0.3896
+    1969       21.0     0.4416
+    1977       15.0     0.4937
+    1968     ------     0.5455         0.0      14.0
+    1975       10.0     0.6059
+    1970        8.0     0.7273
+    1978        8.0     0.6666
+    1980        7.0     0.7880
+    1972     ------     0.9496         0.0       1.0
+    1976     ------     0.8989         0.0       1.0
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.003.005
+  Prov. Ver. 7.0      Annual peak flow frequency analysis      Run Date / Time
+  05/08/2013         using Expected Moments Algorithm (EMA)    06/12/2014 13:59
+ 
+            Preliminary release of PeakFQ for review and testing only.
+  
+         Station - 06675300  HORSE CREEK TRIBUTARY NEAR LITTLE BEAR, WY         
+
+
+                         EMA REPRESENTATION OF DATA
+
+  WATER <----- OBSERVED-----><-------- EMA -------><-PERCEPTION THRESHOLDS->
+   YEAR    Q_LOWER    Q_UPPER    Q_LOWER    Q_UPPER        LOWER       UPPER
+   1961       78.0       78.0       78.0       78.0          0.0        INF 
+   1962        0.0       40.0        0.0       40.0         40.0        INF 
+   1963      286.0      286.0      286.0      286.0          0.0        INF 
+   1964        0.0       40.0        0.0       40.0         40.0        INF 
+   1965        0.0       40.0        0.0       40.0         40.0        INF 
+   1966        0.0       40.0        0.0       40.0         40.0        INF 
+   1967       68.0       68.0       68.0       68.0          0.0        INF 
+   1968        0.0       14.0        0.0       14.0         14.0        INF 
+   1969       21.0       21.0       21.0       21.0          0.0        INF 
+   1970        8.0        8.0        8.0        8.0          0.0        INF 
+   1971       34.0       34.0       34.0       34.0          0.0        INF 
+   1972        0.0        1.0        0.0        1.0          1.0        INF 
+   1973       40.0       40.0       40.0       40.0          0.0        INF 
+   1974       24.0       24.0       24.0       24.0          0.0        INF 
+   1975       10.0       10.0       10.0       10.0          0.0        INF 
+   1976        0.0        1.0        0.0        1.0          1.0        INF 
+   1977       15.0       15.0       15.0       15.0          0.0        INF 
+   1978        8.0        8.0        8.0        8.0          0.0        INF 
+   1979       75.0       75.0       75.0       75.0          0.0        INF 
+   1980        7.0        7.0        7.0        7.0          0.0        INF 
+   1981       40.0       40.0       40.0       40.0          0.0        INF 
+1
+
+
+
+ End PeakFQ analysis.
+   Stations processed :       1
+   Number of errors   :       0
+   Stations skipped   :       0
+   Station years      :      21
+
+
+Data records may have been ignored for the stations listed below.               
+(Card type must be Y, Z, N, H, I, 2, 3, 4,  or *.)                              
+(2, 4, and * records are ignored.)                                              
+                                                                                
+ For the station below, the following records were ignored:                     
+                                                                                
+ FINISHED PROCESSING STATION:  06675300       USGS HORSE CREEK TRIBUTARY NEAR LI
+                                                                                
+                                                                                
+ For the station below, the following records were ignored:                     
+                                                                                
+ FINISHED PROCESSING STATION:                                                   
+                                                                                

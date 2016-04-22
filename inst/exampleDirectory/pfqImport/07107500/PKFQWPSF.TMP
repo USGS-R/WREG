@@ -1,0 +1,26 @@
+Verbose
+I ASCI 07107500.TXT
+O File 07107500.PRT
+O Plot Style Graphics
+O Plot Format PNG
+O Additional Watstore 0710
+O Export 07107500.EXP
+O Empirical 07107500.
+Station 07107500
+     Analyze EMA
+     PCPT_Thresh 1864 2013 0 1E+20 Default
+     PCPT_Thresh 1979 1979 0 1040 Peak > stated value
+     PCPT_Thresh 1864 1922 24500 1E+20 2014 non-exceedance bound
+     PCPT_Thresh 1935 1978 21800 1E+20 Missing - 2014 non-exceedance bound
+     PCPT_Thresh 1994 2013 21800 1E+20 Missing - 2014 non-exceedance bound
+     BegYear 1864
+     EndYear 2013
+     HistPeriod 150
+     Interval 1979 1040 1E+20 Peak > stated value
+     SkewOpt Weighted
+     GenSkew -0.1008195
+     SkewSE 0.55
+     LOType MGBT
+     Latitude 38.05167
+     Longitude 104.7931
+     PlotName 07107500

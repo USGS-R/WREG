@@ -1,80 +1,154 @@
-#' Weighted-Multiple-Linear Regression Program (WREG)
-#' 
-#' @description
-#' The \code{WREG.MLR} function executes the basic regression analysis that forms the 
-#' foundation of the WREG program.
-#' 
-#' @param Y The dependent variable of interest, with any transformations already 
-#' applied.
-#' @param X The independent variables in the regression, with any transformations 
-#' already applied.  Each row represents a site and each column represents
-#' a particular independe variable.  (If a leading constant is used, it should be 
-#' included here as a leading column of ones.)  The rows must be in the same order as
-#' the dependent variables in \code{Y}.
-#' @param x0 A vector containing the independent variables (as above) for a 
-#' particular target site.  This variable is only used for ROI analysis.
-#' @param Legacy A logical.  A value of \code{TRUE} forces the WREG program to behave 
-#' identically to WREG v. 1.05, with BUGS and all.  It will force \code{TY=2} and
-#' \code{DistMeth=1}.  For ROI regressions, it will also require a specific calculation 
-#' for weighing matrices in \dQuote{WLS} (\code{\link{Omega.WLS.ROImatchMatLab}}), 
-#' \dQuote{GLS}, and \dQuote{GLSskew} (see \code{\link{Omega.GLS.ROImatchMatLab}})
-#' Further details are provided in \code{\link{WREG.RoI}}
-#' 
-#' @details
-#' Fill in details.
-#' 
-#' @return All outputs are returned as part of a list.  The elements of the list depend 
-#' on the type of regression performed.  The elements of the list may include:
-#' \item{Coefs}{A data frame composed of four variables: (1) \code{Coefficient} contains 
-#' the regression coefficeints estimated for the model, (2) \code{\sQuote{Standard Error}}
-#' contains the standard errors of each regression coefficient, (3) \code{tStatistic} 
-#' contains the Student's T-statistic of each regression coefficient and (4) 
-#' \code{pValue} contains the significance probability of each regression coefficient.}
-#' \item{ResLevInf}{A data frame composed of three variables for each site in the 
-#' regression.  \code{Residual} contains the model residuals.  \code{Leverage} contains
-#' the leverage of each site.  \code{Influence} contains the influence of each site.}
-#' \item{LevLim}{The critical value of leverage.  See \code{\link{Leverage}}}
-#' \item{InflLim}{The critical value of influence.  See \code{\link{Influence}}}
-#' \item{LevInf.Sig}{A logical matrix indicating if the leverage (column 1) is significant 
-#' and the influence (column 2) is significant for each site in the regression.}
-#' \item{PerformanceMetrics}{A list of not more than ten elements.  All regression
-#' types return the mean squared error of residuals (\code{MSE}), the coefficient of
-#' determination (\code{R2}), the adjusted coefficient of determination (\code{R2_adj})
-#' and the root mean squared error (\code{RMSE}, in percent).  \code{WLS}, \code{GLS} 
-#' and \code{GLSskew} also return the pseudo coefficient of regression (\code{R2_pseudo}), 
-#' the average variance of prediction (\code{AVP}), the standard error of prediction 
-#' (\code{Sp}, in percent), a vector of the individual variances of prediction for 
-#' each site (\code{VP.PredVar}), the model-error variance (\code{ModErrVar}) and the 
-#' standardized model error variance (\code{StanModErr}, in percent).  Details on the 
-#' appropriateness and applicability of performance metrics can be found in the WREG manual.}
-#' \item{X}{The input predictors.}
-#' \item{Y}{The input observations.}
-#' \item{fitted.values}{A vector of model estimates from the regression model.}
-#' \item{residuals}{A vector of model residuals.}
-#' \item{Weighting}{The weighting matrix used to develop regression estimates.}
-#' \item{Input}{A list of input parameters for error searching.  Right now it only
-#' includes \code{Legacy} to document if a Legacy application of WREG v. 1.05 was
-#' implemented.}
-#' @import stats
-#' 
-#' @examples 
-#' \dontrun add examples
+#'Weighted-Multiple-Linear Regression Program (WREG)
+#'
+#'@description The \code{WREG.OLS} function executes the multiple linear 
+#'  regression analysis using ordinary least-squares regression.
+#'  
+#'@param Y The dependent variable of interest, with any transformations already 
+#'  applied.
+#'@param X The independent variables in the regression, with any transformations
+#'  already applied.  Each row represents a site and each column represents a 
+#'  particular independe variable.  (If a leading constant is used, it should be
+#'  included here as a leading column of ones.)  The rows must be in the same 
+#'  order as the dependent variables in \code{Y}.
+#'@param transY A required character string indicating if the the 
+#'  dependentvariable was transformed by the common logarithm ('log10'), 
+#'  transformed by the natural logarithm ('ln') or untransformed ('none').
+#'@param x0 A vector containing the independent variables (as above) for a 
+#'  particular target site.  This variable is only used for ROI analysis.
+#'  
+#'@details This function follows the basic implementation of ordinary 
+#'  least-squares regression.
+#'  
+#'@return All outputs are returned as part of a list.  The elements of the list 
+#'  depend on the type of regression performed.  The elements of the list may 
+#'  include: \item{Coefs}{A data frame composed of four variables: (1) 
+#'  \code{Coefficient} contains the regression coefficeints estimated for the 
+#'  model, (2) \code{\sQuote{Standard Error}} contains the standard errors of 
+#'  each regression coefficient, (3) \code{tStatistic} contains the Student's 
+#'  T-statistic of each regression coefficient and (4) \code{pValue} contains 
+#'  the significance probability of each regression coefficient.} 
+#'  \item{ResLevInf}{A data frame composed of three variables for each site in 
+#'  the regression.  \code{Residual} contains the model residuals. 
+#'  \code{Leverage} contains the leverage of each site.  \code{Influence} 
+#'  contains the influence of each site.} \item{LevLim}{The critical value of 
+#'  leverage.  See \code{\link{Leverage}}} \item{InflLim}{The critical value of 
+#'  influence.  See \code{\link{Influence}}} \item{LevInf.Sig}{A logical matrix 
+#'  indicating if the leverage (column 1) is significant and the influence 
+#'  (column 2) is significant for each site in the regression.} 
+#'  \item{PerformanceMetrics}{A list of not more than ten elements.  All 
+#'  regression types return the mean squared error of residuals (\code{MSE}), 
+#'  the coefficient of determination (\code{R2}), the adjusted coefficient of 
+#'  determination (\code{R2_adj}) and the root mean squared error (\code{RMSE}, 
+#'  in percent).  Details on the appropriateness and applicability of
+#'  performance metrics can be found in the WREG manual.} \item{X}{The input
+#'  predictors.} \item{Y}{The input observations.} \item{fitted.values}{A vector
+#'  of model estimates from the regression model.} \item{residuals}{A vector of
+#'  model residuals.} \item{Weighting}{The weighting matrix used to develop
+#'  regression estimates.} \item{Input}{A list of input parameters for error
+#'  searching.  Currently empty.}
+#'@import stats
+#'  
+#' @examples
+#'#Import the data
+#'peakFQdir <- paste0(system.file("exampleDirectory", package = "WREG"),
+#'                    "/pfqImport")
+#'gisFilePath <- paste0(peakFQdir,"/pfqSiteInfo.txt")
+#'importedData <- importPeakFQ(pfqPath = peakFQdir,
+#'                             gisFile = gisFilePath)
+#'#Parameterize model.
+#'#all rows must be ordered identically between dataframes that contain site-specific information.
+#'##Select Y variable
+#'Y <- importedData$Y$AEP_0.5
+#'
+#'##Select X variables
+#'X <- importedData$X[c("Sand",
+#'                      "OutletElev",
+#'                      "Slope")]
+#'##Specify Y transformation if any
+#'transY <- "none"
+
+#'#Run WREG.OLS
+#'WREG.OLS(Y, X, transY)
+#'
 #'@export
 
-WREG.OLS <- function(Y,X,x0=NA,legacy=FALSE) {
+WREG.OLS <- function(Y,X,transY,x0=NA) {
   # William Farmer, USGS, January 05, 2015
   
-  ## Add controls to meet legacy demands
-  ##    NOTE: legacy forces program to return the same results as WREG v 1.05.
-  if (legacy) { # If legacy is indicated, override custom inputs.
-    TY <- 2 # WREG v1.05 does not read this input correctly.
-    DistMeth <- 1 # WREG v1.05 uses "Nautical Mile" approximation
+  # Some upfront error handling
+  err <- FALSE
+  if ((!missing(X)&!missing(Y))&&
+      (length(Y)!=nrow(X))) {
+    warning(paste0("The length of Y must be the same as ",
+      "the number of rows in X."))
+    err <- TRUE
   }
+  if (missing(Y)) {
+    warning("Dependent variable (Y) must be provided.")
+    err <- TRUE
+  } else {
+    if (!is.numeric(Y)) {
+      warning("Dependent variable (Y) must be provided as class numeric.")
+      err <- TRUE
+    } else {
+      if (sum(is.na(Y))>0) {
+        warning(paste0("The depedent variable (Y) contains missing ",
+          "values.  These must be removed."))
+        err <- TRUE
+      }
+      if (sum(is.infinite(Y))>0) {
+        warning(paste0("The depedent variable (Y) contains infinite ",
+          "values.  These must be removed."))
+        err <- TRUE
+      }
+    }
+  }
+  if (missing(X)) {
+    warning("Independent variables (X) must be provided.")
+    err <- TRUE
+  } else {
+    if ((length(unique(apply(X,FUN=class,MARGIN=2)))!=1)|
+        (unique(apply(X,FUN=class,MARGIN=2))!="numeric")) {
+      warning("Independent variables (X) must be provided as class numeric.")
+      err <- TRUE
+    } else {
+      if (sum(is.na(as.matrix(X)))>0) {
+        warning(paste0("Some independent variables (X) contain missing ",
+          "values.  These must be removed."))
+        err <- TRUE
+      }
+      if (sum(is.infinite(as.matrix(X)))>0) {
+        warning(paste0("Some independent variables (X) contain infinite ",
+          "values.  These must be removed."))
+        err <- TRUE
+      }
+    }
+  }
+  if(missing(transY)|!is.character(transY)) {
+    warning("transY must be included as a character string.")
+    err <- TRUE
+  } else if (!is.element(transY,c("none","log10","ln"))) {
+    warning("transY must be either 'none', 'log10' or 'ln'.")
+    err <- TRUE
+  }
+
   ## Determine if ROI is being applied
   if (is.na(sum(x0))) { # ROI regression is not used.
     ROI <- F
   } else { # ROI regression is used.
     ROI <- T
+  }
+  if (ROI&&(length(x0)!=ncol(X))) {
+    warning(paste0("The length of x0 must be the same as ",
+      "the number of columns in X"))
+    err <- TRUE
+  }
+  if (ROI&&(!is.numeric(x0))) {
+    warning(paste0("The input x0 must be of the numeric class"))
+    err <- TRUE
+  }
+  if (err) {
+    stop('Invalid inputs were provided. See warnings().')
   }
   ## Just initial values for control.
   var.modelerror.k <- NA
@@ -98,7 +172,12 @@ WREG.OLS <- function(Y,X,x0=NA,legacy=FALSE) {
   SST <- sum((Y-mean(Y))^2) # Total sum of squares. Eq 37
   R2 <- 1 - SSR/SST # Coefficient of determination. Eq 35
   R2_adj <- 1 - SSR*(nrow(X)-1)/SST/(nrow(X)-ncol(X)) # Adjusted coefficient of determination. Eq 38
-  RMSE <-100*sqrt(exp(log(10)*log(10)*MSE)-1) # Root-mean-squared error, in percent. Eq 34
+  RMSE <- NA
+  if (transY=='log10') {
+    RMSE <-100*sqrt(exp(log(10)*log(10)*MSE)-1) # Root-mean-squared error, in percent. Eq 34
+  } else if (transY=='ln') {
+    RMSE <-100*sqrt(exp(MSE)-1) # Root-mean-squared error, in percent. transformed for natural logs.
+  }
   PerfMet <- list(MSE=MSE,R2=R2,R2_adj=R2_adj,RMSE=RMSE) # Performance metrics for output (basic, for OLS)
 
   ## Leverage and influence statistics
@@ -122,7 +201,10 @@ WREG.OLS <- function(Y,X,x0=NA,legacy=FALSE) {
   names(LevInf.Sig) <- c('SignificantLeverage','SignificantInfluence')
   
   ## Handling output
-  Output <- list(Coefs=Coefs,ResLevInf=ResLevInf,LevLim=Lev$Limit,InflLim=Infl$Limit,LevInf.Sig=cbind(Lev$Significant,Infl$Significant),PerformanceMetrics=PerfMet,X=X,Y=Y,fitted.values=Y_hat,residuals=e,Weighting=Omega,Inputs=list(legacy=legacy))
+  Output <- list(Coefs=Coefs,ResLevInf=ResLevInf,LevLim=Lev$Limit,
+    InflLim=Infl$Limit,LevInf.Sig=cbind(Lev$Significant,Infl$Significant),
+    PerformanceMetrics=PerfMet,X=X,Y=Y,fitted.values=Y_hat,residuals=e,
+    Weighting=Omega,Inputs=list(transY=transY))
   if (ROI) { # Appended at-site estimates for ROI calculations
     Y_est <- x0%*%B_hat # ROI site estimate
     Output <- c(Output,Y.ROI=Y_est,x0.ROI=x0)

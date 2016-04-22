@@ -1,0 +1,39 @@
+# US Geological Survey
+# PeakFQ Flood Frequency Analysis, Version 7.1 dated 3/14/2014
+#
+# Analyzed: 11/25/2014 13:00
+#
+# Empirical Frequency Curves
+Station - 06831500  FRENCHMAN CREEK NEAR IMPERIAL, NEBR.                        
+  WaterYr	  RankedQ	   EMAEst	ThreshLow	 ThreshUp	  IntvLow	 IntvHigh
+    1941	      146.0	      0.0000	       0.	      INF
+    1942	      460.0	      0.0000	       0.	      INF
+    1943	     1860.0	      0.0000	       0.	      INF
+    1944	      272.0	      0.0000	       0.	      INF
+    1945	      328.0	      0.0000	       0.	      INF
+    1946	      284.0	      0.0000	       0.	      INF
+    1947	      208.0	      0.0000	       0.	      INF
+    1948	      200.0	      0.0000	       0.	      INF
+    1949	      230.0	      0.0000	       0.	      INF
+    1950	      146.0	      0.0000	       0.	      INF
+    1951	     1860.0	      0.0000	       0.	      INF
+    1952	      167.0	      0.0000	       0.	      INF
+    1953	      150.0	      0.0000	       0.	      INF
+    1954	      266.0	      0.0000	       0.	      INF
+    1955	      330.0	      0.0000	       0.	      INF
+    1956	      824.0	      0.0000	       0.	      INF
+    1957	      383.0	      0.0000	       0.	      INF
+    1958	     1070.0	      0.0000	       0.	      INF
+    1959	      170.0	      0.0000	       0.	      INF
+    1960	     2340.0	      0.0000	       0.	      INF
+    1961	      107.0	      0.0000	       0.	      INF
+    1962	      400.0	      0.0000	       0.	      INF
+    1963	      127.0	      0.0000	       0.	      INF
+    1964	      626.0	      0.0000	       0.	      INF
+    1965	      306.0	      0.0000	       0.	      INF
+    1966	      237.0	      0.0000	       0.	      INF
+    1967	      809.0	      0.0000	       0.	      INF
+    1968	       98.0	      0.0000	       0.	      INF
+    1969	      124.0	      0.0000	       0.	      INF
+    1970	      337.0	      0.0000	       0.	      INF
+    1971	      269.0	      0.0000	       0.	      INF

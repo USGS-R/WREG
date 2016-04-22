@@ -1,0 +1,258 @@
+1
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.002.000
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 14:30
+
+                         --- PROCESSING OPTIONS ---  
+
+                      Plot option         = Graphics device   
+                      Basin char output   = WATSTORE      
+                      Print option        = Yes
+                      Debug print         = No 
+                      Input peaks listing = Long 
+                      Input peaks format  = WATSTORE peak file  
+
+                      Input files used:
+                         peaks (ascii)  - C:\Users\mkohn\Desktop\06668040\06668040.TXT                                    
+                         specifications - C:\Users\mkohn\Desktop\06668040\PKFQWPSF.TMP                                    
+                      Output file(s): 
+                         main - C:\Users\mkohn\Desktop\06668040\06668040.PRT                                    
+                         bcd  - C:\Users\mkohn\Desktop\06668040\06668040.BCD                                    
+  
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.001
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 14:30
+  
+              Station - 06668040  RABBIT CREEK NEAR WHEATLAND, WY               
+
+
+                     I N P U T   D A T A   S U M M A R Y
+
+                Number of peaks in record            =       20
+                Peaks not used in analysis           =        0
+                Systematic peaks in analysis         =       20
+                Historic peaks in analysis           =        0
+                Beginning Year                       =     1965
+                Ending Year                          =     1984
+                Historical Period Length             =       20
+                Generalized skew                     =   -0.007
+                     Standard error                  =    0.550
+                     Mean Square error               =    0.303
+                Skew option                          =   WEIGHTED  
+                Gage base discharge                  =      0.0
+                User supplied high outlier threshold =   --           
+                User supplied PILF (LO) criterion    =   --           
+                Plotting position parameter          =     0.00
+                Type of analysis                            EMA
+                PILF (LO) Test Method                      MGBT
+                Perception Thresholds:
+                     Begin     End       Low     High     Comment
+                      1965    1984       0.0       INF     DEFAULT                                                                         
+                Interval Data                    =   None Specified
+
+
+
+  *********  NOTICE  --  Preliminary machine computations.        *********     
+  *********  User responsible for assessment and interpretation.  *********     
+
+    EMA003I-PILFS (LOS) WERE DETECTED USING MULTIPLE GRUBBS-BECK TEST   0      11.0
+      THE FOLLOWING PEAKS (WITH CORRESPONDING P-VALUES) WERE CENSORED:
+               5 ZERO VALUES
+    EMA002W-CONFIDENCE INTERVALS ARE NOT EXACT IF HISTORIC PERIOD > 0
+
+
+                                        Kendall's Tau Parameters
+
+                                                        MEDIAN   No. of
+                                       TAU    P-VALUE    SLOPE   PEAKS
+                                ---------------------------------------
+             SYSTEMATIC RECORD      0.114      0.586      3.000    15
+
+
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.002
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 14:30
+  
+              Station - 06668040  RABBIT CREEK NEAR WHEATLAND, WY               
+
+
+           ANNUAL FREQUENCY CURVE PARAMETERS -- LOG-PEARSON TYPE III 
+
+                                    LOGARITHMIC         
+                         -------------------------------
+                                      STANDARD          
+                            MEAN     DEVIATION     SKEW 
+                         -------------------------------
+ EMA W/O REG. INFO         1.4121      0.5387     -0.228
+ EMA W/REG. INFO           1.4200      0.5239     -0.067
+
+ EMA ESTIMATE OF MSE OF SKEW W/O REG. INFO (AT-SITE)      0.2650
+ EMA ESTIMATE OF MSE OF SKEW W/SYSTEMATIC ONLY (AT-SITE)  0.2650
+
+
+
+    ANNUAL FREQUENCY CURVE -- DISCHARGES AT SELECTED EXCEEDANCE PROBABILITIES
+
+   ANNUAL   EMA W/    EMA W/O     <------ FOR EMA ESTIMATES ------->
+EXCEEDANCE  REG INFO  REG INFO    VARIANCE  95% CONFIDENCE INTERVALS
+PROBABILITY ESTIMATE  ESTIMATE     OF EST.       LOWER       UPPER
+
+   0.6667      15.8      15.8      0.0208         3.3         25.5
+   0.5000      26.7      27.1      0.0155        10.7         46.0
+   0.4292      33.0      33.7      0.0147        16.3         59.3
+   0.2000      72.9      74.2      0.0176        42.2        159.7
+   0.1000     122.3     122.4      0.0244        67.5        345.8
+   0.0400     211.3     204.9      0.0373       106.6        904.8
+   0.0200     299.9     282.7      0.0498       140.0       1800.0
+   0.0100     410.0     375.1      0.0646       176.4       3428.0
+   0.0050     545.0     483.1      0.0818       214.9       6324.0
+   0.0020     767.8     651.8      0.1083       268.5      13710.0
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.003
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 14:30
+  
+              Station - 06668040  RABBIT CREEK NEAR WHEATLAND, WY               
+
+
+                       I N P U T   D A T A   L I S T I N G
+
+
+    WATER       PEAK   PEAKFQ   <--- Intervals --->
+     YEAR      VALUE    CODES     LOW         HIGH   REMARKS
+     1965       43.0       
+     1966        0.0       
+     1967       44.0       
+     1968       28.0       
+     1969        0.0       
+     1970       25.0       
+     1971       35.0       
+     1972        0.0       
+     1973        0.0       
+     1974        0.0       
+     1975       42.0       
+     1976       86.0       
+     1977       54.0       
+     1978       57.0       
+     1979       25.0       
+     1980       76.0       
+     1981      108.0       
+     1982       16.0       
+     1983      312.0       
+     1984       11.0       
+
+
+        Explanation of peak discharge qualification codes
+
+       PeakFQ    NWIS
+        CODE     CODE   DEFINITION
+
+          D        3    Dam failure, non-recurrent flow anomaly
+          G        8    Discharge greater than stated value
+          X       3+8   Both of the above
+          L        4    Discharge less than stated value
+          K     6 OR C  Known effect of regulation or urbanization
+          H        7    Historic peak
+
+          -  Minus-flagged discharge -- Not used in computation
+                -8888.0 -- No discharge value given
+          -  Minus-flagged water year -- Historic peak used in computation
+
+
+
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.004
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 14:30
+  
+              Station - 06668040  RABBIT CREEK NEAR WHEATLAND, WY               
+
+
+   EMPIRICAL FREQUENCY CURVES -- HIRSCH-STEDINGER PLOTTING POSITIONS
+
+   WATER     RANKED      EMA         INTERVALS
+    YEAR   DISCHARGE   ESTIMATE      LOW      HIGH
+    1983      312.0     0.0474
+    1981      108.0     0.0951
+    1976       86.0     0.1427
+    1980       76.0     0.1903
+    1978       57.0     0.2380
+    1977       54.0     0.2856
+    1967       44.0     0.3333
+    1965       43.0     0.3809
+    1975       42.0     0.4285
+    1971       35.0     0.4762
+    1968       28.0     0.5238
+    1970       25.0     0.6191
+    1979       25.0     0.5715
+    1982       16.0     0.6667
+    1984       11.0     0.7144
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.005
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 14:30
+  
+              Station - 06668040  RABBIT CREEK NEAR WHEATLAND, WY               
+
+
+                         EMA REPRESENTATION OF DATA
+
+  WATER <----- OBSERVED-----><-------- EMA -------><-PERCEPTION THRESHOLDS->
+   YEAR    Q_LOWER    Q_UPPER    Q_LOWER    Q_UPPER        LOWER       UPPER
+   1965       43.0       43.0       43.0       43.0         11.0        INF 
+   1966        0.0        0.0        0.0       11.0         11.0        INF 
+   1967       44.0       44.0       44.0       44.0         11.0        INF 
+   1968       28.0       28.0       28.0       28.0         11.0        INF 
+   1969        0.0        0.0        0.0       11.0         11.0        INF 
+   1970       25.0       25.0       25.0       25.0         11.0        INF 
+   1971       35.0       35.0       35.0       35.0         11.0        INF 
+   1972        0.0        0.0        0.0       11.0         11.0        INF 
+   1973        0.0        0.0        0.0       11.0         11.0        INF 
+   1974        0.0        0.0        0.0       11.0         11.0        INF 
+   1975       42.0       42.0       42.0       42.0         11.0        INF 
+   1976       86.0       86.0       86.0       86.0         11.0        INF 
+   1977       54.0       54.0       54.0       54.0         11.0        INF 
+   1978       57.0       57.0       57.0       57.0         11.0        INF 
+   1979       25.0       25.0       25.0       25.0         11.0        INF 
+   1980       76.0       76.0       76.0       76.0         11.0        INF 
+   1981      108.0      108.0      108.0      108.0         11.0        INF 
+   1982       16.0       16.0       16.0       16.0         11.0        INF 
+   1983      312.0      312.0      312.0      312.0         11.0        INF 
+   1984       11.0       11.0       11.0       11.0         11.0        INF 
+1
+
+
+
+ End PeakFQ analysis.
+   Stations processed :       1
+   Number of errors   :       0
+   Stations skipped   :       0
+   Station years      :      20
+
+
+Data records may have been ignored for the stations listed below.               
+(Card type must be Y, Z, N, H, I, 2, 3, 4,  or *.)                              
+(2, 4, and * records are ignored.)                                              
+                                                                                
+ For the station below, the following records were ignored:                     
+                                                                                
+                                                                                
+ FINISHED PROCESSING STATION:  06668040       USGS RABBIT CREEK NEAR WHEATLAND, 
+                                                                                
+                                                                                
+ For the station below, the following records were ignored:                     
+                                                                                
+ FINISHED PROCESSING STATION:                                                   
+                                                                                

@@ -1,0 +1,360 @@
+1
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.002.000
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 10:14
+
+                         --- PROCESSING OPTIONS ---  
+
+                      Plot option         = Graphics device   
+                      Basin char output   = WATSTORE      
+                      Print option        = Yes
+                      Debug print         = No 
+                      Input peaks listing = Long 
+                      Input peaks format  = WATSTORE peak file  
+
+                      Input files used:
+                         peaks (ascii)  - C:\Users\mkohn\Desktop\06838200\06838200.TXT                                    
+                         specifications - C:\Users\mkohn\Desktop\06838200\PKFQWPSF.TMP                                    
+                      Output file(s): 
+                         main - C:\Users\mkohn\Desktop\06838200\06838200.PRT                                    
+                         bcd  - C:\Users\mkohn\Desktop\06838200\06838200.BCD                                    
+  
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.001
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 10:14
+  
+               Station - 06838200  COON CREEK AT INDIANOLA, NEBR.               
+
+
+                     I N P U T   D A T A   S U M M A R Y
+
+                Number of peaks in record            =       37
+                Peaks not used in analysis           =        0
+                Systematic peaks in analysis         =       37
+                Historic peaks in analysis           =        0
+                Beginning Year                       =     1961
+                Ending Year                          =     1999
+                Historical Period Length             =       39
+                Generalized skew                     =    0.128
+                     Standard error                  =    0.550
+                     Mean Square error               =    0.303
+                Skew option                          =   WEIGHTED  
+                Gage base discharge                  =      0.0
+                User supplied high outlier threshold =   --           
+                User supplied PILF (LO) criterion    =   --           
+                Plotting position parameter          =     0.00
+                Type of analysis                            EMA
+                PILF (LO) Test Method                      MGBT
+                Perception Thresholds:
+                     Begin     End       Low     High     Comment
+                      1961    1999       0.0       INF     DEFAULT                                                                         
+                      1980    1980      45.0       INF     PEAK < STATED VALUE                                                             
+                      1985    1985       5.0       INF     PEAK < STATED VALUE                                                             
+                      1986    1986       5.0       INF     PEAK < STATED VALUE                                                             
+                      1987    1987       5.0       INF     PEAK < STATED VALUE                                                             
+                      1989    1989      50.0       INF     PEAK < STATED VALUE                                                             
+                      1991    1991       5.0       INF     PEAK < STATED VALUE                                                             
+                      1996    1996      50.0       INF     PEAK < STATED VALUE                                                             
+                      1997    1997      50.0       INF     PEAK < STATED VALUE                                                             
+                      1998    1998      50.0       INF     PEAK < STATED VALUE                                                             
+                      1999    1999      50.0       INF     PEAK < STATED VALUE                                                             
+                      1994    1995       INF       INF     MISSING                                                                         
+                Interval Data:
+                              Year       Low     High     Comment
+                              1980       0.0      45.0     PEAK < STATED VALUE                                                             
+                              1985       0.0       5.0     PEAK < STATED VALUE                                                             
+                              1986       0.0       5.0     PEAK < STATED VALUE                                                             
+                              1987       0.0       5.0     PEAK < STATED VALUE                                                             
+                              1989       0.0      50.0     PEAK < STATED VALUE                                                             
+                              1991       0.0       5.0     PEAK < STATED VALUE                                                             
+                              1996       0.0      50.0     PEAK < STATED VALUE                                                             
+                              1997       0.0      50.0     PEAK < STATED VALUE                                                             
+                              1998       0.0      50.0     PEAK < STATED VALUE                                                             
+                              1999       0.0      50.0     PEAK < STATED VALUE                                                             
+
+
+
+  *********  NOTICE  --  Preliminary machine computations.        *********     
+  *********  User responsible for assessment and interpretation.  *********     
+
+    WCF002J-CALCS COMPLETED.  RETURN CODE =  2
+    EMA003I-PILFS (LOS) WERE DETECTED USING MULTIPLE GRUBBS-BECK TEST  18     140.0
+      THE FOLLOWING PEAKS (WITH CORRESPONDING P-VALUES) WERE CENSORED:
+               2 ZERO VALUES
+             0.2    (0.0000)
+            10.0    (0.0034)
+            20.0    (0.0085)
+            20.0    (0.0003)
+            50.0    (0.0151)
+            70.0    (0.0440)
+            75.0    (0.0124)
+            75.0    (0.0007)
+           140.0    (0.1167)
+           155.0    (0.1109)
+           195.0    (0.4639)
+           230.0    (******)
+           230.0    (******)
+           240.0    (******)
+           245.0    (******)
+           305.0    (******)
+           310.0    (******)
+           310.0    (******)
+    EMA002W-CONFIDENCE INTERVALS ARE NOT EXACT IF HISTORIC PERIOD > 0
+
+
+                                        Kendall's Tau Parameters
+
+                                                        MEDIAN   No. of
+                                       TAU    P-VALUE    SLOPE   PEAKS
+                                ---------------------------------------
+             SYSTEMATIC RECORD     -0.353      0.003     -8.250    35
+
+
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.002
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 10:14
+  
+               Station - 06838200  COON CREEK AT INDIANOLA, NEBR.               
+
+
+           ANNUAL FREQUENCY CURVE PARAMETERS -- LOG-PEARSON TYPE III 
+
+                                    LOGARITHMIC         
+                         -------------------------------
+                                      STANDARD          
+                            MEAN     DEVIATION     SKEW 
+                         -------------------------------
+ EMA W/O REG. INFO         2.0692      0.4930     -0.365
+ EMA W/REG. INFO           2.1131      0.4311      0.021
+
+ EMA ESTIMATE OF MSE OF SKEW W/O REG. INFO (AT-SITE)      0.1584
+ EMA ESTIMATE OF MSE OF SKEW W/SYSTEMATIC ONLY (AT-SITE)  0.2161
+
+
+
+    ANNUAL FREQUENCY CURVE -- DISCHARGES AT SELECTED EXCEEDANCE PROBABILITIES
+
+   ANNUAL   EMA W/    EMA W/O     <------ FOR EMA ESTIMATES ------->
+EXCEEDANCE  REG INFO  REG INFO    VARIANCE  95% CONFIDENCE INTERVALS
+PROBABILITY ESTIMATE  ESTIMATE     OF EST.       LOWER       UPPER
+
+   0.9000      36.4      26.4      0.0817         2.7         66.2
+   0.8000      56.2      46.3      0.0530         6.9         94.1
+   0.6667      84.4      76.3      0.0328        14.9        129.3
+   0.5000     129.3     125.6      0.0179        32.4        178.5
+   0.4292     154.4     153.3      0.0136        42.0        206.0
+   0.2000     298.9     309.3      0.0063       126.9        411.4
+   0.1000     464.0     477.0      0.0092       309.9       1177.0
+   0.0400     742.9     736.7      0.0195       460.0       3796.0
+   0.0200    1008.      961.2      0.0304       573.4       7685.0
+   0.0100    1326.     1209.       0.0433       698.0      14260.0
+   0.0050    1706.     1480.       0.0578       840.4      23840.0
+   0.0020    2317.     1872.       0.0791      1043.0      46730.0
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.003
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 10:14
+  
+               Station - 06838200  COON CREEK AT INDIANOLA, NEBR.               
+
+
+                       I N P U T   D A T A   L I S T I N G
+
+
+    WATER       PEAK   PEAKFQ   <--- Intervals --->
+     YEAR      VALUE    CODES     LOW         HIGH   REMARKS
+     1961      750.0       
+     1962      420.0       
+     1963      240.0       
+     1964      310.0       
+     1965      230.0       
+     1966      320.0       
+     1967      305.0       
+     1968      900.0       
+     1969       50.0       
+     1970      310.0       
+     1971       75.0       
+     1972       20.0       
+     1973       20.0       
+     1974      155.0       
+     1975      195.0       
+     1976        0.0       
+     1977      540.0       
+     1978        0.2       
+     1979      230.0       
+     1980       45.0   L            0.0        45.0  PEAK < STATED VALUE                                                             
+     1981      245.0       
+     1982       75.0       
+     1983       70.0       
+     1984       10.0       
+     1985        5.0   L            0.0         5.0  PEAK < STATED VALUE                                                             
+     1986        5.0   L            0.0         5.0  PEAK < STATED VALUE                                                             
+     1987        5.0   L            0.0         5.0  PEAK < STATED VALUE                                                             
+     1988      140.0       
+     1989       50.0   L            0.0        50.0  PEAK < STATED VALUE                                                             
+     1990        0.0       
+     1991        5.0   L            0.0         5.0  PEAK < STATED VALUE                                                             
+     1992      400.0       
+     1993      310.0       
+     1996       50.0   L            0.0        50.0  PEAK < STATED VALUE                                                             
+     1997       50.0   L            0.0        50.0  PEAK < STATED VALUE                                                             
+     1998       50.0   L            0.0        50.0  PEAK < STATED VALUE                                                             
+     1999       50.0   L            0.0        50.0  PEAK < STATED VALUE                                                             
+
+
+        Explanation of peak discharge qualification codes
+
+       PeakFQ    NWIS
+        CODE     CODE   DEFINITION
+
+          D        3    Dam failure, non-recurrent flow anomaly
+          G        8    Discharge greater than stated value
+          X       3+8   Both of the above
+          L        4    Discharge less than stated value
+          K     6 OR C  Known effect of regulation or urbanization
+          H        7    Historic peak
+
+          -  Minus-flagged discharge -- Not used in computation
+                -8888.0 -- No discharge value given
+          -  Minus-flagged water year -- Historic peak used in computation
+
+
+
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.004
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 10:14
+  
+               Station - 06838200  COON CREEK AT INDIANOLA, NEBR.               
+
+
+   EMPIRICAL FREQUENCY CURVES -- HIRSCH-STEDINGER PLOTTING POSITIONS
+
+   WATER     RANKED      EMA         INTERVALS
+    YEAR   DISCHARGE   ESTIMATE      LOW      HIGH
+    1968      900.0     0.0257
+    1961      750.0     0.0515
+    1977      540.0     0.0773
+    1962      420.0     0.1031
+    1992      400.0     0.1289
+    1966      320.0     0.1547
+    1964      310.0     0.2322
+    1970      310.0     0.2064
+    1993      310.0     0.1805
+    1967      305.0     0.2580
+    1981      245.0     0.2838
+    1963      240.0     0.3096
+    1965      230.0     0.3612
+    1979      230.0     0.3354
+    1975      195.0     0.3870
+    1974      155.0     0.4128
+    1988      140.0     0.4386
+  * 1971       75.0     0.4903
+  * 1982       75.0     0.4645
+  * 1983       70.0     0.5161
+  * 1969       50.0     0.5419
+    1989     ------     0.9282         0.0      50.0
+    1996     ------     0.8560         0.0      50.0
+    1997     ------     0.7838         0.0      50.0
+    1998     ------     0.7116         0.0      50.0
+    1999     ------     0.6394         0.0      50.0
+    1980     ------     0.7838         0.0      45.0
+  * 1972       20.0     0.6324
+  * 1973       20.0     0.5999
+  * 1984       10.0     0.6649
+    1985     ------     0.9396         0.0       5.0
+    1986     ------     0.8790         0.0       5.0
+    1987     ------     0.8183         0.0       5.0
+    1991     ------     0.7577         0.0       5.0
+  * 1978        0.2     0.7728
+
+    * DENOTES PILF (LO)
+
+1
+
+
+  Program PeakFq           U. S. GEOLOGICAL SURVEY             Seq.001.005
+  Version 7.1         Annual peak flow frequency analysis      Run Date / Time
+  3/14/2014                                                    02/03/2015 10:14
+  
+               Station - 06838200  COON CREEK AT INDIANOLA, NEBR.               
+
+
+                         EMA REPRESENTATION OF DATA
+
+  WATER <----- OBSERVED-----><-------- EMA -------><-PERCEPTION THRESHOLDS->
+   YEAR    Q_LOWER    Q_UPPER    Q_LOWER    Q_UPPER        LOWER       UPPER
+   1961      750.0      750.0      750.0      750.0        140.0        INF 
+   1962      420.0      420.0      420.0      420.0        140.0        INF 
+   1963      240.0      240.0      240.0      240.0        140.0        INF 
+   1964      310.0      310.0      310.0      310.0        140.0        INF 
+   1965      230.0      230.0      230.0      230.0        140.0        INF 
+   1966      320.0      320.0      320.0      320.0        140.0        INF 
+   1967      305.0      305.0      305.0      305.0        140.0        INF 
+   1968      900.0      900.0      900.0      900.0        140.0        INF 
+   1969       50.0       50.0        0.0      140.0        140.0        INF 
+   1970      310.0      310.0      310.0      310.0        140.0        INF 
+   1971       75.0       75.0        0.0      140.0        140.0        INF 
+   1972       20.0       20.0        0.0      140.0        140.0        INF 
+   1973       20.0       20.0        0.0      140.0        140.0        INF 
+   1974      155.0      155.0      155.0      155.0        140.0        INF 
+   1975      195.0      195.0      195.0      195.0        140.0        INF 
+   1976        0.0        0.0        0.0      140.0        140.0        INF 
+   1977      540.0      540.0      540.0      540.0        140.0        INF 
+   1978        0.2        0.2        0.0      140.0        140.0        INF 
+   1979      230.0      230.0      230.0      230.0        140.0        INF 
+   1980        0.0       45.0        0.0      140.0        140.0        INF 
+   1981      245.0      245.0      245.0      245.0        140.0        INF 
+   1982       75.0       75.0        0.0      140.0        140.0        INF 
+   1983       70.0       70.0        0.0      140.0        140.0        INF 
+   1984       10.0       10.0        0.0      140.0        140.0        INF 
+   1985        0.0        5.0        0.0      140.0        140.0        INF 
+   1986        0.0        5.0        0.0      140.0        140.0        INF 
+   1987        0.0        5.0        0.0      140.0        140.0        INF 
+   1988      140.0      140.0      140.0      140.0        140.0        INF 
+   1989        0.0       50.0        0.0      140.0        140.0        INF 
+   1990        0.0        0.0        0.0      140.0        140.0        INF 
+   1991        0.0        5.0        0.0      140.0        140.0        INF 
+   1992      400.0      400.0      400.0      400.0        140.0        INF 
+   1993      310.0      310.0      310.0      310.0        140.0        INF 
+   1994        0.0       INF         0.0       INF          INF         INF 
+   1995        0.0       INF         0.0       INF          INF         INF 
+   1996        0.0       50.0        0.0      140.0        140.0        INF 
+   1997        0.0       50.0        0.0      140.0        140.0        INF 
+   1998        0.0       50.0        0.0      140.0        140.0        INF 
+   1999        0.0       50.0        0.0      140.0        140.0        INF 
+1
+
+
+
+ End PeakFQ analysis.
+   Stations processed :       1
+   Number of errors   :       0
+   Stations skipped   :       0
+   Station years      :      37
+
+
+Data records may have been ignored for the stations listed below.               
+(Card type must be Y, Z, N, H, I, 2, 3, 4,  or *.)                              
+(2, 4, and * records are ignored.)                                              
+                                                                                
+ For the station below, the following records were ignored:                     
+                                                                                
+                                                                                
+ FINISHED PROCESSING STATION:  06838200       USGS COON CREEK AT INDIANOLA, NEBR
+                                                                                
+                                                                                
+ For the station below, the following records were ignored:                     
+                                                                                
+ FINISHED PROCESSING STATION:                                                   
+                                                                                

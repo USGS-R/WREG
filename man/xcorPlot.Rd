@@ -7,7 +7,7 @@
 xcorPlot(object, alpha, theta, concurrentMin, DistMeth = 2, plot = TRUE)
 }
 \arguments{
-\item{object}{A list of the imported data from \code{\link{importPeakFQ}}
+\item{object}{A list of the imported data from \code{\link{importPeakFQ}} 
 or\code{\link{importWREG}}.}
 
 \item{alpha}{A number, \code{alpha} is a parameter used in the estimated 
@@ -22,7 +22,7 @@ manual.}
 concurrent record required to estimate cross-correlation.}
 
 \item{DistMeth}{A value of \code{1} indicates that the "Nautical Mile" 
-approximation should be used to calculate inter-site distances.  A value of
+approximation should be used to calculate inter-site distances.  A value of 
 \code{2} designates the Haversine approximation.  See 
 \code{\link{Dist.WREG}}.}
 
@@ -33,6 +33,11 @@ If \code{plot=FALSE}, the Nash-Sutcliffe model efficieny is returned.
 }
 \description{
 \code{xcorPlot} explores the fit of the proposed approximation of
-cross-correlation.
+ cross-correlation.
+}
+\examples{
+\dontrun{
+#add examples
+}
 }
 

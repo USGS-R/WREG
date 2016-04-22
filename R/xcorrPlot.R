@@ -2,9 +2,9 @@
 #'Exploring correlation function
 #'
 #'@description \code{xcorPlot} explores the fit of the proposed approximation of
-#'cross-correlation.
-#'
-#'@param object A list of the imported data from \code{\link{importPeakFQ}}
+#'  cross-correlation.
+#'  
+#'@param object A list of the imported data from \code{\link{importPeakFQ}} 
 #'  or\code{\link{importWREG}}.
 #'@param alpha A number, \code{alpha} is a parameter used in the estimated 
 #'  cross-correlation between site records.  See equation 20 in the WREG v. 1.05
@@ -15,7 +15,7 @@
 #'@param concurrentMin A number specifying the minimum number of years of 
 #'  concurrent record required to estimate cross-correlation.
 #'@param DistMeth A value of \code{1} indicates that the "Nautical Mile" 
-#'  approximation should be used to calculate inter-site distances.  A value of
+#'  approximation should be used to calculate inter-site distances.  A value of 
 #'  \code{2} designates the Haversine approximation.  See 
 #'  \code{\link{Dist.WREG}}.
 #'@param plot A logical spcifying if the plot should be created.
@@ -23,6 +23,11 @@
 #'@return If \code{plot=FALSE}, the Nash-Sutcliffe model efficieny is returned.
 #'  
 #'@import stats graphics
+#'  
+#' @examples
+#' \dontrun{
+#' #add examples
+#' }
 #'@export
 xcorPlot <- function(object,alpha,theta,concurrentMin,
   DistMeth=2,plot=TRUE) {

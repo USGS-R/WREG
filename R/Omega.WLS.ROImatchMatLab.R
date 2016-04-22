@@ -1,43 +1,48 @@
-#' Weighing Matrix for ROI-WLS (WREG)
+#'Weighing Matrix for ROI-WLS (WREG)
 #'
-#'@description
-#'\code{Omega.WLS.ROImatchMatLab} calculates the weighting function for a 
-#'weighted least-squares regression using regions-of-influence.  This is largely
-#'legacy code to match WREG v. 1.05 idiosyncrasies.
+#'@description \code{Omega.WLS.ROImatchMatLab} calculates the weighting function
+#'for a weighted least-squares regression using regions-of-influence.  This is
+#'largely legacy code to match WREG v. 1.05 idiosyncrasies.
 #'
-#' @param Y.all The dependent variable of interest at all sites in the network, with any
-#' transformations already applied.
-#' @param X.all The independent variables  at all sites in the network, with any 
-#' transformations already applied.  Each row represents a site and each column 
-#' represents a particular independent variable.  The rows must be in the same order as
-#' the dependent variables in \code{Y}.
-#' @param LP3 A dataframe containing the fitted Log-Pearson Type III standard
-#' deviate, standard deviation and skew for all sites in the network.  The names of 
-#' this data frame are \code{S}, \code{K} and \code{G}.  The order of the rows must 
-#' be the same as \code{Y}.
-#' @param RecordLengths.all \code{RecordLengths.all} may be a matrix whose rows and columns 
-#' are in the same order as \code{Y}.  Each \code{(r,c)} element represents the 
-#' length of concurrent record between sites \code{r} and \code{c}.  The diagonal 
-#' elements therefore represent each site's full record length.  For \dQuote{WLS}, 
-#' only the at-site record lengths are needed.  In this case, \code{RecordLengths} 
-#' can be a vector or a matrix.  Here, this should only include sites in the current
-#' region of influence.
-#' @param NDX A vector listing the indices of the sites that comprise the region of 
-#' influence.
-#'
-#'@details This is a legacy function that matches the idiosyncrasies of WREG v. 1.05.
-#'This includes using all sites to implement the sigma regression, averaging across
-#'all record lengths, using arbitrary record lengths to estimate weights and using a
-#'new function for estimating the MSE of the basic OLS model.
-#'
-#'This function will become obsolete once all idiosyncrasies are assessed.
-#'
-#'@return \code{Omega.WLS.ROImatchMatLab} returns a list with three elements:
-#'\item{Omega}{The estimated weighting matrix.}
-#'\item{var.modelerror.0}{The estimated model error variance for a constant-value 
-#'model.}
-#'\item{var.modelerror.k}{The estimated model error variance for a k-variable model.}
-#'
+#'@param Y.all The dependent variable of interest at all sites in the network,
+#'  with any transformations already applied.
+#'@param X.all The independent variables  at all sites in the network, with any 
+#'  transformations already applied.  Each row represents a site and each column
+#'  represents a particular independent variable.  The rows must be in the same
+#'  order as the dependent variables in \code{Y}.
+#'@param LP3 A dataframe containing the fitted Log-Pearson Type III standard 
+#'  deviate, standard deviation and skew for all sites in the network.  The
+#'  names of this data frame are \code{S}, \code{K} and \code{G}.  The order of
+#'  the rows must be the same as \code{Y}.
+#'@param RecordLengths.all \code{RecordLengths.all} may be a matrix whose rows
+#'  and columns are in the same order as \code{Y}.  Each \code{(r,c)} element
+#'  represents the length of concurrent record between sites \code{r} and
+#'  \code{c}.  The diagonal elements therefore represent each site's full record
+#'  length.  For \dQuote{WLS}, only the at-site record lengths are needed.  In
+#'  this case, \code{RecordLengths} can be a vector or a matrix.  Here, this
+#'  should only include sites in the current region of influence.
+#'@param NDX A vector listing the indices of the sites that comprise the region
+#'  of influence.
+#'  
+#'@details This is a legacy function that matches the idiosyncrasies of WREG v.
+#'  1.05. This includes using all sites to implement the sigma regression,
+#'  averaging across all record lengths, using arbitrary record lengths to
+#'  estimate weights and using a new function for estimating the MSE of the
+#'  basic OLS model.
+#'  
+#'  This function will become obsolete once all idiosyncrasies are assessed.
+#'  
+#'@return \code{Omega.WLS.ROImatchMatLab} returns a list with three elements: 
+#'  \item{Omega}{The estimated weighting matrix.} \item{var.modelerror.0}{The
+#'  estimated model error variance for a constant-value model.} 
+#'  \item{var.modelerror.k}{The estimated model error variance for a k-variable
+#'  model.}
+#'  
+#'  
+#' @examples
+#' \dontrun{
+#' #add examples
+#' }
 #'@export
 Omega.WLS.ROImatchMatLab <- function(Y.all,X.all,LP3.all,RecordLengths.all,NDX) {
   # William Farmer, USGS, January 26, 2015
@@ -45,6 +50,113 @@ Omega.WLS.ROImatchMatLab <- function(Y.all,X.all,LP3.all,RecordLengths.all,NDX) 
   # WREG v 1.05 (MatLab) is inconsistent in which components are used to develop equations in RoI-WLS
   # Eq. 15 is implemented with all sites
   # The mean inverse record length is implemented with all sites
+  
+  # Some upfront error handling
+  err <- FALSE
+  if ((!missing(X.all)&!missing(Y.all))&&
+      (length(Y.all)!=nrow(X.all))) {
+    warning(paste0("The length of Y.all must be the same as ",
+      "the number of rows in X.all."))
+    err <- TRUE
+  }
+  if (missing(Y.all)) {
+    warning("Dependent variable (Y.all) must be provided.")
+    err <- TRUE
+  } else {
+    if (!is.numeric(Y.all)) {
+      warning("Dependent variable (Y.all) must be provided as class numeric.")
+      err <- TRUE
+    } else {
+      if (sum(is.na(Y.all))>0) {
+        warning(paste0("The depedent variable (Y.all) contains missing ",
+          "values.  These must be removed."))
+        err <- TRUE
+      }
+      if (sum(is.infinite(Y.all))>0) {
+        warning(paste0("The depedent variable (Y.all) contains infinite ",
+          "values.  These must be removed."))
+        err <- TRUE
+      }
+    }
+  }
+  if (missing(X.all)) {
+    warning("Independent variables (X.all) must be provided.")
+    err <- TRUE
+  } else {
+    if ((length(unique(apply(X.all,FUN=class,MARGIN=2)))!=1)|
+        (unique(apply(X.all,FUN=class,MARGIN=2))!="numeric")) {
+      warning("Independent variables (X.all) must be provided as class numeric.")
+      err <- TRUE
+    } else {
+      if (sum(is.na(as.matrix(X.all)))>0) {
+        warning(paste0("Some independent variables (X.all) contain missing ",
+          "values.  These must be removed."))
+        err <- TRUE
+      }
+      if (sum(is.infinite(as.matrix(X.all)))>0) {
+        warning(paste0("Some independent variables (X.all) contain infinite ",
+          "values.  These must be removed."))
+        err <- TRUE
+      }
+    }
+  }
+  if (missing(NDX)|!is.integer(NDX)|length(NDX)>1) {
+    warning(paste0("NDX must be provided as a single integer value."))
+    err <- TRUE
+  }
+  # Error checking LP3
+  if (missing(LP3.all)) {
+    warning("LP3.all must be provided as an input.")
+    err <- TRUE
+  } else {
+      if (!is.data.frame(LP3.all)) {
+        warning(paste("LP3.all must be provided as a data frame with elements named",
+          "'S', 'K' and 'G' for standard deivation, deviate and skew,",
+          "respectively."))
+        err <- TRUE
+      } else {
+        if (sum(is.element(c("S","K","G"),names(LP3.all)))!=3) {
+          warning(paste("In valid elements: The names of the elements in LP3.all are",
+            names(LP3.all),". LP3.all must be provided as a data frame with elements named",
+            "'S', 'K' and 'G' for standard deivation, deviate and skew,",
+            "respectively."))
+          err <- TRUE
+        }
+        if ((length(unique(apply(cbind(LP3.all$S,LP3.all$K,LP3.all$G),FUN=class,MARGIN=2)))!=1)|
+            (unique(apply(cbind(LP3.all$S,LP3.all$K,LP3.all$G),FUN=class,MARGIN=2))!="numeric")) {
+          warning("LP3.all must be provided as a numeric array")
+          err <- TRUE
+        } else {
+          if (sum(is.infinite(LP3.all$S),is.infinite(LP3.all$K),is.infinite(LP3.all$G))>0) {
+            warning(paste0("Some elements of LP3.all$S, LP3.all$K, and LP3.all$G contain infinite ",
+              "values.  These must be removed."))
+            err <- TRUE
+          }
+          if (sum(is.na(LP3.all$S),is.na(LP3.all$K),is.na(LP3.all$G))>0) {
+            warning(paste0("Some elements of LP3.all$S, LP3.all$K, and LP3.all$G contain missing ",
+              "values.  These must be removed."))
+            err <- TRUE
+          }
+        }
+      }
+
+  }
+  if (missing(RecordLengths.all)) {
+    warning("A matrix of RecordLengths.all must be provided as input.")
+    err <- TRUE
+  } else {
+    if (ncol(RecordLengths.all)!=nrow(RecordLengths.all)) {
+      warning("RecordLengths.all must be provided as a square array")
+      err <- TRUE
+    }
+    if (!is.numeric(RecordLengths.all)) {
+      warning("RecordLengths.all must be provided as a numeric array")
+      err <- TRUE
+    }
+  }
+  if (err) {
+    stop("Invalid inputs were provided.  See warnings().")
+  }
   
   ## Get the subset parameters
   Y<-Y.all[NDX] # Subset of dependent variables in region of influence.
