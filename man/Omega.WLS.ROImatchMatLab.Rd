@@ -53,8 +53,40 @@ This is a legacy function that matches the idiosyncrasies of WREG v.
  This function will become obsolete once all idiosyncrasies are assessed.
 }
 \examples{
-\dontrun{
-#add examples
+# Import some example data
+rm(list = ls())
+peakFQdir <- paste0(
+  file.path(system.file("exampleDirectory", package = "WREG"),
+    "pfqImport"))
+gisFilePath <- file.path(peakFQdir, "pfqSiteInfo.txt")
+importedData <- importPeakFQ(pfqPath = peakFQdir, gisFile = gisFilePath)
+
+# Organizing input data
+lp3Data <- importedData$LP3f
+lp3Data$K <- importedData$LP3k$AEP_0.5
+Y <- importedData$Y$AEP_0.5
+X <- importedData$X[c("Sand", "OutletElev", "Slope")]
+
+#### Geographic Region-of-Influence
+i <- 1 # Site of interest
+n <- 10 # size of region of influence
+Gdist <- vector(length=length(Y)) # Empty vector for geographic distances
+for (j in 1:length(Y)) {
+  if (i!=j) {
+    #### Geographic distance
+    Gdist[j] <- Dist.WREG(Lat1 = importedData$BasChars$Lat[i],
+      Long1 = importedData$BasChars$Long[i],
+      Lat2 = importedData$BasChars$Lat[j],
+      Long2 = importedData$BasChars$Long[j]) # Intersite distance, miles
+  } else {
+    Gdist[j] <- Inf # To block self identification.
+  }
 }
+temp <- sort.int(Gdist,index.return=T)
+NDX <- temp$ix[1:n] # Sites to use in this regression
+
+# Compute weighting matrix
+weightingResult <- Omega.WLS.ROImatchMatLab(Y.all = Y, X.all = X,
+  LP3.all = lp3Data, RecordLengths.all = importedData$recLen, NDX = NDX)
 }
 
