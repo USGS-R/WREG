@@ -83,9 +83,51 @@
 #'@import stats
 #'  
 #' @examples
-#' \dontrun{
-#' #add examples
+#' # Import some example data
+#' rm(list = ls())
+#' peakFQdir <- paste0(
+#'   file.path(system.file("exampleDirectory", package = "WREG"),
+#'     "pfqImport"))
+#' gisFilePath <- file.path(peakFQdir, "pfqSiteInfo.txt")
+#' importedData <- importPeakFQ(pfqPath = peakFQdir, gisFile = gisFilePath)
+#' 
+#' # Organizing input data
+#' lp3Data <- importedData$LP3f
+#' lp3Data$K <- importedData$LP3k$AEP_0.5
+#' Y <- importedData$Y$AEP_0.5
+#' X <- importedData$X[c("Sand", "OutletElev", "Slope")]
+#' 
+#' #### Geographic Region-of-Influence
+#' i <- 1 # Site of interest
+#' n <- 10 # size of region of influence
+#' Gdist <- vector(length=length(Y)) # Empty vector for geographic distances
+#' for (j in 1:length(Y)) {
+#'   if (i!=j) {
+#'     #### Geographic distance
+#'     Gdist[j] <- Dist.WREG(Lat1 = importedData$BasChars$Lat[i],
+#'       Long1 = importedData$BasChars$Long[i],
+#'       Lat2 = importedData$BasChars$Lat[j],
+#'       Long2 = importedData$BasChars$Long[j]) # Intersite distance, miles
+#'   } else {
+#'     Gdist[j] <- Inf # To block self identification.
+#'   }
 #' }
+#' temp <- sort.int(Gdist,index.return=T)
+#' NDX <- temp$ix[1:n] # Sites to use in this regression
+#' 
+#' # Pull out characeristics of the region.
+#' Y.i <- Y[NDX] # Predictands from region of influence
+#' X.i <- X[NDX,] # Predictors from region of influence
+#' RecordLengths.i <- importedData$recLen[NDX,NDX] # Record lengths from region of influence
+#' BasinChars.i <- importedData$BasChars[NDX,] # Basin characteristics (IDs, Lat, Long) from region of influence.
+#' LP3.i <- data.frame(lp3Data)[NDX,] # LP3 parameters from region of influence
+#' 
+#' # Compute weighting matrix
+#' weightingResult <- Omega.GLS.ROImatchMatLab(alpha = 0.01, theta = 0.98,
+#'   Independent = importedData$BasChars, X = X.i, Y = Y.i,
+#'  RecordLengths = RecordLengths.i, LP3 = LP3.i, TY = 20,
+#'   X.all = X, LP3.all = lp3Data)
+#' 
 #'@export
 Omega.GLS.ROImatchMatLab <- function(alpha=0.01,theta=0.98,Independent,X,Y,RecordLengths,
   LP3,MSEGR=NA,TY=2,Peak=T,X.all,LP3.all,DistMeth=2,regSkew=FALSE) {
@@ -108,32 +150,6 @@ Omega.GLS.ROImatchMatLab <- function(alpha=0.01,theta=0.98,Independent,X,Y,Recor
   
   # Some upfront error handling
   err <- FALSE
-  if ((!missing(X.all)&!missing(Y.all))&&
-      (length(Y.all)!=nrow(X.all))) {
-    warning(paste0("The length of Y.all must be the same as ",
-      "the number of rows in X.all."))
-    err <- TRUE
-  }
-  if (missing(Y.all)) {
-    warning("Dependent variable (Y.all) must be provided.")
-    err <- TRUE
-  } else {
-    if (!is.numeric(Y.all)) {
-      warning("Dependent variable (Y.all) must be provided as class numeric.")
-      err <- TRUE
-    } else {
-      if (sum(is.na(Y.all))>0) {
-        warning(paste0("The depedent variable (Y.all) contains missing ",
-          "values.  These must be removed."))
-        err <- TRUE
-      }
-      if (sum(is.infinite(Y.all))>0) {
-        warning(paste0("The depedent variable (Y.all) contains infinite ",
-          "values.  These must be removed."))
-        err <- TRUE
-      }
-    }
-  }
   if (missing(X.all)) {
     warning("Independent variables (X.all) must be provided.")
     err <- TRUE
@@ -340,8 +356,8 @@ Omega.GLS.ROImatchMatLab <- function(alpha=0.01,theta=0.98,Independent,X,Y,Recor
     warning("Peak must be a single value")
     err <- TRUE
   }
-  if (!is.element(distMeth,c(1,2))) {
-    warning("distMeth must be either 1 for use of a nautical mile ",
+  if (!is.element(DistMeth,c(1,2))) {
+    warning("DistMeth must be either 1 for use of a nautical mile ",
       "approximation or 2 for use of the haversine formula.")
     err <- TRUE
   }
@@ -444,9 +460,9 @@ Omega.GLS.ROImatchMatLab <- function(alpha=0.01,theta=0.98,Independent,X,Y,Recor
   
   ## Baseline OLS sigma regression. Eq 15.
   Omega <- diag(nrow(X.all)) # OLS weighting matrix (identity)
-  B.SigReg <- solve(t(X.all)%*%solve(Omega)%*%X.all)%*%t(X.all)%*%solve(Omega)%*%LP3.all$S # OLS estimated coefficients for k-variable model of LP3 standard deviation.
+  B.SigReg <- solve(t(X.all)%*%solve(Omega)%*%as.matrix(X.all))%*%t(X.all)%*%solve(Omega)%*%LP3.all$S # OLS estimated coefficients for k-variable model of LP3 standard deviation.
   # BUG: MatLab fits beta regression (Eq 15) using all sites.  See lines 1305-1316 and 1372-1378 of WREG v 1.05
-  Yhat.SigReg <- X%*%B.SigReg # Estimates from sigma regression
+  Yhat.SigReg <- as.matrix(X)%*%B.SigReg # Estimates from sigma regression
   
   ## NOTE: This iteration procedure is currently implemented in WREG v1.05, though not described in the manual.
   ##        It searches across 30 possible values of model-error variance, looks for a sign-change, and then repeats thirty searches on the identified interval.
@@ -493,8 +509,8 @@ Omega.GLS.ROImatchMatLab <- function(alpha=0.01,theta=0.98,Independent,X,Y,Recor
         }
       }
     }
-    B_hat <- solve(t(X)%*%solve(Omega)%*%X)%*%t(X)%*%solve(Omega)%*%Y # Use weighting matrix to estimate regression coefficients
-    Iterations$Deviation[w] <- t(Y-X%*%B_hat)%*%solve(Omega)%*%(Y-X%*%B_hat)-Target # Difference between result and target value. Eq 21.
+    B_hat <- solve(t(X)%*%solve(Omega)%*%as.matrix(X))%*%t(X)%*%solve(Omega)%*%Y # Use weighting matrix to estimate regression coefficients
+    Iterations$Deviation[w] <- t(Y-as.matrix(X)%*%B_hat)%*%solve(Omega)%*%(Y-as.matrix(X)%*%B_hat)-Target # Difference between result and target value. Eq 21.
   }
   ## Finer intervals.  Expands iterval with sign change to get closer to zero.
   Signs <- sign(Iterations$Deviation); LastPos <- which(diff(Signs)!=0) # Finds where sign changes from positive to negative
@@ -538,8 +554,8 @@ Omega.GLS.ROImatchMatLab <- function(alpha=0.01,theta=0.98,Independent,X,Y,Recor
           }
         }
       }
-      B_hat <- solve(t(X)%*%solve(Omega)%*%X)%*%t(X)%*%solve(Omega)%*%Y # Use weighting matrix to estimate regression coefficients
-      Iterations2$Deviation[w] <- t(Y-X%*%B_hat)%*%solve(Omega)%*%(Y-X%*%B_hat)-Target # Difference between result and target value. Eq 21.
+      B_hat <- solve(t(X)%*%solve(Omega)%*%as.matrix(X))%*%t(X)%*%solve(Omega)%*%Y # Use weighting matrix to estimate regression coefficients
+      Iterations2$Deviation[w] <- t(Y-as.matrix(X)%*%B_hat)%*%solve(Omega)%*%(Y-as.matrix(X)%*%B_hat)-Target # Difference between result and target value. Eq 21.
     }
     BestPos <- which(Iterations2$Deviation==min(Iterations2$Deviation[Iterations2$Deviation>0])) # Find minimum positive deviation from Eq 21.
     GSQ <- Iterations2$GSQ[BestPos] # best estimate of model-error variance
