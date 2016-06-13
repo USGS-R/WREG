@@ -44,8 +44,22 @@ than the critical value.  These calculations are based on equations 40, 41 and
 42 of the WREG v. 1.0 manual.
 }
 \examples{
-\dontrun{
-#add examples
-}
+# Import some example data
+rm(list = ls())
+peakFQdir <- paste0(
+  file.path(system.file("exampleDirectory", package = "WREG"),
+    "pfqImport"))
+gisFilePath <- file.path(peakFQdir, "pfqSiteInfo.txt")
+importedData <- importPeakFQ(pfqPath = peakFQdir, gisFile = gisFilePath)
+
+# Run a simple regression
+Y <- importedData$Y$AEP_0.5
+X <- importedData$X[c("Sand", "OutletElev", "Slope")]
+transY <- "none"
+result <- WREG.OLS(Y, X, transY)
+
+# calculate leverage of each point
+leverageResult <- Leverage(X = X,
+  Omega = result$Weighting)
 }
 
