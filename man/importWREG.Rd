@@ -47,7 +47,9 @@ program manual (Techniques and Methods 4-A8).  Files that are not valid
 inputs files for the WREG version describe therein will not be accepted.
 }
 \examples{
-wregDir <- paste0(system.file("exampleDirectory", package = "WREG"),"/matlabImport")
-importWREG(wregPath = wregDir)
+rm(list = ls())
+wregDir <- file.path(system.file("exampleDirectory", package = "WREG"),
+ "matlabImport")
+importedData <- importWREG(wregPath = wregDir)
 }
 
