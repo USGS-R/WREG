@@ -94,8 +94,24 @@ This function is largely a subroutine for \code{\link{WREG.MLR}} when
  estimate.
 }
 \examples{
-\dontrun{
-#add examples
-}
+# Import some example data
+rm(list = ls())
+peakFQdir <- paste0(
+  file.path(system.file("exampleDirectory", package = "WREG"),
+    "pfqImport"))
+gisFilePath <- file.path(peakFQdir, "pfqSiteInfo.txt")
+importedData <- importPeakFQ(pfqPath = peakFQdir, gisFile = gisFilePath)
+
+# Organizing input data
+lp3Data <- importedData$LP3f
+lp3Data$K <- importedData$LP3k$AEP_0.5
+Y <- importedData$Y$AEP_0.5
+X <- importedData$X[c("Sand", "OutletElev", "Slope")]
+
+# Compute weighting matrix
+weightingResult <- Omega.GLS(alpha = 0.01, theta = 0.98,
+  independent = importedData$BasChars, X = X,
+  Y = Y, recordLengths = importedData$recLen,
+  LP3 = lp3Data, MSEGR = NA, TY = 20, peak = T, distMeth = 2)
 }
 
