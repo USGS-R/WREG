@@ -49,9 +49,11 @@ the need to manipulate additional files.  The site selection is driven
 by the sites in the GIS table.
 }
 \examples{
-peakFQdir <- paste0(system.file("exampleDirectory", package = "WREG"),"/pfqImport")
-gisFilePath <- paste0(peakFQdir,"/pfqSiteInfo.txt")
-importPeakFQ(pfqPath = peakFQdir,
-            gisFile = gisFilePath)
+rm(list = ls())
+peakFQdir <- paste0(
+  file.path(system.file("exampleDirectory", package = "WREG"),
+    "pfqImport"))
+gisFilePath <- file.path(peakFQdir, "pfqSiteInfo.txt")
+importedData <- importPeakFQ(pfqPath = peakFQdir, gisFile = gisFilePath)
 }
 
