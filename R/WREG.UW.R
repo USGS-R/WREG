@@ -82,7 +82,7 @@
 #' # Make simple weighting using inverse record lengths
 #' inverseRecLen <- diag(1 / diag(importedData$recLen))
 #' 
-#' # Run WLS regression
+#' # Run user-weights regression
 #' result <- WREG.UW(Y, X, customWeight = inverseRecLen, transY)
 #' 
 #'@export
