@@ -90,7 +90,6 @@ lp3Data$K <- importedData$LP3k$AEP_0.5
 Y <- importedData$Y$AEP_0.5
 X <- importedData$X[c("Sand", "OutletElev", "Slope")]
 recordLengths <- importedData$recLen
-basinChars <- importedData$BasChars
 transY <- "none"
 
 # Run WLS regression

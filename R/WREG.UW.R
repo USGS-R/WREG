@@ -66,9 +66,25 @@
 #'@import stats
 #'  
 #' @examples
-#' \dontrun{
-#' #add examples
-#' }
+#' # Import some example data
+#' rm(list = ls())
+#' peakFQdir <- paste0(
+#'   file.path(system.file("exampleDirectory", package = "WREG"),
+#'     "pfqImport"))
+#' gisFilePath <- file.path(peakFQdir, "pfqSiteInfo.txt")
+#' importedData <- importPeakFQ(pfqPath = peakFQdir, gisFile = gisFilePath)
+#' 
+#' # Organizing input data
+#' Y <- importedData$Y$AEP_0.5
+#' X <- importedData$X[c("Sand", "OutletElev", "Slope")]
+#' transY <- "none"
+#' 
+#' # Make simple weighting using inverse record lengths
+#' inverseRecLen <- diag(1 / diag(importedData$recLen))
+#' 
+#' # Run WLS regression
+#' result <- WREG.UW(Y, X, customWeight = inverseRecLen, transY)
+#' 
 #'@export
 WREG.UW <- function(Y,X,customWeight,transY,x0=NA) {
   # William Farmer, USGS, January 05, 2015
