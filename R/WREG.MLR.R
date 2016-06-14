@@ -96,6 +96,8 @@
 #'  idiosyncrasies, see the notes for the \code{Legacy} input and the links to 
 #'  other functions in this package.
 #'  
+#'  This function is generally depreciated by the specific WREG functions.
+#'  
 #'@return All outputs are returned as part of a list.  The elements of the list 
 #'  depend on the type of regression performed.  The elements of the list may 
 #'  include: \item{Coefs}{A data frame composed of four variables: (1) 
@@ -137,22 +139,27 @@
 #' #add examples
 #' }
 #'@export
-WREG.MLR <- function(Reg,...) {
+WREG.MLR <- function(Reg,Y,X,transY=NA,x0,
+  RecordLengths = NA,LP3 = NA,regSkew=FALSE,
+  alpha=0.01,theta=0.98,BasinChars=NA,MSEGR=NA,TY=2,Peak=T,
+  ROI=c('PRoI','GRoI','HRoI'),n=NA,D=250,DistMeth=2,Legacy=FALSE) {
   # William Farmer, USGS, January 05, 2015
   # Revised as wrapper (13 April 2016)
-  
+  print(x0)
   if (missing(Reg)|!is.element(Reg,c("OLS","WLS","GLS"))) {
     stop("Reg argument must be provided as either 'OLS', 'WLS', 'GLS' or 'CustomWeight'.")
   }
   
   if (Reg=='OLS') {
-    Output <- WREG.OLS(...)
+    Output <- WREG.OLS(Y,X,transY,x0=x0)
   } else if (Reg=='WLS') {
-    Output <- WREG.WLS(...)
+    Output <- WREG.WLS(Y,X,recordLengths,LP3,transY,x0)
   } else if (Reg=='GLS') {
-    Output <- WREG.GLS(...)
+    Output <- WREG.GLS(Y,X,recordLengths,LP3,basinChars,transY,
+      x0,alpha,theta,peak,distMeth,
+      regSkew,MSEGR,TY,legacy)
   } else if (Reg=='CustomWeight') {
-    Output <- WREG.UW(...)
+    Output <- WREG.UW(Y,X,customWeight,transY,x0)
   }
   
   return(Output)

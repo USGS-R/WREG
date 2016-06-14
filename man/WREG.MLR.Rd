@@ -4,7 +4,10 @@
 \alias{WREG.MLR}
 \title{Weighted-Multiple-Linear Regression Program (WREG)}
 \usage{
-WREG.MLR(Reg, ...)
+WREG.MLR(Reg, Y, X, transY = NA, x0, RecordLengths = NA, LP3 = NA,
+  regSkew = FALSE, alpha = 0.01, theta = 0.98, BasinChars = NA,
+  MSEGR = NA, TY = 2, Peak = T, ROI = c("PRoI", "GRoI", "HRoI"),
+  n = NA, D = 250, DistMeth = 2, Legacy = FALSE)
 }
 \arguments{
 \item{Reg}{A string indicating which type of regression should be applied. The
@@ -46,6 +49,10 @@ frame are \code{S}, \code{K} and \code{G}.  For \dQuote{GLSskew}, the
 regional skew value must also be provided in a variable called \code{GR}.
 The order of the rows must be the same as \code{Y}.}
 
+\item{regSkew}{A logical vector indicating if regional skews are provided with
+ an adjustment required for uncertainty therein (\code{TRUE}).  The default
+ is \code{FALSE}.}
+
 \item{alpha}{A number, required only for \dQuote{GLS} and \dQuote{GLSskew}.
 \code{alpha} is a parameter used in the estimated cross-correlation between
 site records.  See equation 20 in the WREG v. 1.05 manual.  The arbitrary,
@@ -74,16 +81,6 @@ only for \dQuote{GLSskew}.  The default value is \code{2}.  (See the
 event or a low-flow event.  \code{TRUE} indicates a peak flow, while
 \code{FALSE} indicates a low-flow event.}
 
-\item{CustomWeight}{This allows the user to enter a custom weighting matrix.
-It is included also to provide legacy code for WREG v. 1.05.
-\code{CustomWeight} can either be a square matrix of weights with a length
-equal to \code{length(Y)} or a list containing three elements.  The elements
-of the list include (1) \code{Omega} as the square weighting matrix, (2)
-\code{var.modelerror.k} as the estimated variance of the model errors from
-the k-variable model (\code{k=ncol(X)}), and (3) \code{var.modelerror.0} as
-the variance of the model errors from a consant-only regression.  Required
-for \code{Reg=} \dQuote{CustomWeight}.}
-
 \item{DistMeth}{Required for \dQuote{GLS} and \dQuote{GLSskew}.  A value of
 \code{1} indicates that the "Nautical Mile" approximation should be used to
 calculate inter-site distances.  A value of \code{2} designates the
@@ -98,9 +95,15 @@ require a specific calculation for weighing matrices in \dQuote{WLS}
 (see \code{\link{Omega.GLS.ROImatchMatLab}}) Further details are provided in
 \code{\link{WREG.RoI}}}
 
-\item{regSkew}{A logical vector indicating if regional skews are provided with
- an adjustment required for uncertainty therein (\code{TRUE}).  The default
- is \code{FALSE}.}
+\item{CustomWeight}{This allows the user to enter a custom weighting matrix.
+It is included also to provide legacy code for WREG v. 1.05.
+\code{CustomWeight} can either be a square matrix of weights with a length
+equal to \code{length(Y)} or a list containing three elements.  The elements
+of the list include (1) \code{Omega} as the square weighting matrix, (2)
+\code{var.modelerror.k} as the estimated variance of the model errors from
+the k-variable model (\code{k=ncol(X)}), and (3) \code{var.modelerror.0} as
+the variance of the model errors from a consant-only regression.  Required
+for \code{Reg=} \dQuote{CustomWeight}.}
 }
 \value{
 All outputs are returned as part of a list.  The elements of the list
@@ -156,6 +159,8 @@ This is the main function for WREG, though it serves only as a
  the code.  Further analysis is needed.  For information on the specific
  idiosyncrasies, see the notes for the \code{Legacy} input and the links to
  other functions in this package.
+
+ This function is generally depreciated by the specific WREG functions.
 }
 \examples{
 \dontrun{

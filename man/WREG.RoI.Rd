@@ -4,10 +4,10 @@
 \alias{WREG.RoI}
 \title{Region-of-Influence Regression (WREG)}
 \usage{
-WREG.RoI(Y, X, Reg, transY = NA, RecordLengths, LP3, regSkew = FALSE,
-  alpha = 0.01, theta = 0.98, BasinChars = NA, MSEGR = NA, TY = 2,
-  Peak = T, ROI = c("PRoI", "GRoI", "HRoI"), n, D = 250, DistMeth = 2,
-  Legacy = FALSE)
+WREG.RoI(Y, X, Reg, transY = NA, RecordLengths = NA, LP3 = NA,
+  regSkew = FALSE, alpha = 0.01, theta = 0.98, BasinChars = NA,
+  MSEGR = NA, TY = 2, Peak = T, ROI = c("PRoI", "GRoI", "HRoI"),
+  n = NA, D = 250, DistMeth = 2, Legacy = FALSE)
 }
 \arguments{
 \item{Y}{The dependent variable of interest, with any transformations already
@@ -102,7 +102,7 @@ Haversine approximation.  See \code{\link{Dist.WREG}}.  The default value is
  distance limit \code{D} to be interpretted in meters.}
 }
 \value{
-As with \code{\link{WREG.MLR}}, \code{WREG.RoI} returns a large list
+As with other WREG functions, \code{WREG.RoI} returns a large list
  of regression parameters and metrics.  This list varies depending on the
  \code{Reg} specified, but may contain: \item{fitted.values}{A vector of
  model estimates from the regression model.} \item{residuals}{A vector of
@@ -145,8 +145,8 @@ As with \code{\link{WREG.MLR}}, \code{WREG.RoI} returns a large list
  (\code{Leverage.Limits}), a vector of critical influence values for each ROI
  regression (\code{Influence.Limits}) and a list of performance metrics for
  each ROI regression (\code{PerformanceMetrics}).  The last element,
- \code{PerformanceMetrics} is identical to the same output from \code{\link{
- WREG.MLR}} excpet that every element is multiplied by the number of
+ \code{PerformanceMetrics} is identical to the same output from other
+ functions excpet that every element is multiplied by the number of
  observations so as to capture the individual performance of each ROI
  regression.} \item{ROI.InputParameters}{A list of input parameters to record
  the controls on the ROI regression.  \code{D} idicates the limit used in
@@ -163,7 +163,7 @@ WREG framework.
 The support for region-of-influence regression is described in the
  manual of WREG v. 1.0.  \code{WREG.RoI} iterates through the sites of
  \code{Y}, defines a region of influence and implements the specified
- regression by calling \code{\link{WREG.MLR}}.
+ regression by calling a WREG function.
 
  The logical handle \code{Legacy} has been included to test that this program
  returns the same results as WREG v. 1.05.  In the development of this code,
@@ -175,8 +175,22 @@ The support for region-of-influence regression is described in the
  other functions in this package.
 }
 \examples{
-\dontrun{
-#add examples
-}
+# Import some example data
+rm(list = ls())
+peakFQdir <- paste0(
+  file.path(system.file("exampleDirectory", package = "WREG"),
+    "pfqImport"))
+gisFilePath <- file.path(peakFQdir, "pfqSiteInfo.txt")
+importedData <- importPeakFQ(pfqPath = peakFQdir, gisFile = gisFilePath)
+
+# Run a simple regression
+Y <- importedData$Y$AEP_0.5
+X <- importedData$X[c("A")]
+transY <- "none"
+basinChars <- importedData$BasChars
+#result <- WREG.OLS(Y, X, transY)
+
+result <- WREG.RoI(Y, X, Reg = "OLS", transY, BasinChars = basinChars,
+  ROI='GRoI', n = 10L)
 }
 
