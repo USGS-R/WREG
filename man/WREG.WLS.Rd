@@ -76,32 +76,24 @@ In this implementation, the weights for weighted least-squares
  regression are defined by record lengths.  See manual for details.
 }
 \examples{
-#Import the data
-peakFQdir <- paste0(system.file("exampleDirectory", package = "WREG"),
-                   "/pfqImport")
-gisFilePath <- paste0(peakFQdir,"/pfqSiteInfo.txt")
-importedData <- importPeakFQ(pfqPath = peakFQdir,
-                            gisFile = gisFilePath)
-#Parameterize model.
-#all rows must be ordered identically between dataframes that contain site-specific information.
-##Select Y variable
+# Import some example data
+rm(list = ls())
+peakFQdir <- paste0(
+  file.path(system.file("exampleDirectory", package = "WREG"),
+    "pfqImport"))
+gisFilePath <- file.path(peakFQdir, "pfqSiteInfo.txt")
+importedData <- importPeakFQ(pfqPath = peakFQdir, gisFile = gisFilePath)
+
+# Organizing input data
+lp3Data <- importedData$LP3f
+lp3Data$K <- importedData$LP3k$AEP_0.5
 Y <- importedData$Y$AEP_0.5
-
-##Select X variables
-X <- importedData$X[c("Sand",
-                     "OutletElev",
-                     "Slope")]
-##Define record lengths
+X <- importedData$X[c("Sand", "OutletElev", "Slope")]
 recordLengths <- importedData$recLen
-
-##Build LP3 matrix
-###Select LP3K and merge with LP3f
-LP3 <- data.frame(S=importedData$LP3f$S,
-                 K=importedData$LP3k$AEP_0.5,
-                 G=importedData$LP3f$G)
-##Specify Y transformation if any
+basinChars <- importedData$BasChars
 transY <- "none"
-#Run WREG.WLS
-WREG.WLS(Y, X, recordLengths, LP3, transY)
+
+# Run WLS regression
+result <- WREG.WLS(Y, X, recordLengths, LP3 = lp3Data, transY)
 }
 
