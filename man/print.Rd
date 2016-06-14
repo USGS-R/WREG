@@ -27,7 +27,8 @@
 
 \code{print.WREG.GLS} Prints a summary of output list from WREG.GLS
 
-\code{print.GLSs} Prints a summary of output list from WREG.GLSs
+\code{print.GLSs} Prints a summary of output list from WREG.GLS with
+an adjustment for uncertainty in the skewness
 }
 \description{
 Print methods for WREG output lists
@@ -40,5 +41,85 @@ Print methods for WREG output lists
 \code{print} is a generic name for the functions documented.
 \cr
 If called, \code{print} displays a summary of the output from WREG... functions
+}
+\examples{
+## print.WREG.OLS
+# Import some example data
+rm(list = ls())
+peakFQdir <- paste0(
+  file.path(system.file("exampleDirectory", package = "WREG"),
+    "pfqImport"))
+gisFilePath <- file.path(peakFQdir, "pfqSiteInfo.txt")
+importedData <- importPeakFQ(pfqPath = peakFQdir, gisFile = gisFilePath)
+
+# Run a simple regression
+Y <- importedData$Y$AEP_0.5
+X <- importedData$X[c("Sand", "OutletElev", "Slope")]
+transY <- "none"
+result <- WREG.OLS(Y, X, transY)
+print(result)
+## print.WREG.WLS
+# Import some example data
+rm(list = ls())
+peakFQdir <- paste0(
+  file.path(system.file("exampleDirectory", package = "WREG"),
+    "pfqImport"))
+gisFilePath <- file.path(peakFQdir, "pfqSiteInfo.txt")
+importedData <- importPeakFQ(pfqPath = peakFQdir, gisFile = gisFilePath)
+
+# Organizing input data
+lp3Data <- importedData$LP3f
+lp3Data$K <- importedData$LP3k$AEP_0.5
+Y <- importedData$Y$AEP_0.5
+X <- importedData$X[c("Sand", "OutletElev", "Slope")]
+recordLengths <- importedData$recLen
+transY <- "none"
+
+# Run WLS regression
+result <- WREG.WLS(Y, X, recordLengths, LP3 = lp3Data, transY)
+print(result)
+## print.WREG.GLS
+# Import some example data
+rm(list = ls())
+peakFQdir <- paste0(
+  file.path(system.file("exampleDirectory", package = "WREG"),
+    "pfqImport"))
+gisFilePath <- file.path(peakFQdir, "pfqSiteInfo.txt")
+importedData <- importPeakFQ(pfqPath = peakFQdir, gisFile = gisFilePath)
+
+# Organizing input data
+lp3Data <- importedData$LP3f
+lp3Data$K <- importedData$LP3k$AEP_0.5
+Y <- importedData$Y$AEP_0.5
+X <- importedData$X[c("Sand", "OutletElev", "Slope")]
+recordLengths <- importedData$recLen
+basinChars <- importedData$BasChars
+transY <- "none"
+
+# Run GLS regression
+result <- WREG.GLS(Y, X, recordLengths, LP3 = lp3Data, basinChars, transY)
+print(result)
+## print.WREG.GLS
+# Import some example data
+rm(list = ls())
+peakFQdir <- paste0(
+  file.path(system.file("exampleDirectory", package = "WREG"),
+    "pfqImport"))
+gisFilePath <- file.path(peakFQdir, "pfqSiteInfo.txt")
+importedData <- importPeakFQ(pfqPath = peakFQdir, gisFile = gisFilePath)
+
+# Organizing input data
+lp3Data <- importedData$LP3f
+lp3Data$K <- importedData$LP3k$AEP_0.5
+Y <- importedData$Y$AEP_0.5
+X <- importedData$X[c("Sand", "OutletElev", "Slope")]
+recordLengths <- importedData$recLen
+basinChars <- importedData$BasChars
+transY <- "none"
+
+# Run GLS regression with uncertainty in the skewness
+result <- WREG.GLS(Y, X, recordLengths, LP3 = lp3Data, basinChars, transY,
+  regSkew = TRUE, MSEGR = 0.302)
+print(result)
 }
 
