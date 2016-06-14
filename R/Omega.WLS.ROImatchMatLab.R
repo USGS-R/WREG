@@ -40,9 +40,42 @@
 #'  
 #'  
 #' @examples
-#' \dontrun{
-#' #add examples
+#' # Import some example data
+#' rm(list = ls())
+#' peakFQdir <- paste0(
+#'   file.path(system.file("exampleDirectory", package = "WREG"),
+#'     "pfqImport"))
+#' gisFilePath <- file.path(peakFQdir, "pfqSiteInfo.txt")
+#' importedData <- importPeakFQ(pfqPath = peakFQdir, gisFile = gisFilePath)
+#' 
+#' # Organizing input data
+#' lp3Data <- importedData$LP3f
+#' lp3Data$K <- importedData$LP3k$AEP_0.5
+#' Y <- importedData$Y$AEP_0.5
+#' X <- importedData$X[c("Sand", "OutletElev", "Slope")]
+#' 
+#' #### Geographic Region-of-Influence
+#' i <- 1 # Site of interest
+#' n <- 10 # size of region of influence
+#' Gdist <- vector(length=length(Y)) # Empty vector for geographic distances
+#' for (j in 1:length(Y)) {
+#'   if (i!=j) {
+#'     #### Geographic distance
+#'     Gdist[j] <- Dist.WREG(Lat1 = importedData$BasChars$Lat[i],
+#'       Long1 = importedData$BasChars$Long[i],
+#'       Lat2 = importedData$BasChars$Lat[j],
+#'       Long2 = importedData$BasChars$Long[j]) # Intersite distance, miles
+#'   } else {
+#'     Gdist[j] <- Inf # To block self identification.
+#'   }
 #' }
+#' temp <- sort.int(Gdist,index.return=T)
+#' NDX <- temp$ix[1:n] # Sites to use in this regression
+#' 
+#' # Compute weighting matrix
+#' weightingResult <- Omega.WLS.ROImatchMatLab(Y.all = Y, X.all = X,
+#'   LP3.all = lp3Data, RecordLengths.all = importedData$recLen, NDX = NDX)
+#'
 #'@export
 Omega.WLS.ROImatchMatLab <- function(Y.all,X.all,LP3.all,RecordLengths.all,NDX) {
   # William Farmer, USGS, January 26, 2015
@@ -100,8 +133,12 @@ Omega.WLS.ROImatchMatLab <- function(Y.all,X.all,LP3.all,RecordLengths.all,NDX) 
       }
     }
   }
-  if (missing(NDX)|!is.integer(NDX)|length(NDX)>1) {
-    warning(paste0("NDX must be provided as a single integer value."))
+  if (missing(NDX) | !is.numeric(NDX) | !is.vector(NDX)) {
+    warning(paste0("NDX must be provided as a numeric vector."))
+    err <- TRUE
+  }
+  if (!sum(is.element(NDX, 1:length(Y))) == length(NDX)) {
+    warning(paste0("NDX must be valid indices of inputs like Y.all"))
     err <- TRUE
   }
   # Error checking LP3
@@ -169,8 +206,8 @@ Omega.WLS.ROImatchMatLab <- function(Y.all,X.all,LP3.all,RecordLengths.all,NDX) 
   
   ## Initial OLS (basis for others)
   Omega <- diag(nrow(X)) # Temporary weighting matrix (identity) for initial OLS
-  B_hat <- solve(t(X)%*%solve(Omega)%*%X)%*%t(X)%*%solve(Omega)%*%Y # OLS estimated coefficients
-  Y_hat <- X%*%B_hat # OLS model estimates
+  B_hat <- solve(t(X)%*%solve(Omega)%*%as.matrix(X))%*%t(X)%*%solve(Omega)%*%Y # OLS estimated coefficients
+  Y_hat <- as.matrix(X)%*%B_hat # OLS model estimates
   e <- Y-Y_hat # OLS model residuals
   MSE.OLS <- sum(e^2)/(nrow(X)-ncol(X)) # OLS mean square-error (k-variable)
   MSE.OLS <- sd(e)^2 # BUG: MatLab code uses this expression in RoI WLS.  See line 1450 of WREG v 1.05
@@ -178,9 +215,9 @@ Omega.WLS.ROImatchMatLab <- function(Y.all,X.all,LP3.all,RecordLengths.all,NDX) 
   
   ## Estimate k-variable model-error variance
   Omega <- diag(nrow(X.all)) # Temporary weighting matrix (identity) for k-variable sigma regression. Eq 15.
-  B.SigReg <- solve(t(X.all)%*%solve(Omega)%*%X.all)%*%t(X.all)%*%solve(Omega)%*%LP3.all$S # OLS estimated coefficients for model of LP3 standard deviations
+  B.SigReg <- solve(t(X.all)%*%solve(Omega)%*%as.matrix(X.all))%*%t(X.all)%*%solve(Omega)%*%LP3.all$S # OLS estimated coefficients for model of LP3 standard deviations
   # BUG: MatLab fits beta regression (Eq 15) using all sites.  See lines 1305-1316 and 1413-1419 of WREG v 1.05
-  Yhat.SigReg <- X.all%*%B.SigReg # Estimates of sigma regression
+  Yhat.SigReg <- as.matrix(X.all)%*%B.SigReg # Estimates of sigma regression
   S_bar <- mean(Yhat.SigReg[NDX]) # Average sigma of limited set
   G_bar <- mean(LP3$G) # Average skew of limited-set LP3
   K_bar <- mean(LP3$K) # Average standard deviate of limited-set LP3

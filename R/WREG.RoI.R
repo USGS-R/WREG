@@ -81,7 +81,7 @@
 #'@details The support for region-of-influence regression is described in the
 #'  manual of WREG v. 1.0.  \code{WREG.RoI} iterates through the sites of
 #'  \code{Y}, defines a region of influence and implements the specified
-#'  regression by calling \code{\link{WREG.MLR}}.
+#'  regression by calling a WREG function.
 #'  
 #'  The logical handle \code{Legacy} has been included to test that this program
 #'  returns the same results as WREG v. 1.05.  In the development of this code,
@@ -92,7 +92,7 @@
 #'  idiosyncrasies, see the notes for the \code{Legacy} input and the links to
 #'  other functions in this package.
 #'  
-#'@return As with \code{\link{WREG.MLR}}, \code{WREG.RoI} returns a large list
+#'@return As with other WREG functions, \code{WREG.RoI} returns a large list
 #'  of regression parameters and metrics.  This list varies depending on the
 #'  \code{Reg} specified, but may contain: \item{fitted.values}{A vector of
 #'  model estimates from the regression model.} \item{residuals}{A vector of
@@ -135,8 +135,8 @@
 #'  (\code{Leverage.Limits}), a vector of critical influence values for each ROI
 #'  regression (\code{Influence.Limits}) and a list of performance metrics for
 #'  each ROI regression (\code{PerformanceMetrics}).  The last element, 
-#'  \code{PerformanceMetrics} is identical to the same output from \code{\link{ 
-#'  WREG.MLR}} excpet that every element is multiplied by the number of
+#'  \code{PerformanceMetrics} is identical to the same output from other 
+#'  functions excpet that every element is multiplied by the number of
 #'  observations so as to capture the individual performance of each ROI
 #'  regression.} \item{ROI.InputParameters}{A list of input parameters to record
 #'  the controls on the ROI regression.  \code{D} idicates the limit used in
@@ -146,14 +146,28 @@
 #'  implemented.}
 #'  
 #' @examples
-#' \dontrun{
-#' #add examples
-#' }
+#' # Import some example data
+#' rm(list = ls())
+#' peakFQdir <- paste0(
+#'   file.path(system.file("exampleDirectory", package = "WREG"),
+#'     "pfqImport"))
+#' gisFilePath <- file.path(peakFQdir, "pfqSiteInfo.txt")
+#' importedData <- importPeakFQ(pfqPath = peakFQdir, gisFile = gisFilePath)
+#' 
+#' # Run a simple regression
+#' Y <- importedData$Y$AEP_0.5
+#' X <- importedData$X[c("A")]
+#' transY <- "none"
+#' basinChars <- importedData$BasChars
+#' #result <- WREG.OLS(Y, X, transY)
+#' 
+#' result <- WREG.RoI(Y, X, Reg = "OLS", transY, BasinChars = basinChars,
+#'   ROI='GRoI', n = 10L)
 #'@export
 WREG.RoI <- function(Y,X,Reg,transY=NA,
-  RecordLengths,LP3,regSkew=FALSE,
+  RecordLengths = NA,LP3 = NA,regSkew=FALSE,
   alpha=0.01,theta=0.98,BasinChars=NA,MSEGR=NA,TY=2,Peak=T,
-  ROI=c('PRoI','GRoI','HRoI'),n,D=250,DistMeth=2,Legacy=FALSE) {
+  ROI=c('PRoI','GRoI','HRoI'),n=NA,D=250,DistMeth=2,Legacy=FALSE) {
   # William Farmer, USGS, January 23, 2015
   
   # Some upfront error handling
@@ -210,86 +224,88 @@ WREG.RoI <- function(Y,X,Reg,transY=NA,
     err <- TRUE
   }
   # Error checking LP3
-  if (missing(LP3)) {
-    warning("LP3 must be provided as an input.")
-    err <- TRUE
-  } else {
-    if (!regSkew) {
-      if (!is.data.frame(LP3)) {
-        warning(paste("LP3 must be provided as a data frame with elements named",
-          "'S', 'K' and 'G' for standard deivation, deviate and skew,",
-          "respectively."))
-        err <- TRUE
-      } else {
-        if (sum(is.element(c("S","K","G"),names(LP3)))!=3) {
-          warning(paste("In valid elements: The names of the elements in LP3 are",
-            names(LP3),". LP3 must be provided as a data frame with elements named",
+  if (is.element(Reg,c("GLS","GLSskew","WLS"))) {
+    if (missing(LP3)) {
+      warning("LP3 must be provided as an input.")
+      err <- TRUE
+    } else {
+      if (!regSkew) {
+        if (!is.data.frame(LP3)) {
+          warning(paste("LP3 must be provided as a data frame with elements named",
             "'S', 'K' and 'G' for standard deivation, deviate and skew,",
             "respectively."))
           err <- TRUE
-        }
-        if ((length(unique(apply(cbind(LP3$S,LP3$K,LP3$G),FUN=class,MARGIN=2)))!=1)|
-            (unique(apply(cbind(LP3$S,LP3$K,LP3$G),FUN=class,MARGIN=2))!="numeric")) {
-          warning("LP3 must be provided as a numeric array")
-          err <- TRUE
         } else {
-          if (sum(is.infinite(LP3$S),is.infinite(LP3$K),is.infinite(LP3$G))>0) {
-            warning(paste0("Some elements of LP3$S, LP3$K, and LP3$G contain infinite ",
-              "values.  These must be removed."))
+          if (sum(is.element(c("S","K","G"),names(LP3)))!=3) {
+            warning(paste("In valid elements: The names of the elements in LP3 are",
+              names(LP3),". LP3 must be provided as a data frame with elements named",
+              "'S', 'K' and 'G' for standard deivation, deviate and skew,",
+              "respectively."))
             err <- TRUE
           }
-          if (sum(is.na(LP3$S),is.na(LP3$K),is.na(LP3$G))>0) {
-            warning(paste0("Some elements of LP3$S, LP3$K, and LP3$G contain missing ",
-              "values.  These must be removed."))
+          if ((length(unique(apply(cbind(LP3$S,LP3$K,LP3$G),FUN=class,MARGIN=2)))!=1)|
+              (unique(apply(cbind(LP3$S,LP3$K,LP3$G),FUN=class,MARGIN=2))!="numeric")) {
+            warning("LP3 must be provided as a numeric array")
             err <- TRUE
+          } else {
+            if (sum(is.infinite(LP3$S),is.infinite(LP3$K),is.infinite(LP3$G))>0) {
+              warning(paste0("Some elements of LP3$S, LP3$K, and LP3$G contain infinite ",
+                "values.  These must be removed."))
+              err <- TRUE
+            }
+            if (sum(is.na(LP3$S),is.na(LP3$K),is.na(LP3$G))>0) {
+              warning(paste0("Some elements of LP3$S, LP3$K, and LP3$G contain missing ",
+                "values.  These must be removed."))
+              err <- TRUE
+            }
           }
         }
-      }
-    } else {
-      if (!is.data.frame(LP3)) {
-        warning(paste("LP3 must be provided as a data frame with elements named",
-          "'S', 'K', 'G' and 'GR' for standard deivation, deviate,",
-          "skew and regional skew, respectively."))
-        err <- TRUE
       } else {
-        if (sum(is.element(c("S","K","G","GR"),names(LP3)))!=4) {
-          warning(paste("In valid elements: The names of the elements in LP3 are",
-            names(LP3),". LP3 must be provided as a data frame with elements named",
+        if (!is.data.frame(LP3)) {
+          warning(paste("LP3 must be provided as a data frame with elements named",
             "'S', 'K', 'G' and 'GR' for standard deivation, deviate,",
             "skew and regional skew, respectively."))
           err <- TRUE
-        }
-        if ((length(unique(apply(cbind(LP3$S,LP3$K,LP3$G,LP3$GR),FUN=class,MARGIN=2)))!=1)|
-            (unique(apply(cbind(LP3$S,LP3$K,LP3$G,LP3$GR),FUN=class,MARGIN=2))!="numeric")) {
-          warning("LP3 must be provided as a numeric array")
-          err <- TRUE
         } else {
-          if (sum(is.infinite(LP3$S),is.infinite(LP3$K),
-            is.infinite(LP3$G),is.infinite(LP3$GR))>0) {
-            warning(paste0("Some elements of LP3$S, LP3$K, LP3$G and LP3$GR contain ",
-              "infinite values.  These must be removed."))
+          if (sum(is.element(c("S","K","G","GR"),names(LP3)))!=4) {
+            warning(paste("In valid elements: The names of the elements in LP3 are",
+              names(LP3),". LP3 must be provided as a data frame with elements named",
+              "'S', 'K', 'G' and 'GR' for standard deivation, deviate,",
+              "skew and regional skew, respectively."))
             err <- TRUE
           }
-          if (sum(is.na(LP3$S),is.na(LP3$K),is.na(LP3$G),is.na(LP3$GR))>0) {
-            warning(paste0("Some elements of LP3$S, LP3$K, LP3$G and LP3$GR contain ",
-              "missing values.  These must be removed."))
+          if ((length(unique(apply(cbind(LP3$S,LP3$K,LP3$G,LP3$GR),FUN=class,MARGIN=2)))!=1)|
+              (unique(apply(cbind(LP3$S,LP3$K,LP3$G,LP3$GR),FUN=class,MARGIN=2))!="numeric")) {
+            warning("LP3 must be provided as a numeric array")
             err <- TRUE
+          } else {
+            if (sum(is.infinite(LP3$S),is.infinite(LP3$K),
+              is.infinite(LP3$G),is.infinite(LP3$GR))>0) {
+              warning(paste0("Some elements of LP3$S, LP3$K, LP3$G and LP3$GR contain ",
+                "infinite values.  These must be removed."))
+              err <- TRUE
+            }
+            if (sum(is.na(LP3$S),is.na(LP3$K),is.na(LP3$G),is.na(LP3$GR))>0) {
+              warning(paste0("Some elements of LP3$S, LP3$K, LP3$G and LP3$GR contain ",
+                "missing values.  These must be removed."))
+              err <- TRUE
+            }
           }
         }
       }
     }
-  }
-  if (missing(recordLengths)) {
-    warning("A matrix of recordLengths must be provided as input.")
-    err <- TRUE
-  } else {
-    if (ncol(recordLengths)!=nrow(recordLengths)) {
-      warning("recordLengths must be provided as a square array")
+    if (missing(recordLengths)) {
+      warning("A matrix of recordLengths must be provided as input.")
       err <- TRUE
-    }
-    if (!is.numeric(recordLengths)) {
-      warning("recordLengths must be provided as a numeric array")
-      err <- TRUE
+    } else {
+      if (ncol(recordLengths)!=nrow(recordLengths)) {
+        warning("recordLengths must be provided as a square array")
+        err <- TRUE
+      }
+      if (!is.numeric(recordLengths)) {
+        warning("recordLengths must be provided as a numeric array")
+        err <- TRUE
+      }
     }
   }
   if (missing(BasinChars)) {
@@ -331,8 +347,8 @@ WREG.RoI <- function(Y,X,Reg,transY=NA,
   }
   
   ## Add controls to meet legacy demands
-  if (!is.logical(legacy)) {
-    warning("legacy must be either TRUE to force matching with previous",
+  if (!is.logical(Legacy)) {
+    warning("Legacy must be either TRUE to force matching with previous",
       "versions or FALSE for correct computations.")
     err <- TRUE
   }
@@ -434,25 +450,49 @@ WREG.RoI <- function(Y,X,Reg,transY=NA,
       RecordLengths.i <- RecordLengths[NDX,NDX] # Record lengths from region of influence
     } else if (!is.na(sum(c(RecordLengths)))&&is.vector(RecordLengths)) { # WLS
       RecordLengths.i <- RecordLengths[NDX] # Record lengths from region of influence
+    } else {
+      RecordLengths.i <- RecordLengths
     }
     BasinChars.i <- BasinChars[NDX,] # Basin characteristics (IDs, Lat, Long) from region of influence.
     LP3.i <- data.frame(LP3)[NDX,] # LP3 parameters from region of influence
     if (Legacy) { # Apply regressions to match MatLab WREG v 1.05.
       if (Reg=='WLS') { # Use subroutine to correct WLS weights to meet v1.05 idiosyncrasies
         WeightFix <- Omega.WLS.ROImatchMatLab(Y.all=Y,X.all=X,LP3.all=LP3,RecordLengths.all=RecordLengths,NDX=NDX)
-        Reg.i <- WREG.MLR(Reg='CustomWeight',Y=Y.i,X=X.i,x0=x0.i,RecordLengths=RecordLengths.i,LP3=LP3.i,customWeight=WeightFix)
+        Reg.i <- WREG.UW(Y = Y.i, 
+          X = as.matrix(X.i , ncol = length(X.i) / length(Y)),
+          customWeight = WeightFix, transY, x0 = x0.i)
       } else if (is.element(Reg,c('GLS','GLSskew'))) { # Use subroutine to correct GLS and GLSskew weights to meet v1.05 idiosyncrasies
         # "Corrected" weighting matrix to match MATLAB code.  Returns weighting matrix and var.moderror.k
         WeightFix.k <- Omega.GLS.ROImatchMatLab(alpha=alpha,theta=theta,Independent=BasinChars.i,X=X.i,Y=Y.i,RecordLengths=RecordLengths.i,LP3=LP3.i,MSEGR=MSEGR,TY=TY,Peak=Peak,X.all=X,LP3.all=LP3,DistMeth=DistMeth)
         # "Corrected" to match MATLAB code.  Returns weighting matrix and var.moderror.0
         WeightFix.0 <- Omega.GLS.ROImatchMatLab(alpha=alpha,theta=theta,Independent=BasinChars.i,X=matrix(1,ncol=1,nrow=nrow(X.i)),Y=Y.i,RecordLengths=RecordLengths.i,LP3=LP3.i,MSEGR=MSEGR,TY=TY,Peak=Peak,X.all=matrix(1,ncol=1,nrow=nrow(X)),LP3.all=LP3,DistMeth=DistMeth)
         WeightFix <- list(Omega=WeightFix.k$Omega,var.modelerror.0=WeightFix.0$GSQ,var.modelerror.k=WeightFix.k$GSQ)
-        Reg.i <- WREG.MLR(Reg='CustomWeight',Y=Y.i,X=X.i,x0=x0.i,CustomWeight=WeightFix) 
+        Reg.i <- WREG.UW(Y = Y.i, 
+          X = as.matrix(X.i , ncol = length(X.i) / length(Y)),
+          customWeight = WeightFix, transY, x0 = x0.i)
       } else if (Reg=='OLS') { # Apply OLS normally.
-        Reg.i <- WREG.MLR(Reg=Reg,Y=Y.i,X=X.i,x0=x0.i)
+        Reg.i <- WREG.OLS(Y = Y.i, 
+          X = as.matrix(X.i , ncol = length(X.i) / length(Y)), 
+          transY, x0 = x0.i)
       }
     } else { # Aply WREG with "bugs" corrected.
-      Reg.i <- WREG.MLR(Reg=Reg,Y=Y.i,X=X.i,x0=x0.i,regSkew=regSkew,RecordLengths=RecordLengths.i,LP3=LP3.i,alpha=alpha,theta=theta,basinChars=BasinChars.i,MSEGR=MSEGR,TY=TY,Peak=Peak,DistMeth=DistMeth,Legacy=Legacy)
+      if (Reg=='WLS') {
+        Reg.i <- WREG.WLS(Y = Y.i, 
+          X = as.matrix(X.i , ncol = length(X.i) / length(Y)),
+          recordLengths = RecordLengths.i,
+          LP3 = LP3.i, transY, x0 = x0.i)
+      } else if (is.element(Reg,c('GLS','GLSskew'))) { 
+        Reg.i <- WREG.GLS(Y = Y.i, 
+          X = as.matrix(X.i , ncol = length(X.i) / length(Y)),
+          recordLengths = RecordLengths.i,
+          LP3 = LP3.i, transY,
+          x0=x0.i, alpha, theta, Peak, distMeth = DistMeth,
+          regSkew, MSEGR, TY, legacy=Legacy)
+      } else if (Reg=='OLS') {
+        Reg.i <- WREG.OLS(Y = Y.i, 
+          X = as.matrix(X.i , ncol = length(X.i) / length(Y)), 
+          transY, x0 = x0.i)
+      }
     }
     
     ### Store outputs

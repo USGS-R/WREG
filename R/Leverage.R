@@ -30,9 +30,24 @@
 #'  indicates if the leverage is significant for each observation.}
 #'  
 #'@examples
-#' \dontrun{
-#' #add examples
-#' }
+#' # Import some example data
+#' rm(list = ls())
+#' peakFQdir <- paste0(
+#'   file.path(system.file("exampleDirectory", package = "WREG"),
+#'     "pfqImport"))
+#' gisFilePath <- file.path(peakFQdir, "pfqSiteInfo.txt")
+#' importedData <- importPeakFQ(pfqPath = peakFQdir, gisFile = gisFilePath)
+#' 
+#' # Run a simple regression
+#' Y <- importedData$Y$AEP_0.5
+#' X <- importedData$X[c("Sand", "OutletElev", "Slope")]
+#' transY <- "none"
+#' result <- WREG.OLS(Y, X, transY)
+#' 
+#' # calculate leverage of each point
+#' leverageResult <- Leverage(X = X, 
+#'   Omega = result$Weighting)
+#'
 #'@export
 Leverage <- function(X,Omega,Ch=NA,x0=NA,ROI=FALSE) {
   # William Farmer, USGS, January 02, 2015
@@ -86,10 +101,10 @@ Leverage <- function(X,Omega,Ch=NA,x0=NA,ROI=FALSE) {
   }
   
   if (ROI==F) { # Not region-of-influence regression
-    h <- diag(X%*%solve(t(X)%*%solve(Omega)%*%X)%*%t(X)%*%solve(Omega)) # Leverage, Eq 40
+    h <- diag(as.matrix(X)%*%solve(t(X)%*%solve(Omega)%*%as.matrix(X))%*%t(X)%*%solve(Omega)) # Leverage, Eq 40
     if (is.na(Ch)) {Ch=2} # Default for non-ROI 
   } else if (ROI==T) { # Region-of-influence regression
-    h <- t(x0%*%solve(t(X)%*%solve(Omega)%*%X)%*%t(X)%*%solve(Omega)) # Leverage, Eq 41
+    h <- t(x0%*%solve(t(X)%*%solve(Omega)%*%as.matrix(X))%*%t(X)%*%solve(Omega)) # Leverage, Eq 41
     if (is.na(Ch)) {Ch=4} # Default for ROI 
   }
   h_limit <- Ch*mean(h) # Critical value of leverage, Eq 42

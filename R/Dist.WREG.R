@@ -19,9 +19,23 @@
 #'@return Returns the distance between the two sites in miles.
 #'  
 #' @examples 
-#' \dontrun{
-#' #add examples
-#' }
+#' # Import some example data
+#' rm(list = ls())
+#' peakFQdir <- paste0(
+#'   file.path(system.file("exampleDirectory", package = "WREG"),
+#'     "pfqImport"))
+#' gisFilePath <- file.path(peakFQdir, "pfqSiteInfo.txt")
+#' importedData <- importPeakFQ(pfqPath = peakFQdir, gisFile = gisFilePath)
+#' 
+#' # For two sites, compute the inter-site distance
+#' # Use the haversine approximation
+#' intersiteDistance <- Dist.WREG(Lat1 = importedData$BasChars$Lat[1],
+#'   Long1 = importedData$BasChars$Lat[1],
+#'   Lat2 = importedData$BasChars$Lat[2],
+#'   Long2 = importedData$BasChars$Lat[2],
+#'   method = 2)
+#' 
+#' print(intersiteDistance)
 #'@export
 Dist.WREG <- function(Lat1,Long1,Lat2,Long2,method=2) {
   # William Farmer, USGS, January 23, 2015

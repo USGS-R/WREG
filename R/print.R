@@ -1,25 +1,41 @@
-##' @title print.WREG
-##' @description Print methods for WREG output lists
-##' @name print
-##' @aliases print.OLS
-##' @aliases print.WLS
-##' @aliases print.GLS
-##' @aliases print.GLSs
-##'
-##' @title print.WREG
-##'
-##' @param object An output list from one of the WREG... functions
-##'
-##' @note \code{print} is a generic name for the functions documented.
-##' \cr
-##' If called, \code{print} displays a summary of the output from WREG... functions
-##'
-##' @rdname print
-##' @export
-##' 
-##' @rdname print.OLS
-##' @return \code{print.WREG.OLS} Prints a summary of output list from WREG.OLS
-##' @export
+#' @title print.WREG
+#' @description Print methods for WREG output lists
+#' @name print
+#' @aliases print.OLS
+#' @aliases print.WLS
+#' @aliases print.GLS
+#' @aliases print.GLSs
+#'
+#' @title print.WREG
+#'
+#' @param object An output list from one of the WREG... functions
+#'
+#' @note \code{print} is a generic name for the functions documented.
+#' \cr
+#' If called, \code{print} displays a summary of the output from WREG... functions
+#'
+#' @rdname print
+#' @export
+#' 
+#' @rdname print.OLS
+#' @return \code{print.WREG.OLS} Prints a summary of output list from WREG.OLS
+#' @examples 
+#' ## print.WREG.OLS
+#' # Import some example data
+#' rm(list = ls())
+#' peakFQdir <- paste0(
+#'   file.path(system.file("exampleDirectory", package = "WREG"),
+#'     "pfqImport"))
+#' gisFilePath <- file.path(peakFQdir, "pfqSiteInfo.txt")
+#' importedData <- importPeakFQ(pfqPath = peakFQdir, gisFile = gisFilePath)
+#' 
+#' # Run a simple regression
+#' Y <- importedData$Y$AEP_0.5
+#' X <- importedData$X[c("Sand", "OutletElev", "Slope")]
+#' transY <- "none"
+#' result <- WREG.OLS(Y, X, transY)
+#' print(result)
+#' @export
 print.WREG.OLS <- function(object) {
   cat(paste0("Regression Model for ",names(object$Y),'\n'))
   cat('Coefficients fit by ordinary least-squares.\n')
@@ -53,9 +69,30 @@ print.WREG.OLS <- function(object) {
                            paste0(temp$Influence,'*'),temp$Influence)
   print(temp)
 }
-##' @rdname print
-##' @return \code{print.WREG.WLS} Prints a summary of output list from WREG.WLS
-##' @export
+#' @rdname print
+#' @return \code{print.WREG.WLS} Prints a summary of output list from WREG.WLS
+#' @examples 
+#' ## print.WREG.WLS
+#' # Import some example data
+#' rm(list = ls())
+#' peakFQdir <- paste0(
+#'   file.path(system.file("exampleDirectory", package = "WREG"),
+#'     "pfqImport"))
+#' gisFilePath <- file.path(peakFQdir, "pfqSiteInfo.txt")
+#' importedData <- importPeakFQ(pfqPath = peakFQdir, gisFile = gisFilePath)
+#' 
+#' # Organizing input data
+#' lp3Data <- importedData$LP3f
+#' lp3Data$K <- importedData$LP3k$AEP_0.5
+#' Y <- importedData$Y$AEP_0.5
+#' X <- importedData$X[c("Sand", "OutletElev", "Slope")]
+#' recordLengths <- importedData$recLen
+#' transY <- "none"
+#' 
+#' # Run WLS regression
+#' result <- WREG.WLS(Y, X, recordLengths, LP3 = lp3Data, transY)
+#' print(result)
+#' @export
 print.WREG.WLS <- function(object) {
   cat(paste0("Regression Model for ",names(object$Y),'\n'))
   cat('Coefficients fit by weighted least-squares.\n')
@@ -101,10 +138,32 @@ print.WREG.WLS <- function(object) {
                            paste0(temp$Influence,'*'),temp$Influence)
   print(temp)
 }
-##'
-##' @rdname print
-##' @return \code{print.WREG.GLS} Prints a summary of output list from WREG.GLS
-##' @export
+#'
+#' @rdname print
+#' @return \code{print.WREG.GLS} Prints a summary of output list from WREG.GLS
+#' @examples
+#' ## print.WREG.GLS
+#' # Import some example data
+#' rm(list = ls())
+#' peakFQdir <- paste0(
+#'   file.path(system.file("exampleDirectory", package = "WREG"),
+#'     "pfqImport"))
+#' gisFilePath <- file.path(peakFQdir, "pfqSiteInfo.txt")
+#' importedData <- importPeakFQ(pfqPath = peakFQdir, gisFile = gisFilePath)
+#' 
+#' # Organizing input data
+#' lp3Data <- importedData$LP3f
+#' lp3Data$K <- importedData$LP3k$AEP_0.5
+#' Y <- importedData$Y$AEP_0.5
+#' X <- importedData$X[c("Sand", "OutletElev", "Slope")]
+#' recordLengths <- importedData$recLen
+#' basinChars <- importedData$BasChars
+#' transY <- "none"
+#' 
+#' # Run GLS regression
+#' result <- WREG.GLS(Y, X, recordLengths, LP3 = lp3Data, basinChars, transY)
+#' print(result)
+#' @export
 print.WREG.GLS <- function(object) {
   cat(paste0("Regression Model for ",names(object$Y),'\n'))
   cat('Coefficients fit by generalized least-squares.\n')
@@ -150,10 +209,34 @@ print.WREG.GLS <- function(object) {
                            paste0(temp$Influence,'*'),temp$Influence)
   print(temp)
 }
-##'
-##' @rdname print
-##' @return \code{print.GLSs} Prints a summary of output list from WREG.GLSs
-##' @export
+#'
+#' @rdname print
+#' @return \code{print.GLSs} Prints a summary of output list from WREG.GLS with
+#' an adjustment for uncertainty in the skewness
+#' @examples
+#' ## print.WREG.GLS
+#' # Import some example data
+#' rm(list = ls())
+#' peakFQdir <- paste0(
+#'   file.path(system.file("exampleDirectory", package = "WREG"),
+#'     "pfqImport"))
+#' gisFilePath <- file.path(peakFQdir, "pfqSiteInfo.txt")
+#' importedData <- importPeakFQ(pfqPath = peakFQdir, gisFile = gisFilePath)
+#' 
+#' # Organizing input data
+#' lp3Data <- importedData$LP3f
+#' lp3Data$K <- importedData$LP3k$AEP_0.5
+#' Y <- importedData$Y$AEP_0.5
+#' X <- importedData$X[c("Sand", "OutletElev", "Slope")]
+#' recordLengths <- importedData$recLen
+#' basinChars <- importedData$BasChars
+#' transY <- "none"
+#' 
+#' # Run GLS regression with uncertainty in the skewness
+#' result <- WREG.GLS(Y, X, recordLengths, LP3 = lp3Data, basinChars, transY, 
+#'   regSkew = TRUE, MSEGR = 0.302)
+#' print(result)
+#' @export
 print.WREG.GLSs <- function(object) {
 cat(paste0("Regression Model for ",names(object$Y),'\n'))
 cat(paste0('Coefficients fit by generalized least-squares with an \n',

@@ -34,9 +34,24 @@
 #'  significant for each observation.}
 #'  
 #' @examples
-#' \dontrun{
-#' #add examples
-#' }
+#' # Import some example data
+#' rm(list = ls())
+#' peakFQdir <- paste0(
+#'   file.path(system.file("exampleDirectory", package = "WREG"),
+#'     "pfqImport"))
+#' gisFilePath <- file.path(peakFQdir, "pfqSiteInfo.txt")
+#' importedData <- importPeakFQ(pfqPath = peakFQdir, gisFile = gisFilePath)
+#' 
+#' # Run a simple regression
+#' Y <- importedData$Y$AEP_0.5
+#' X <- importedData$X[c("Sand", "OutletElev", "Slope")]
+#' transY <- "none"
+#' result <- WREG.OLS(Y, X, transY)
+#' 
+#' # calculate influence of each point
+#' influenceResult <- Influence(e = result$residuals, X = X, 
+#'   Omega = result$Weighting, Beta = result$Coefs$Coefficient)
+#'
 #'@export
 Influence <- function(e,X,Omega,Beta,ROI=FALSE,Lev=NA) {
   # William Farmer, USGS, January 02, 2015
@@ -123,12 +138,12 @@ Influence <- function(e,X,Omega,Beta,ROI=FALSE,Lev=NA) {
       warning("Coefficients (Beta) must be provided as class numeric")
       err <- TRUE
     } else {
-      if (sum(is.na(c(X)))>0) {
+      if (sum(is.na(c(Beta)))>0) {
         warning(paste0("Some coefficients (Beta) contain missing ",
           "values.  These must be removed."))
         err <- TRUE
       }
-      if (sum(is.infinite(c(X)))>0) {
+      if (sum(is.infinite(c(Beta)))>0) {
         warning(paste0("Some coefficients (Beta) contain infinite ",
           "values.  These must be removed."))
         err <- TRUE
@@ -144,7 +159,7 @@ Influence <- function(e,X,Omega,Beta,ROI=FALSE,Lev=NA) {
     stop("Invalid inputs were provided.  See warnings().")
   }
   
-  L <- X%*%solve(t(X)%*%solve(Omega)%*%X)%*%t(X) # Basic leverage calculation
+  L <- as.matrix(X)%*%solve(t(X)%*%solve(Omega)%*%as.matrix(X))%*%t(X) # Basic leverage calculation
   if (ROI) {
     # Though not noted in the manual, GLS-ROI uses a different calculation and critical value for influence.
     H <- X%*%solve(t(X)%*%solve(Omega)%*%X)%*%t(X)%*%solve(Omega) # Leverage matrix; need for ROI version of leverage

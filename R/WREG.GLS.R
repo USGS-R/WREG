@@ -119,38 +119,25 @@
 #'@import stats
 #'  
 #'@examples
-#'#Import the data
-#'peakFQdir <- paste0(system.file("exampleDirectory", package = "WREG"),
-#'                    "/pfqImport")
-#'gisFilePath <- paste0(peakFQdir,"/pfqSiteInfo.txt")
-#'importedData <- importPeakFQ(pfqPath = peakFQdir,
-#'                             gisFile = gisFilePath)
-#'#Parameterize model.
-#'#all rows must be ordered identically between dataframes that contain site-specific information.
-#'##Select Y variable
-#'Y <- importedData$Y$AEP_0.5
-#'
-#'##Select X variables
-#'X <- importedData$X[c("Sand",
-#'                      "OutletElev",
-#'                      "Slope")]
-#'##Define record lengths
-#'recordLengths <- importedData$recLen
-#'
-#'##Build LP3 matrix
-#'###Select LP3K and merge with LP3f
-#'LP3 <- data.frame(S=importedData$LP3f$S,
-#'                  K=importedData$LP3k$AEP_0.5,
-#'                  G=importedData$LP3f$G)
-
-#'##Select basin characteristics
-#'basinChars <- importedData$BasChars
-
-#'##Specify Y transformation if any
-#'transY <- "none"
-
-#'#Run WREG.GLS
-#'WREG.GLS(Y, X, recordLengths, LP3, basinChars, transY)
+#' # Import some example data
+#' rm(list = ls())
+#' peakFQdir <- paste0(
+#'   file.path(system.file("exampleDirectory", package = "WREG"),
+#'     "pfqImport"))
+#' gisFilePath <- file.path(peakFQdir, "pfqSiteInfo.txt")
+#' importedData <- importPeakFQ(pfqPath = peakFQdir, gisFile = gisFilePath)
+#' 
+#' # Organizing input data
+#' lp3Data <- importedData$LP3f
+#' lp3Data$K <- importedData$LP3k$AEP_0.5
+#' Y <- importedData$Y$AEP_0.5
+#' X <- importedData$X[c("Sand", "OutletElev", "Slope")]
+#' recordLengths <- importedData$recLen
+#' basinChars <- importedData$BasChars
+#' transY <- "none"
+#' 
+#' # Run GLS regression
+#' result <- WREG.GLS(Y, X, recordLengths, LP3 = lp3Data, basinChars, transY)
 #'
 #'@export
 
