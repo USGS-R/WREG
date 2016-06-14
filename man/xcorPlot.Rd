@@ -36,8 +36,16 @@ If \code{plot=FALSE}, the Nash-Sutcliffe model efficieny is returned.
  cross-correlation.
 }
 \examples{
-\dontrun{
-#add examples
-}
+# Import some example data
+rm(list = ls())
+peakFQdir <- paste0(
+  file.path(system.file("exampleDirectory", package = "WREG"),
+    "pfqImport"))
+gisFilePath <- file.path(peakFQdir, "pfqSiteInfo.txt")
+importedData <- importPeakFQ(pfqPath = peakFQdir, gisFile = gisFilePath)
+
+# Build cross-correlation plot
+xcorPlot(object = importedData, alpha = 0.01, theta = 0.98,
+  concurrentMin = 10)
 }
 
