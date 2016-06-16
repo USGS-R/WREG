@@ -23,6 +23,6 @@ test_that("Run WREG.UW",{
   # Run user-weights regression
   result_test <- WREG.UW(Y, X, customWeight = inverseRecLen, transY)
   
-  expect_identical(result_test,result)
+  expect_equal(result_test,result)
 })
 
