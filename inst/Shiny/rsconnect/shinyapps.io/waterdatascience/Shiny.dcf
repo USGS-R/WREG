@@ -1,0 +1,10 @@
+name: Shiny
+account: waterdatascience
+server: shinyapps.io
+appId: 90887
+bundleId: 404689
+url: https://waterdatascience.shinyapps.io/Shiny/
+when: 1459171029.81053
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: serverold.R|SiteFiles.zip|TestFile4WREGWeb.txt
