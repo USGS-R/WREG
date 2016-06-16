@@ -1,12 +1,11 @@
 context("WREG.GLS tests")
 
-test_that("import static datasets", {
-  #Import the data
+
+
+test_that("Run WREG.GLS",{
+  
   expect_silent(load(paste0(system.file("testData", package = "WREG"),"/staticData_peakFQ.rda")))
   expect_silent(load(paste0(system.file("testData", package = "WREG"),"/wreg.gls.staticOut.rda")))
-})
-
-test_that("Parameterize the model",{
   
   expect_silent({
     #Parameterize model.
@@ -44,18 +43,16 @@ test_that("Parameterize the model",{
   expect_silent({
     transY <- "none"
   })
-})
 
-test_that("Run WREG.GLS",{
+
+
   
   expect_silent({
     #Run WREG.GLS
     wreg.gls.out <- WREG.GLS(Y, X, recordLengths, LP3, basinChars, transY)
   })
-})
 
-test_that("Check WREG.GLS output",{
-  
+
   #Coefs
   expect_identical(wreg.gls.out$Coefs,wreg.gls.staticOut$Coefs)
   expect_identical(wreg.gls.out$ResLevInf,wreg.gls.staticOut$ResLevInf)
