@@ -25,12 +25,12 @@ test_that("importWREG", {
   expect_identical(importedData$BasChars,staticData_WREG$BasChars)
 
   #Check recLen, needs additional checks for rownames and colnames because contain siteIDs
-  expect_identical(importedData$recLen,staticData_WREG$recLen)
+  expect_equal(importedData$recLen,staticData_WREG$recLen)
   expect_identical(row.names(importedData$recLen),row.names(staticData_WREG$recLen))
   expect_identical(colnames(importedData$recLen),colnames(staticData_WREG$recLen))
   
   #Check recCor, needs additional checks for rownames and colnames because contain siteIDs
-  expect_identical(importedData$recCor,staticData_WREG$recCor)
+  expect_equal(importedData$recCor,staticData_WREG$recCor)
   expect_identical(row.names(importedData$recCor),row.names(staticData_WREG$recCor))
   expect_identical(colnames(importedData$recCor),colnames(staticData_WREG$recCor))
   
