@@ -31,4 +31,24 @@ test_that("Dist.WREG",{
 }
 )
 
+test_that("xcorrplot",{
+          
+          # Import some example data
+          expect_silent(
+            
+            load(paste0(system.file("testData", package = "WREG"),"/staticData_peakFQ.rda"))
+          )
+          
+          # Build cross-correlation plot
+          expect_silent(
+            p1_test <- xcorPlot(object = staticData_peakFQ, alpha = 0.01, theta = 0.98,
+                                concurrentMin = 10)
+          )
+          
+          expect_silent(load(paste0(system.file("testData", package = "WREG"),"/xcorPlot.out.rda")))
+          
+          expect_identical(p1_test,p1)
+          
 
+
+})
