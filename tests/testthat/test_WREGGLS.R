@@ -54,17 +54,17 @@ test_that("Run WREG.GLS",{
 
 
   #Coefs
-  expect_identical(wreg.gls.out$Coefs,wreg.gls.staticOut$Coefs)
-  expect_identical(wreg.gls.out$ResLevInf,wreg.gls.staticOut$ResLevInf)
-  expect_identical(wreg.gls.out$InflLim,wreg.gls.staticOut$InflLim)
-  expect_identical(wreg.gls.out$LevInf.Sig,wreg.gls.staticOut$LevInf.Sig)
-  expect_identical(wreg.gls.out$PerformanceMetrics,wreg.gls.staticOut$PerformanceMetrics)
-  expect_identical(wreg.gls.out$X,wreg.gls.staticOut$X)
-  expect_identical(wreg.gls.out$Y,wreg.gls.staticOut$Y)
-  expect_identical(wreg.gls.out$fitted.values,wreg.gls.staticOut$fitted.values)
-  expect_identical(wreg.gls.out$residuals,wreg.gls.staticOut$residuals)
-  expect_identical(wreg.gls.out$Weighting,wreg.gls.staticOut$Weighting)
-  expect_identical(wreg.gls.out$Inputs,wreg.gls.staticOut$Inputs)
+  expect_equal(wreg.gls.out$Coefs,wreg.gls.staticOut$Coefs)
+  expect_equal(wreg.gls.out$ResLevInf,wreg.gls.staticOut$ResLevInf)
+  expect_equal(wreg.gls.out$InflLim,wreg.gls.staticOut$InflLim)
+  expect_equal(wreg.gls.out$LevInf.Sig,wreg.gls.staticOut$LevInf.Sig)
+  expect_equal(wreg.gls.out$PerformanceMetrics,wreg.gls.staticOut$PerformanceMetrics)
+  expect_equal(wreg.gls.out$X,wreg.gls.staticOut$X)
+  expect_equal(wreg.gls.out$Y,wreg.gls.staticOut$Y)
+  expect_equal(wreg.gls.out$fitted.values,wreg.gls.staticOut$fitted.values)
+  expect_equal(wreg.gls.out$residuals,wreg.gls.staticOut$residuals)
+  expect_equal(wreg.gls.out$Weighting,wreg.gls.staticOut$Weighting)
+  expect_equal(wreg.gls.out$Inputs,wreg.gls.staticOut$Inputs)
   
 })
 

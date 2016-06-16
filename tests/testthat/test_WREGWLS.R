@@ -23,5 +23,5 @@ test_that("Run WREG.WLS",{
   # Run WLS regression
   result_test <- WREG.WLS(Y, X, recordLengths, LP3 = lp3Data, transY)
   
-  expect_identical(result_test,result)
+  expect_equal(result_test,result)
 })
