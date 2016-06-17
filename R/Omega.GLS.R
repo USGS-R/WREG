@@ -95,7 +95,7 @@
 #'   
 #' @export
 Omega.GLS <- function(alpha=0.01,theta=0.98,independent,X,Y,recordLengths,
-  LP3,MSEGR=NA,TY=2,peak=T,distMeth=2) {
+  LP3,MSEGR=NA,TY=2,peak=TRUE,distMeth=2) {
   
   # William Farmer, January 22, 2015
   
