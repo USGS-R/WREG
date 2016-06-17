@@ -5,7 +5,7 @@
 \title{Calculate weighting matrix for GLS regression. (WREG)}
 \usage{
 Omega.GLS(alpha = 0.01, theta = 0.98, independent, X, Y, recordLengths, LP3,
-  MSEGR = NA, TY = 2, peak = T, distMeth = 2)
+  MSEGR = NA, TY = 2, peak = TRUE, distMeth = 2)
 }
 \arguments{
 \item{alpha}{A number, required only for \dQuote{GLS} and \dQuote{GLSskew}. 
@@ -112,7 +112,7 @@ X <- importedData$X[c("Sand", "OutletElev", "Slope")]
 weightingResult <- Omega.GLS(alpha = 0.01, theta = 0.98,
   independent = importedData$BasChars, X = X,
   Y = Y, recordLengths = importedData$recLen,
-  LP3 = lp3Data, MSEGR = NA, TY = 20, peak = T, distMeth = 2)
+  LP3 = lp3Data, MSEGR = NA, TY = 20, peak = TRUE, distMeth = 2)
   
 }
 
