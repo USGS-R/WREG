@@ -133,7 +133,7 @@ for (j in 1:length(Y)) {
     Gdist[j] <- Inf # To block self identification.
   }
 }
-temp <- sort.int(Gdist,index.return=T)
+temp <- sort.int(Gdist,index.return=TRUE)
 NDX <- temp$ix[1:n] # Sites to use in this regression
 
 # Pull out characeristics of the region.
