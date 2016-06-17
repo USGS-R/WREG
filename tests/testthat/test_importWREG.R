@@ -7,7 +7,7 @@ context("Import data function tests")
 #Import the data
 test_that("importWREG", {
   #Load comparison dataset
-  expect_silent(load(paste0(system.file("testData", package = "WREG"),"/staticData_WREG.rda")))
+  expect_silent(load(paste0(system.file("testData", package = "WREG"),"/staticData_wreg.rda")))
   
   #Import the data
   expect_silent({

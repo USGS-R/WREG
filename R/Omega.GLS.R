@@ -91,7 +91,7 @@
 #' weightingResult <- Omega.GLS(alpha = 0.01, theta = 0.98,
 #'   independent = importedData$BasChars, X = X,
 #'   Y = Y, recordLengths = importedData$recLen,
-#'   LP3 = lp3Data, MSEGR = NA, TY = 20, peak = T, distMeth = 2)
+#'   LP3 = lp3Data, MSEGR = NA, TY = 20, peak = TRUE, distMeth = 2)
 #'   
 #' @export
 Omega.GLS <- function(alpha=0.01,theta=0.98,independent,X,Y,recordLengths,
