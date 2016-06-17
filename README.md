@@ -5,7 +5,7 @@ Windows Tests: [![Build status](https://ci.appveyor.com/api/projects/status/weeq
 
 Linux Tests: [![travis](https://travis-ci.org/USGS-R/WREG.svg?branch=master)](https://travis-ci.org/USGS-R/WREG)
 
-Code Coverage: [![Coverage Status](https://coveralls.io/repos/USGS-R/WREG/badge.svg?branch=master&service=github)](https://coveralls.io/github/USGS-R/WREG?branch=master)
+Code Coverage: [![Coverage Status](https://coveralls.io/repos/github/USGS-R/WREG/badge.svg?branch=master)](https://coveralls.io/github/USGS-R/WREG?branch=master)
 
 UNDER DEVELOPMENT 
 -----------------
