@@ -96,7 +96,7 @@ All outputs are returned as part of a list.  The elements of the list
  depend on the type of regression performed.  The elements of the list may
  include: \item{Coefs}{A data frame composed of four variables: (1)
  \code{Coefficient} contains the regression coefficeints estimated for the
- model, (2) \code{\sQuote{Standard Error}} contains the standard errors of
+ model, (2) \code{Standard Error} contains the standard errors of
  each regression coefficient, (3) \code{tStatistic} contains the Student's
  T-statistic of each regression coefficient and (4) \code{pValue} contains
  the significance probability of each regression coefficient.}

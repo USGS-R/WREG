@@ -105,7 +105,7 @@
 #'  applicability of performance metrics can be found in the WREG manual.} 
 #'  \item{Coefficients}{A list composed of four elements: (1) \code{Values}
 #'  contains the regression coefficeints estimated for the model built around
-#'  each observation, (2) \code{\sQuote{StanError}} contains the standard errors
+#'  each observation, (2) \code{StanError} contains the standard errors
 #'  of each regression coefficient for the ROI regressions around each
 #'  observations, (3) \code{TStatistic} contains the Student's T-statistic of
 #'  each regression coefficient for the ROI regression built around each
