@@ -22,7 +22,6 @@
 #' @examples 
 #' ## print.WREG.OLS
 #' # Import some example data
-#' rm(list = ls())
 #' peakFQdir <- paste0(
 #'   file.path(system.file("exampleDirectory", package = "WREG"),
 #'     "pfqImport"))
@@ -74,7 +73,6 @@ print.WREG.OLS <- function(object) {
 #' @examples 
 #' ## print.WREG.WLS
 #' # Import some example data
-#' rm(list = ls())
 #' peakFQdir <- paste0(
 #'   file.path(system.file("exampleDirectory", package = "WREG"),
 #'     "pfqImport"))
@@ -144,7 +142,6 @@ print.WREG.WLS <- function(object) {
 #' @examples
 #' ## print.WREG.GLS
 #' # Import some example data
-#' rm(list = ls())
 #' peakFQdir <- paste0(
 #'   file.path(system.file("exampleDirectory", package = "WREG"),
 #'     "pfqImport"))
@@ -216,7 +213,6 @@ print.WREG.GLS <- function(object) {
 #' @examples
 #' ## print.WREG.GLS
 #' # Import some example data
-#' rm(list = ls())
 #' peakFQdir <- paste0(
 #'   file.path(system.file("exampleDirectory", package = "WREG"),
 #'     "pfqImport"))

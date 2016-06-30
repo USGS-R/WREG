@@ -39,7 +39,6 @@
 #' \item{recCor}{A matrix of the correlaiton between site paris.}
 #' 
 #' @examples
-#' rm(list = ls())
 #' peakFQdir <- paste0(
 #'   file.path(system.file("exampleDirectory", package = "WREG"),
 #'     "pfqImport"))
