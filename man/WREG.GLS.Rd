@@ -18,11 +18,22 @@ column represents a particular independe variable.  (If a leading constant
 is used, it should be included here as a leading column of ones.)  The rows
 must be in the same order as the dependent variables in \code{Y}.}
 
+\item{recordLengths}{A numeric matrix whose rows and columns are in the same
+order as \code{Y}.  Each \code{(r,c)} element represents the length of
+concurrent record between sites \code{r} and \code{c}.  The diagonal
+elements therefore represent each site's full record length.}
+
 \item{LP3}{A numeric matrix containing the fitted Log-Pearson Type III
 standard deviate, standard deviation and skew for each site.  The columns of
 the matrix represent S, K, G, and an option regional skew value \code{GR}
 required by WREG.GLS with regSkew = TRUE. The order of the rows must be the
 same as \code{Y}.}
+
+\item{basinChars}{A dataframe containing three variables: \code{StationID} is
+the identifier of each site, \code{Lat} is the latitude of the site, in
+decimal degrees, and \code{Long} is the longitude of the site, in decimal
+degrees.  The sites must be presented in the same order as \code{Y}.
+Required only if \code{regSkew = TRUE}.}
 
 \item{transY}{A required character string indicating if the the
 dependentvariable was transformed by the common logarithm ('log10'),
@@ -41,6 +52,16 @@ cross-correlation between site records.  See equation 20 in the WREG v. 1.05
 manual.  The arbitrary, default value is 0.98.  The user should fit a
 different value as needed.}
 
+\item{peak}{A logical.  Indicates if the event being modeled is a peak flow
+event or a low-flow event.  \code{TRUE} indicates a peak flow, while
+\code{FALSE} indicates a low-flow event.}
+
+\item{distMeth}{A numeric. A value of \code{1} indicates that the "Nautical
+Mile" approximation should be used to calculate inter-site distances.  A
+value of \code{2} designates the Haversine approximation.  See
+\code{\link{Dist.WREG}}.  The default value is \code{2}.  (See the
+\code{Legacy} details below.)}
+
 \item{regSkew}{A logical vector indicating if regional skews are provided with
 an adjustment required for uncertainty therein (\code{TRUE}).  The default
 is \code{FALSE}.}
@@ -52,38 +73,7 @@ only if \code{regSkew = TRUE}.}
 only for \dQuote{GLSskew}.  The default value is \code{2}.  (See the
 \code{Legacy} details below.)}
 
-\item{RecordLengths}{A numeric matrix whose rows and columns are in the same
-order as \code{Y}.  Each \code{(r,c)} element represents the length of
-concurrent record between sites \code{r} and \code{c}.  The diagonal
-elements therefore represent each site's full record length.}
-
-\item{BasinChars}{A dataframe containing three variables: \code{StationID} is
-the identifier of each site, \code{Lat} is the latitude of the site, in
-decimal degrees, and \code{Long} is the longitude of the site, in decimal
-degrees.  The sites must be presented in the same order as \code{Y}.
-Required only if \code{regSkew = TRUE}.}
-
-\item{Peak}{A logical.  Indicates if the event being modeled is a peak flow
-event or a low-flow event.  \code{TRUE} indicates a peak flow, while
-\code{FALSE} indicates a low-flow event.}
-
-\item{CustomWeight}{This allows the user to enter a custom weighting matrix.
-It is included also to provide legacy code for WREG v. 1.05.
-\code{CustomWeight} can either be a square matrix of weights with a length
-equal to \code{length(Y)} or a list containing three elements.  The elements
-of the list include (1) \code{Omega} as the square weighting matrix, (2)
-\code{var.modelerror.k} as the estimated variance of the model errors from
-the k-variable model (\code{k=ncol(X)}), and (3) \code{var.modelerror.0} as
-the variance of the model errors from a consant-only regression.  Required
-for \code{Reg=} \dQuote{CustomWeight}.}
-
-\item{DistMeth}{A numeric. A value of \code{1} indicates that the "Nautical
-Mile" approximation should be used to calculate inter-site distances.  A
-value of \code{2} designates the Haversine approximation.  See
-\code{\link{Dist.WREG}}.  The default value is \code{2}.  (See the
-\code{Legacy} details below.)}
-
-\item{Legacy}{A logical.  A value of \code{TRUE} forces the WREG program to
+\item{legacy}{A logical.  A value of \code{TRUE} forces the WREG program to
  behave identically to WREG v. 1.05, with BUGS and all.  It will force
  \code{TY=2} and \code{DistMeth=1}.  For ROI regressions, it will also
  require a specific calculation for weighing matrices in \dQuote{WLS}

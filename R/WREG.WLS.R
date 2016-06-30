@@ -10,7 +10,7 @@
 #'  column represents a particular independe variable.  (If a leading constant 
 #'  is used, it should be included here as a leading column of ones.)  The rows 
 #'  must be in the same order as the dependent variables in \code{Y}.
-#'@param RecordLengths A numeric vector whose rows are in the same order as 
+#'@param recordLengths A numeric vector whose rows are in the same order as 
 #'  \code{Y} and represent the at-site record length.
 #'@param LP3 A numeric matrix containing the fitted Log-Pearson Type III 
 #'  standard deviate, standard deviation and skew for each site.  The columns of

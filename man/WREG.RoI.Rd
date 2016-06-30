@@ -48,6 +48,10 @@ frame are \code{S}, \code{K} and \code{G}.  For \dQuote{GLSskew}, the
 regional skew value must also be provided in a variable called \code{GR}.
 The order of the rows must be the same as \code{Y}.}
 
+\item{regSkew}{A logical vector indicating if regional skews are provided with
+an adjustment required for uncertainty therein (\code{TRUE}).  The default
+is \code{FALSE}.}
+
 \item{alpha}{A number, required only for \dQuote{GLS} and \dQuote{GLSskew}.
 \code{alpha} is a parameter used in the estimated cross-correlation between
 site records.  See equation 20 in the WREG v. 1.05 manual.  The arbitrary,

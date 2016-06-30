@@ -16,6 +16,9 @@ column represents a particular independe variable.  (If a leading constant
 is used, it should be included here as a leading column of ones.)  The rows
 must be in the same order as the dependent variables in \code{Y}.}
 
+\item{recordLengths}{A numeric vector whose rows are in the same order as
+\code{Y} and represent the at-site record length.}
+
 \item{LP3}{A numeric matrix containing the fitted Log-Pearson Type III
 standard deviate, standard deviation and skew for each site.  The columns of
 the matrix represent S, K, G, and an option regional skew value \code{GR}
@@ -28,9 +31,6 @@ transformed by the natural logarithm ('ln') or untransformed ('none').}
 
 \item{x0}{A vector containing the independent variables (as above) for a
  particular target site.  This variable is only used for ROI analysis.}
-
-\item{RecordLengths}{A numeric vector whose rows are in the same order as
-\code{Y} and represent the at-site record length.}
 }
 \value{
 All outputs are returned as part of a list.  The elements of the list

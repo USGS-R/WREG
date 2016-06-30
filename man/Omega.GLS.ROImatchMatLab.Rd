@@ -79,10 +79,14 @@ variable called \code{GR}.  The order of the rows must be the same as
 \code{Y}.}
 
 \item{DistMeth}{Required for \dQuote{GLS} and \dQuote{GLSskew}.  A value of
- \code{1} indicates that the "Nautical Mile" approximation should be used to
- calculate inter-site distances.  A value of \code{2} designates the
- Haversine approximation.  See \code{\link{Dist.WREG}}.  The default value is
- \code{2}.  (See the \code{Legacy} details below.)}
+\code{1} indicates that the "Nautical Mile" approximation should be used to
+calculate inter-site distances.  A value of \code{2} designates the
+Haversine approximation.  See \code{\link{Dist.WREG}}.  The default value is
+\code{2}.  (See the \code{Legacy} details below.)}
+
+\item{regSkew}{A logical vector indicating if regional skews are provided with
+ an adjustment required for uncertainty therein (\code{TRUE}).  The default
+ is \code{FALSE}.}
 }
 \value{
 \code{Omega.GLS.ROImatchMatLab} returns a list with two elements:

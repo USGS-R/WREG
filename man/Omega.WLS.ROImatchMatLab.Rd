@@ -15,6 +15,11 @@ transformations already applied.  Each row represents a site and each column
 represents a particular independent variable.  The rows must be in the same
 order as the dependent variables in \code{Y}.}
 
+\item{LP3.all}{A dataframe containing the fitted Log-Pearson Type III standard
+deviate, standard deviation and skew for all sites in the network.  The
+names of this data frame are \code{S}, \code{K} and \code{G}.  The order of
+the rows must be the same as \code{Y}.}
+
 \item{RecordLengths.all}{\code{RecordLengths.all} may be a matrix whose rows
 and columns are in the same order as \code{Y}.  Each \code{(r,c)} element
 represents the length of concurrent record between sites \code{r} and
@@ -25,11 +30,6 @@ should only include sites in the current region of influence.}
 
 \item{NDX}{A vector listing the indices of the sites that comprise the region
  of influence.}
-
-\item{LP3}{A dataframe containing the fitted Log-Pearson Type III standard
-deviate, standard deviation and skew for all sites in the network.  The
-names of this data frame are \code{S}, \code{K} and \code{G}.  The order of
-the rows must be the same as \code{Y}.}
 }
 \value{
 \code{Omega.WLS.ROImatchMatLab} returns a list with three elements:
