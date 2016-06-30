@@ -8,7 +8,7 @@
 #'
 #' @title print.WREG
 #'
-#' @param object An output list from one of the WREG... functions
+#' @param x An output list from one of the WREG... functions
 #'
 #' @note \code{print} is a generic name for the functions documented.
 #' \cr
