@@ -54,7 +54,15 @@ importPeakFQ <- function(pfqPath,gisFile,sites='') {
   gisData <- read.table(file=gisFile,sep='\t',header=T,
                         colClasses=list(Station.ID='character'))
   gisData$Station.ID <- ifelse(nchar(gisData$Station.ID)%%2>0,
-                               paste0("0",gisData$Station.ID),gisData$Station.ID)
+    paste0("0",gisData$Station.ID), gisData$Station.ID)
+  
+  # Remove old WREG variables that are reproduced elsewhere
+  remNDX <- -which(is.element(names(gisData), c('No..Annual.Series',
+    'Zero.1.NonZero.2',
+    'FreqZero',
+    'Regional.Skew',
+    'Cont.1.PR.2')))
+  gisData <- gisData[, remNDX]
   
   # subset to specified sites
   if (sites!='') {
