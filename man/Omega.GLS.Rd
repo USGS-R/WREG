@@ -78,9 +78,7 @@ required for generalized least-squares regression, without or without
 uncertainty in the regional skew.
 }
 \details{
-This function is largely a subroutine for \code{\link{WREG.MLR}} when
- applying generalized least-squares regression (\dQuote{GLS} and
- \dQuote{GLSskew}).
+This function is largely a subroutine for \code{\link{WREG.GLS}}.
 
  The weighting matrix is calculated by iteration, as noted in the manual to
  WREG v. 1.0.  As currently implemented the initial estimate of model error
