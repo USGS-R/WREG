@@ -9,13 +9,13 @@
 \alias{print.WREG.WLS}
 \title{print.WREG}
 \usage{
-\method{print}{WREG.OLS}(object)
+\method{print}{WREG.OLS}(x, ...)
 
-\method{print}{WREG.WLS}(object)
+\method{print}{WREG.WLS}(x, ...)
 
-\method{print}{WREG.GLS}(object)
+\method{print}{WREG.GLS}(x, ...)
 
-\method{print}{WREG.GLSs}(object)
+\method{print}{WREG.GLSs}(x, ...)
 }
 \arguments{
 \item{object}{An output list from one of the WREG... functions}
