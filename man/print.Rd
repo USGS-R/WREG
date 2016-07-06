@@ -18,7 +18,9 @@
 \method{print}{WREG.GLSs}(x, ...)
 }
 \arguments{
-\item{x}{An output list from one of the WREG... functions}
+\item{x}{An output list from one of the WREG functions}
+
+\item{...}{further arguments passed to or from other methods.}
 }
 \value{
 \code{print.WREG.OLS} Prints a summary of output list from WREG.OLS
