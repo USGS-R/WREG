@@ -404,7 +404,7 @@ shinyServer(function(input, output,session) {
                                               peak=T,
                                               distMeth=2,
                                               regSkew=TRUE,
-                                              MSEGR=selectData$MSEGR,
+                                              MSEGR=input$MSEGR,
                                               TY=2)
                        }
                      }

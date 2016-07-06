@@ -111,6 +111,10 @@ shinyUI(fluidPage(theme="theme.css",navbarPage(img(src="Logo.png", width="80px",
                                                                                      conditionalPanel(
                                                                                        condition = "input.regType == 'GLS'",
                                                                                        checkboxInput("GLSskew",label="With regional skew",value=FALSE)
+                                                                                     ),
+                                                                                     conditionalPanel(
+                                                                                       condition = "input.GLSskew == true",
+                                                                                       numericInput("MSEGR",label="MSEGR",value="")
                                                                                      )
                                                                                      
                                                                                      
