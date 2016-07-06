@@ -178,8 +178,8 @@ shinyUI(fluidPage(theme="theme.css",navbarPage(img(src="Logo.png", width="80px",
                                                                                 radioButtons('format', 'Document format', c('HTML', 'Word'),
                                                                                              inline = TRUE),
                                                                                 downloadButton('downloadReport'),
-                                                                                h2("Download all results (text only)"),
-                                                                                downloadButton("exportText")
+                                                                                h2("Download rData (.rda)"),
+                                                                                downloadButton("downloadResults")
                                                                                 
                                                                               )
                                                                      )

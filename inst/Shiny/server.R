@@ -468,7 +468,50 @@ shinyServer(function(input, output,session) {
       file.rename(out, file)
     }
 )
-
+  
+  output$downloadResults <- downloadHandler(
+    filename = "outputRaw.rda",
+    
+    content = function(file) {
+      ##Cant use zip in R because of need for rtools
+      
+      save(wregOUT,file=file)
+      
+      # temporarily switch to the temp dir, in case you do not have write
+      # permission to the current working directory
+      #owd <- setwd(tempdir())
+      #on.exit(setwd(owd))
+      
+      #tmpdir <- tempdir()
+      #setwd(tempdir())
+      
+      # write.table(wregOUT$Coefs,file="coefs.txt",sep="\t",quote=FALSE)
+      # write.table(wregOUT$ResLevInf,file="ResLevInf.txt",sep="\t",quote=FALSE,row.names=FALSE)
+      # write.table(wregOUT$LevLim,file="LevLim.txt",sep="\t",quote=FALSE,row.names=FALSE)
+      # write.table(wregOUT$InflLim,file="InflLim.txt",sep="\t",quote=FALSE,row.names=FALSE)
+      # write.table(wregOUT$LevInf.Sig,file="LevInf.Sig.txt",sep="\t",quote=FALSE,row.names=FALSE)
+      # write.table(wregOUT$PerformanceMetrics,file="PerformanceMetrics.txt",sep="\t",quote=FALSE,row.names=FALSE)
+      # write.table(wregOUT$X,file="X.txt",sep="\t",quote=FALSE,row.names=FALSE)
+      # write.table(wregOUT$Y,file="Y.txt",sep="\t",quote=FALSE,row.names=FALSE)
+      # write.table(wregOUT$fitted.values,file="fitted.values.txt",sep="\t",quote=FALSE,row.names=FALSE)
+      # write.table(wregOUT$residuals,file="residuals.txt",sep="\t",quote=FALSE,row.names=FALSE)
+      # write.table(wregOUT$Weighting,file="Weighting.txt",sep="\t",quote=FALSE)
+      # write.table(wregOUT$Inputs,file="Inputs.txt",sep="\t",quote=FALSE)
+      
+      #tar(tarfile=paste0(getwd(),"/",file),files=c("coefs.txt",
+      #                          "ResLevInf.txt",
+      #                          "LevLim.txt",
+      #                          "InflLim.txt",
+      #                          "LevInf.Sig.txt",
+      #                          "PerformanceMetrics.txt",
+      #                          "X.txt",
+      #                          "Y.txt",
+      #                          "fitted.values.txt",
+      #                          "residuals.txt",
+      #                          "Weighting.txt",
+      #                          "Inputs.txt"))
+    },
+    contentType = "application/zip")
 
 
 
