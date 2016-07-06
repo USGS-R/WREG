@@ -10,7 +10,7 @@
 #'  column represents a particular independe variable.  (If a leading constant 
 #'  is used, it should be included here as a leading column of ones.)  The rows 
 #'  must be in the same order as the dependent variables in \code{Y}.
-#'@param RecordLengths A numeric vector whose rows are in the same order as 
+#'@param recordLengths A numeric vector whose rows are in the same order as 
 #'  \code{Y} and represent the at-site record length.
 #'@param LP3 A numeric matrix containing the fitted Log-Pearson Type III 
 #'  standard deviate, standard deviation and skew for each site.  The columns of
@@ -30,7 +30,7 @@
 #'  depend on the type of regression performed.  The elements of the list may 
 #'  include: \item{Coefs}{A data frame composed of four variables: (1) 
 #'  \code{Coefficient} contains the regression coefficeints estimated for the 
-#'  model, (2) \code{\sQuote{Standard Error}} contains the standard errors of 
+#'  model, (2) \code{Standard Error} contains the standard errors of 
 #'  each regression coefficient, (3) \code{tStatistic} contains the Student's 
 #'  T-statistic of each regression coefficient and (4) \code{pValue} contains 
 #'  the significance probability of each regression coefficient.} 
@@ -63,7 +63,6 @@
 #'  
 #' @examples
 #' # Import some example data
-#' rm(list = ls())
 #' peakFQdir <- paste0(
 #'   file.path(system.file("exampleDirectory", package = "WREG"),
 #'     "pfqImport"))

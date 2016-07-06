@@ -12,7 +12,7 @@
 #'  must be in the same order as the dependent variables in \code{Y}.
 #'@param x0 A vector containing the independent variables (as above) for a 
 #'  particular target site.  This variable is only used for ROI analysis.
-#'@param RecordLengths A numeric matrix whose rows and columns are in the same 
+#'@param recordLengths A numeric matrix whose rows and columns are in the same 
 #'  order as \code{Y}.  Each \code{(r,c)} element represents the length of 
 #'  concurrent record between sites \code{r} and \code{c}.  The diagonal 
 #'  elements therefore represent each site's full record length.
@@ -29,7 +29,7 @@
 #'  cross-correlation between site records.  See equation 20 in the WREG v. 1.05
 #'  manual.  The arbitrary, default value is 0.98.  The user should fit a 
 #'  different value as needed.
-#'@param BasinChars A dataframe containing three variables: \code{StationID} is 
+#'@param basinChars A dataframe containing three variables: \code{StationID} is 
 #'  the identifier of each site, \code{Lat} is the latitude of the site, in 
 #'  decimal degrees, and \code{Long} is the longitude of the site, in decimal 
 #'  degrees.  The sites must be presented in the same order as \code{Y}. 
@@ -42,19 +42,10 @@
 #'@param TY A numeric.  The return period of the event being modeled.  Required 
 #'  only for \dQuote{GLSskew}.  The default value is \code{2}.  (See the 
 #'  \code{Legacy} details below.)
-#'@param Peak A logical.  Indicates if the event being modeled is a peak flow 
+#'@param peak A logical.  Indicates if the event being modeled is a peak flow 
 #'  event or a low-flow event.  \code{TRUE} indicates a peak flow, while 
 #'  \code{FALSE} indicates a low-flow event.
-#'@param CustomWeight This allows the user to enter a custom weighting matrix. 
-#'  It is included also to provide legacy code for WREG v. 1.05. 
-#'  \code{CustomWeight} can either be a square matrix of weights with a length 
-#'  equal to \code{length(Y)} or a list containing three elements.  The elements
-#'  of the list include (1) \code{Omega} as the square weighting matrix, (2) 
-#'  \code{var.modelerror.k} as the estimated variance of the model errors from 
-#'  the k-variable model (\code{k=ncol(X)}), and (3) \code{var.modelerror.0} as 
-#'  the variance of the model errors from a consant-only regression.  Required 
-#'  for \code{Reg=} \dQuote{CustomWeight}.
-#'@param DistMeth A numeric. A value of \code{1} indicates that the "Nautical 
+#'@param distMeth A numeric. A value of \code{1} indicates that the "Nautical 
 #'  Mile" approximation should be used to calculate inter-site distances.  A 
 #'  value of \code{2} designates the Haversine approximation.  See 
 #'  \code{\link{Dist.WREG}}.  The default value is \code{2}.  (See the 
@@ -62,7 +53,7 @@
 #'@param regSkew A logical vector indicating if regional skews are provided with
 #'  an adjustment required for uncertainty therein (\code{TRUE}).  The default 
 #'  is \code{FALSE}.
-#'@param Legacy A logical.  A value of \code{TRUE} forces the WREG program to 
+#'@param legacy A logical.  A value of \code{TRUE} forces the WREG program to 
 #'  behave identically to WREG v. 1.05, with BUGS and all.  It will force 
 #'  \code{TY=2} and \code{DistMeth=1}.  For ROI regressions, it will also 
 #'  require a specific calculation for weighing matrices in \dQuote{WLS} 
@@ -87,7 +78,7 @@
 #'  depend on the type of regression performed.  The elements of the list may 
 #'  include: \item{Coefs}{A data frame composed of four variables: (1) 
 #'  \code{Coefficient} contains the regression coefficeints estimated for the 
-#'  model, (2) \code{\sQuote{Standard Error}} contains the standard errors of 
+#'  model, (2) \code{Standard Error} contains the standard errors of 
 #'  each regression coefficient, (3) \code{tStatistic} contains the Student's 
 #'  T-statistic of each regression coefficient and (4) \code{pValue} contains 
 #'  the significance probability of each regression coefficient.} 
@@ -120,7 +111,6 @@
 #'  
 #'@examples
 #' # Import some example data
-#' rm(list = ls())
 #' peakFQdir <- paste0(
 #'   file.path(system.file("exampleDirectory", package = "WREG"),
 #'     "pfqImport"))

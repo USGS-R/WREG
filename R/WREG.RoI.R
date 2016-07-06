@@ -35,6 +35,9 @@
 #'  frame are \code{S}, \code{K} and \code{G}.  For \dQuote{GLSskew}, the
 #'  regional skew value must also be provided in a variable called \code{GR}. 
 #'  The order of the rows must be the same as \code{Y}.
+#'@param regSkew A logical vector indicating if regional skews are provided with
+#'  an adjustment required for uncertainty therein (\code{TRUE}).  The default 
+#'  is \code{FALSE}.
 #'@param alpha A number, required only for \dQuote{GLS} and \dQuote{GLSskew}. 
 #'  \code{alpha} is a parameter used in the estimated cross-correlation between
 #'  site records.  See equation 20 in the WREG v. 1.05 manual.  The arbitrary,
@@ -105,7 +108,7 @@
 #'  applicability of performance metrics can be found in the WREG manual.} 
 #'  \item{Coefficients}{A list composed of four elements: (1) \code{Values}
 #'  contains the regression coefficeints estimated for the model built around
-#'  each observation, (2) \code{\sQuote{StanError}} contains the standard errors
+#'  each observation, (2) \code{StanError} contains the standard errors
 #'  of each regression coefficient for the ROI regressions around each
 #'  observations, (3) \code{TStatistic} contains the Student's T-statistic of
 #'  each regression coefficient for the ROI regression built around each
@@ -147,7 +150,6 @@
 #'  
 #' @examples
 #' # Import some example data
-#' rm(list = ls())
 #' peakFQdir <- paste0(
 #'   file.path(system.file("exampleDirectory", package = "WREG"),
 #'     "pfqImport"))

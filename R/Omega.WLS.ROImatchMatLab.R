@@ -10,7 +10,7 @@
 #'  transformations already applied.  Each row represents a site and each column
 #'  represents a particular independent variable.  The rows must be in the same
 #'  order as the dependent variables in \code{Y}.
-#'@param LP3 A dataframe containing the fitted Log-Pearson Type III standard 
+#'@param LP3.all A dataframe containing the fitted Log-Pearson Type III standard 
 #'  deviate, standard deviation and skew for all sites in the network.  The
 #'  names of this data frame are \code{S}, \code{K} and \code{G}.  The order of
 #'  the rows must be the same as \code{Y}.
@@ -41,7 +41,6 @@
 #'  
 #' @examples
 #' # Import some example data
-#' rm(list = ls())
 #' peakFQdir <- paste0(
 #'   file.path(system.file("exampleDirectory", package = "WREG"),
 #'     "pfqImport"))

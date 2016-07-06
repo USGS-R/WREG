@@ -68,6 +68,9 @@
 #'  calculate inter-site distances.  A value of \code{2} designates the
 #'  Haversine approximation.  See \code{\link{Dist.WREG}}.  The default value is
 #'  \code{2}.  (See the \code{Legacy} details below.)
+#'@param regSkew A logical vector indicating if regional skews are provided with
+#'  an adjustment required for uncertainty therein (\code{TRUE}).  The default 
+#'  is \code{FALSE}.
 #'  
 #'@details This is a legacy function that matches the idiosyncrasies of WREG v.
 #'  1.05. This includes using all sites to implement the sigma regression.
@@ -84,7 +87,6 @@
 #'  
 #' @examples
 #' # Import some example data
-#' rm(list = ls())
 #' peakFQdir <- paste0(
 #'   file.path(system.file("exampleDirectory", package = "WREG"),
 #'     "pfqImport"))

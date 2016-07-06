@@ -8,7 +8,7 @@
 #'
 #' @title print.WREG
 #'
-#' @param object An output list from one of the WREG... functions
+#' @param x An output list from one of the WREG... functions
 #'
 #' @note \code{print} is a generic name for the functions documented.
 #' \cr
@@ -22,7 +22,6 @@
 #' @examples 
 #' ## print.WREG.OLS
 #' # Import some example data
-#' rm(list = ls())
 #' peakFQdir <- paste0(
 #'   file.path(system.file("exampleDirectory", package = "WREG"),
 #'     "pfqImport"))
@@ -36,7 +35,8 @@
 #' result <- WREG.OLS(Y, X, transY)
 #' print(result)
 #' @export
-print.WREG.OLS <- function(object) {
+print.WREG.OLS <- function(x, ...) {
+  object <- x
   cat(paste0("Regression Model for ",names(object$Y),'\n'))
   cat('Coefficients fit by ordinary least-squares.\n')
   cat("\nCall:\n", object$Inputs$call,'\n\n')
@@ -74,7 +74,6 @@ print.WREG.OLS <- function(object) {
 #' @examples 
 #' ## print.WREG.WLS
 #' # Import some example data
-#' rm(list = ls())
 #' peakFQdir <- paste0(
 #'   file.path(system.file("exampleDirectory", package = "WREG"),
 #'     "pfqImport"))
@@ -93,7 +92,8 @@ print.WREG.OLS <- function(object) {
 #' result <- WREG.WLS(Y, X, recordLengths, LP3 = lp3Data, transY)
 #' print(result)
 #' @export
-print.WREG.WLS <- function(object) {
+print.WREG.WLS <- function(x, ...) {
+  object <- x
   cat(paste0("Regression Model for ",names(object$Y),'\n'))
   cat('Coefficients fit by weighted least-squares.\n')
   cat("\nCall:\n", object$Inputs$call,'\n\n')
@@ -144,7 +144,6 @@ print.WREG.WLS <- function(object) {
 #' @examples
 #' ## print.WREG.GLS
 #' # Import some example data
-#' rm(list = ls())
 #' peakFQdir <- paste0(
 #'   file.path(system.file("exampleDirectory", package = "WREG"),
 #'     "pfqImport"))
@@ -164,7 +163,8 @@ print.WREG.WLS <- function(object) {
 #' result <- WREG.GLS(Y, X, recordLengths, LP3 = lp3Data, basinChars, transY)
 #' print(result)
 #' @export
-print.WREG.GLS <- function(object) {
+print.WREG.GLS <- function(x, ...) {
+  object <- x
   cat(paste0("Regression Model for ",names(object$Y),'\n'))
   cat('Coefficients fit by generalized least-squares.\n')
   cat("\nCall:\n", object$Inputs$call,'\n\n')
@@ -216,7 +216,6 @@ print.WREG.GLS <- function(object) {
 #' @examples
 #' ## print.WREG.GLS
 #' # Import some example data
-#' rm(list = ls())
 #' peakFQdir <- paste0(
 #'   file.path(system.file("exampleDirectory", package = "WREG"),
 #'     "pfqImport"))
@@ -237,7 +236,8 @@ print.WREG.GLS <- function(object) {
 #'   regSkew = TRUE, MSEGR = 0.302)
 #' print(result)
 #' @export
-print.WREG.GLSs <- function(object) {
+print.WREG.GLSs <- function(x, ...) {
+  object <- x
 cat(paste0("Regression Model for ",names(object$Y),'\n'))
 cat(paste0('Coefficients fit by generalized least-squares with an \n',
            'adjustment for uncertainty in regional skew.\n'))

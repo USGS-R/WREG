@@ -38,7 +38,6 @@
 #' \item{UW}{A matrix of user weights, if included.}
 #' 
 #'@examples
-#'rm(list = ls())
 #'wregDir <- file.path(system.file("exampleDirectory", package = "WREG"),
 #'  "matlabImport")
 #'importedData <- importWREG(wregPath = wregDir)

@@ -53,9 +53,7 @@
 #'  Haversine approximation.  See \code{\link{Dist.WREG}}.  The default value is
 #'  \code{2}.  (See the \code{Legacy} details below.)
 #'  
-#'@details This function is largely a subroutine for \code{\link{WREG.MLR}} when
-#'  applying generalized least-squares regression (\dQuote{GLS} and
-#'  \dQuote{GLSskew}).
+#'@details This function is largely a subroutine for \code{\link{WREG.GLS}}.
 #'  
 #'  The weighting matrix is calculated by iteration, as noted in the manual to 
 #'  WREG v. 1.0.  As currently implemented the initial estimate of model error
@@ -74,7 +72,6 @@
 #'  
 #' @examples
 #' # Import some example data
-#' rm(list = ls())
 #' peakFQdir <- paste0(
 #'   file.path(system.file("exampleDirectory", package = "WREG"),
 #'     "pfqImport"))
