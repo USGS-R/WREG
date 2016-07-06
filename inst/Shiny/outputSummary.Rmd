@@ -1,0 +1,40 @@
+---
+title: "WREG Output summary"
+date: "`r Sys.time()`"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#Summary text
+```{r echo=FALSE}
+print(wregOUT)
+```
+
+#Figures
+
+##Fitted vs. Residuals
+
+```{r echo=FALSE}
+plot(wregOUT$fitted.values,wregOUT$residuals,
+                        xlab="Fitted values",ylab="Residuals",
+                        main="Fitted vs Residual")
+```
+
+##Y vs Leverage
+
+```{r echo=FALSE}
+ plot(wregOUT$Y,wregOUT$ResLevInf$Leverage,
+                        xlab="Y",ylab="Leverage",
+                        main="Y vs Leverage")
+```
+
+##Y vs Influence
+
+```{r echo=FALSE}
+plot(wregOUT$Y,wregOUT$ResLevInf$Leverage,
+                        xlab="Y",ylab="Influence",
+                        main="Y vs Influence")
+```
+

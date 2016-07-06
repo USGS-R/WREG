@@ -354,97 +354,165 @@ shinyServer(function(input, output,session) {
   ###Run WREG
   observeEvent(input$runWREG,
                {
-                tryCatch({
-                 withProgress(message = 'Running regression', value = 0, {
-                   LP3 <<- merge(selectData$LP3f,selectData$LP3k[c("Station.ID",input$Y)],by="Station.ID")
-                   LP3 <<- LP3[c(2,5,3,4)]
-                   colnames(LP3) <- c("S","K","G","GR")
-                   if(input$regType == "OLS")
-                   {
-                     wregOUT <<- WREG.OLS(Y=Yinput[,2],
-                                          X=Xinput[,2:ncol(Xinput)],
-                                          transY = transY)
-                   } else if (input$regType == "WLS")
-                   {
-                     
-                     wregOUT <<- WREG.WLS(Y=Yinput[,2],
-                                          X=Xinput[,2:ncol(Xinput)],
-                                          transY = transY,
-                                          recordLengths = selectData$recLen,
-                                          LP3 = LP3)
-                   } else if(input$regType == "GLS")
-                   {
-                     if(input$GLSskew == FALSE)
+                 tryCatch({
+                   withProgress(message = 'Running regression', value = 0, {
+                     LP3 <<- merge(selectData$LP3f,selectData$LP3k[c("Station.ID",input$Y)],by="Station.ID")
+                     LP3 <<- LP3[c(2,5,3,4)]
+                     colnames(LP3) <- c("S","K","G","GR")
+                     if(input$regType == "OLS")
                      {
-                       wregOUT <<- WREG.GLS(Y=Yinput[,2],
+                       wregOUT <<- WREG.OLS(Y=Yinput[,2],
+                                            X=Xinput[,2:ncol(Xinput)],
+                                            transY = transY)
+                     } else if (input$regType == "WLS")
+                     {
+                       
+                       wregOUT <<- WREG.WLS(Y=Yinput[,2],
                                             X=Xinput[,2:ncol(Xinput)],
                                             transY = transY,
                                             recordLengths = selectData$recLen,
-                                            LP3 = LP3,
-                                            basinChars = selectData$BasChars,
-                                            x0=NA,
-                                            alpha=input$alpha,
-                                            theta=input$theta,
-                                            peak=T,
-                                            distMeth=2,
-                                            regSkew=FALSE,
-                                            MSEGR=NA,
-                                            TY=2)
-                     } else if(input$GLSskew == TRUE)
+                                            LP3 = LP3)
+                     } else if(input$regType == "GLS")
                      {
-                       wregOUT <<- WREG.GLS(Y=Yinput[,2],
-                                            X=Xinput[,2:ncol(Xinput)],
-                                            transY = transY,
-                                            recordLengths = selectData$recLen,
-                                            LP3 = LP3,
-                                            basinChars = selectData$BasChars,
-                                            x0=NA,
-                                            alpha=input$alpha,
-                                            theta=input$theta,
-                                            peak=T,
-                                            distMeth=2,
-                                            regSkew=TRUE,
-                                            MSEGR=selectData$MSEGR,
-                                            TY=2)
+                       if(input$GLSskew == FALSE)
+                       {
+                         wregOUT <<- WREG.GLS(Y=Yinput[,2],
+                                              X=Xinput[,2:ncol(Xinput)],
+                                              transY = transY,
+                                              recordLengths = selectData$recLen,
+                                              LP3 = LP3,
+                                              basinChars = selectData$BasChars,
+                                              x0=NA,
+                                              alpha=input$alpha,
+                                              theta=input$theta,
+                                              peak=T,
+                                              distMeth=2,
+                                              regSkew=FALSE,
+                                              MSEGR=NA,
+                                              TY=2)
+                       } else if(input$GLSskew == TRUE)
+                       {
+                         wregOUT <<- WREG.GLS(Y=Yinput[,2],
+                                              X=Xinput[,2:ncol(Xinput)],
+                                              transY = transY,
+                                              recordLengths = selectData$recLen,
+                                              LP3 = LP3,
+                                              basinChars = selectData$BasChars,
+                                              x0=NA,
+                                              alpha=input$alpha,
+                                              theta=input$theta,
+                                              peak=T,
+                                              distMeth=2,
+                                              regSkew=TRUE,
+                                              MSEGR=input$MSEGR,
+                                              TY=2)
+                       }
                      }
-                   }
-                 })
-                 
-                 output$wregPrint <- renderPrint(print(wregOUT))
-                 output$wregFitVsRes <- renderPlot({
-                   plot(wregOUT$fitted.values,wregOUT$residuals,
-                        xlab="Fitted values",ylab="Residuals",
-                        main="Fitted vs Residual")
-                 })
-                 
-                 output$wregYVsLev <- renderPlot({
-                   plot(wregOUT$Y,wregOUT$ResLevInf$Leverage,
-                        xlab="Y",ylab="Leverage",
-                        main="Y vs Leverage")
-                 })
-                 
-                 output$wregYVsInf <- renderPlot({
-                   plot(wregOUT$Y,wregOUT$ResLevInf$Leverage,
-                        xlab="Y",ylab="Influence",
-                        main="Y vs Influence")
-                 })
-                 
-                 output$wregYVsInf <- renderPlot({
-                   plot(wregOUT$Y,wregOUT$ResLevInf$Leverage,
-                        xlab="Y",ylab="Influence",
-                        main="Y vs Influence")
-                 })
-                 
-                 h2("X and Y variable inputs")
-                 output$wregXY <- renderDataTable({cbind(Yinput,Xinput[2:ncol(Xinput)])})
-                },error=function(e) {output$wregPrint <- renderText("There was an error running WREG, please check inputs")})
+                   })
+                   
+                   output$wregPrint <- renderPrint(print(wregOUT))
+                   output$wregFitVsRes <- renderPlot({
+                     plot(wregOUT$fitted.values,wregOUT$residuals,
+                          xlab="Fitted values",ylab="Residuals",
+                          main="Fitted vs Residual")
+                   })
+                   
+                   output$wregYVsLev <- renderPlot({
+                     plot(wregOUT$Y,wregOUT$ResLevInf$Leverage,
+                          xlab="Y",ylab="Leverage",
+                          main="Y vs Leverage")
+                   })
+                   
+                   output$wregYVsInf <- renderPlot({
+                     plot(wregOUT$Y,wregOUT$ResLevInf$Leverage,
+                          xlab="Y",ylab="Influence",
+                          main="Y vs Influence")
+                   })
+                   
+                   output$wregYVsInf <- renderPlot({
+                     plot(wregOUT$Y,wregOUT$ResLevInf$Leverage,
+                          xlab="Y",ylab="Influence",
+                          main="Y vs Influence")
+                   })
+                   
+                   h2("X and Y variable inputs")
+                   output$wregXY <- renderDataTable({cbind(Yinput,Xinput[2:ncol(Xinput)])})
+                 },error=function(e) {output$wregPrint <- renderText(paste0("There was an error running WREG, please check inputs",
+                                                                            geterrmessage()))})
                  
                }
   )
   
+  ####################################
+  ###Export results
+  output$downloadReport <- downloadHandler(
+    filename = function() {
+      paste('outputSummary', sep = '.', switch(
+        input$format, HTML = 'html', Word = 'docx'
+      ))
+    },
+    
+    content = function(file) {
+      src <- normalizePath('outputSummary.Rmd')
+      
+      # temporarily switch to the temp dir, in case you do not have write
+      # permission to the current working directory
+      owd <- setwd(tempdir())
+      on.exit(setwd(owd))
+      file.copy(src, 'outputSummary.Rmd')
+      
+      out <- render('outputSummary.Rmd', switch(
+        input$format,
+        HTML = html_document(), Word = word_document()
+      ))
+      file.rename(out, file)
+    }
+)
   
-  
-  
-  
-  
+  output$downloadResults <- downloadHandler(
+    filename = "outputRaw.rda",
+    
+    content = function(file) {
+      ##Cant use zip in R because of need for rtools
+      
+      save(wregOUT,file=file)
+      
+      # temporarily switch to the temp dir, in case you do not have write
+      # permission to the current working directory
+      #owd <- setwd(tempdir())
+      #on.exit(setwd(owd))
+      
+      #tmpdir <- tempdir()
+      #setwd(tempdir())
+      
+      # write.table(wregOUT$Coefs,file="coefs.txt",sep="\t",quote=FALSE)
+      # write.table(wregOUT$ResLevInf,file="ResLevInf.txt",sep="\t",quote=FALSE,row.names=FALSE)
+      # write.table(wregOUT$LevLim,file="LevLim.txt",sep="\t",quote=FALSE,row.names=FALSE)
+      # write.table(wregOUT$InflLim,file="InflLim.txt",sep="\t",quote=FALSE,row.names=FALSE)
+      # write.table(wregOUT$LevInf.Sig,file="LevInf.Sig.txt",sep="\t",quote=FALSE,row.names=FALSE)
+      # write.table(wregOUT$PerformanceMetrics,file="PerformanceMetrics.txt",sep="\t",quote=FALSE,row.names=FALSE)
+      # write.table(wregOUT$X,file="X.txt",sep="\t",quote=FALSE,row.names=FALSE)
+      # write.table(wregOUT$Y,file="Y.txt",sep="\t",quote=FALSE,row.names=FALSE)
+      # write.table(wregOUT$fitted.values,file="fitted.values.txt",sep="\t",quote=FALSE,row.names=FALSE)
+      # write.table(wregOUT$residuals,file="residuals.txt",sep="\t",quote=FALSE,row.names=FALSE)
+      # write.table(wregOUT$Weighting,file="Weighting.txt",sep="\t",quote=FALSE)
+      # write.table(wregOUT$Inputs,file="Inputs.txt",sep="\t",quote=FALSE)
+      
+      #tar(tarfile=paste0(getwd(),"/",file),files=c("coefs.txt",
+      #                          "ResLevInf.txt",
+      #                          "LevLim.txt",
+      #                          "InflLim.txt",
+      #                          "LevInf.Sig.txt",
+      #                          "PerformanceMetrics.txt",
+      #                          "X.txt",
+      #                          "Y.txt",
+      #                          "fitted.values.txt",
+      #                          "residuals.txt",
+      #                          "Weighting.txt",
+      #                          "Inputs.txt"))
+    },
+    contentType = "application/zip")
+
+
+
 })

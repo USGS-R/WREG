@@ -108,7 +108,15 @@ shinyUI(fluidPage(theme="theme.css",navbarPage(img(src="Logo.png", width="80px",
                                                                                                   choices=list("Ordinary-least squares"="OLS",
                                                                                                                "Weighted-least squares"="WLS",
                                                                                                                "Generalized-least squares"="GLS")),
-                                                                                     checkboxInput("GLSskew",label="With regional skew",value=FALSE)
+                                                                                     conditionalPanel(
+                                                                                       condition = "input.regType == 'GLS'",
+                                                                                       checkboxInput("GLSskew",label="With regional skew",value=FALSE)
+                                                                                     ),
+                                                                                     conditionalPanel(
+                                                                                       condition = "input.GLSskew == true",
+                                                                                       numericInput("MSEGR",label="MSEGR",value="")
+                                                                                     )
+                                                                                     
                                                                                      
                                                                                      
                                                                                    ),
@@ -154,8 +162,8 @@ shinyUI(fluidPage(theme="theme.css",navbarPage(img(src="Logo.png", width="80px",
                                                         )
                                                         
                                                ),
-                                               tabPanel("View Results",
-                                                        navlistPanel("Plots and Tables",
+                                               tabPanel("View and export Results",
+                                                        navlistPanel("Result output",
                                                                      tabPanel("Plots",
                                                                               fluidPage(
                                                                                 plotOutput("wregFitVsRes"),
@@ -167,7 +175,18 @@ shinyUI(fluidPage(theme="theme.css",navbarPage(img(src="Logo.png", width="80px",
                                                                               fluidPage(
                                                                                 dataTableOutput("wregXY")
                                                                                 )
+                                                                              ),
+                                                                     tabPanel("Export results",
+                                                                              fluidPage(
+                                                                                h2("Download summary report"),
+                                                                                radioButtons('format', 'Document format', c('HTML', 'Word'),
+                                                                                             inline = TRUE),
+                                                                                downloadButton('downloadReport'),
+                                                                                h2("Download rData (.rda)"),
+                                                                                downloadButton("downloadResults")
+                                                                                
                                                                               )
+                                                                     )
                                                         )
                                                         
                                                         

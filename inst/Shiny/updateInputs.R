@@ -6,6 +6,8 @@ updateSelectInput(session,"Y",choices=colnames(importData$Y)[-1])
 #X Variable
 updateSelectInput(session,"X",choices=colnames(importData$X)[-1])
 
+updateNumericInput(session,"MSEGR",value=importData$MSEGR)
+
 #Variable transforms
 output$XvarTrans <- renderUI({
   if(length(input$X) > 0)
