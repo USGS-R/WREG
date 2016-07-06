@@ -12,7 +12,8 @@ Suggests:
     testthat
 Imports:
   DT,
-  shiny
+  shiny,
+  rmarkdown
 Depends:
   R (>= 2.10)
 VignetteBuilder: knitr
