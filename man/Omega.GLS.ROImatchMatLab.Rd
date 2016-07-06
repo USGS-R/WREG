@@ -143,9 +143,9 @@ NDX <- temp$ix[1:n] # Sites to use in this regression
 Y.i <- Y[NDX] # Predictands from region of influence
 X.i <- X[NDX,] # Predictors from region of influence
 # Record lengths from region of influence
-RecordLengths.i <- importedData$recLen[NDX,NDX]
+RecordLengths.i <- importedData$recLen[NDX,NDX] 
 # Basin characteristics (IDs, Lat, Long) from region of influence.
-BasinChars.i <- importedData$BasChars[NDX,]
+BasinChars.i <- importedData$BasChars[NDX,] 
 LP3.i <- data.frame(lp3Data)[NDX,] # LP3 parameters from region of influence
 
 # Compute weighting matrix
