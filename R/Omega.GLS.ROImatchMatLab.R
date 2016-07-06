@@ -120,8 +120,10 @@
 #' # Pull out characeristics of the region.
 #' Y.i <- Y[NDX] # Predictands from region of influence
 #' X.i <- X[NDX,] # Predictors from region of influence
-#' RecordLengths.i <- importedData$recLen[NDX,NDX] # Record lengths from region of influence
-#' BasinChars.i <- importedData$BasChars[NDX,] # Basin characteristics (IDs, Lat, Long) from region of influence.
+#' # Record lengths from region of influence
+#' RecordLengths.i <- importedData$recLen[NDX,NDX] 
+#' # Basin characteristics (IDs, Lat, Long) from region of influence.
+#' BasinChars.i <- importedData$BasChars[NDX,] 
 #' LP3.i <- data.frame(lp3Data)[NDX,] # LP3 parameters from region of influence
 #' 
 #' # Compute weighting matrix
@@ -131,12 +133,13 @@
 #'   X.all = X, LP3.all = lp3Data)
 #' 
 #'@export
-Omega.GLS.ROImatchMatLab <- function(alpha=0.01,theta=0.98,Independent,X,Y,RecordLengths,
-  LP3,MSEGR=NA,TY=2,Peak=T,X.all,LP3.all,DistMeth=2,regSkew=FALSE) {
+Omega.GLS.ROImatchMatLab <- function(alpha=0.01,theta=0.98,Independent,X,Y,
+  RecordLengths, LP3,MSEGR=NA,TY=2,Peak=T,X.all,LP3.all,
+  DistMeth=2,regSkew=FALSE) {
   # William Farmer, January 27, 2015
   #
-  # WREG v 1.05 (MatLab) is inconsistent in which components are used to develop equations in RoI-WLS
-  # Eq. 15 is implemented with all sites
+  # WREG v 1.05 (MatLab) is inconsistent in which components are used to 
+  #  develop equations in RoI-WLS Eq. 15 is implemented with all sites
   
   
   # Some upfront error handling
