@@ -21,7 +21,48 @@ test_that("Run WREG.WLS",{
   transY <- "none"
   
   # Run WLS regression
-  result_test <- WREG.WLS(Y, X, recordLengths, LP3 = lp3Data, transY)
+  expect_silent(
+  resultTest <- WREG.WLS(Y, X, recordLengths, LP3 = lp3Data, transY)
+  )
   
-  expect_equal(result_test,result)
+  expect_silent(print(resultTest))
+  expect_equal(resultTest,result)
+  
+  # Run WLS regression with log10
+  
+  expect_silent(
+    
+    load(paste0(system.file("testData", package = "WREG"),"/wreg.wls.log10.staticOut.rda"))
+  )
+  expect_silent(
+  resultTest <- WREG.WLS(Y, X, recordLengths, LP3 = lp3Data, transY = "log10")
+  )
+  expect_equal(resultTest,result)
+  
+  # Run WLS regression with ln
+  
+  expect_silent(
+    
+    load(paste0(system.file("testData", package = "WREG"),"/wreg.wls.ln.staticOut.rda"))
+  )
+  
+  expect_silent(
+    resultTest <- WREG.WLS(Y, X, recordLengths, LP3 = lp3Data, transY = "ln")
+  )
+  
+  expect_equal(resultTest,result)
+  
+  #Check warnings
+  expect_error(WREG.WLS(Y="jazandapus",X,recordLengths,LP3=lp3Data,transY),
+               "Invalid inputs were provided.  See warnings()."
+               )
+  
+  expect_error(WREG.WLS(Y,X="jazandapus",recordLengths,LP3=lp3Data,transY)
+  )
+  expect_error(WREG.WLS(Y,X,recordLengths="jazandapus",LP3=lp3Data,transY),
+               "Invalid inputs were provided.  See warnings()."
+  )
+  expect_error(WREG.WLS(Y,X,recordLengths,LP3=lp3Data,transY="jazandapus"),
+               "Invalid inputs were provided.  See warnings()."
+  )
 })
