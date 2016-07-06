@@ -128,6 +128,7 @@ test_that("Run WREG.GLS with transY=ln",{
     wreg.gls.out <- WREG.GLS(Y, X, recordLengths, LP3, basinChars, transY)
   })
   
+  expect_silent(print(wreg.gls.out))
   
   #Coefs
   expect_equal(wreg.gls.out$Coefs,wreg.gls.staticOut$Coefs)

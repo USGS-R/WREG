@@ -23,7 +23,7 @@ test_that("Run WREG.UW",{
   # Run user-weights regression
   resultTest <- WREG.UW(Y, X, customWeight = inverseRecLen, transY)
   
-  expect_equal(result_test,wreg.uw.staticOut)
+  expect_equal(resultTest,wreg.uw.staticOut)
 })
 
 test_that("Run WREG.UW with model variance list",{

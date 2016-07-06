@@ -21,6 +21,9 @@ test_that("Run WREG.OLS",{
   expect_silent(
     resultTest <- WREG.OLS(Y, X, transY)
   )
+  
+  expect_silent(print(resultTest))
+  
   expect_equal(resultTest,wreg.ols.staticOut)
 })
   
@@ -49,7 +52,7 @@ test_that("Run WREG.OLS with log10",{
   expect_equal(resultTest,wreg.ols.staticOut.log10)
 })
 
-test_that("Run WREG.OLS with log10",{
+test_that("Run WREG.OLS with ln",{
   # Import some example data
   expect_silent(
     
