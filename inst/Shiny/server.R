@@ -93,12 +93,12 @@ shinyServer(function(input, output,session) {
                  ))
                  selectData <<- list(sites = importData$sites[which(importData$sites %in% 
                                                                       siteChars$Station.ID[selSites])],
-                                     Y = subset(importData$Y,Station.ID %in% siteChars$Station.ID[selSites]),
+                                     Y = importData$Y[importData$Y$Station.ID %in% siteChars$Station.ID[selSites],],
                                      AEP = importData$AEP,
-                                     X = subset(importData$X,Station.ID %in% siteChars$Station.ID[selSites]),
-                                     LP3f = subset(importData$LP3f,Station.ID %in% siteChars$Station.ID[selSites]),
-                                     LP3k = subset(importData$LP3k,Station.ID %in% siteChars$Station.ID[selSites]),
-                                     BasChars = subset(importData$BasChars,Station.ID %in% siteChars$Station.ID[selSites]),
+                                     X = importData$X[importData$X$Station.ID %in% siteChars$Station.ID[selSites],],
+                                     LP3f = importData$LP3f[importData$LP3f$Station.ID %in% siteChars$Station.ID[selSites],],
+                                     LP3k = importData$LP3k[importData$LP3k$Station.ID %in% siteChars$Station.ID[selSites],],
+                                     BasChars = importData$BasChars[importData$BasChars$Station.ID %in% siteChars$Station.ID[selSites],],
                                      MSEGR = importData$MSEGR,
                                      recLen = importData$recLen[siteChars$Station.ID[selSites],
                                                                 siteChars$Station.ID[selSites]],

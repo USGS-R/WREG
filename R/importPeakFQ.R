@@ -65,7 +65,7 @@ importPeakFQ <- function(pfqPath,gisFile,sites='') {
   
   # subset to specified sites
   if (sites!='') {
-    gisData <- subset(gisData,Station.ID %in% sites)
+    gisData <- gisData[gisData$Station.ID %in% sites,]
   }
   #ndx <- which(is.element(gisData$Station.ID,sites))
   
@@ -204,8 +204,8 @@ importPeakFQ <- function(pfqPath,gisFile,sites='') {
   }
   
   ###Subset GIS file to only sites that have an EXP and PRT
-  gisData <- subset(gisData,Station.ID %in% EXP_SiteID[,2])
-  gisData <- subset(gisData,Station.ID %in% PRT_SiteID)
+  gisData <- gisData[gisData$Station.ID %in% EXP_SiteID[,2],]
+  gisData <- gisData[gisData$Station.ID %in% PRT_SiteID,]
   
   #This needs a comment
   recLen <- recCor <- matrix(NA,ncol=length(siteTS),nrow=length(siteTS))

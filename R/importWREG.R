@@ -185,13 +185,13 @@ importWREG <- function(wregPath,sites='') {
     allFiles <- allFiles[-which(lapply(allFiles,length) == 0)]
     
     #Remove missing site from all files
-    Y <- subset(Y, Station.ID %in% sitesOut)
-    X <- subset(X, Station.ID %in% sitesOut)
-    LP3f <- subset(LP3f, Station.ID %in% sitesOut)
-    LP3k <- subset(LP3k, Station.ID %in% sitesOut)
-    BasChars <- subset(BasChars, Station.ID %in% sitesOut)
-    siteInfo <- subset(siteInfo, Station.ID %in% sitesOut)
-    TestRecLen <- subset(TestRecLen, Station.ID %in% sitesOut )
+    Y <- Y[Y$Station.ID %in% sitesOut,]
+    X <- X[X$Station.ID %in% sitesOut,]
+    LP3f <- LP3f[LP3f$Station.ID %in% sitesOut,]
+    LP3k <- LP3k[LP3k$Station.ID %in% sitesOut,]
+    BasChars <- BasChars[BasChars$Station.ID %in% sitesOut,]
+    siteInfo <- siteInfo[siteInfo$Station.ID %in% sitesOut,]
+    TestRecLen <- TestRecLen[TestRecLen$Station.ID %in% sitesOut,]
     
   }
   if(length(allFiles) > length(sitesOut))
