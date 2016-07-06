@@ -21,14 +21,14 @@
 #'@param transY A required character string indicating if the the 
 #'  dependentvariable was transformed by the common logarithm ('log10'), 
 #'  transformed by the natural logarithm ('ln') or untransformed ('none').
-#'@param RecordLengths This input is required for \dQuote{WLS}, \dQuote{GLS} and
+#'@param recordLengths This input is required for \dQuote{WLS}, \dQuote{GLS} and
 #'  \dQuote{GLSskew}.  For \dQuote{GLS} and \dQuote{GLSskew},
-#'  \code{RecordLengths} should be a matrix whose rows and columns are in the
+#'  \code{recordLengths} should be a matrix whose rows and columns are in the
 #'  same order as \code{Y}.  Each \code{(r,c)} element represents the length of
 #'  concurrent record between sites \code{r} and \code{c}.  The diagonal
 #'  elements therefore represent each site's full record length.  For
 #'  \dQuote{WLS}, the only the at-site record lengths are needed. In the case of
-#'  \dQuote{WLS}, \code{RecordLengths} can be a vector or the matrix described
+#'  \dQuote{WLS}, \code{recordLengths} can be a vector or the matrix described
 #'  for \dQuote{GLS} and \dQuote{GLSskew}.
 #'@param LP3 A dataframe containing the fitted Log-Pearson Type III standard 
 #'  deviate, standard deviation and skew for each site.  The names of this data
@@ -167,7 +167,7 @@
 #'   ROI='GRoI', n = 10L)
 #'@export
 WREG.RoI <- function(Y,X,Reg,transY=NA,
-  RecordLengths = NA,LP3 = NA,regSkew=FALSE,
+  recordLengths = NA,LP3 = NA,regSkew=FALSE,
   alpha=0.01,theta=0.98,BasinChars=NA,MSEGR=NA,TY=2,Peak=T,
   ROI=c('PRoI','GRoI','HRoI'),n=NA,D=250,DistMeth=2,Legacy=FALSE) {
   # William Farmer, USGS, January 23, 2015
@@ -405,7 +405,7 @@ WREG.RoI <- function(Y,X,Reg,transY=NA,
   ## Cycle through sites.  For each site, determine region, perform regression, save output.
   for (i in 1:length(Y)) { # Loop through sites...
     x0.i <- X[i,] # Predictors at target site
-    x0.i.nocon <- t(matrix(rep(X.nocon[i,],times=length(Y)),ncol=length(Y))) # Predictors at target site, less a constant
+    x0.i.nocon <- t(matrix(unlist(rep(X.nocon[i,],times=length(Y))),ncol=length(Y))) # Predictors at target site, less a constant
     ### Physiographic Euclidian distance
     Pdist <- sqrt(rowSums(((x0.i.nocon-X.nocon)/SDs)^2)) # Euclidian distance in independent-variable space.  Eq 47.
     Pdist[i] <- Inf # To block self identification.
@@ -448,26 +448,26 @@ WREG.RoI <- function(Y,X,Reg,transY=NA,
     ### Perform regressions
     Y.i <- Y[NDX] # Predictands from region of influence
     X.i <- X[NDX,] # Predictors from region of influence
-    if (!is.na(sum(c(RecordLengths)))&&is.matrix(RecordLengths)) {# GLS
-      RecordLengths.i <- RecordLengths[NDX,NDX] # Record lengths from region of influence
-    } else if (!is.na(sum(c(RecordLengths)))&&is.vector(RecordLengths)) { # WLS
-      RecordLengths.i <- RecordLengths[NDX] # Record lengths from region of influence
+    if (!is.na(sum(c(recordLengths)))&&is.matrix(recordLengths)) {# GLS
+      recordLengths.i <- recordLengths[NDX,NDX] # Record lengths from region of influence
+    } else if (!is.na(sum(c(recordLengths)))&&is.vector(recordLengths)) { # WLS
+      recordLengths.i <- recordLengths[NDX] # Record lengths from region of influence
     } else {
-      RecordLengths.i <- RecordLengths
+      recordLengths.i <- recordLengths
     }
     BasinChars.i <- BasinChars[NDX,] # Basin characteristics (IDs, Lat, Long) from region of influence.
     LP3.i <- data.frame(LP3)[NDX,] # LP3 parameters from region of influence
     if (Legacy) { # Apply regressions to match MatLab WREG v 1.05.
       if (Reg=='WLS') { # Use subroutine to correct WLS weights to meet v1.05 idiosyncrasies
-        WeightFix <- Omega.WLS.ROImatchMatLab(Y.all=Y,X.all=X,LP3.all=LP3,RecordLengths.all=RecordLengths,NDX=NDX)
+        WeightFix <- Omega.WLS.ROImatchMatLab(Y.all=Y,X.all=X,LP3.all=LP3,RecordLengths.all=recordLengths,NDX=NDX)
         Reg.i <- WREG.UW(Y = Y.i, 
           X = as.matrix(X.i , ncol = length(X.i) / length(Y)),
           customWeight = WeightFix, transY, x0 = x0.i)
       } else if (is.element(Reg,c('GLS','GLSskew'))) { # Use subroutine to correct GLS and GLSskew weights to meet v1.05 idiosyncrasies
         # "Corrected" weighting matrix to match MATLAB code.  Returns weighting matrix and var.moderror.k
-        WeightFix.k <- Omega.GLS.ROImatchMatLab(alpha=alpha,theta=theta,Independent=BasinChars.i,X=X.i,Y=Y.i,RecordLengths=RecordLengths.i,LP3=LP3.i,MSEGR=MSEGR,TY=TY,Peak=Peak,X.all=X,LP3.all=LP3,DistMeth=DistMeth)
+        WeightFix.k <- Omega.GLS.ROImatchMatLab(alpha=alpha,theta=theta,Independent=BasinChars.i,X=X.i,Y=Y.i,RecordLengths=recordLengths.i,LP3=LP3.i,MSEGR=MSEGR,TY=TY,Peak=Peak,X.all=X,LP3.all=LP3,DistMeth=DistMeth)
         # "Corrected" to match MATLAB code.  Returns weighting matrix and var.moderror.0
-        WeightFix.0 <- Omega.GLS.ROImatchMatLab(alpha=alpha,theta=theta,Independent=BasinChars.i,X=matrix(1,ncol=1,nrow=nrow(X.i)),Y=Y.i,RecordLengths=RecordLengths.i,LP3=LP3.i,MSEGR=MSEGR,TY=TY,Peak=Peak,X.all=matrix(1,ncol=1,nrow=nrow(X)),LP3.all=LP3,DistMeth=DistMeth)
+        WeightFix.0 <- Omega.GLS.ROImatchMatLab(alpha=alpha,theta=theta,Independent=BasinChars.i,X=matrix(1,ncol=1,nrow=nrow(X.i)),Y=Y.i,RecordLengths=recordLengths.i,LP3=LP3.i,MSEGR=MSEGR,TY=TY,Peak=Peak,X.all=matrix(1,ncol=1,nrow=nrow(X)),LP3.all=LP3,DistMeth=DistMeth)
         WeightFix <- list(Omega=WeightFix.k$Omega,var.modelerror.0=WeightFix.0$GSQ,var.modelerror.k=WeightFix.k$GSQ)
         Reg.i <- WREG.UW(Y = Y.i, 
           X = as.matrix(X.i , ncol = length(X.i) / length(Y)),
@@ -481,12 +481,12 @@ WREG.RoI <- function(Y,X,Reg,transY=NA,
       if (Reg=='WLS') {
         Reg.i <- WREG.WLS(Y = Y.i, 
           X = as.matrix(X.i , ncol = length(X.i) / length(Y)),
-          recordLengths = RecordLengths.i,
+          recordLengths = recordLengths.i,
           LP3 = LP3.i, transY, x0 = x0.i)
       } else if (is.element(Reg,c('GLS','GLSskew'))) { 
         Reg.i <- WREG.GLS(Y = Y.i, 
           X = as.matrix(X.i , ncol = length(X.i) / length(Y)),
-          recordLengths = RecordLengths.i,
+          recordLengths = recordLengths.i,
           LP3 = LP3.i, transY,
           x0=x0.i, alpha, theta, Peak, distMeth = DistMeth,
           regSkew, MSEGR, TY, legacy=Legacy)

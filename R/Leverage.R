@@ -103,7 +103,7 @@ Leverage <- function(X,Omega,Ch=NA,x0=NA,ROI=FALSE) {
     h <- diag(as.matrix(X)%*%solve(t(X)%*%solve(Omega)%*%as.matrix(X))%*%t(X)%*%solve(Omega)) # Leverage, Eq 40
     if (is.na(Ch)) {Ch=2} # Default for non-ROI 
   } else if (ROI==T) { # Region-of-influence regression
-    h <- t(x0%*%solve(t(X)%*%solve(Omega)%*%as.matrix(X))%*%t(X)%*%solve(Omega)) # Leverage, Eq 41
+    h <- t(as.matrix(x0)%*%solve(t(X)%*%solve(Omega)%*%as.matrix(X))%*%t(X)%*%solve(Omega)) # Leverage, Eq 41
     if (is.na(Ch)) {Ch=4} # Default for ROI 
   }
   h_limit <- Ch*mean(h) # Critical value of leverage, Eq 42

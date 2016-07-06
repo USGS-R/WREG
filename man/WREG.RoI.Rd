@@ -4,7 +4,7 @@
 \alias{WREG.RoI}
 \title{Region-of-Influence Regression (WREG)}
 \usage{
-WREG.RoI(Y, X, Reg, transY = NA, RecordLengths = NA, LP3 = NA,
+WREG.RoI(Y, X, Reg, transY = NA, recordLengths = NA, LP3 = NA,
   regSkew = FALSE, alpha = 0.01, theta = 0.98, BasinChars = NA,
   MSEGR = NA, TY = 2, Peak = T, ROI = c("PRoI", "GRoI", "HRoI"),
   n = NA, D = 250, DistMeth = 2, Legacy = FALSE)
@@ -32,14 +32,14 @@ regional skew.)}
 dependentvariable was transformed by the common logarithm ('log10'),
 transformed by the natural logarithm ('ln') or untransformed ('none').}
 
-\item{RecordLengths}{This input is required for \dQuote{WLS}, \dQuote{GLS} and
+\item{recordLengths}{This input is required for \dQuote{WLS}, \dQuote{GLS} and
 \dQuote{GLSskew}.  For \dQuote{GLS} and \dQuote{GLSskew},
-\code{RecordLengths} should be a matrix whose rows and columns are in the
+\code{recordLengths} should be a matrix whose rows and columns are in the
 same order as \code{Y}.  Each \code{(r,c)} element represents the length of
 concurrent record between sites \code{r} and \code{c}.  The diagonal
 elements therefore represent each site's full record length.  For
 \dQuote{WLS}, the only the at-site record lengths are needed. In the case of
-\dQuote{WLS}, \code{RecordLengths} can be a vector or the matrix described
+\dQuote{WLS}, \code{recordLengths} can be a vector or the matrix described
 for \dQuote{GLS} and \dQuote{GLSskew}.}
 
 \item{LP3}{A dataframe containing the fitted Log-Pearson Type III standard
