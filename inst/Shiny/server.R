@@ -410,6 +410,8 @@ shinyServer(function(input, output,session) {
                      }
                    })
                    
+                   #####################################
+                   ###Render priunt summary and plots
                    output$wregPrint <- renderPrint(print(wregOUT))
                    output$wregFitVsRes <- renderPlot({
                      plot(wregOUT$fitted.values,wregOUT$residuals,
@@ -435,8 +437,102 @@ shinyServer(function(input, output,session) {
                           main="Y vs Influence")
                    })
                    
-                   h2("X and Y variable inputs")
-                   output$wregXY <- renderDataTable({cbind(Yinput,Xinput[2:ncol(Xinput)])})
+                   
+                   ##############################################
+                   ###Table outputs
+                   
+                   #Inputs
+                   output$wregXY <- DT::renderDataTable(cbind(Yinput,Xinput[2:ncol(Xinput)]),
+                                                    options = list(scrollX = TRUE))
+                   output$downloadInputs <- downloadHandler(
+                     filename = "modelInput.txt",
+                     
+                     content = function(file) {
+                       write.table(cbind(Yinput,Xinput[2:ncol(Xinput)]),file=file,sep="\t",quote=FALSE)
+                       
+                     })
+                   
+                   #Coefs
+                   output$Coefs <- DT::renderDataTable(wregOUT$Coefs)
+                   output$downloadCoefs <- downloadHandler(
+                     filename = "coefs.txt",
+                     
+                     content = function(file) {
+                       write.table(wregOUT$Coefs,file=file,sep="\t",quote=FALSE)
+                       
+                     })
+                   
+                   #ResLevInf
+                   output$ResLevInf <- DT::renderDataTable(wregOUT$ResLevInf)
+                   output$downloadResLevInf <- downloadHandler(
+                     filename = "ResLevInf.txt",
+                     
+                     content = function(file) {
+                       write.table(wregOUT$ResLevInf,file=file,sep="\t",quote=FALSE)
+                       
+                     })
+                   
+                   #LevLim
+                   output$LevLim <- renderText(wregOUT$LevLim)
+                   
+                   #InflLim
+                   output$InflLim <- renderText(wregOUT$InflLim)
+                   
+                   #LevInf.Sig
+                   output$LevInf.Sig <- DT::renderDataTable(wregOUT$LevInf.Sig)
+                   output$downloadLevInf.Sig <- downloadHandler(
+                     filename = "LevInf.Sig.txt",
+                     
+                     content = function(file) {
+                       write.table(wregOUT$LevInf.Sig,file=file,sep="\t",quote=FALSE)
+                       
+                     })
+                   
+                   #Performance Metrics
+                   output$PerformanceMetricsUI <- renderUI({
+                     
+                     fluidRow(
+                       h2("Performance metrics"),
+                       
+                       lapply(1:length(wregOUT$PerformanceMetrics), function(i) {
+                         
+                         
+                         
+                         
+                         column(2,
+                                h4(names(wregOUT$PerformanceMetrics)[i]),
+                                verbatimTextOutput(names(wregOUT$PerformanceMetrics[i]))
+                         )
+                       })
+                     )
+                     
+                   })
+                   
+                   lapply(1:length(wregOUT$PerformanceMetrics), function(i) {
+                     output[[names(wregOUT$PerformanceMetrics)[i]]] <- renderText({wregOUT$PerformanceMetrics[[i]]})
+                   })
+                   
+                   #fitted.values and residuals
+                   output$FitandResid <- DT::renderDataTable(cbind(wregOUT$fitted.values,wregOUT$residuals))
+                   output$downloadFitandResid <- downloadHandler(
+                     filename = "FitandResid.txt",
+                     
+                     content = function(file) {
+                       write.table(cbind(wregOUT$fitted.values,wregOUT$residuals),file=file,sep="\t",quote=FALSE)
+                       
+                     })
+                   
+                   #Weighting
+                   output$Weighting <- DT::renderDataTable(wregOUT$Weighting,
+                                                       options = list(scrollX = TRUE))
+                   output$downloadWeighting <- downloadHandler(
+                     filename = "Weighting.txt",
+                     
+                     content = function(file) {
+                       write.table(wregOUT$Weighting,file=file,sep="\t",quote=FALSE)
+                       
+                     })
+                   
                  },error=function(e) {output$wregPrint <- renderText(paste0("There was an error running WREG, please check inputs",
                                                                             geterrmessage()))})
                  
@@ -467,52 +563,13 @@ shinyServer(function(input, output,session) {
       ))
       file.rename(out, file)
     }
-)
+  )
   
   output$downloadResults <- downloadHandler(
     filename = "outputRaw.rda",
     
     content = function(file) {
-      ##Cant use zip in R because of need for rtools
-      
       save(wregOUT,file=file)
-      
-      # temporarily switch to the temp dir, in case you do not have write
-      # permission to the current working directory
-      #owd <- setwd(tempdir())
-      #on.exit(setwd(owd))
-      
-      #tmpdir <- tempdir()
-      #setwd(tempdir())
-      
-      # write.table(wregOUT$Coefs,file="coefs.txt",sep="\t",quote=FALSE)
-      # write.table(wregOUT$ResLevInf,file="ResLevInf.txt",sep="\t",quote=FALSE,row.names=FALSE)
-      # write.table(wregOUT$LevLim,file="LevLim.txt",sep="\t",quote=FALSE,row.names=FALSE)
-      # write.table(wregOUT$InflLim,file="InflLim.txt",sep="\t",quote=FALSE,row.names=FALSE)
-      # write.table(wregOUT$LevInf.Sig,file="LevInf.Sig.txt",sep="\t",quote=FALSE,row.names=FALSE)
-      # write.table(wregOUT$PerformanceMetrics,file="PerformanceMetrics.txt",sep="\t",quote=FALSE,row.names=FALSE)
-      # write.table(wregOUT$X,file="X.txt",sep="\t",quote=FALSE,row.names=FALSE)
-      # write.table(wregOUT$Y,file="Y.txt",sep="\t",quote=FALSE,row.names=FALSE)
-      # write.table(wregOUT$fitted.values,file="fitted.values.txt",sep="\t",quote=FALSE,row.names=FALSE)
-      # write.table(wregOUT$residuals,file="residuals.txt",sep="\t",quote=FALSE,row.names=FALSE)
-      # write.table(wregOUT$Weighting,file="Weighting.txt",sep="\t",quote=FALSE)
-      # write.table(wregOUT$Inputs,file="Inputs.txt",sep="\t",quote=FALSE)
-      
-      #tar(tarfile=paste0(getwd(),"/",file),files=c("coefs.txt",
-      #                          "ResLevInf.txt",
-      #                          "LevLim.txt",
-      #                          "InflLim.txt",
-      #                          "LevInf.Sig.txt",
-      #                          "PerformanceMetrics.txt",
-      #                          "X.txt",
-      #                          "Y.txt",
-      #                          "fitted.values.txt",
-      #                          "residuals.txt",
-      #                          "Weighting.txt",
-      #                          "Inputs.txt"))
-    },
-    contentType = "application/zip")
-
-
-
+      })
+  
 })

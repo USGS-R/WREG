@@ -76,4 +76,4 @@ output$XvarTrans <- renderUI({
 })
 
 #Data table
-output$siteCharTable <- renderDataTable(siteChars,filter="top",server=TRUE)
+output$siteCharTable <- DT::renderDataTable(siteChars,filter="top",server=TRUE)

@@ -60,7 +60,7 @@ shinyUI(fluidPage(theme="theme.css",navbarPage(img(src="Logo.png", width="80px",
                                                                    
                                                                    verbatimTextOutput("numSitesWREG")
                                                                    
-
+                                                                   
                                                           )
                                                ),
                                                
@@ -78,7 +78,7 @@ shinyUI(fluidPage(theme="theme.css",navbarPage(img(src="Logo.png", width="80px",
                                                                      ),
                                                                      actionButton("selectSites",label="Submit"),
                                                                      verbatimTextOutput("selSites"),
-                                                                     dataTableOutput("siteCharTable")
+                                                                     DT::dataTableOutput("siteCharTable")
                                                                      
                                                                    )
                                                                    
@@ -171,21 +171,57 @@ shinyUI(fluidPage(theme="theme.css",navbarPage(img(src="Logo.png", width="80px",
                                                                                 plotOutput("wregYVsInf")
                                                                               )
                                                                      ),
-                                                                     tabPanel("Tables",
+                                                                     tabPanel("Result tables",
                                                                               fluidPage(
-                                                                                dataTableOutput("wregXY")
-                                                                                )
-                                                                              ),
-                                                                     tabPanel("Export results",
-                                                                              fluidPage(
-                                                                                h2("Download summary report"),
-                                                                                radioButtons('format', 'Document format', c('HTML', 'Word'),
-                                                                                             inline = TRUE),
-                                                                                downloadButton('downloadReport'),
-                                                                                h2("Download rData (.rda)"),
-                                                                                downloadButton("downloadResults")
+                                                                                
+                                                                                uiOutput("PerformanceMetricsUI"),
+                                                                                
+                                                                                h2("Model coefficients"),
+                                                                                DT::dataTableOutput("Coefs"),
+                                                                                downloadButton('downloadCoefs'),
+                                                                                
+                                                                                h2("X and Y variable inputs"),
+                                                                                DT::dataTableOutput("wregXY"),
+                                                                                downloadButton('downloadInputs'),
+                                                                                
+                                                                                h2("Residuals, Leverage, and Influence"),
+                                                                                DT::dataTableOutput("ResLevInf"),
+                                                                                downloadButton('downloadResLevInf'),
+                                                                                
+                                                                                fluidRow(
+                                                                                  column(4,
+                                                                                         h4("Critical value of leverage"),
+                                                                                         verbatimTextOutput("LevLim")
+                                                                                  ),
+                                                                                  column(4,
+                                                                                         h4("Critical value of influence"),
+                                                                                         verbatimTextOutput("InflLim")
+                                                                                  )
+                                                                                ),
+                                                                                  
+                                                                                h2("Significance of leverage and influence"),
+                                                                                DT::dataTableOutput("LevInf.Sig"),
+                                                                                downloadButton('downloadLevInf.Sig'),
+                                                                                
+                                                                                h2("Fitted and residual values"),
+                                                                                DT::dataTableOutput("FitandResid"),
+                                                                                downloadButton('downloadFitandResid'),
+                                                                                
+                                                                                h2("Weighting matrix"),
+                                                                                DT::dataTableOutput("Weighting"),
+                                                                                downloadButton('downloadWeighting')
                                                                                 
                                                                               )
+                                                                              
+                                                                     ),
+                                                                     tabPanel("Summary and rData export",
+                                                                              h2("Download summary report"),
+                                                                              radioButtons('format', 'Document format', c('HTML', 'Word'),
+                                                                                           inline = TRUE),
+                                                                              downloadButton('downloadReport'),
+                                                                              
+                                                                              h2("Download rData (.rda)"),
+                                                                              downloadButton("downloadResults")
                                                                      )
                                                         )
                                                         
