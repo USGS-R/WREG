@@ -5,7 +5,7 @@
 #' }
 #' @export
 #' @import shiny
-#' @improt rmarkdown
+#' @import rmarkdown
 #' @importFrom DT renderDataTable
 #' @importFrom DT dataTableOutput
 WREGgui <- function() {
