@@ -232,7 +232,7 @@ Omega.WLS.ROImatchMatLab <- function(Y.all,X.all,LP3.all,RecordLengths.all,NDX) 
   var.modelerror.0 <- max(0,MSE.OLS.0-c1.0*mean(1/RecordLengths.all)) # Constant-model model-error variance.  Eq 14.
   
   ## Final weighting matrix
-  Omega <- diag((var.modelerror.k+c1/RecordLengths.all[1:n])) # WLS weighting matrix.  Eq 12
+  Omega <- diag((var.modelerror.k+c1/RecordLengths.all[1:length(NDX)])) # WLS weighting matrix.  Eq 12
   # BUG: MatLab code mis-shuffles the record lengths.  See lines 1457-1459 of WREG v. 1.05
   
   ## Output
