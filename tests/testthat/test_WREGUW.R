@@ -56,10 +56,10 @@ test_that("Run WREG.UW with model variance list",{
   # Run user-weights regression
   resultTest <- WREG.UW(Y, X, customWeight = inverseRecLen, transY)
   
-  #wreg.uw.modvar.out <- resultTest
+  #wreg.uw.staticOut <- resultTest
   #save(wreg.uw.staticOut,file="inst/testData/wreg.uw.modVar.out.rda")
   
-  expect_equal(resultTest,wreg.uw.modvar.out)
+  expect_equal(resultTest,wreg.uw.staticOut)
 })
 
 # test_that("Error checking",{

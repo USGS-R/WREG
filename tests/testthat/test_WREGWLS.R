@@ -75,7 +75,7 @@ test_that("Run WREG.WLS with ln",{
   
   expect_silent(
     
-    load(paste0(system.file("testData", package = "WREG"),"/wreg.wls.ln.staticOut.rda"))
+    load(paste0(system.file("testData", package = "WREG"),"/wreg.wls.staticOut.ln.rda"))
   )
   
   # Organizing input data
