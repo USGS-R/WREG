@@ -514,7 +514,8 @@ shinyServer(function(input, output,session) {
                    })
                    
                    #fitted.values and residuals
-                   output$FitandResid <- DT::renderDataTable(cbind(wregOUT$fitted.values,wregOUT$residuals))
+                   output$FitandResid <- DT::renderDataTable(cbind(wregOUT$fitted.values,wregOUT$residuals),
+                                                             colnames=c("Fitted values","Residuals"))
                    output$downloadFitandResid <- downloadHandler(
                      filename = "FitandResid.txt",
                      
@@ -525,54 +526,55 @@ shinyServer(function(input, output,session) {
                    
                    #Weighting
                    output$Weighting <- DT::renderDataTable(wregOUT$Weighting,
+                                                           colnames = rep("",ncol(wregOUT$Weighting)),
                                                            options = list(scrollX = TRUE))
-                   output$downloadWeighting <- downloadHandler(
-                     filename = "Weighting.txt",
-                     
-                     content = function(file) {
-                       write.table(wregOUT$Weighting,file=file,sep="\t",quote=FALSE)
-                       
-                     })
+                 output$downloadWeighting <- downloadHandler(
+                   filename = "Weighting.txt",
                    
+                   content = function(file) {
+                     write.table(wregOUT$Weighting,file=file,sep="\t",quote=FALSE)
+                     
+                   })
+                 
                  },warning=function(w) {
                    warn <<- append(warn, conditionMessage(w))
                    output$wregPrint <- renderText(paste0(warn))
                  }, error=function(e) {output$wregPrint <- renderText(paste0("There was an error running WREG, please check inputs",warn))})
-                 
+  
                }
-  )
+)
+
+####################################
+###Export results
+output$downloadReport <- downloadHandler(
+  filename = function() {
+    paste('outputSummary', sep = '.', switch(
+      input$format, HTML = 'html', Word = 'docx'
+    ))
+  },
   
-  ####################################
-  ###Export results
-  output$downloadReport <- downloadHandler(
-    filename = function() {
-      paste('outputSummary', sep = '.', switch(
-        input$format, HTML = 'html', Word = 'docx'
-      ))
-    },
+  content = function(file) {
+    src <- normalizePath('outputSummary.Rmd')
     
-    content = function(file) {
-      src <- normalizePath('outputSummary.Rmd')
-      
-      # temporarily switch to the temp dir, in case you do not have write
-      # permission to the current working directory
-      owd <- setwd(tempdir())
-      on.exit(setwd(owd))
-      file.copy(src, 'outputSummary.Rmd')
-      
-      out <- render('outputSummary.Rmd', switch(
-        input$format,
-        HTML = html_document(), Word = word_document()
-      ))
-      file.rename(out, file)
-    }
-  )
-  
-  output$downloadResults <- downloadHandler(
-    filename = "outputRaw.rda",
+    # temporarily switch to the temp dir, in case you do not have write
+    # permission to the current working directory
+    owd <- setwd(tempdir())
+    on.exit(setwd(owd))
+    file.copy(src, 'outputSummary.Rmd')
     
-    content = function(file) {
-      save(wregOUT,file=file)
-    })
+    out <- render('outputSummary.Rmd', switch(
+      input$format,
+      HTML = html_document(), Word = word_document()
+    ))
+    file.rename(out, file)
+  }
+)
+
+output$downloadResults <- downloadHandler(
+  filename = "outputRaw.rda",
   
+  content = function(file) {
+    save(wregOUT,file=file)
+  })
+
 })
