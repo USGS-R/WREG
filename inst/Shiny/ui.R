@@ -186,7 +186,7 @@ shinyUI(fluidPage(theme="theme.css",title="WREG",
                                                               DT::dataTableOutput("wregXY"),
                                                               downloadButton('downloadInputs'),
                                                               
-                                                              h2("Residuals, Leverage, and Influence"),
+                                                              h2("Model performance for observations"),
                                                               DT::dataTableOutput("ResLevInf"),
                                                               downloadButton('downloadResLevInf'),
                                                               

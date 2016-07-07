@@ -514,7 +514,8 @@ shinyServer(function(input, output,session) {
                    })
                    
                    #fitted.values and residuals
-                   output$FitandResid <- DT::renderDataTable(cbind(wregOUT$fitted.values,wregOUT$residuals))
+                   output$FitandResid <- DT::renderDataTable(cbind(wregOUT$fitted.values,wregOUT$residuals),
+                                                             colnames=c("Fitted values","Residuals"))
                    output$downloadFitandResid <- downloadHandler(
                      filename = "FitandResid.txt",
                      
