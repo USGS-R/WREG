@@ -78,7 +78,7 @@ shinyUI(fluidPage(theme="theme.css",navbarPage(img(src="Logo.png", width="80px",
                                                                      ),
                                                                      actionButton("selectSites",label="Submit"),
                                                                      verbatimTextOutput("selSites"),
-                                                                     dataTableOutput("siteCharTable")
+                                                                     DT::dataTableOutput("siteCharTable")
                                                                      
                                                                    )
                                                                    
@@ -174,16 +174,18 @@ shinyUI(fluidPage(theme="theme.css",navbarPage(img(src="Logo.png", width="80px",
                                                                      tabPanel("Result tables",
                                                                               fluidPage(
                                                                                 
-                                                                                h2("X and Y variable inputs"),
-                                                                                dataTableOutput("wregXY"),
-                                                                                downloadButton('downloadInputs'),
+                                                                                uiOutput("PerformanceMetricsUI"),
                                                                                 
                                                                                 h2("Model coefficients"),
-                                                                                dataTableOutput("Coefs"),
+                                                                                DT::dataTableOutput("Coefs"),
                                                                                 downloadButton('downloadCoefs'),
                                                                                 
+                                                                                h2("X and Y variable inputs"),
+                                                                                DT::dataTableOutput("wregXY"),
+                                                                                downloadButton('downloadInputs'),
+                                                                                
                                                                                 h2("Residuals, Leverage, and Influence"),
-                                                                                dataTableOutput("ResLevInf"),
+                                                                                DT::dataTableOutput("ResLevInf"),
                                                                                 downloadButton('downloadResLevInf'),
                                                                                 
                                                                                 fluidRow(
@@ -198,11 +200,16 @@ shinyUI(fluidPage(theme="theme.css",navbarPage(img(src="Logo.png", width="80px",
                                                                                 ),
                                                                                   
                                                                                 h2("Significance of leverage and influence"),
-                                                                                dataTableOutput("LevInf.Sig"),
+                                                                                DT::dataTableOutput("LevInf.Sig"),
                                                                                 downloadButton('downloadLevInf.Sig'),
                                                                                 
-                                                                                uiOutput("PerformanceMetricsUI")
+                                                                                h2("Fitted and residual values"),
+                                                                                DT::dataTableOutput("FitandResid"),
+                                                                                downloadButton('downloadFitandResid'),
                                                                                 
+                                                                                h2("Weighting matrix"),
+                                                                                DT::dataTableOutput("Weighting"),
+                                                                                downloadButton('downloadWeighting')
                                                                                 
                                                                               )
                                                                               
