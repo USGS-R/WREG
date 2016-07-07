@@ -39,7 +39,7 @@ test_that("Run WREG.UW with model variance list",{
   
   expect_silent(
     
-    load(paste0(system.file("testData", package = "WREG"),"/wreg.uw.modVar.out.rda"))
+    load(paste0(system.file("testData", package = "WREG"),"/wreg.uw.modvar.out.rda"))
   )
   
   # Organizing input data

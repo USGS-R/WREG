@@ -47,8 +47,16 @@ test_that("Run WREG.WLS with log 10",{
     load(paste0(system.file("testData", package = "WREG"),"/wreg.wls.staticOut.log10.rda"))
   )
   
+  # Organizing input data
+  lp3Data <- staticData_peakFQ$LP3f
+  lp3Data$K <- staticData_peakFQ$LP3k$AEP_0.5
+  Y <- staticData_peakFQ$Y$AEP_0.5
+  X <- staticData_peakFQ$X[c("Sand", "OutletElev", "Slope")]
+  recordLengths <- staticData_peakFQ$recLen
+  transY <- "log10"
+  
   expect_silent(
-    resultTest <- WREG.WLS(Y, X, recordLengths, LP3 = lp3Data, transY = "log10")
+    resultTest <- WREG.WLS(Y, X, recordLengths, LP3 = lp3Data, transY = transY)
   )
   
   #wreg.wls.staticOut <- resultTest
@@ -70,9 +78,18 @@ test_that("Run WREG.WLS with ln",{
     load(paste0(system.file("testData", package = "WREG"),"/wreg.wls.ln.staticOut.rda"))
   )
   
+  # Organizing input data
+  lp3Data <- staticData_peakFQ$LP3f
+  lp3Data$K <- staticData_peakFQ$LP3k$AEP_0.5
+  Y <- staticData_peakFQ$Y$AEP_0.5
+  X <- staticData_peakFQ$X[c("Sand", "OutletElev", "Slope")]
+  recordLengths <- staticData_peakFQ$recLen
+  transY <- "ln"
+  
   expect_silent(
     resultTest <- WREG.WLS(Y, X, recordLengths, LP3 = lp3Data, transY = "ln")
   )
+  
   
   #wreg.wls.staticOut <- resultTest
   #save(wreg.wls.staticOut,file="inst/testData/wreg.wls.staticOut.ln.rda")
