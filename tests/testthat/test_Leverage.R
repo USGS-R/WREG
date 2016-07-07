@@ -40,9 +40,7 @@ test_that("leverage error checking",{
   
   expect_error(
     leverageResult <- Leverage(X = "jazandapus",
-                               Omega = result$Weighting),
-    "dim(X) must have a positive length"
-  )
+                               Omega = result$Weighting))
   expect_error(
     leverageResult <- Leverage(X,
                                Omega = "jazandapus"),

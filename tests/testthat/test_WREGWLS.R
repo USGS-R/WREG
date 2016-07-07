@@ -25,7 +25,9 @@ test_that("Run WREG.WLS",{
   resultTest <- WREG.WLS(Y, X, recordLengths, LP3 = lp3Data, transY)
   )
   
-  expect_silent(print(resultTest))
+  expect_warning(print(resultTest),regexp=NA)
+  expect_error(print(resultTest),regexp=NA)
+  
   expect_equal(resultTest,result)
   
   # Run WLS regression with log10
