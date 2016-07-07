@@ -82,6 +82,7 @@ require a specific calculation for weighing matrices in \dQuote{WLS}
 \code{\link{WREG.RoI}}}
 }
 \value{
+<<<<<<< HEAD
 All outputs are returned as part of a list.  The elements of the list 
  depend on the type of regression performed.  The elements of the list may 
  include: \item{Coefs}{A data frame composed of four variables: (1) 
@@ -115,6 +116,41 @@ All outputs are returned as part of a list.  The elements of the list
  \item{Weighting}{The weighting matrix used to develop regression estimates.}
  \item{Input}{A list of input parameters for error searching.  Currently 
  empty.}
+=======
+All outputs are returned as part of a list.  The elements of the list
+ depend on the type of regression performed.  The elements of the list may
+ include: \item{Coefs}{A data frame composed of four variables: (1)
+ \code{Coefficient} contains the regression coefficeints estimated for the
+ model, (2) \code{Standard Error} contains the standard errors of each
+ regression coefficient, (3) \code{tStatistic} contains the Student's
+ T-statistic of each regression coefficient and (4) \code{pValue} contains
+ the significance probability of each regression coefficient.}
+ \item{ResLevInf}{A data frame composed of four variables for each site in
+ the regression.  \code{Residual} contains the model residuals.
+ \code{Leverage} contains the leverage of each site.  \code{Influence}
+ contains the influence of each site.  \code{VarPred} contains the variance
+ of prediction at each site.} \item{LevLim}{The critical value of leverage.
+ See \code{\link{Leverage}}} \item{InflLim}{The critical value of influence.
+ See \code{\link{Influence}}} \item{LevInf.Sig}{A logical matrix indicating
+ if the leverage (column 1) is significant and the influence (column 2) is
+ significant for each site in the regression.} \item{PerformanceMetrics}{A
+ list of not more than ten elements.  All regression types return the mean
+ squared error of residuals (\code{MSE}), the coefficient of determination
+ (\code{R2}), the adjusted coefficient of determination (\code{R2_adj}) and
+ the root mean squared error (\code{RMSE}, in percent).  The pseudo
+ coefficient of regression (\code{R2_pseudo}), the average variance of
+ prediction (\code{AVP}), the standard error of prediction (\code{Sp}, in
+ percent), a vector of the individual variances of prediction for each site
+ (\code{VP.PredVar}), the model-error variance (\code{ModErrVar}) and the
+ standardized model error variance (\code{StanModErr}, in percent) are also
+ returned.  Details on the appropriateness and applicability of performance
+ metrics can be found in the WREG manual.} \item{X}{The input predictors.}
+ \item{Y}{The input observations.} \item{fitted.values}{A vector of model
+ estimates from the regression model.} \item{residuals}{A vector of model
+ residuals.} \item{Weighting}{The weighting matrix used to develop regression
+ estimates.} \item{Input}{A list of input parameters for error searching.
+ Currently empty.}
+>>>>>>> upstream/master
 }
 \description{
 The \code{WREG.GLS} function executes the multiple linear 
