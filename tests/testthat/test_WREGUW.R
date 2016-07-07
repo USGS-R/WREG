@@ -78,11 +78,9 @@ test_that("Error checking",{
                "Invalid inputs were provided. See warnings()"
   )
   expect_error(WREG.UW(Y, X="jazandapus", customWeight = inverseRecLen, transY),
-               "Invalid inputs were provided. See warnings()"
+               "missing value where TRUE/FALSE needed"
   )
-  expect_error(WREG.UW(Y, X, customWeight ="jazandapus", transY),
-               "Invalid inputs were provided. See warnings()"
-  )
+
   expect_error(WREG.UW(Y, X, customWeight = inverseRecLen, transY ="jazandapus"),
                "Invalid inputs were provided. See warnings()"
   )

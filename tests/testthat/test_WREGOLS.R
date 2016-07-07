@@ -22,7 +22,8 @@ test_that("Run WREG.OLS",{
     resultTest <- WREG.OLS(Y, X, transY)
   )
   
-  expect_silent(print(resultTest))
+  expect_error(print(resultTest), regexp = NA)
+  expect_warning(print(resultTest), regexp = NA)
   
   expect_equal(resultTest,wreg.ols.staticOut)
 })
