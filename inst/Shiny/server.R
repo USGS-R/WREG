@@ -148,8 +148,8 @@ shinyServer(function(input, output,session) {
   
   ###This does the X variables. The lapply builds the UI basedo n the 
   ###Number of X variables selected
-  observeEvent(input$selectVars,
-               {
+  #observeEvent(input$selectVars,
+   #            {
                  output$XvarTrans <- renderUI({
                    if(length(input$X) > 0)
                    {
@@ -190,7 +190,7 @@ shinyServer(function(input, output,session) {
                    } else {}
                    
                  })
-               })
+              # })
   
   
   ###This applies the transforms

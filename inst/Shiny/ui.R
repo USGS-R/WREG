@@ -88,7 +88,7 @@ shinyUI(fluidPage(theme="theme.css",navbarPage(img(src="Logo.png", width="80px",
                                                                                    sidebarPanel(
                                                                                      selectInput("Y","Y-variable",choices = NA),
                                                                                      selectInput("X","X-variables",choices = NA,multiple=TRUE),
-                                                                                     actionButton("selectVars","Select variables"),
+                                                                                     #actionButton("selectVars","Select variables"),
                                                                                      actionButton("transVars","Apply transform"),
                                                                                      verbatimTextOutput("transformNote")
                                                                                    ),
