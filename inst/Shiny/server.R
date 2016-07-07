@@ -432,7 +432,7 @@ shinyServer(function(input, output,session) {
                    })
                    
                    output$wregYVsInf <- renderPlot({
-                     plot(wregOUT$Y,wregOUT$ResLevInf$Leverage,
+                     plot(wregOUT$Y,wregOUT$ResLevInf$Influence,
                           xlab="Y",ylab="Influence",
                           main="Y vs Influence")
                    })
