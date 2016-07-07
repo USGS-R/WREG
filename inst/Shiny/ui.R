@@ -60,7 +60,7 @@ shinyUI(fluidPage(theme="theme.css",navbarPage(img(src="Logo.png", width="80px",
                                                                    
                                                                    verbatimTextOutput("numSitesWREG")
                                                                    
-
+                                                                   
                                                           )
                                                ),
                                                
@@ -171,21 +171,50 @@ shinyUI(fluidPage(theme="theme.css",navbarPage(img(src="Logo.png", width="80px",
                                                                                 plotOutput("wregYVsInf")
                                                                               )
                                                                      ),
-                                                                     tabPanel("Tables",
+                                                                     tabPanel("Result tables",
                                                                               fluidPage(
-                                                                                dataTableOutput("wregXY")
-                                                                                )
-                                                                              ),
-                                                                     tabPanel("Export results",
-                                                                              fluidPage(
-                                                                                h2("Download summary report"),
-                                                                                radioButtons('format', 'Document format', c('HTML', 'Word'),
-                                                                                             inline = TRUE),
-                                                                                downloadButton('downloadReport'),
-                                                                                h2("Download rData (.rda)"),
-                                                                                downloadButton("downloadResults")
+                                                                                
+                                                                                h2("X and Y variable inputs"),
+                                                                                dataTableOutput("wregXY"),
+                                                                                downloadButton('downloadInputs'),
+                                                                                
+                                                                                h2("Model coefficients"),
+                                                                                dataTableOutput("Coefs"),
+                                                                                downloadButton('downloadCoefs'),
+                                                                                
+                                                                                h2("Residuals, Leverage, and Influence"),
+                                                                                dataTableOutput("ResLevInf"),
+                                                                                downloadButton('downloadResLevInf'),
+                                                                                
+                                                                                fluidRow(
+                                                                                  column(4,
+                                                                                         h4("Critical value of leverage"),
+                                                                                         verbatimTextOutput("LevLim")
+                                                                                  ),
+                                                                                  column(4,
+                                                                                         h4("Critical value of influence"),
+                                                                                         verbatimTextOutput("InflLim")
+                                                                                  )
+                                                                                ),
+                                                                                  
+                                                                                h2("Significance of leverage and influence"),
+                                                                                dataTableOutput("LevInf.Sig"),
+                                                                                downloadButton('downloadLevInf.Sig'),
+                                                                                
+                                                                                uiOutput("PerformanceMetricsUI")
+                                                                                
                                                                                 
                                                                               )
+                                                                              
+                                                                     ),
+                                                                     tabPanel("Summary and rData export",
+                                                                              h2("Download summary report"),
+                                                                              radioButtons('format', 'Document format', c('HTML', 'Word'),
+                                                                                           inline = TRUE),
+                                                                              downloadButton('downloadReport'),
+                                                                              
+                                                                              h2("Download rData (.rda)"),
+                                                                              downloadButton("downloadResults")
                                                                      )
                                                         )
                                                         

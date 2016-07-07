@@ -410,6 +410,8 @@ shinyServer(function(input, output,session) {
                      }
                    })
                    
+                   #####################################
+                   ###Render priunt summary and plots
                    output$wregPrint <- renderPrint(print(wregOUT))
                    output$wregFitVsRes <- renderPlot({
                      plot(wregOUT$fitted.values,wregOUT$residuals,
@@ -435,8 +437,86 @@ shinyServer(function(input, output,session) {
                           main="Y vs Influence")
                    })
                    
-                   h2("X and Y variable inputs")
+                   
+                   ##############################################
+                   ###Table outputs
+                   
+                   #Inputs
                    output$wregXY <- renderDataTable({cbind(Yinput,Xinput[2:ncol(Xinput)])})
+                   output$downloadInputs <- downloadHandler(
+                     filename = "modelInput.txt",
+                     
+                     content = function(file) {
+                       write.table(cbind(Yinput,Xinput[2:ncol(Xinput)]),file=file,sep="\t",quote=FALSE)
+                       
+                     })
+                   
+                   #Coefs
+                   output$Coefs <- renderDataTable(wregOUT$Coefs)
+                   output$downloadCoefs <- downloadHandler(
+                     filename = "coefs.txt",
+                     
+                     content = function(file) {
+                       write.table(wregOUT$Coefs,file=file,sep="\t",quote=FALSE)
+                       
+                     })
+                   
+                   #ResLevInf
+                   output$ResLevInf <- renderDataTable(wregOUT$ResLevInf)
+                   output$downloadResLevInf <- downloadHandler(
+                     filename = "ResLevInf.txt",
+                     
+                     content = function(file) {
+                       write.table(wregOUT$ResLevInf,file=file,sep="\t",quote=FALSE)
+                       
+                     })
+                   
+                   #LevLim
+                   output$LevLim <- renderText(wregOUT$LevLim)
+                   
+                   #InflLim
+                   output$InflLim <- renderText(wregOUT$InflLim)
+                   
+                   #LevInf.Sig
+                   output$LevInf.Sig <- renderDataTable(wregOUT$LevInf.Sig)
+                   output$downloadLevInf.Sig <- downloadHandler(
+                     filename = "LevInf.Sig.txt",
+                     
+                     content = function(file) {
+                       write.table(wregOUT$LevInf.Sig,file=file,sep="\t",quote=FALSE)
+                       
+                     })
+                   
+                   #Performance Metrics
+                   output$PerformanceMetricsUI <- renderUI({
+                     if(length(wregOUT$PerformanceMetrics) > 0)
+                     {
+                       fluidRow(
+                         h2("Performance metrics"),
+                         
+                         lapply(1:length(wregOUT$PerformanceMetrics), function(i) {
+                           
+                           
+                           
+                           
+                           column(2,
+                                  h4(names(wregOUT$PerformanceMetrics)[i]),
+                                  verbatimTextOutput(names(wregOUT$PerformanceMetrics[i]))
+                           )
+                           
+                           
+                           
+                         })
+                       )
+                     } else {}
+                     
+                   })
+                   
+                   lapply(1:length(wregOUT$PerformanceMetrics), function(i) {
+                     output[[names(wregOUT$PerformanceMetrics)[i]]] <- renderText({wregOUT$PerformanceMetrics[[i]]})
+                   })
+                   
+
                  },error=function(e) {output$wregPrint <- renderText(paste0("There was an error running WREG, please check inputs",
                                                                             geterrmessage()))})
                  
@@ -467,7 +547,7 @@ shinyServer(function(input, output,session) {
       ))
       file.rename(out, file)
     }
-)
+  )
   
   output$downloadResults <- downloadHandler(
     filename = "outputRaw.rda",
@@ -510,9 +590,8 @@ shinyServer(function(input, output,session) {
       #                          "residuals.txt",
       #                          "Weighting.txt",
       #                          "Inputs.txt"))
-    },
-    contentType = "application/zip")
-
-
-
+    })
+  
+  
+  
 })
