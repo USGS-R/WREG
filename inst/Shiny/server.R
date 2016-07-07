@@ -149,48 +149,48 @@ shinyServer(function(input, output,session) {
   ###This does the X variables. The lapply builds the UI basedo n the 
   ###Number of X variables selected
   #observeEvent(input$selectVars,
-   #            {
-                 output$XvarTrans <- renderUI({
-                   if(length(input$X) > 0)
-                   {
-                     lapply(1:length(input$X), function(i) {
-                       
-                       
-                       fluidRow(
-                         
-                         column(4,
-                                radioButtons(paste0(input$X[i],"XvarTransType"),
-                                             label=isolate(input$X[i]),
-                                             choices = c("none","log10","ln","exp"),
-                                             inline=TRUE),
-                                fluidRow(
-                                  column(6,
-                                         numericInput(paste0(input$X[i],"_XvarC1"),label="C1",value=1,step=0.1)
-                                  ),
-                                  column(6,
-                                         numericInput(paste0(input$X[i],"_XvarC2"),label="C2",value=1,step=0.1)
-                                  )
-                                ),
-                                fluidRow(
-                                  column(6,
-                                         numericInput(paste0(input$X[i],"_XvarC3"),label="C3",value=0,step=0.1)
-                                  ),
-                                  column(6,
-                                         numericInput(paste0(input$X[i],"_XvarC4"),label="C4",value=1,step=0.1)
-                                  )
-                                )
-                         ),
-                         column(8,
-                                plotOutput(paste0(input$X[i],"_plot"))
-                         )
-                       )
-                       
-                       
-                     })
-                   } else {}
-                   
-                 })
-              # })
+  #            {
+  output$XvarTrans <- renderUI({
+    if(length(input$X) > 0)
+    {
+      lapply(1:length(input$X), function(i) {
+        
+        
+        fluidRow(
+          
+          column(4,
+                 radioButtons(paste0(input$X[i],"XvarTransType"),
+                              label=isolate(input$X[i]),
+                              choices = c("none","log10","ln","exp"),
+                              inline=TRUE),
+                 fluidRow(
+                   column(6,
+                          numericInput(paste0(input$X[i],"_XvarC1"),label="C1",value=1,step=0.1)
+                   ),
+                   column(6,
+                          numericInput(paste0(input$X[i],"_XvarC2"),label="C2",value=1,step=0.1)
+                   )
+                 ),
+                 fluidRow(
+                   column(6,
+                          numericInput(paste0(input$X[i],"_XvarC3"),label="C3",value=0,step=0.1)
+                   ),
+                   column(6,
+                          numericInput(paste0(input$X[i],"_XvarC4"),label="C4",value=1,step=0.1)
+                   )
+                 )
+          ),
+          column(8,
+                 plotOutput(paste0(input$X[i],"_plot"))
+          )
+        )
+        
+        
+      })
+    } else {}
+    
+  })
+  # })
   
   
   ###This applies the transforms
@@ -443,7 +443,7 @@ shinyServer(function(input, output,session) {
                    
                    #Inputs
                    output$wregXY <- DT::renderDataTable(cbind(Yinput,Xinput[2:ncol(Xinput)]),
-                                                    options = list(scrollX = TRUE))
+                                                        options = list(scrollX = TRUE))
                    output$downloadInputs <- downloadHandler(
                      filename = "modelInput.txt",
                      
@@ -524,7 +524,7 @@ shinyServer(function(input, output,session) {
                    
                    #Weighting
                    output$Weighting <- DT::renderDataTable(wregOUT$Weighting,
-                                                       options = list(scrollX = TRUE))
+                                                           options = list(scrollX = TRUE))
                    output$downloadWeighting <- downloadHandler(
                      filename = "Weighting.txt",
                      
@@ -533,8 +533,10 @@ shinyServer(function(input, output,session) {
                        
                      })
                    
-                 },error=function(e) {output$wregPrint <- renderText(paste0("There was an error running WREG, please check inputs",
-                                                                            geterrmessage()))})
+                 },warning=function(w) {
+                   warn <<- append(warn, conditionMessage(w))
+                 }, error=function(e) {output$wregPrint <- renderText(paste0("There was an error running WREG, please check inputs",
+                                                                             geterrmessage()))})
                  
                }
   )
@@ -570,6 +572,6 @@ shinyServer(function(input, output,session) {
     
     content = function(file) {
       save(wregOUT,file=file)
-      })
+    })
   
 })

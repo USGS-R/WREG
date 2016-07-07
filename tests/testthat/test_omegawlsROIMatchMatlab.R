@@ -1,6 +1,6 @@
-context("Omega.GLS.ROImatchMatLab tests")
+context("Omega.WLS.ROImatchMatLab tests")
 
-test_that("Run Omega.GLS.ROImatchMatLab",
+test_that("Run Omega.WLS.ROImatchMatLab",
           {
             # Import some example data
             expect_silent(
