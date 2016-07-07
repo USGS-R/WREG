@@ -240,7 +240,7 @@ WREG.UW <- function(Y,X,customWeight,transY,x0=NA) {
   
   ## Handling output
   Output <- list(Coefs=Coefs,ResLevInf=ResLevInf,LevLim=Lev$Limit,
-    InflLim=Infl$Limit,LevInf.Sig=cbind(Lev$Significant,Infl$Significant),
+    InflLim=Infl$Limit,LevInf.Sig=LevInf.Sig,
     PerformanceMetrics=PerfMet,X=X,Y=Y,fitted.values=Y_hat,residuals=e,
     Weighting=Omega,Inputs=list(transY=transY))
   if (ROI) { # Appended at-site estimates for ROI calculations
