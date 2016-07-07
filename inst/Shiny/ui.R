@@ -95,6 +95,10 @@ shinyUI(fluidPage(theme="theme.css",title="WREG",
                                                                    verbatimTextOutput("transformNote")
                                                                  ),
                                                                  mainPanel(
+                                                                   withMathJax(
+                                                                     helpText('$$f{(C1*var^{C2}+C3)^{C4}}$$')
+                                                                     ),
+                                                                   h3(""),
                                                                    uiOutput("YvarTrans"),
                                                                    uiOutput('XvarTrans')
                                                                    
@@ -168,6 +172,7 @@ shinyUI(fluidPage(theme="theme.css",title="WREG",
                                       navlistPanel("Result output",
                                                    tabPanel("Plots",
                                                             fluidPage(
+                                                              helpText("Plots can be saved using right-click"),
                                                               plotOutput("wregFitVsRes"),
                                                               plotOutput("wregYVsLev"),
                                                               plotOutput("wregYVsInf")
