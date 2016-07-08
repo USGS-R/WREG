@@ -25,16 +25,29 @@ plot(wregOUT$fitted.values,wregOUT$residuals,
 ##Y vs Leverage
 
 ```{r echo=FALSE}
- plot(wregOUT$Y,wregOUT$ResLevInf$Leverage,
-                        xlab="Y",ylab="Leverage",
-                        main="Y vs Leverage")
+plot(wregOUT$Y,wregOUT$ResLevInf$Leverage,
+                          xlab="Y",ylab="Leverage",
+                          main="Y vs Leverage")
+                     abline(h=wregOUT$LevLim,lty=2,col="red")
+                     par(mar=c(0, 0, 0, 0))
+                     # c(bottom, left, top, right)
+                     plot.new()
+                     legend('center',"Critical value", lty = 2,
+                            col="red",ncol=1,bty ="n")
 ```
 
 ##Y vs Influence
 
 ```{r echo=FALSE}
-plot(wregOUT$Y,wregOUT$ResLevInf$Leverage,
-                        xlab="Y",ylab="Influence",
-                        main="Y vs Influence")
+layout(rbind(1,2), heights=c(7,1))
+                     plot(wregOUT$Y,wregOUT$ResLevInf$Influence,
+                          xlab="Y",ylab="Influence",
+                          main="Y vs Influence")
+                     abline(h=wregOUT$InflLim,lty=2,col="red")
+                     par(mar=c(0, 0, 0, 0))
+                     # c(bottom, left, top, right)
+                     plot.new()
+                     legend('center',"Critical value", lty = 2,
+                            col="red",ncol=1,bty ="n")
 ```
 

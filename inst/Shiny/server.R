@@ -415,28 +415,38 @@ shinyServer(function(input, output,session) {
                    ###Render priunt summary and plots
                    output$wregPrint <- renderPrint(print(wregOUT))
                    output$wregFitVsRes <- renderPlot({
+                     layout(rbind(1,2), heights=c(7,1))
                      plot(wregOUT$fitted.values,wregOUT$residuals,
                           xlab="Fitted values",ylab="Residuals",
                           main="Fitted vs Residual")
                    })
                    
                    output$wregYVsLev <- renderPlot({
+                     layout(rbind(1,2), heights=c(7,1))
                      plot(wregOUT$Y,wregOUT$ResLevInf$Leverage,
                           xlab="Y",ylab="Leverage",
                           main="Y vs Leverage")
+                     abline(h=wregOUT$LevLim,lty=2,col="red")
+                     par(mar=c(0, 0, 0, 0))
+                     # c(bottom, left, top, right)
+                     plot.new()
+                     legend('center',"Critical value", lty = 2,
+                            col="red",ncol=1,bty ="n")
                    })
                    
+
                    output$wregYVsInf <- renderPlot({
-                     plot(wregOUT$Y,wregOUT$ResLevInf$Leverage,
-                          xlab="Y",ylab="Influence",
-                          main="Y vs Influence")
-                   })
-                   
-                   output$wregYVsInf <- renderPlot({
+                     layout(rbind(1,2), heights=c(7,1))
                      plot(wregOUT$Y,wregOUT$ResLevInf$Influence,
                           xlab="Y",ylab="Influence",
                           main="Y vs Influence")
-                   })
+                     abline(h=wregOUT$InflLim,lty=2,col="red")
+                     par(mar=c(0, 0, 0, 0))
+                     # c(bottom, left, top, right)
+                     plot.new()
+                     legend('center',"Critical value", lty = 2,
+                            col="red",ncol=1,bty ="n")
+                    })
                    
                    
                    ##############################################

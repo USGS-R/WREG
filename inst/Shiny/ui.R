@@ -215,7 +215,7 @@ shinyUI(fluidPage(theme="theme.css",title="WREG",
                                                               downloadButton('downloadFitandResid'),
                                                               
                                                               h2("Weighting matrix"),
-                                                              DT::dataTableOutput("Weighting"),
+                                                              #DT::dataTableOutput("Weighting"),
                                                               downloadButton('downloadWeighting')
                                                               
                                                             )
