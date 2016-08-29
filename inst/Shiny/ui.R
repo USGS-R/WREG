@@ -116,11 +116,11 @@ shinyUI(fluidPage(theme="theme.css",title="WREG",
                                                                                              "Generalized-least squares"="GLS")),
                                                                    conditionalPanel(
                                                                      condition = "input.regType == 'GLS'",
-                                                                     checkboxInput("GLSskew",label="With regional skew",value=FALSE)
+                                                                     checkboxInput("GLSskew",label="Consider uncertainty in skew",value=FALSE)
                                                                    ),
                                                                    conditionalPanel(
                                                                      condition = "input.GLSskew == true",
-                                                                     numericInput("MSEGR",label="MSEGR",value="")
+                                                                     numericInput("Mean squared error of regional skew",label="MSEGR",value="")
                                                                    )
                                                                    
                                                                    
