@@ -386,11 +386,8 @@ shinyServer(function(input, output,session) {
                                               x0=NA,
                                               alpha=input$alpha,
                                               theta=input$theta,
-                                              peak=T,
-                                              distMeth=2,
                                               regSkew=FALSE,
-                                              MSEGR=NA,
-                                              TY=2)
+                                              distMeth=2)
                        } else if(input$GLSskew == TRUE)
                        {
                          wregOUT <<- WREG.GLS(Y=Yinput[,2],
@@ -402,11 +399,11 @@ shinyServer(function(input, output,session) {
                                               x0=NA,
                                               alpha=input$alpha,
                                               theta=input$theta,
-                                              peak=T,
+                                              peak=as.logical(input$peak),
                                               distMeth=2,
                                               regSkew=TRUE,
                                               MSEGR=input$MSEGR,
-                                              TY=2)
+                                              TY=input$TY)
                        }
                      }
                    })

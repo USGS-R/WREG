@@ -121,10 +121,18 @@ shinyUI(fluidPage(theme="theme.css",title="WREG",
                                                                    conditionalPanel(
                                                                      condition = "input.GLSskew == true",
                                                                      numericInput("MSEGR",label="Mean squared error of regional skew",value="")
+                                                                   ),
+                                                                   conditionalPanel(
+                                                                     condition = "input.GLSskew == true",
+                                                                     numericInput("TY",label="Return Period (years)",value="")
+                                                                   ),
+                                                                   conditionalPanel(
+                                                                     condition = "input.GLSskew == true",
+                                                                     radioButtons("peak",
+                                                                       "Peak or Minimum?",
+                                                                       choices=list("Peak Streamflow"=TRUE,
+                                                                         "Low Streamflow"=FALSE))
                                                                    )
-                                                                   
-                                                                   
-                                                                   
                                                                  ),
                                                                  mainPanel(
                                                                    conditionalPanel(
