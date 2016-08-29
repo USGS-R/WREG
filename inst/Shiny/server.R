@@ -34,7 +34,7 @@ shinyServer(function(input, output,session) {
                  })
                  
                  output$numSitesPeakFQ <- renderText(
-                   c("Data imported for the followign sites: ",
+                   c("Data imported for the following sites: ",
                      as.character(unique(importData$sites)))
                    
                  )
@@ -64,7 +64,7 @@ shinyServer(function(input, output,session) {
                  })
                  
                  output$numSitesWREG <- renderText(
-                   c("Data imported for the followign sites: ",
+                   c("Data imported for the following sites: ",
                      as.character(unique(importData$sites)))
                    
                  )
