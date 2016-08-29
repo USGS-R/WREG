@@ -225,6 +225,7 @@ importWREG <- function(wregPath,sites='') {
   }
   row.names(recLen) <- row.names(recCor) <- colnames(recLen) <- 
     colnames(recCor) <- sitesOut
+  names(LP3k) <- names(Y)
   
   # Output result
   result <- list(

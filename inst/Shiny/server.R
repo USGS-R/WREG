@@ -546,7 +546,9 @@ shinyServer(function(input, output,session) {
                  },warning=function(w) {
                    warn <<- append(warn, conditionMessage(w))
                    output$wregPrint <- renderText(paste0(warn))
-                 }, error=function(e) {output$wregPrint <- renderText(paste0("There was an error running WREG, please check inputs",warn))})
+                 }, error=function(e) {
+                   #print(e)
+                   output$wregPrint <- renderText(paste0("There was an error running WREG, please check inputs",warn))})
   
                }
 )
