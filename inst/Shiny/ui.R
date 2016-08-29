@@ -120,7 +120,7 @@ shinyUI(fluidPage(theme="theme.css",title="WREG",
                                                                    ),
                                                                    conditionalPanel(
                                                                      condition = "input.GLSskew == true",
-                                                                     numericInput("Mean squared error of regional skew",label="MSEGR",value="")
+                                                                     numericInput("MSEGR",label="Mean squared error of regional skew",value="")
                                                                    )
                                                                    
                                                                    
