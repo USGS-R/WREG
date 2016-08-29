@@ -273,8 +273,7 @@ cat('(* indicates significnace at the 5% level.)\n\n')
 cat('Observations, Predictions, Residuals, Leverage and Influence\n')
 cat(paste0('Leverage Limit:\t',round(object$LevLim,4),'\n'))
 cat(paste0('Influence Limit:\t',round(object$InflLim,4),'\n'))
-temp <- cbind(object$Y,object$fitted.values,object$ResLevInf,
-              object$PerformanceMetrics$VP.PredVar)
+temp <- cbind(object$Y,object$fitted.values,object$ResLevInf)
 temp <- round(temp,4)
 names(temp) <- c('Observation','Prediction','Residual','Leverage',
                  'Influence','Variance of Prediction')
