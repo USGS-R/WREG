@@ -25,15 +25,13 @@
 #'  order as the dependent variables in \code{Y}.
 #'@param Y The dependent variable of interest, with any transformations already 
 #'  applied.
-#'@param recordLengths This input is required for \dQuote{WLS}, \dQuote{GLS} and
-#'  \dQuote{GLSskew}.  For \dQuote{GLS} and \dQuote{GLSskew},
-#'  \code{recordLengths} should be a matrix whose rows and columns are in the
-#'  same order as \code{Y}.  Each \code{(r,c)} element represents the length of
-#'  concurrent record between sites \code{r} and \code{c}.  The diagonal
-#'  elements therefore represent each site's full record length.  For
-#'  \dQuote{WLS}, the only the at-site record lengths are needed. In the case of
-#'  \dQuote{WLS}, \code{recordLengths} can be a vector or the matrix described
-#'  for \dQuote{GLS} and \dQuote{GLSskew}.
+#'@param recordLengths This input is required. #'  \code{recordLengths} should
+#'  be a matrix whose rows and columns are in the same order as \code{Y}.  Each
+#'  \code{(r,c)} element represents the length of concurrent record between
+#'  sites \code{r} and \code{c}.  The diagonal elements therefore represent each
+#'  site's full record length.  For \dQuote{WLS}, the only the at-site record
+#'  lengths are needed. In the case of \dQuote{WLS}, \code{recordLengths} can be
+#'  a vector or the matrix described for \dQuote{GLS} and \dQuote{GLSskew}.
 #'@param LP3 A dataframe containing the fitted Log-Pearson Type III standard 
 #'  deviate, standard deviation and skew for each site.  The names of this data
 #'  frame are \code{S}, \code{K} and \code{G}.  For \dQuote{GLSskew}, the

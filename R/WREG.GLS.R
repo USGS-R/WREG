@@ -32,8 +32,7 @@
 #'@param basinChars A dataframe containing three variables: \code{StationID} is 
 #'  the identifier of each site, \code{Lat} is the latitude of the site, in 
 #'  decimal degrees, and \code{Long} is the longitude of the site, in decimal 
-#'  degrees.  The sites must be presented in the same order as \code{Y}. 
-#'  Required only if \code{regSkew = TRUE}.
+#'  degrees.  The sites must be presented in the same order as \code{Y}.
 #'@param transY A required character string indicating if the the 
 #'  dependentvariable was transformed by the common logarithm ('log10'), 
 #'  transformed by the natural logarithm ('ln') or untransformed ('none').
