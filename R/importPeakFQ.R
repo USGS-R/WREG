@@ -50,8 +50,16 @@ importPeakFQ <- function(pfqPath,gisFile,sites='') {
   # Developed by William Farmer, 04 February 2016
   
   # Load GIS file
-  gisData <- read.table(file=gisFile,sep='\t',header=T,
-                        colClasses=list(Station.ID='character'))
+  gisData <- read.table(file=gisFile,sep='\t',header=T)
+  
+  # Check to see if the file has standard column names, otherwise rename the first three columns to the apropriate name
+  if (Reduce('&',(is.element(names(gisData), c('Station.ID', 'Lat', 'Long')))) == FALSE){
+    names(gisData)[1:3] <- c('Station.ID', 'Lat', 'Long')
+  } 
+  
+  #convert Station.ID to character class
+  gisData$Station.ID <- as(gisData$Station.ID, 'character')
+  
   gisData$Station.ID <- ifelse(nchar(gisData$Station.ID)%%2>0,
     paste0("0",gisData$Station.ID), gisData$Station.ID)
   

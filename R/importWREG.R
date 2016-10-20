@@ -56,12 +56,27 @@ importWREG <- function(wregPath,sites='') {
   if (!file.exists(siteInfoFile)) {
     stop(paste('Could not find',siteInfoFile))
   }
-  siteInfo <- read.table(siteInfoFile,sep='\t',header=T,
-                         colClasses = list(Station.ID='character'))
+  
+  
+  # siteInfo <- read.table(siteInfoFile,sep='\t',header=T,
+  #                        colClasses = list(Station.ID='character'))
+  siteInfo <- read.table(siteInfoFile,sep='\t',header=T)
+  
+  # Check to see if the file has standard column names, otherwise rename the first three columns to the apropriate name
+  if (Reduce('&',(is.element(names(siteInfo), c('Station.ID', 'Lat', 'Long')))) == FALSE){
+    names(siteInfo)[1:3] <- c('Station.ID', 'Lat', 'Long')
+  } 
+  
+  #convert Station.ID to character class
+  siteInfo$Station.ID <- as(siteInfo$Station.ID, 'character')
+  
   siteInfo$Station.ID <- ifelse(nchar(siteInfo$Station.ID)%%2>0,
                                 paste0("0",siteInfo$Station.ID),siteInfo$Station.ID)
+  
   BasChars <- siteInfo[,is.element(names(siteInfo),
-                                   c('Station.ID','Lat','Long'))]
+                                     c('Station.ID','Lat','Long'))]
+  
+  
   X <- siteInfo[,c(1,9:ncol(siteInfo))]
   
   # Screen for particular sites
@@ -175,31 +190,46 @@ importWREG <- function(wregPath,sites='') {
   
   # Load and parse USGS*.txt files
   siteTS <- list()
-  allFiles <- unique(apply(as.matrix(paste0('USGS',sitesOut,'*.txt')),
-                           MARGIN=1,FUN=list.files,path=wregPath))
-  if (any(lapply(allFiles,length) == 0)) {
-    warning(paste("The following sites do not have timeseries data",
-                  sitesOut[which(lapply(allFiles,length) == 0)]))
-    #Remove missing file from all files list
-    sitesOut <- sitesOut[-which(lapply(allFiles,length) == 0)]
-    allFiles <- allFiles[-which(lapply(allFiles,length) == 0)]
+  
+  # See if a USGS Annual time series file exists, if so read it in
+  # Otherwise get data from each individual file
+  usgs_annual_file = file.path(wregPath,'USGSAnnualTimeSeries.txt')
+  if (file.exists(usgs_annual_file)) {
     
-    #Remove missing site from all files
-    Y <- Y[Y$Station.ID %in% sitesOut,]
-    X <- X[X$Station.ID %in% sitesOut,]
-    LP3f <- LP3f[LP3f$Station.ID %in% sitesOut,]
-    LP3k <- LP3k[LP3k$Station.ID %in% sitesOut,]
-    BasChars <- BasChars[BasChars$Station.ID %in% sitesOut,]
-    siteInfo <- siteInfo[siteInfo$Station.ID %in% sitesOut,]
-    TestRecLen <- TestRecLen[TestRecLen$Station.ID %in% sitesOut,]
+    # split the files in to a list of tables based on site id 
+    temp_table <- read.table(usgs_annual_file)
+    sites = unique(temp_table[,1])
+    for (x in 1:length(sites)){
+      siteTS <- c(siteTS, split(temp_table,temp_table[,1] == sites[x])[2])
+    }
     
+  } else {
+    allFiles <- unique(apply(as.matrix(paste0('USGS',sitesOut,'*.txt')),
+                             MARGIN=1,FUN=list.files,path=wregPath))
+    if (any(lapply(allFiles,length) == 0)) {
+      warning(paste("The following sites do not have timeseries data",
+                    sitesOut[which(lapply(allFiles,length) == 0)]))
+      #Remove missing file from all files list
+      sitesOut <- sitesOut[-which(lapply(allFiles,length) == 0)]
+      allFiles <- allFiles[-which(lapply(allFiles,length) == 0)]
+      
+      #Remove missing site from all files
+      Y <- Y[Y$Station.ID %in% sitesOut,]
+      X <- X[X$Station.ID %in% sitesOut,]
+      LP3f <- LP3f[LP3f$Station.ID %in% sitesOut,]
+      LP3k <- LP3k[LP3k$Station.ID %in% sitesOut,]
+      BasChars <- BasChars[BasChars$Station.ID %in% sitesOut,]
+      siteInfo <- siteInfo[siteInfo$Station.ID %in% sitesOut,]
+      TestRecLen <- TestRecLen[TestRecLen$Station.ID %in% sitesOut,]
+      
+    }
+    if(length(allFiles) > length(sitesOut))
+    {
+      stop("Duplicate timeseries were found.")
+    }
+    allFiles <- file.path(wregPath,allFiles)
+    siteTS <- lapply(allFiles,read.table)
   }
-  if(length(allFiles) > length(sitesOut))
-  {
-    stop("Duplicate timeseries were found.")
-  }
-  allFiles <- file.path(wregPath,allFiles)
-  siteTS <- lapply(allFiles,read.table)
   
   recLen <- recCor <- matrix(NA,ncol=length(siteTS),nrow=length(siteTS))
   
