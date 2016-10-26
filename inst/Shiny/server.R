@@ -73,6 +73,37 @@ shinyServer(function(input, output,session) {
                  
                })
   
+  observeEvent(input$getData_WREG_General,
+               {
+                 withProgress(message = 'Importing data', value = 0, {
+                   importData <<- importWREG_General(wregPath = input$wregPath_General)
+                   #Set select data to import data so that it defuaults to all sites if none selected in gui
+                   selectData <<- list(sites = importData$sites,
+                                       Y = importData$Y,
+                                       AEP = importData$AEP,
+                                       X = importData$X,
+                                       LP3f = importData$LP3f,
+                                       LP3k = importData$LP3k,
+                                       BasChars = importData$BasChars,
+                                       MSEGR = importData$MSEGR,
+                                       recLen = importData$recLen,
+                                       recCor = importData$recCor
+                   )
+                   
+                   siteChars <<- cbind(importData$BasChars,
+                                       importData$X)
+                 })
+                 
+                 output$numSitesWREG_General <- renderText(
+                   c("Data imported for the following sites: ",
+                     as.character(unique(importData$sites)))
+                   
+                 )
+                 #updateSelectInput(session,"Y",choices=colnames(importData$Y))
+                 source("updateInputs.R",local=TRUE)$value
+                 
+               })
+  
   ##############################
   #Select data
   

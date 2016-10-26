@@ -60,19 +60,25 @@ importWREG <- function(wregPath,sites='') {
   
   # siteInfo <- read.table(siteInfoFile,sep='\t',header=T,
   #                        colClasses = list(Station.ID='character'))
-  siteInfo <- read.table(siteInfoFile,sep='\t',header=T)
+  siteInfo <- read.table(siteInfoFile,sep='\t',header=T,fill=TRUE)
   
   # Check to see if the file has standard column names, otherwise rename the first three columns to the apropriate name
   if (Reduce('&',(is.element(names(siteInfo), c('Station.ID', 'Lat', 'Long')))) == FALSE){
-    names(siteInfo)[1:3] <- c('Station.ID', 'Lat', 'Long')
+    names(siteInfo)[1:10] <- c('Station.ID',	'Lat',	'Long',	'No..Annual.Series',	'Zero.1.NonZero.2',	'FreqZero',
+                              'Regional.Skew',	'Cont.1.PR.2',	'A',	'P1006')
+    
+    siteInfo <- shiftColumns(siteInfo, 11)
+    
   } 
   
+  
   #convert Station.ID to character class
-  siteInfo$Station.ID <- as(siteInfo$Station.ID, 'character')
+  siteInfo$Station.ID <- toupper(as(siteInfo$Station.ID, 'character'))
   
-  siteInfo$Station.ID <- ifelse(nchar(siteInfo$Station.ID)%%2>0,
-                                paste0("0",siteInfo$Station.ID),siteInfo$Station.ID)
-  
+  #check to see if any sites need a zero appended
+  zero_append <- which(nchar(siteInfo$Station.ID) != 8)
+  siteInfo$Station.ID[zero_append] <- paste0("0",siteInfo$Station.ID[zero_append])
+
   BasChars <- siteInfo[,is.element(names(siteInfo),
                                      c('Station.ID','Lat','Long'))]
   
@@ -103,11 +109,20 @@ importWREG <- function(wregPath,sites='') {
   if (!file.exists(flowCharFile)) {
     stop(paste('Could not find',flowCharFile))
   }
-  Y <- read.table(flowCharFile,sep='\t',header=T,
-                  colClasses = list(Station.ID='character'))
+  Y <- read.table(flowCharFile,sep='\t',header=T)
+  if(!is.element('Station.ID', names(Y))){
+    names(Y)[1] <- 'Station.ID'
+    
+    Y <- shiftColumns(Y,2)
+  }
+  Y$Station.ID <- toupper(as(Y$Station.ID,'character'))
+  
   # Y <- Y[sort.int(runif(nrow(Y)),index.return = TRUE)$ix,] # for testing
-  Y$Station.ID <- ifelse(nchar(Y$Station.ID)%%2>0,
-                         paste0("0",Y$Station.ID),Y$Station.ID)
+  #check to see if any sites need a zero appended
+  zero_append <- which(nchar(Y$Station.ID) != 8)
+  Y$Station.ID[zero_append] <- paste0("0",Y$Station.ID[zero_append])
+  
+  
   names(Y)[2:ncol(Y)] <- unlist(strsplit(names(Y)[2:ncol(Y)],split='[.]'))
   ndx <- which(is.element(Y$Station.ID,sitesOut))
   Y <- Y[ndx,]
@@ -120,8 +135,18 @@ importWREG <- function(wregPath,sites='') {
     stop(paste('Could not find',lp3gFile))
   }
   lp3g <- read.table(lp3gFile,sep='\t',header=T)
-  lp3g$Station.ID <- ifelse(nchar(lp3g$Station.ID)%%2>0,
-                            paste0("0",lp3g$Station.ID),lp3g$Station.ID)
+  if(!is.element('Station.ID', names(lp3g))){
+    names(lp3g)[1] <- 'Station.ID'
+    
+    lp3g <- shiftColumns(lp3g,2)
+  }
+  lp3g$Station.ID <- toupper(as(lp3g$Station.ID,'character'))
+  
+  #check to see if any sites need a zero appended
+  zero_append <- which(nchar(lp3g$Station.ID) != 8)
+  lp3g$Station.ID[zero_append] <- paste0("0",lp3g$Station.ID[zero_append])
+  
+  
   test <- sum(unlist(
     lapply(lapply(t(lp3g[,2:ncol(lp3g)]),FUN=unique),FUN=length))>1)
   if (test>0) {
@@ -137,8 +162,17 @@ importWREG <- function(wregPath,sites='') {
     stop(paste('Could not find',lp3kFile))
   }
   lp3k <- read.table(lp3kFile,sep='\t',header=T)
-  lp3k$Station.ID <- ifelse(nchar(lp3k$Station.ID)%%2>0,
-                            paste0("0",lp3k$Station.ID),lp3k$Station.ID)
+  if(!is.element('Station.ID', names(lp3k))){
+    names(lp3k)[1] <- 'Station.ID'
+    
+    lp3k <- shiftColumns(lp3k,2)
+  }
+  lp3k$Station.ID <- toupper(as(lp3k$Station.ID,'character'))
+  
+  #check to see if any sites need a zero appended
+  zero_append <- which(nchar(lp3k$Station.ID) != 8)
+  lp3k$Station.ID[zero_append] <- paste0("0",lp3k$Station.ID[zero_append])
+  
   ndx <- which(is.element(lp3k$Station.ID,sitesOut))
   lp3k <- lp3k[ndx,]
   site3b <- lp3k$Station.ID
@@ -148,8 +182,18 @@ importWREG <- function(wregPath,sites='') {
     stop(paste('Could not find',lp3sFile))
   }
   lp3s <- read.table(lp3sFile,sep='\t',header=T)
-  lp3s$Station.ID <- ifelse(nchar(lp3s$Station.ID)%%2>0,
-                            paste0("0",lp3s$Station.ID),lp3s$Station.ID)
+  if(!is.element('Station.ID', names(lp3s))){
+    names(lp3s)[1] <- 'Station.ID'
+    
+    lp3s <- shiftColumns(lp3s,2)
+  }
+  lp3s$Station.ID <- toupper(as(lp3s$Station.ID,'character'))
+  
+  #check to see if any sites need a zero appended
+  zero_append <- which(nchar(lp3s$Station.ID) != 8)
+  lp3s$Station.ID[zero_append] <- paste0("0",lp3s$Station.ID[zero_append])
+  
+  
   test <- sum(unlist(
     lapply(lapply(t(lp3s[,2:ncol(lp3s)]),FUN=unique),FUN=length))>1)
   if (test>0) {
@@ -198,7 +242,9 @@ importWREG <- function(wregPath,sites='') {
     
     # split the files in to a list of tables based on site id 
     temp_table <- read.table(usgs_annual_file)
+    temp_table[,1] <- toupper(as(temp_table[,1], "character"))
     sites = unique(temp_table[,1])
+    
     for (x in 1:length(sites)){
       siteTS <- c(siteTS, split(temp_table,temp_table[,1] == sites[x])[2])
     }
@@ -231,6 +277,10 @@ importWREG <- function(wregPath,sites='') {
     siteTS <- lapply(allFiles,read.table)
   }
   
+  if (length(siteTS) == 0){
+    stop(paste("There are no timeseries files to process.  Check ts naming convetions."))
+  }
+  
   recLen <- recCor <- matrix(NA,ncol=length(siteTS),nrow=length(siteTS))
   
   for (i in 1:length(siteTS)) {
@@ -244,6 +294,12 @@ importWREG <- function(wregPath,sites='') {
       ijdata <- idata[which(is.element(idata[,1],overlap)),2]
       jidata <- jdata[which(is.element(jdata[,1],overlap)),2]
       if (length(unique(ijdata))==1|length(unique(jidata))==1) {next}
+      
+      #check to see if the data has the proper dimensions to be correlated
+      if (length(ijdata) != length(jidata)){
+        stop(paste('Overlap in data matrix caused by multiple entries for a year and site.  Revisit data.'))
+      }
+      
       recCor[i,j] <- recCor[j,i] <- cor(ijdata,jidata)
     }
   }
@@ -271,4 +327,28 @@ importWREG <- function(wregPath,sites='') {
   )
   return(result)
   
+}
+
+shiftColumns <- function(siteInfo, columnShift){
+  
+  allNames = names(siteInfo)
+  ndx <- which(!is.na(siteInfo$Station.ID))
+  siteInfo <- siteInfo[ndx,]
+
+  blank_count <- 0
+  for (x in 1:length(siteInfo)){
+    if (Reduce('|',(siteInfo[,allNames[x]] == ""))){
+      blank_count <- blank_count + 1
+    }
+  }
+  
+  if (blank_count > 0){
+    for (x in columnShift:length(siteInfo)-blank_count){
+      names(siteInfo)[x] <- names(siteInfo)[x+blank_count]
+    }
+    
+    siteInfo <- siteInfo[,1:length(siteInfo)-blank_count]
+  }
+  
+  return(siteInfo)
 }

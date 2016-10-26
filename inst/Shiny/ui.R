@@ -69,7 +69,7 @@ shinyUI(fluidPage(theme="theme.css",title="WREG",
                                                  
                                         ),
                                         tabPanel("Import MatLab WREG project",
-                                                 h2("This imports data from from a directory set up for the old WREG program and prepares it for use in WREG-R."),
+                                                 h2("This imports data from a directory set up for the old WREG program and prepares it for use in WREG-R."),
                                                  
                                                  hr(),
                                                  h3("Select Matlab WREG data"),
@@ -84,6 +84,23 @@ shinyUI(fluidPage(theme="theme.css",title="WREG",
                                                  verbatimTextOutput("numSitesWREG")
                                                  
                                                  
+                                        ),
+                                        tabPanel("Import General WREG project",
+                                                 h2("This imports data from a directory set up for the general WREG files."),
+                                                 
+                                                 hr(),
+                                                 h3("Select General WREG data"),
+                                                 h6("Input the path to a directory that contains contains all of the files needed to implement the General version of WREG."),
+                                                 textInput('wregPath_General',
+                                                           'Path to directory'),
+                                                 hr(),
+                                                 h3("Import the data"),
+                                                 actionButton("getData_WREG_General",label = "Import data"),
+                                                 hr(),
+                                                 
+                                                 verbatimTextOutput("numSitesWREG_General")
+                                                 
+                                        
                                         )
                              ),
                              
