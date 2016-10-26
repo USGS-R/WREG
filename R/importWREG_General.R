@@ -63,31 +63,31 @@ importWREG_General <- function(wregPath,sites='') {
   siteInfo <- read.table(siteInfoFile,sep='\t',header=T,fill=TRUE)
   
   # Check to see if the file has standard column names, otherwise rename the first three columns to the apropriate name
-  if (Reduce('&',(is.element(names(siteInfo), c('Station.ID',	'Lat', 'Long', 'No..Annual.Series',	'Zero.1.NonZero.2',	'FreqZero',	'Regional.Skew', 
-                                                'Cont.1.PR.2', 'FlowQ2', 'FlowQ5', 'FlowQ10',	'FlowQ25', 'FlowQ50', 'FlowQ100', 'FlowQ200',
-                                                'FlowQ500', 'LP3G', 'LP3KQ2', 'LP3KQ5', 'LP3KQ10', 'LP3KQ25', 'LP3KQ50',	'LP3KQ100',	'LP3KQ200',	'LP3KQ500',
-                                                'LP3S', 'A', 'P1006', 'C',	'Sand',	'Long.1',	'OutletElev',	'E', 'Slope')))) == FALSE){
+  if (Reduce('&',(is.element(names(siteInfo)[1:25], c('stationID',	'latitude',	'longitude',	'regionalSkew',	'skew',	'standardDeviation',	'flowCharQ2',
+                                                'flowCharQ5',	'flowCharQ10',	'flowCharQ25',	'flowCharQ50',	'flowCharQ100',	'flowCharQ200',	'flowCharQ500',
+                                                'flowCharQ2.K',	'flowCharQ5.K',	'flowCharQ10.K',	'flowCharQ25.K',	'flowCharQ50.K',	'flowCharQ100.K',	
+                                                'flowCharQ200.K',	'flowCharQ500.K',	'zero.1.nonZero.2',	'freqZero',	'Cont.1.PR.2'	)))) == FALSE){
     stop(paste("Please check naming conventions of the general file format"))
   } 
   
-  #convert Station.ID to character class
-  siteInfo$Station.ID <- toupper(as(siteInfo$Station.ID, 'character'))
+  #convert stationID to character class
+  siteInfo$stationID <- toupper(as(siteInfo$stationID, 'character'))
   
   #check to see if any sites need a zero appended
-  zero_append <- which(nchar(siteInfo$Station.ID) != 8)
-  siteInfo$Station.ID[zero_append] <- paste0("0",siteInfo$Station.ID[zero_append])
+  zero_append <- which(nchar(siteInfo$stationID) != 8)
+  siteInfo$stationID[zero_append] <- paste0("0",siteInfo$stationID[zero_append])
 
   BasChars <- siteInfo[,is.element(names(siteInfo),
-                                     c('Station.ID','Lat','Long'))]
-  X <- siteInfo[,c(1,27:ncol(siteInfo))]
-  sitesOut <- siteInfo$Station.ID
-  Y <- siteInfo[,c(1,9:16)]
-  lp3g <- siteInfo[,c(1,17)]
-  lp3k <- siteInfo[,c(1,18:25)]
-  lp3s <- siteInfo[,c(1,26)]
+                                     c('stationID','Lat','Long'))]
+  X <- siteInfo[,c(1,26:ncol(siteInfo))]
+  sitesOut <- siteInfo$stationID
+  Y <- siteInfo[,c(1,7:14)]
+  lp3g <- siteInfo[,c(1,5)]
+  lp3k <- siteInfo[,c(1,15:23)]
+  lp3s <- siteInfo[,c(1,6)]
   
-  LP3f <- data.frame(Station.ID=sitesOut,S=lp3s[,2],G=lp3g[,2],
-                     GR=siteInfo$Regional.Skew)
+  LP3f <- data.frame(stationID=sitesOut,S=lp3s[,2],G=lp3g[,2],
+                     GR=siteInfo$regionalSkew)
   LP3k <- lp3k
   uwls <- NULL
  
