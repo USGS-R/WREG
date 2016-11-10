@@ -1,7 +1,8 @@
 
 shinyServer(function(input, output,session) {
   
-  
+  warn("initialize")
+ 
   options(shiny.sanitize.errors = TRUE)
   
   session$onSessionEnded(function() {
@@ -14,111 +15,124 @@ shinyServer(function(input, output,session) {
   
   observeEvent(input$getData_peakFQ,
                {
-                 withProgress(message = 'Importing data', value = 0, {
-                   importData <<- importPeakFQ(pfqPath = input$pfqPath,
-                                               gisFile = input$gisFile$datapath
-                                               
-                   )
-                   selectData <<- list(sites = importData$sites,
-                                       Y = importData$Y,
-                                       AEP = importData$AEP,
-                                       X = importData$X,
-                                       LP3f = importData$LP3f,
-                                       LP3k = importData$LP3k,
-                                       BasChars = importData$BasChars,
-                                       MSEGR = importData$MSEGR,
-                                       recLen = importData$recLen,
-                                       recCor = importData$recCor
-                   )
+                 tryCatch({
+                     withProgress(message = 'Importing data', value = 0, {
+                       importData <<- importPeakFQ(pfqPath = input$pfqPath,
+                                                   gisFile = input$gisFile$datapath
+                                                   
+                       )
+                       selectData <<- list(sites = importData$sites,
+                                           Y = importData$Y,
+                                           AEP = importData$AEP,
+                                           X = importData$X,
+                                           LP3f = importData$LP3f,
+                                           LP3k = importData$LP3k,
+                                           BasChars = importData$BasChars,
+                                           MSEGR = importData$MSEGR,
+                                           recLen = importData$recLen,
+                                           recCor = importData$recCor
+                       )
+                       
+                       siteChars <<- merge(importData$BasChars,
+                                           importData$X,
+                                           by="Station.ID")
+                     })
+                     
+                     output$numSitesPeakFQ <- renderText(
+                       c("Data imported for the following sites: ",
+                         as.character(unique(importData$sites)),
+                         warn("get"))
+                       
+                     )
+                     #updateSelectInput(session,"Y",choices=colnames(importData$Y))
+                     source("updateInputs.R",local=TRUE)$value
+                 },
+                 error = function(err) {
                    
-                   siteChars <<- merge(importData$BasChars,
-                                       importData$X,
-                                       by="Station.ID")
+                   output$numSitesPeakFQ <- renderText(validate(paste("Error: ", err$message),
+                                                                errorClass="errorMessage"))
+                   
                  })
-                 
-                 output$numSitesPeakFQ <- renderText(
-                   c("Data imported for the following sites: ",
-                     as.character(unique(importData$sites)))
-                   
-                 )
-                 #updateSelectInput(session,"Y",choices=colnames(importData$Y))
-                 source("updateInputs.R",local=TRUE)$value
                })
   
   observeEvent(input$getData_WREG,
                {
-                 withProgress(message = 'Importing data', value = 0, {
-                   importData <<- importWREG(wregPath = input$wregPath)
-                   #Set select data to import data so that it defuaults to all sites if none selected in gui
-                   selectData <<- list(sites = importData$sites,
-                                       Y = importData$Y,
-                                       AEP = importData$AEP,
-                                       X = importData$X,
-                                       LP3f = importData$LP3f,
-                                       LP3k = importData$LP3k,
-                                       BasChars = importData$BasChars,
-                                       MSEGR = importData$MSEGR,
-                                       recLen = importData$recLen,
-                                       recCor = importData$recCor
-                   )
+                 tryCatch({
+                     withProgress(message = 'Importing data', value = 0, {
+                       importData <<- importWREG(wregPath = input$wregPath)
+                       #Set select data to import data so that it defuaults to all sites if none selected in gui
+                       selectData <<- list(sites = importData$sites,
+                                           Y = importData$Y,
+                                           AEP = importData$AEP,
+                                           X = importData$X,
+                                           LP3f = importData$LP3f,
+                                           LP3k = importData$LP3k,
+                                           BasChars = importData$BasChars,
+                                           MSEGR = importData$MSEGR,
+                                           recLen = importData$recLen,
+                                           recCor = importData$recCor
+                       )
+                       
+                       siteChars <<- cbind(importData$BasChars,
+                                           importData$X)
+                     })
+                     
+                     output$numSitesWREG <- renderText(
+                       c("Data imported for the following sites: ",
+                         as.character(unique(importData$sites)))
+                       
+                     )
+                     #updateSelectInput(session,"Y",choices=colnames(importData$Y))
+                     source("updateInputs.R",local=TRUE)$value
+                 },
+                 error = function(err) {
                    
-                   siteChars <<- cbind(importData$BasChars,
-                                       importData$X)
+                   output$numSitesWREG <- renderText(validate(paste("Error: ", err$message),
+                                                              errorClass="errorMessage"))
+                   
                  })
-                 
-                 output$numSitesWREG <- renderText(
-                   c("Data imported for the following sites: ",
-                     as.character(unique(importData$sites)))
-                   
-                 )
-                 #updateSelectInput(session,"Y",choices=colnames(importData$Y))
-                 source("updateInputs.R",local=TRUE)$value
-                 
                })
   
   observeEvent(input$getData_WREG_General,
                {
                  tryCatch({
-                   withProgress(message = 'Importing data', value = 0, {
-                   
-                  
-                   
-                   importData <- importWREG_General(wregPath = input$wregPath_General)
-                                
+                     withProgress(message = 'Importing data', value = 0, {
                      
-                   #Set select data to import data so that it defuaults to all sites if none selected in gui
-                   selectData <<- list(sites = importData$sites,
-                                       Y = importData$Y,
-                                       AEP = importData$AEP,
-                                       X = importData$X,
-                                       LP3f = importData$LP3f,
-                                       LP3k = importData$LP3k,
-                                       BasChars = importData$BasChars,
-                                       MSEGR = importData$MSEGR,
-                                       recLen = importData$recLen,
-                                       recCor = importData$recCor
-                   )
-                   
-                   siteChars <<- cbind(importData$BasChars,
-                                       importData$X)
-                   
-                   
-                   
-                 }
-               )
-                   output$numSitesWREG_General <- renderText(
-                     c("Data imported for the following sites: ",
-                       as.character(unique(importData$sites)))
+                    
                      
-                   )
-                   #updateSelectInput(session,"Y",choices=colnames(importData$Y))
-                   source("updateInputs.R",local=TRUE)$value
+                         importData <- importWREG_General(wregPath = input$wregPath_General)
+                                      
+                           
+                         #Set select data to import data so that it defuaults to all sites if none selected in gui
+                         selectData <<- list(sites = importData$sites,
+                                             Y = importData$Y,
+                                             AEP = importData$AEP,
+                                             X = importData$X,
+                                             LP3f = importData$LP3f,
+                                             LP3k = importData$LP3k,
+                                             BasChars = importData$BasChars,
+                                             MSEGR = importData$MSEGR,
+                                             recLen = importData$recLen,
+                                             recCor = importData$recCor
+                         )
+                         
+                         siteChars <<- cbind(importData$BasChars,
+                                             importData$X)
+                     })
+                     
+                     output$numSitesWREG_General <- renderText(
+                       c("Data imported for the following sites: ",
+                         as.character(unique(importData$sites)))
+                       
+                     )
+                     #updateSelectInput(session,"Y",choices=colnames(importData$Y))
+                     source("updateInputs.R",local=TRUE)$value
                    
                    },
-               warning = function(war) { print(paste("warningggggg")) },
                error = function(err) {
                  
-                 output$numSitesWREG_General <- renderText(paste("Error bruh :", err$message))
+                 output$numSitesWREG_General <- renderText(validate(paste("Error: ", err$message),
+                                                                    errorClass="errorMessage"))
                 
                })
             })
@@ -128,36 +142,45 @@ shinyServer(function(input, output,session) {
   
   observeEvent(input$selectSites,
                {
-                 if(input$siteSelOption == "Select individual sites")
-                 {
-                   selSites <<- as.numeric(input$siteCharTable_rows_selected)
-                 } else if (input$siteSelOption == "Select all sites on current table page")
-                 {
-                   selSites <<- as.numeric(input$siteCharTable_rows_current)
-                 } else if (input$siteSelOption == "Select all sites in dataset") 
-                 {
-                   selSites <<- seq(from=1,to=length(siteChars$Station.ID))
-                 }
-                 output$selSites <- renderText(c("The following sites will be used in WREG: ",
-                                                 as.character(siteChars$Station.ID[selSites])
-                 ))
-                 selectData <<- list(sites = importData$sites[which(importData$sites %in% 
-                                                                      siteChars$Station.ID[selSites])],
-                                     Y = importData$Y[importData$Y$Station.ID %in% siteChars$Station.ID[selSites],],
-                                     AEP = importData$AEP,
-                                     X = importData$X[importData$X$Station.ID %in% siteChars$Station.ID[selSites],],
-                                     LP3f = importData$LP3f[importData$LP3f$Station.ID %in% siteChars$Station.ID[selSites],],
-                                     LP3k = importData$LP3k[importData$LP3k$Station.ID %in% siteChars$Station.ID[selSites],],
-                                     BasChars = importData$BasChars[importData$BasChars$Station.ID %in% siteChars$Station.ID[selSites],],
-                                     MSEGR = importData$MSEGR,
-                                     recLen = importData$recLen[siteChars$Station.ID[selSites],
-                                                                siteChars$Station.ID[selSites]],
-                                     recCor = importData$recCor[siteChars$Station.ID[selSites],
-                                                                siteChars$Station.ID[selSites]]
-                 )
-                 
-                 
-                 
+                 tryCatch({
+                   if(input$siteSelOption == "Select individual sites")
+                   {
+                     selSites <<- as.numeric(input$siteCharTable_rows_selected)
+                   } else if (input$siteSelOption == "Select all sites on current table page")
+                   {
+                     selSites <<- as.numeric(input$siteCharTable_rows_current)
+                   } else if (input$siteSelOption == "Select all sites in dataset") 
+                   {
+                     selSites <<- seq(from=1,to=length(siteChars$Station.ID))
+                   }
+                   
+                   #check if sites were selected
+                   if(length(siteChars$Station.ID[selSites]) < 1){
+                     stop("No sites were selected")
+                   }
+                   
+                   output$selSites <- renderText(c("The following sites will be used in WREG: ",
+                                                   as.character(siteChars$Station.ID[selSites])
+                   ))
+                   selectData <<- list(sites = importData$sites[which(importData$sites %in% 
+                                                                        siteChars$Station.ID[selSites])],
+                                       Y = importData$Y[importData$Y$Station.ID %in% siteChars$Station.ID[selSites],],
+                                       AEP = importData$AEP,
+                                       X = importData$X[importData$X$Station.ID %in% siteChars$Station.ID[selSites],],
+                                       LP3f = importData$LP3f[importData$LP3f$Station.ID %in% siteChars$Station.ID[selSites],],
+                                       LP3k = importData$LP3k[importData$LP3k$Station.ID %in% siteChars$Station.ID[selSites],],
+                                       BasChars = importData$BasChars[importData$BasChars$Station.ID %in% siteChars$Station.ID[selSites],],
+                                       MSEGR = importData$MSEGR,
+                                       recLen = importData$recLen[siteChars$Station.ID[selSites],
+                                                                  siteChars$Station.ID[selSites]],
+                                       recCor = importData$recCor[siteChars$Station.ID[selSites],
+                                                                  siteChars$Station.ID[selSites]]
+                   )
+                 },
+                 error = function(err){
+                   output$selSites<- renderText(validate(paste("Error: ", err$message),
+                                          errorClass="errorMessage"))
+                 })
                }
   )
   
@@ -246,7 +269,14 @@ shinyServer(function(input, output,session) {
   ###This applies the transforms
   observeEvent(input$transVars,
                {
-                 try({
+                 tryCatch({
+                  
+                   #check to see if any x trans variables are selected
+                   wregValidation(Reduce('|',lapply(list(input$YvarC1,input$YvarC2,input$YvarC3,input$YvarC4), is.null)),
+                                  "eq",FALSE, "No y variables selected for transformation")
+                  
+                   #check for numeric input
+                   wregValidation(list(input$YvarC1,input$YvarC2,input$YvarC3,input$YvarC4), "numeric")
                    
                    #Y transformation
                    if(input$YvarTransType == "log10")
@@ -263,6 +293,8 @@ shinyServer(function(input, output,session) {
                          #C4
                          input$YvarC4
                      )
+                     #check to see if y transfer variable is infinity
+                     wregValidation(Yinput, "notEq", -Inf, "Y Tansfer equation equals infinity")
                      
                      transY <<- "log10"
                      Yinput <<- as.data.frame(cbind(selectData$Y$Station.ID,Yinput))
@@ -280,6 +312,8 @@ shinyServer(function(input, output,session) {
                          #C4
                          input$YvarC4
                      )
+                     #check to see if y transfer variable is infinity
+                     wregValidation(Yinput, "notEq", -Inf, "Y Tansfer equation equals infinity")
                      
                      transY <<- "ln"
                      Yinput <<- as.data.frame(cbind(selectData$Y$Station.ID,Yinput))
@@ -308,7 +342,19 @@ shinyServer(function(input, output,session) {
                      transY <<- "none"
                    }
                    
+                   #check to see if any x trans variables are selected
+                   wregValidation(Reduce('|',is.null(input$X)), "eq", FALSE, 
+                                  "No X variables selected for transformation")
+                
                    Xinput <<- lapply(1:length(input$X), function(i) {
+                     
+                     #check for numeric input
+                     wregValidation(list(input[[paste0(input$X[i],"_XvarC1")]],
+                                         input[[paste0(input$X[i],"_XvarC2")]],
+                                         input[[paste0(input$X[i],"_XvarC3")]],
+                                         input[[paste0(input$X[i],"_XvarC4")]]
+                                         ), "numeric")
+                     
                      if(input[[paste0(input$X[i],"XvarTransType")]] == "log10")
                      {
                        log10(
@@ -359,6 +405,9 @@ shinyServer(function(input, output,session) {
                      
                    })
                    
+                   #check to see if any of the variables equal infinity
+                   wregValidation(Xinput,"notEq", -Inf, "One or more x transfer variables equal infinity")
+                   
                    ##Combine list into dataframe
                    Xinput <<- do.call(cbind,Xinput)
                    Xinput <<- as.data.frame(cbind(selectData$X$Station.ID,Xinput))
@@ -389,22 +438,49 @@ shinyServer(function(input, output,session) {
                    })
                    output$transformNote <- renderText("Variables selected and transformations applied")
                    
+                 },  error = function(err) {
+                   
+                   output$transformNote  <- renderText(validate(paste("Error: ", err$message),
+                                                                      errorClass="errorMessage"))
+                   
                  })
+              
+  
                })
   ####################################
   ###Select the type of regression and do plot
   
-  output$corrPlot <- renderPlot(xcorPlot(object = selectData,
-                                         alpha = input$alpha,
-                                         theta = input$theta,
-                                         concurrentMin = input$concMin)
-  )
+  
+  output$corrPlot <- renderPlot(getCorPlot())
+  
+  getCorPlot <- function(){
+    
+    tempCorrPlot <- NULL
+    tryCatch({
+      
+      #check if inputs are numeric
+      wregValidation(list(input$alpha,input$theta,input$concMin), "numeric")
+      
+      tempCorrPlot <- xcorPlot(object = selectData,
+                      alpha = input$alpha,
+                      theta = input$theta,
+                      concurrentMin = input$concMin)
+      
+    
+    output$corrPlotError <- renderText(warn("get"))
+      
+    },
+    error = function(err){
+      output$corrPlotError <- renderText(validate(paste("Error: ", err$message), errorClass="errorMessage"))
+    })
+    
+    return(tempCorrPlot)
+  }
   
   ####################################
   ###Run WREG
   observeEvent(input$runWREG,
                {
-                 warn <<- ""
                  tryCatch({
                    withProgress(message = 'Running regression', value = 0, {
                      LP3 <<- merge(selectData$LP3f,selectData$LP3k[c("Station.ID",input$Y)],by="Station.ID")
@@ -592,16 +668,13 @@ shinyServer(function(input, output,session) {
                      write.table(wregOUT$Weighting,file=file,sep="\t",quote=FALSE)
                      
                    })
-                 
-                 },warning=function(w) {
-                   warn <<- append(warn, conditionMessage(w))
-                   output$wregPrint <- renderText(paste0(warn))
-                 }, error=function(e) {
+                 }, error=function(err) {
                    #print(e)
-                   output$wregPrint <- renderText(paste0("There was an error running WREG, please check inputs",warn))})
+                   output$wregPrint <- renderText(validate(paste("Error: ", err),
+                                                           errorClass="errorMessage"))
   
-               }
-)
+               }) 
+        })
 
 ####################################
 ###Export results

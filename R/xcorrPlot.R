@@ -42,7 +42,7 @@ xcorPlot <- function(object,alpha,theta,concurrentMin,
   # Revised by WHF, March 02, 2016
   
   if (concurrentMin < 10) {
-    warning(paste0('It is not reccommended to use a concurrent record',
+    warn("add",paste0('It is not reccommended to use a concurrent record',
       ' length less than 10 years. The value has been increased to 10.'))
     concurrentMin <- 10
   }

@@ -1,6 +1,7 @@
 
 shinyUI(fluidPage(theme="theme.css",title="WREG",
                   tags$head(tags$link(rel = "icon", type = "image/png", href = "favicon-16x16.png")),
+                  tags$style(type="text/css", ".shiny-output-error-errorMessage{ color:red; }"),
                   navbarPage(img(src="Logo.png", width="80px",height = "40px"),"WREG",
                              tabPanel("Welcome",
                                       titlePanel("Weighted-Multiple-Linear Regression Program"),
@@ -193,7 +194,9 @@ shinyUI(fluidPage(theme="theme.css",title="WREG",
                                                                                               step=0.01)
                                                                        )
                                                                      ),
-                                                                     plotOutput("corrPlot")
+                                                                     plotOutput("corrPlot"),
+                                                                     textOutput("corrPlotError")
+                                                                     
                                                                    )
                                                                  )
                                                  )

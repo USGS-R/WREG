@@ -51,52 +51,44 @@
 Leverage <- function(X,Omega,Ch=NA,x0=NA,ROI=FALSE) {
   # William Farmer, USGS, January 02, 2015
   # 01/27/2015, WHF: Added ABS on limits
+  # 11/10/16 Greg Petrochenkov: Changed validation scheme
   
   # Some upfront error handling
-  err <- FALSE
-  if (missing(X)) {
-    warning("Independent variables (X) must be provided.")
-    err <- TRUE
-  } else {
-    if ((length(unique(apply(X,FUN=class,MARGIN=2)))!=1)|
-        (unique(apply(X,FUN=class,MARGIN=2))!="numeric")) {
-      warning("Independent variables (X) must be provided as class numeric.")
-      err <- TRUE
-    } else {
-      if (sum(is.na(as.matrix(X)))>0) {
-        warning(paste0("Some independent variables (X) contain missing ",
-          "values.  These must be removed."))
-        err <- TRUE
-      }
-      if (sum(is.infinite(as.matrix(X)))>0) {
-        warning(paste0("Some independent variables (X) contain infinite ",
-          "values.  These must be removed."))
-        err <- TRUE
+  if(!wregValidation(missing(X), "eq", FALSE,
+                     "Independent variables (X) must be provided.", warnFlag = TRUE)){
+    
+    if(!wregValidation((length(unique(apply(X,FUN=class,MARGIN=2)))!=1)|
+                       (unique(apply(X,FUN=class,MARGIN=2))!="numeric"), "eq", FALSE,
+                       "Independent variables (X) must be provided as class numeric.", warnFlag = TRUE)){
+      
+      if(!wregValidation(sum(is.na(as.matrix(X))), "eq", 0,
+                         paste0("Some independent variables (X) contain missing ",
+                                "values.  These must be removed."), warnFlag = TRUE)){
+        
+        wregValidation(sum(is.infinite(as.matrix(X))), "eq", 0,
+                       paste0("Some independent variables (X) contain infinite ",
+                              "values.  These must be removed."), warnFlag = TRUE)
       }
     }
   }
-  if (missing(Omega)) {
-    warning("A weighting matrix (Omega) must be provided.")
-    err <- TRUE
-  } else {
-    if (!is.matrix(Omega)) {
-      warning("The weighting matrix (Omega) must be provided as a matrix.")
-      err <- TRUE
-    } else {
-      if (!is.numeric(Omega)) {
-        warning("The weighting matrix (Omega) must be provided as class numeric.")
-        err <- TRUE
-      } else {
-        if (det(Omega)==0) {
-          warning(paste("The weighting matrix (Omega) is singular and, therefore,",
-            "cannot be inverted.  Reconsider the weighting matrix."))
-          err <- TRUE
-        }
+  if(!wregValidation(missing(Omega), "eq", FALSE,
+                     "A weighting matrix (Omega) must be provided.", warnFlag = TRUE)){
+    
+    if(!wregValidation(!is.matrix(Omega), "eq", FALSE,
+                       "The weighting matrix (Omega) must be provided as a matrix.", warnFlag = TRUE)){
+      
+      if(!wregValidation(Omega, "numeric", message =
+                         "The weighting matrix (Omega) must be provided as class numeric.", warnFlag = TRUE)){
+        
+        wregValidation(det(Omega), "notEq", 0,
+                       paste0("Some independent variables (X) contain infinite ",
+                              "values.  These must be removed."), warnFlag = TRUE)
       }
     }
   }
-  if (err) {
-    stop("Invalid inputs were provided.  See warnings().")
+  
+  if (warn("check")) {
+    stop("Invalid inputs were provided.  See warnings().", warn("get"))
   }
   
   if (ROI==F) { # Not region-of-influence regression

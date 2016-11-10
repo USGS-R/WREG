@@ -41,38 +41,36 @@ Dist.WREG <- function(Lat1,Long1,Lat2,Long2,method=2) {
   
   # basic error checking
   ivars <- c('Lat1','Long1','Lat2','Long2')
-  err <- FALSE
+  
   for (i in ivars) {
-    check <- eval(parse(text=paste0('missing(',i,')')))
-    if (check) {
-      err = TRUE
-      warning(paste(i,"must be provided."))
+    if(wregValidation(eval(parse(text=paste0('missing(',i,')'))), "eq", FALSE,
+                   paste(i,"must be provided."), warnFlag = TRUE)){
       next
     }
-    check <- eval(parse(text=paste0('sum(!is.numeric(',i,'))>0')))
-    if (check) {
-      err = TRUE
-      warning(paste(i,"is not numeric."))
+   
+    if(wregValidation(eval(parse(text=paste0('sum(!is.numeric(',i,'))>0'))), "eq", FALSE,
+                      paste(i,"is not numeric."), warnFlag = TRUE)){
       next
     }
-    check <- eval(parse(text=paste0('sum(is.infinite(',i,'))>0')))
-    if (check) {
-      err = TRUE
-      warning(paste(i,"contains infinite values."))
+   
+    if(wregValidation(eval(parse(text=paste0('sum(is.infinite(',i,'))>0'))), "eq", FALSE,
+                      paste(i,"is not infinite."), warnFlag = TRUE)){
+      next
     }
-    check <- eval(parse(text=paste0('sum(is.na(',i,'))>0')))
-    if (check) {
-      err = TRUE
-      warning(paste(i,"contains missing values."))
+   
+    
+    if(wregValidation(eval(parse(text=paste0('sum(is.na(',i,'))>0'))), "eq", FALSE,
+                      paste(i,"contains missing values."), warnFlag = TRUE)){
+      next
     }
+   
   }
-  if (!is.element(method,c(1,2))) {
-    warning("'method' must be either 1 for use of a nautical mile ",
-      "approximation or 2 for use of the haversine formula.")
-    err <- TRUE
-  }
-  if (err) {
-    stop("Invalid inputs were provided.  See warnings()")
+  wregValidation(!is.element(method,c(1,2)), "eq", FALSE,
+                 "'method' must be either 1 for use of a nautical mile 
+                 approximation or 2 for use of the haversine formula.", warnFlag = TRUE)
+  
+  if (warn("check")) {
+    stop("Invalid inputs were provided.  See warnings()", warn("get"))
   }
   
   if (method==1) {

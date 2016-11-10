@@ -134,75 +134,65 @@ WREG.GLS <- function(Y,X,recordLengths,LP3,basinChars,transY,
                      x0=NA,alpha=0.01,theta=0.98,peak=T,distMeth=2,
                      regSkew=FALSE,MSEGR=NA,TY=2,legacy=FALSE) {
   # William Farmer, USGS, January 05, 2015
+  # 11/9/16 Greg Petrochenkov: Changed validation scheme
   
   # Some upfront error handling
-  err <- FALSE
-  if ((!missing(X)&!missing(Y))&&
-      (length(Y)!=nrow(X))) {
-    warning(paste0("The length of Y must be the same as ",
-      "the number of rows in X."))
-    err <- TRUE
-  }
-  if (missing(Y)) {
-    warning("Dependent variable (Y) must be provided.")
-    err <- TRUE
-  } else {
-    if (!is.numeric(Y)) {
-      warning("Dependent variable (Y) must be provided as class numeric.")
-      err <- TRUE
-    } else {
-      if (sum(is.na(Y))>0) {
-        warning(paste0("The depedent variable (Y) contains missing ",
-          "values.  These must be removed."))
-        err <- TRUE
-      }
-      if (sum(is.infinite(Y))>0) {
-        warning(paste0("The depedent variable (Y) contains infinite ",
-          "values.  These must be removed."))
-        err <- TRUE
-      }
+  wregValidation((!missing(X)&!missing(Y))&&(length(Y)!=nrow(X)), "eq", FALSE,
+                 paste0("The length of Y must be the same as ",
+                        "the number of rows in X."), warnFlag = TRUE)
+  
+  if (!wregValidation((!missing(X)&!missing(Y))&&(length(Y)!=nrow(X)), "eq", FALSE,
+                      "Dependent variable (Y) must be provided", warnFlag = TRUE)) {
+    
+    if (!wregValidation(Y, "numeric", message = 
+                        "Dependent variable (Y) must be provided as class numeric",
+                        warnFlag = TRUE)) {
+      
+      wregValidation(sum(is.na(Y)), "eq", 0 ,
+                     paste0("The depedent variable (Y) contains missing ",
+                            "values.  These must be removed."),
+                            warnFlag = TRUE)
+      
+      wregValidation(sum(is.infinite(Y)), "eq", 0 ,
+                     paste0("The depedent variable (Y) contains infinite ",
+                            "values.  These must be removed."),
+                            warnFlag = TRUE)
     }
   }
-  if (missing(X)) {
-    warning("Independent variables (X) must be provided.")
-    err <- TRUE
-  } else {
-    if ((length(unique(apply(X,FUN=class,MARGIN=2)))!=1)|
-        (unique(apply(X,FUN=class,MARGIN=2))!="numeric")) {
-      warning("Independent variables (X) must be provided as class numeric.")
-      err <- TRUE
-    } else {
-      if (sum(is.na(as.matrix(X)))>0) {
-        warning(paste0("Some independent variables (X) contain missing ",
-          "values.  These must be removed."))
-        err <- TRUE
-      }
-      if (sum(is.infinite(as.matrix(X)))>0) {
-        warning(paste0("Some independent variables (X) contain infinite ",
-          "values.  These must be removed."))
-        err <- TRUE
-      }
+  
+  if (!wregValidation(missing(X), "eq", FALSE,
+                      "Independent variables (X) must be provided.", warnFlag = TRUE)) {
+    
+    if (!wregValidation((length(unique(apply(X,FUN=class,MARGIN=2)))!=1)|
+                        (unique(apply(X,FUN=class,MARGIN=2))!="numeric"), "eq", FALSE,
+                        "Independent variables (X) must be provided as class numeric.", warnFlag = TRUE)){
+      
+      wregValidation(sum(is.na(as.matrix(X))), "eq", 0,
+                     paste0("Some independent variables (X) contain missing ",
+                            "values.  These must be removed."), warnFlag = TRUE)
+      
+      wregValidation(sum(is.infinite(as.matrix(X))), "eq", 0,
+                     paste0("Some independent variables (X) contain infinite ",
+                            "values.  These must be removed."), warnFlag = TRUE)
     }
   }
-  if (!is.logical(regSkew)) {
-    warning("regSkew must be either TRUE to for skew correction",
-      "or FALSE for no skew correction.")
-    err <- TRUE
-  }
-  if(missing(transY)|!is.character(transY)) {
-    warning("transY must be included as a character string.")
-    err <- TRUE
-  } else if (!is.element(transY,c("none","log10","ln"))) {
-    warning("transY must be either 'none', 'log10' or 'ln'.")
-    err <- TRUE
+  
+  wregValidation(!is.logical(regSkew), "eq", FALSE,
+                 paste0("regSkew must be either TRUE to for skew correction",
+                        "or FALSE for no skew correction."), warnFlag = TRUE)
+  
+  if(!wregValidation(missing(transY)|!is.character(transY), "eq", FALSE,
+                     "transY must be included as a character string", warnFlag = TRUE)) {
+    
+    wregValidation(!is.element(transY,c("none","log10","ln")), "eq", FALSE,
+                   "transY must be either 'none', 'log10' or 'ln'", warnFlag = TRUE)
   }
   
   ## Add controls to meet legacy demands
-  if (!is.logical(legacy)) {
-    warning("legacy must be either TRUE to force matching with previous",
-      "versions or FALSE for correct computations.")
-    err <- TRUE
-  }
+  wregValidation(!is.logical(legacy), "eq", FALSE,
+                  paste0("legacy must be either TRUE to force matching with previous",
+                  "versions or FALSE for correct computations."), warnFlag = TRUE)
+    
   ##    NOTE: legacy forces program to return the same results as WREG v 1.05.
   if (legacy) { # If legacy is indicated, override custom inputs.
     TY <- 2 # WREG v1.05 does not read this input correctly.
@@ -215,15 +205,13 @@ WREG.GLS <- function(Y,X,recordLengths,LP3,basinChars,transY,
   } else { # ROI regression is used.
     ROI <- T
   }
-  if (ROI&&(length(x0)!=ncol(X))) {
-    warning(paste0("The length of x0 must be the same as ",
-      "the number of columns in X"))
-    err <- TRUE
-  }
-  if (ROI&&(!is.numeric(x0))) {
-    warning(paste0("The input x0 must be of the numeric class"))
-    err <- TRUE
-  }
+  
+  wregValidation(ROI&&(length(x0)!=ncol(X)), "eq", FALSE,
+                 paste0("The length of x0 must be the same as ",
+                        "the number of columns in X"), warnFlag = TRUE)
+  
+  wregValidation(ROI&&(!is.numeric(x0)), "eq", FALSE,
+                 "The input x0 must be of the numeric class", warnFlag = TRUE)
   
   ## Just initial values for control.
   var.modelerror.k <- NA
@@ -235,17 +223,15 @@ WREG.GLS <- function(Y,X,recordLengths,LP3,basinChars,transY,
   
   ## Weighting matrix
   if (!is.na(MSEGR)) {
-    if (length(MSEGR)!=1) {
-      warning("MSEGR must be a single value")
-      err <- TRUE
-    }
-    if (!is.numeric(MSEGR)) {
-      warning("MSEGR must be a numeric value")
-      err <- TRUE
-    }
+    
+    wregValidation(length(MSEGR)!=1, "eq", FALSE,
+                  "MSEGR must be a single value", warnFlag = TRUE)
+    
+    wregValidation(MSEGR, "numeric", 
+                   message="MSEGR must be a single value", warnFlag = TRUE)
   }
-  if (err) {
-    stop('Invalid inputs were provided. See warnings().')
+  if (warn("check")) {
+    stop('Invalid inputs were provided. See warnings().', warn("get"))
   }
   if (regSkew==FALSE) {MSEGR<-NA}
   ### Estimate k-variable model-error variance and final weighting matrix

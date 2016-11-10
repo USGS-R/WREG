@@ -54,14 +54,19 @@ importPeakFQ <- function(pfqPath,gisFile,sites='') {
   
   # Check to see if the file has standard column names, otherwise rename the first three columns to the apropriate name
   if (Reduce('&',(is.element(names(gisData), c('Station.ID', 'Lat', 'Long')))) == FALSE){
-    names(gisData)[1:3] <- c('Station.ID', 'Lat', 'Long')
+    names(gisData)[1:10] <- c('Station.ID',	'Lat',	'Long',	'No..Annual.Series',	'Zero.1.NonZero.2',	'FreqZero',
+                               'Regional.Skew',	'Cont.1.PR.2',	'A',	'P1006')
+    
+    gisData <- shiftColumns(gisData, 11)
+    
   } 
   
   #convert Station.ID to character class
-  gisData$Station.ID <- as(gisData$Station.ID, 'character')
+  gisData$Station.ID <- toupper(as(gisData$Station.ID, 'character'))
   
-  gisData$Station.ID <- ifelse(nchar(gisData$Station.ID)%%2>0,
-    paste0("0",gisData$Station.ID), gisData$Station.ID)
+  #check to see if any sites need a zero appended
+  zero_append <- which(nchar(gisData$Station.ID) != 8)
+  gisData$Station.ID[zero_append] <- paste0("0",gisData$Station.ID[zero_append])
   
   # Remove old WREG variables that are reproduced elsewhere
   remNDX <- -which(is.element(names(gisData), c('No..Annual.Series',
@@ -108,11 +113,14 @@ importPeakFQ <- function(pfqPath,gisFile,sites='') {
   ###Get sites that are not in GIS file for warning message
   droppedSites <- gisData$Station.ID[which(!(gisData$Station.ID %in% EXP_SiteID[,2]))]
   
-  if(length(droppedSites > 0))
+  if(length(droppedSites) <= 0)
   {
-    warning(paste("The following sites are present in the GIS file and not found in EXP files in the Peak FQ output directory:",
-                  droppedSites,sep=",")
+    droppedSites <- list(1,2,3)
+    warning(c("The following sites are in the GIS file and not found in EXP files in the Peak FQ output directory: ",
+                  paste0(droppedSites, collapse=","))
     )
+    warn("add",as.character(c("The following sites are in the GIS file and not found in EXP files in the Peak FQ output directory: ",
+                 paste0(droppedSites, collapse=","))))
   }
   
   EXP_G <- do.call(rbind,lapply(allFilesEXP,read.table,skip=7,nrows=1))
@@ -206,9 +214,11 @@ importPeakFQ <- function(pfqPath,gisFile,sites='') {
   
   if(length(droppedSites > 0))
   {
-    warning(paste("The following sites are present in the GIS file and not found in PRT files in the Peak FQ output directory:",
-                  droppedSites,sep=",")
+    warning(c("The following sites are present in the GIS file and not found in PRT files in the Peak FQ output directory: ",
+              paste0(droppedSites, collapse=","))
     )
+    warn("add",as.character(c("The following sites are present in the GIS file and not found in PRT files in the Peak FQ output directory: ",
+                              paste0(droppedSites, collapse=","))))
   }
   
   ###Subset GIS file to only sites that have an EXP and PRT

@@ -63,79 +63,74 @@
 #'  
 #' @examples
 #' # Import some example data
-#' peakFQdir <- paste0(
-#'   file.path(system.file("exampleDirectory", package = "WREG"),
-#'     "pfqImport"))
-#' gisFilePath <- file.path(peakFQdir, "pfqSiteInfo.txt")
-#' importedData <- importPeakFQ(pfqPath = peakFQdir, gisFile = gisFilePath)
-#' 
-#' # Organizing input data
-#' lp3Data <- importedData$LP3f
-#' lp3Data$K <- importedData$LP3k$AEP_0.5
-#' Y <- importedData$Y$AEP_0.5
-#' X <- importedData$X[c("Sand", "OutletElev", "Slope")]
-#' recordLengths <- importedData$recLen
-#' transY <- "none"
-#' 
-#' # Run WLS regression
-#' result <- WREG.WLS(Y, X, recordLengths, LP3 = lp3Data, transY)
+# peakFQdir <- paste0(
+#   file.path(system.file("exampleDirectory", package = "WREG"),
+#     "pfqImport"))
+# gisFilePath <- file.path(peakFQdir, "pfqSiteInfo.txt")
+# importedData <- importPeakFQ(pfqPath = peakFQdir, gisFile = gisFilePath)
+
+# Organizing input data
+# lp3Data <- importedData$LP3f
+# lp3Data$K <- importedData$LP3k$AEP_0.5
+# Y <- importedData$Y$AEP_0.5
+# X <- importedData$X[c("Sand", "OutletElev", "Slope")]
+# recordLengths <- importedData$recLen
+# transY <- "none"
+# 
+# # Run WLS regression
+# result <- WREG.WLS(Y, X, recordLengths, LP3 = lp3Data, transY)
 #'
 #'@export
 
 WREG.WLS <- function(Y,X,recordLengths,LP3,transY,x0=NA) {
-  # William Farmer, USGS, January 05, 2015
+  # 11/9/16 Greg Petrochenkov: Changed validation scheme
   
   # Some upfront error handling
-  err <- FALSE
-  if (missing(Y)) {
-    warning("Dependent variable (Y) must be provided.")
-    err <- TRUE
-  } else {
-    if (!is.numeric(Y)) {
-      warning("Dependent variable (Y) must be provided as class numeric.")
-      err <- TRUE
-    } else {
-      if (sum(is.na(Y))>0) {
-        warning(paste0("The depedent variable (Y) contains missing ",
-          "values.  These must be removed."))
-        err <- TRUE
-      }
-      if (sum(is.infinite(Y))>0) {
-        warning(paste0("The depedent variable (Y) contains infinite ",
-          "values.  These must be removed."))
-        err <- TRUE
-      }
+  wregValidation((!missing(X)&!missing(Y))&&(length(Y)!=nrow(X)), "eq", FALSE,
+                 paste0("The length of Y must be the same as ",
+                        "the number of rows in X."), warnFlag = TRUE)
+  
+  if (!wregValidation((!missing(X)&!missing(Y))&&(length(Y)!=nrow(X)), "eq", FALSE,
+                      "Dependent variable (Y) must be provided", warnFlag = TRUE)) {
+    
+    if (!wregValidation(Y, "numeric", message = 
+                        "Dependent variable (Y) must be provided as class numeric",
+                        warnFlag = TRUE)) {
+      
+      wregValidation(sum(is.na(Y)), "eq", 0 ,
+                     paste0("The depedent variable (Y) contains missing ",
+                            "values.  These must be removed."),
+                            TRUE)
+      
+      wregValidation(sum(is.infinite(Y)), "eq", 0 ,
+                     paste0("The depedent variable (Y) contains infinite ",
+                            "values.  These must be removed."),
+                            warnFlag = TRUE)
     }
-  }
-  if (missing(X)) {
-    warning("Independent variables (X) must be provided.")
-    err <- TRUE
-  } else {
-    if ((length(unique(apply(X,FUN=class,MARGIN=2)))!=1)|
-        (unique(apply(X,FUN=class,MARGIN=2))!="numeric")) {
-      warning("Independent variables (X) must be provided as class numeric.")
-      err <- TRUE
-    } else {
-      if (sum(is.na(as.matrix(X)))>0) {
-        warning(paste0("Some independent variables (X) contain missing ",
-          "values.  These must be removed."))
-        err <- TRUE
-      }
-      if (sum(is.infinite(as.matrix(X)))>0) {
-        warning(paste0("Some independent variables (X) contain infinite ",
-          "values.  These must be removed."))
-        err <- TRUE
-      }
-    }
-  }
-  if(missing(transY)|!is.character(transY)) {
-    warning("transY must be included as a character string.")
-    err <- TRUE
-  } else if (!is.element(transY,c("none","log10","ln"))) {
-    warning("transY must be either 'none', 'log10' or 'ln'.")
-    err <- TRUE
   }
   
+  if (!wregValidation(missing(X), "eq", FALSE,
+                      "Independent variables (X) must be provided.", warnFlag = TRUE)) {
+    
+    if (!wregValidation((length(unique(apply(X,FUN=class,MARGIN=2)))!=1)|
+                        (unique(apply(X,FUN=class,MARGIN=2))!="numeric"), "eq", FALSE,
+                        "Independent variables (X) must be provided as class numeric.", warnFlag = TRUE)){
+      
+      wregValidation(sum(is.na(as.matrix(X))), "eq", 0,
+                     paste0("Some independent variables (X) contain missing ",
+                            "values.  These must be removed."), warnFlag = TRUE)
+      
+      wregValidation(sum(is.infinite(as.matrix(X))), "eq", 0,
+                     paste0("Some independent variables (X) contain infinite ",
+                            "values.  These must be removed."), warnFlag = TRUE)
+    }
+  }
+  if(!wregValidation(missing(transY)|!is.character(transY), "eq", FALSE,
+                     "transY must be included as a character string", warnFlag = TRUE)) {
+    
+    wregValidation(!is.element(transY,c("none","log10","ln")), "eq", FALSE,
+                   "transY must be either 'none', 'log10' or 'ln'", warnFlag = TRUE)
+  }
   
   ## Determine if ROI is being applied
   if (is.na(sum(x0))) { # ROI regression is not used.
@@ -150,72 +145,60 @@ WREG.WLS <- function(Y,X,recordLengths,LP3,transY,x0=NA) {
   if(is.matrix(recordLengths)) {
     recordLengths<-diag(recordLengths)
   }
-  if (missing(recordLengths)) {
-    warning("Record lengths must be provided.")
-    err <- TRUE
-  } else {
-    if (!is.numeric(recordLengths)) {
-      warning("Record lengths must be provided as class numeric.")
-      err <- TRUE
-    } else {
-      if (sum(is.na(c(recordLengths)))>0) {
-        warning(paste0("Some record lengths contain missing ",
-          "values.  These must be removed."))
-        err <- TRUE
-      }
-      if (sum(is.infinite(c(recordLengths)))>0) {
-        warning(paste0("Some record lengths contain infinite ",
-          "values.  These must be removed."))
-        err <- TRUE
-      }
+  if (!wregValidation(missing(recordLengths), "eq", FALSE,
+                     "Record lengths must be provided.", warnFlag = TRUE)) {
+    
+    if (!wregValidation(recordLengths, "numeric", 
+                        message="Record lengths must be provided as class numeric.", warnFlag = TRUE)) {
+      
+      wregValidation(sum(is.na(c(recordLengths))), "eq", 0, 
+                     paste0("Some record lengths contain missing ",
+                            "values.  These must be removed."), warnFlag = TRUE)
+      
+      wregValidation(sum(is.infinite(c(recordLengths))), "eq", 0, 
+                     paste0("Some record lengths contain infinite ",
+                            "values.  These must be removed."), warnFlag = TRUE)
     }
   }
   
   # Error checking LP3
-  if (missing(LP3)) {
-    warning("The data frame LP3 must be provided.")
-    err <- TRUE
-  } else {
-    if (!is.data.frame(LP3)) {
-      warning(paste("LP3 must be provided as a data frame with elements named",
-        "'S', 'K' and 'G' for standard deivation, deviate and skew,",
-        "respectively."))
-      err <- TRUE
-    } else {
-      if (sum(is.element(c("S","K","G"),names(LP3)))!=3) {
-        warning(paste("In valid elements: The names of the elements in LP3 are",
-          names(LP3),". LP3 must be provided as a data frame with elements named",
-          "'S', 'K' and 'G' for standard deivation, deviate and skew,",
-          "respectively."))
-        err <- TRUE
-      } else {
-        if ((length(unique(apply(cbind(LP3$S,LP3$K,LP3$G),FUN=class,MARGIN=2)))!=1)|
-            (unique(apply(cbind(LP3$S,LP3$K,LP3$G),FUN=class,MARGIN=2))!="numeric")) {
-          warning("The data frame LP3 must be provided in a numeric class")
-          err <- TRUE
-        } else {
-          if (sum(is.infinite(LP3$S),is.infinite(LP3$K),is.infinite(LP3$G))>0) {
-            warning(paste0("Some elements of LP3$S, LP3$K, and LP3$G contain infinite ",
-              "values.  These must be removed."))
-            err <- TRUE
-          }
-          if (sum(is.na(LP3$S),is.na(LP3$K),is.na(LP3$G))>0) {
-            warning(paste0("Some elements of LP3$S, LP3$K, and LP3$G contain missing ",
-              "values.  These must be removed."))
-            err <- TRUE
-          }
+  if (!wregValidation(missing(LP3), "eq", FALSE,
+                      "The data frame LP3 must be provided.", warnFlag = TRUE)) {
+    
+    if (!wregValidation(!is.data.frame(LP3), "eq", FALSE,
+                        paste("LP3 must be provided as a data frame with elements named",
+                              "'S', 'K' and 'G' for standard deivation, deviate and skew,",
+                              "respectively."), warnFlag = TRUE)) {
+      
+      if (!wregValidation(sum(is.element(c("S","K","G"),names(LP3)))!=3, "eq", FALSE,
+                         paste("In valid elements: The names of the elements in LP3 are",
+                               names(LP3),". LP3 must be provided as a data frame with elements named",
+                               "'S', 'K' and 'G' for standard deivation, deviate and skew,",
+                               "respectively."), warnFlag = TRUE)) {
+      
+        if(!wregValidation((length(unique(apply(cbind(LP3$S,LP3$K,LP3$G),FUN=class,MARGIN=2)))!=1)|
+                            (unique(apply(cbind(LP3$S,LP3$K,LP3$G),FUN=class,MARGIN=2))!="numeric"), "eq", FALSE,
+                           "The data frame LP3 must be provided in a numeric class", warnFlag = TRUE)){
+        
+          wregValidation(sum(is.infinite(LP3$S),is.infinite(LP3$K),is.infinite(LP3$G))>0, "eq", FALSE,
+                         paste0("Some elements of LP3$S, LP3$K, and LP3$G contain infinite ",
+                                "values.  These must be removed."), warnFlag = TRUE)
+          
+          wregValidation(sum(is.na(LP3$S),is.na(LP3$K),is.na(LP3$G))>0, "eq", FALSE,
+                         paste0("Some elements of LP3$S, LP3$K, and LP3$G contain missing ",
+                                "values.  These must be removed."), warnFlag = TRUE)
         }
       }
     }
   }
-  if ((!missing(X)&!missing(Y)&!missing(recordLengths)&!missing(LP3))&&
-      (length(unique(length(Y),nrow(X),nrow(LP3),length(recordLengths)))!=1)) {
-    warning(paste0("length(Y), nrow(X), nrow(LP3) and ",
-      "length(recordLengths) must all be equal"))
-    err <- TRUE
-  }
-  if (err) {
-    stop('Invalid inputs were provided.  See warnings().')
+  
+  wregValidation((!missing(X)&!missing(Y)&!missing(recordLengths)&!missing(LP3))&&
+                   (length(unique(length(Y),nrow(X),nrow(LP3),length(recordLengths)))!=1), "eq", FALSE,
+                 paste0("length(Y), nrow(X), nrow(LP3) and ",
+                        "length(recordLengths) must all be equal"), warnFlag = TRUE)
+ 
+  if (warn("check")){
+    stop('Invalid inputs were provided. See warnings().', warn("get"))
   }
     
   #Convert X and Y from dataframes to matrices to work with matrix operations below
