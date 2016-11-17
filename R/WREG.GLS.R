@@ -136,6 +136,7 @@ WREG.GLS <- function(Y,X,recordLengths,LP3,basinChars,transY,
   # William Farmer, USGS, January 05, 2015
   # 11/9/16 Greg Petrochenkov: Changed validation scheme
   
+  warn("clear")
   # Some upfront error handling
   wregValidation((!missing(X)&!missing(Y))&&(length(Y)!=nrow(X)), "eq", FALSE,
                  paste0("The length of Y must be the same as ",

@@ -40,7 +40,7 @@ print.WREG.OLS <- function(x, ...) {
   object <- x
   cat(paste0("Regression Model for ",names(object$Y),'\n'))
   cat('Coefficients fit by ordinary least-squares.\n')
-  cat("\nCall:\n", object$Inputs$call,'\n\n')
+  cat("\nCall:\n", createEquation(object$Coefs$Coefficient),'\n\n')
   cat(paste0('\nPerformance Metrics\n(Note: Units are based',
              ' on the transformation of the dependent variable.)\n'))
   cat('Mean Squared Error:\t',
@@ -97,7 +97,7 @@ print.WREG.WLS <- function(x, ...) {
   object <- x
   cat(paste0("Regression Model for ",names(object$Y),'\n'))
   cat('Coefficients fit by weighted least-squares.\n')
-  cat("\nCall:\n", object$Inputs$call,'\n\n')
+  cat("\nCall:\n", createEquation(object$Coefs$Coefficient),'\n\n')
   cat(paste0('\nPerformance Metrics\n(Note: Units are based',
              ' on the transformation of the dependent variable.)\n'))
   cat('Mean Squared Error:\t',
@@ -168,7 +168,7 @@ print.WREG.GLS <- function(x, ...) {
   object <- x
   cat(paste0("Regression Model for ",names(object$Y),'\n'))
   cat('Coefficients fit by generalized least-squares.\n')
-  cat("\nCall:\n", object$Inputs$call,'\n\n')
+  cat("\nCall:\n", createEquation(object$Coefs$Coefficient),'\n\n')
   cat(paste0('\nPerformance Metrics\n(Note: Units are based',
              ' on the transformation of the dependent variable.)\n'))
   cat('Mean Squared Error:\t',
@@ -241,7 +241,7 @@ print.WREG.GLSs <- function(x, ...) {
 cat(paste0("Regression Model for ",names(object$Y),'\n'))
 cat(paste0('Coefficients fit by generalized least-squares with an \n',
            'adjustment for uncertainty in regional skew.\n'))
-cat("\nCall:\n", object$Inputs$call,'\n\n')
+cat("\nCall:\n", createEquation(object$Coefs$Coefficient),'\n\n')
 cat(paste0('\nPerformance Metrics\n(Note: Units are based',
            ' on the transformation of the dependent variable.)\n'))
 cat('Mean Squared Error:\t',
@@ -282,3 +282,28 @@ temp$Influence <- ifelse(object$LevInf.Sig[,2],
                          paste0(temp$Influence,'*'),temp$Influence)
 print(temp)
 }
+
+createEquation <- function(coeffs){
+  xSide <- NULL
+  for(x in 1:length(coeffs)){
+    if(x == length(coeffs)){
+      if(is.null(xSide)){
+        xSide <- sprintf("\n\\\\%.2f * %s",coeffs[x],xEq[x])
+      }else{
+        xSide <- c(xSide, sprintf("\n\\\\%.2f * %s",coeffs[x],xEq[x]))
+      }
+    } else{
+      if(is.null(xSide)){
+        xSide <- sprintf("\n\\\\%.2f * %s + ",coeffs[x],xEq[x])
+      }else{
+        xSide <- c(xSide, sprintf("\n\\\\%.2f * %s + ",coeffs[x],xEq[x]))
+      }
+    }
+  }
+  
+  xSide <- paste(xSide, collapse="")
+  
+  regressionEquation <<- sprintf("%s%s%s%s", "$$", yEq,xSide, "$$")
+  return(c( yEq,gsub("\\\\","",xSide)))
+}
+

@@ -149,219 +149,204 @@
 #'  implemented.}
 #'  
 #' @examples
-#' # Import some example data
-#' peakFQdir <- paste0(
-#'   file.path(system.file("exampleDirectory", package = "WREG"),
-#'     "pfqImport"))
-#' gisFilePath <- file.path(peakFQdir, "pfqSiteInfo.txt")
-#' importedData <- importPeakFQ(pfqPath = peakFQdir, gisFile = gisFilePath)
-#' 
-#' # Run a simple regression
-#' Y <- importedData$Y$AEP_0.5
-#' X <- importedData$X[c("A")]
-#' transY <- "none"
-#' basinChars <- importedData$BasChars
-#' #result <- WREG.OLS(Y, X, transY)
-#' 
-#' result <- WREG.RoI(Y, X, Reg = "OLS", transY, BasinChars = basinChars,
-#'   ROI='GRoI', n = 10L)
+# # Import some example data
+# peakFQdir <- paste0(
+#   file.path(system.file("exampleDirectory", package = "WREG"),
+#     "pfqImport"))
+# gisFilePath <- file.path(peakFQdir, "pfqSiteInfo.txt")
+# importedData <- importPeakFQ(pfqPath = peakFQdir, gisFile = gisFilePath)
+# 
+# # Run a simple regression
+# Y <- importedData$Y$AEP_0.5
+# X <- importedData$X[c("A")]
+# transY <- "none"
+# basinChars <- importedData$BasChars
+# #result <- WREG.OLS(Y, X, transY)
+# 
+# result <- WREG.RoI(Y, X, Reg = "OLS", transY, BasinChars = basinChars,
+#   ROI='GRoI', n = 10L)
 #'@export
 WREG.RoI <- function(Y,X,Reg,transY=NA,
   recordLengths = NA,LP3 = NA,regSkew=FALSE,
   alpha=0.01,theta=0.98,BasinChars=NA,MSEGR=NA,TY=2,Peak=T,
   ROI=c('PRoI','GRoI','HRoI'),n=NA,D=250,DistMeth=2,Legacy=FALSE) {
   # William Farmer, USGS, January 23, 2015
+  # Greg PEtrochenkov, USGS, November 14, 2016 :  Changed validation scheme
   
+  warn("clear")
   # Some upfront error handling
-  err <- FALSE
-  if ((!missing(X)&!missing(Y))&&
-      (length(Y)!=nrow(X))) {
-    warning(paste0("The length of Y must be the same as ",
-      "the number of rows in X."))
-    err <- TRUE
-  }
-  if (missing(Y)) {
-    warning("Dependent variable (Y) must be provided.")
-    err <- TRUE
-  } else {
-    if (!is.numeric(Y)) {
-      warning("Dependent variable (Y) must be provided as class numeric.")
-      err <- TRUE
-    } else {
-      if (sum(is.na(Y))>0) {
-        warning(paste0("The depedent variable (Y) contains missing ",
-          "values.  These must be removed."))
-        err <- TRUE
-      }
-      if (sum(is.infinite(Y))>0) {
-        warning(paste0("The depedent variable (Y) contains infinite ",
-          "values.  These must be removed."))
-        err <- TRUE
-      }
+  wregValidation((!missing(X)&!missing(Y))&&(length(Y)!=nrow(X)), "eq", FALSE,
+                 paste0("The length of Y must be the same as ",
+                        "the number of rows in X."), warnFlag = TRUE)
+  
+  if (!wregValidation(missing(Y), "eq", FALSE,
+                      "Dependent variable (Y) must be provided", warnFlag = TRUE)) {
+    
+    if (!wregValidation(Y, "numeric", message = 
+                        "Dependent variable (Y) must be provided as class numeric",
+                        warnFlag = TRUE)) {
+      
+      wregValidation(sum(is.na(Y)), "eq", 0 ,
+                     paste0("The depedent variable (Y) contains missing ",
+                            "values.  These must be removed."),
+                     warnFlag = TRUE)
+      
+      wregValidation(sum(is.infinite(Y)), "eq", 0 ,
+                     paste0("The depedent variable (Y) contains infinite ",
+                            "values.  These must be removed."),
+                     warnFlag = TRUE)
     }
   }
-  if (missing(X)) {
-    warning("Independent variables (X) must be provided.")
-    err <- TRUE
-  } else {
-    if ((length(unique(apply(X,FUN=class,MARGIN=2)))!=1)|
-        (unique(apply(X,FUN=class,MARGIN=2))!="numeric")) {
-      warning("Independent variables (X) must be provided as class numeric.")
-      err <- TRUE
-    } else {
-      if (sum(is.na(as.matrix(X)))>0) {
-        warning(paste0("Some independent variables (X) contain missing ",
-          "values.  These must be removed."))
-        err <- TRUE
-      }
-      if (sum(is.infinite(as.matrix(X)))>0) {
-        warning(paste0("Some independent variables (X) contain infinite ",
-          "values.  These must be removed."))
-        err <- TRUE
-      }
+ 
+  if (!wregValidation(missing(X), "eq", FALSE,
+                      "Independent variables (X) must be provided.", warnFlag = TRUE)) {
+    
+    if (!wregValidation((length(unique(apply(X,FUN=class,MARGIN=2)))!=1)|
+                        (unique(apply(X,FUN=class,MARGIN=2))!="numeric"), "eq", FALSE,
+                        "Independent variables (X) must be provided as class numeric.", warnFlag = TRUE)){
+      
+      wregValidation(sum(is.na(as.matrix(X))), "eq", 0,
+                     paste0("Some independent variables (X) contain missing ",
+                            "values.  These must be removed."), warnFlag = TRUE)
+      
+      wregValidation(sum(is.infinite(as.matrix(X))), "eq", 0,
+                     paste0("Some independent variables (X) contain infinite ",
+                            "values.  These must be removed."), warnFlag = TRUE)
     }
   }
-  if (missing(n)|!is.integer(n)|length(n)>1) {
-    warning(paste0("n must be provided as a single integer value."))
-    err <- TRUE
-  }
+  
+  wregValidation(missing(n)|!is.integer(n)|length(n)>1, "eq", FALSE,
+                 paste0("n must be provided as a single integer value."), warnFlag = TRUE)
+  
   # Error checking LP3
   if (is.element(Reg,c("GLS","GLSskew","WLS"))) {
-    if (missing(LP3)) {
-      warning("LP3 must be provided as an input.")
-      err <- TRUE
-    } else {
-      if (!regSkew) {
-        if (!is.data.frame(LP3)) {
-          warning(paste("LP3 must be provided as a data frame with elements named",
-            "'S', 'K' and 'G' for standard deivation, deviate and skew,",
-            "respectively."))
-          err <- TRUE
-        } else {
-          if (sum(is.element(c("S","K","G"),names(LP3)))!=3) {
-            warning(paste("In valid elements: The names of the elements in LP3 are",
-              names(LP3),". LP3 must be provided as a data frame with elements named",
-              "'S', 'K' and 'G' for standard deivation, deviate and skew,",
-              "respectively."))
-            err <- TRUE
-          }
-          if ((length(unique(apply(cbind(LP3$S,LP3$K,LP3$G),FUN=class,MARGIN=2)))!=1)|
-              (unique(apply(cbind(LP3$S,LP3$K,LP3$G),FUN=class,MARGIN=2))!="numeric")) {
-            warning("LP3 must be provided as a numeric array")
-            err <- TRUE
-          } else {
-            if (sum(is.infinite(LP3$S),is.infinite(LP3$K),is.infinite(LP3$G))>0) {
-              warning(paste0("Some elements of LP3$S, LP3$K, and LP3$G contain infinite ",
-                "values.  These must be removed."))
-              err <- TRUE
-            }
-            if (sum(is.na(LP3$S),is.na(LP3$K),is.na(LP3$G))>0) {
-              warning(paste0("Some elements of LP3$S, LP3$K, and LP3$G contain missing ",
-                "values.  These must be removed."))
-              err <- TRUE
-            }
+    
+    if (!wregValidation(missing(LP3), "eq", FALSE, "LP3 must be provided as input",
+                        warnFlag = TRUE)){
+      if (!SkewAdj){
+        
+        if (!wregValidation(!is.data.frame(LP3), "eq", FALSE, 
+                            paste("LP3 must be provided as a data frame with elements named",
+                                  "'S', 'K' and 'G' for standard deivation, deviate and skew,",
+                                  "respectively."), warnFlag = TRUE)){
+          
+          wregValidation(sum(is.element(c("S","K","G"),names(LP3))), "eq", 3, 
+                         paste("In valid elements: The names of the elements in LP3 are",
+                               names(LP3),". LP3 must be provided as a data frame with elements named",
+                               "'S', 'K' and 'G' for standard deivation, deviate and skew,",
+                               "respectively."), warnFlag = TRUE)
+          
+          if(wregValidation((length(unique(apply(cbind(LP3$S,LP3$K,LP3$G),FUN=class,MARGIN=2)))!=1)|
+                            (unique(apply(cbind(LP3$S,LP3$K,LP3$G),FUN=class,MARGIN=2))!="numeric"), "eq", FALSE,
+                            "LP3 must be provided as a numeric array", warnFlag = TRUE)){
+            
+            wregValidation(sum(is.infinite(LP3$S),is.infinite(LP3$K),is.infinite(LP3$G)), "eq", 0,
+                           "LP3 must be provided as a numeric array", warnFlag = TRUE)
+            
+            wregValidation(sum(is.na(LP3$S),is.na(LP3$K),is.na(LP3$G)), "eq", 0,
+                           paste0("Some elements of LP3$S, LP3$K, and LP3$G contain missing ",
+                                  "values.  These must be removed."), warnFlag = TRUE)
           }
         }
-      } else {
-        if (!is.data.frame(LP3)) {
-          warning(paste("LP3 must be provided as a data frame with elements named",
-            "'S', 'K', 'G' and 'GR' for standard deivation, deviate,",
-            "skew and regional skew, respectively."))
-          err <- TRUE
-        } else {
-          if (sum(is.element(c("S","K","G","GR"),names(LP3)))!=4) {
-            warning(paste("In valid elements: The names of the elements in LP3 are",
-              names(LP3),". LP3 must be provided as a data frame with elements named",
-              "'S', 'K', 'G' and 'GR' for standard deivation, deviate,",
-              "skew and regional skew, respectively."))
-            err <- TRUE
-          }
-          if ((length(unique(apply(cbind(LP3$S,LP3$K,LP3$G,LP3$GR),FUN=class,MARGIN=2)))!=1)|
-              (unique(apply(cbind(LP3$S,LP3$K,LP3$G,LP3$GR),FUN=class,MARGIN=2))!="numeric")) {
-            warning("LP3 must be provided as a numeric array")
-            err <- TRUE
-          } else {
-            if (sum(is.infinite(LP3$S),is.infinite(LP3$K),
-              is.infinite(LP3$G),is.infinite(LP3$GR))>0) {
-              warning(paste0("Some elements of LP3$S, LP3$K, LP3$G and LP3$GR contain ",
-                "infinite values.  These must be removed."))
-              err <- TRUE
-            }
-            if (sum(is.na(LP3$S),is.na(LP3$K),is.na(LP3$G),is.na(LP3$GR))>0) {
-              warning(paste0("Some elements of LP3$S, LP3$K, LP3$G and LP3$GR contain ",
-                "missing values.  These must be removed."))
-              err <- TRUE
-            }
-          }
+      }
+        
+    } else {
+      
+      if (!wregValidation(!is.data.frame(LP3), "eq", FALSE, 
+                          paste("LP3 must be provided as a data frame with elements named",
+                                "'S', 'K' and 'G' for standard deivation, deviate and skew,",
+                                "respectively."), warnFlag = TRUE)){
+        
+        wregValidation(sum(is.element(c("S","K","G","GR"),names(LP3))), "eq", 4, 
+                       paste("In valid elements: The names of the elements in LP3 are",
+                             names(LP3),". LP3 must be provided as a data frame with elements named",
+                             "'S', 'K', 'G' and 'GR' for standard deivation, deviate,",
+                             "skew and regional skew, respectively."), warnFlag = TRUE)
+        
+        if(!wregValidation((length(unique(apply(cbind(LP3$S,LP3$K,LP3$G,LP3$GR),FUN=class,MARGIN=2)))!=1)|
+                           (unique(apply(cbind(LP3$S,LP3$K,LP3$G,LP3$GR),FUN=class,MARGIN=2))!="numeric"), "eq", FALSE, 
+                           "LP3 must be provided as a numeric array", warnFlag = TRUE)){
+          
+          wregValidation(sum(is.infinite(LP3$S),is.infinite(LP3$K),
+                             is.infinite(LP3$G),is.infinite(LP3$GR)), "eq", 0, 
+                         paste0("Some elements of LP3$S, LP3$K, LP3$G and LP3$GR contain ",
+                                "infinite values.  These must be removed."), warnFlag = TRUE)
+          
+          wregValidation(sum(is.na(LP3$S),is.na(LP3$K),is.na(LP3$G),is.na(LP3$GR)), "eq", 0, 
+                         paste0("Some elements of LP3$S, LP3$K, LP3$G and LP3$GR contain ",
+                                "missing values.  These must be removed."), warnFlag = TRUE)
+          
         }
       }
     }
-    if (missing(recordLengths)) {
-      warning("A matrix of recordLengths must be provided as input.")
-      err <- TRUE
-    } else {
-      if (ncol(recordLengths)!=nrow(recordLengths)) {
-        warning("recordLengths must be provided as a square array")
-        err <- TRUE
-      }
-      if (!is.numeric(recordLengths)) {
-        warning("recordLengths must be provided as a numeric array")
-        err <- TRUE
+
+    
+    if (!wregValidation(missing(recordLengths), "eq", FALSE,
+                        "Record lengths must be provided.", warnFlag = TRUE)) {
+      
+      if (!wregValidation(recordLengths, "numeric", 
+                          message="Record lengths must be provided as class numeric.", warnFlag = TRUE)) {
+        
+        wregValidation(sum(is.na(c(recordLengths))), "eq", 0, 
+                       paste0("Some record lengths contain missing ",
+                              "values.  These must be removed."), warnFlag = TRUE)
+        
+        wregValidation(sum(is.infinite(c(recordLengths))), "eq", 0, 
+                       paste0("Some record lengths contain infinite ",
+                              "values.  These must be removed."), warnFlag = TRUE)
       }
     }
   }
-  if (missing(BasinChars)) {
-    warning("BasinChars must be provided as input.")
-    err <- TRUE
-  } else {
-    if (!is.data.frame(BasinChars)) {
-      warning(paste("'BasinChars' must be provided as a data frame with elements",
-        "named 'Station.ID', 'Lat' and 'Long' for standard deivation,",
-        "deviate and skew, respectively."))
-      err <- TRUE
-    } else {
-      if (sum(is.element(c("Station.ID","Lat","Long"),names(BasinChars)))!=3) {
-        warning(paste("In valid elements: The names of the elements in",
-          "BasinChars are",names(BasinChars),
-          ".  'BasinChars' must be provided as a data frame with elements",
-          "named 'Station.ID', 'Lat' and 'Long' for standard deivation,",
-          "deviate and skew, respectively."))
-        err <- TRUE
-      } else {
-        if ((length(unique(apply(cbind(BasinChars$Lat,BasinChars$Long),FUN=class,MARGIN=2)))!=1)|
-            (unique(apply(cbind(BasinChars$Lat,BasinChars$Long),FUN=class,MARGIN=2))!="numeric")) {
-          warning("latitudes and longitudes must be provided as class numeric.")
-          err <- TRUE
-        } else {
-          if (sum(is.na(c(BasinChars$Lat,BasinChars$Long)))>0) {
-            warning(paste0("Some latitudes and longitudes contain missing ",
-              "values.  These must be removed."))
-            err <- TRUE
-          }
-          if (sum(is.infinite(c(BasinChars$Lat,BasinChars$Long)))>0) {
-            warning(paste0("Some latitudes and longitudes contain infinite ",
-              "values.  These must be removed."))
-            err <- TRUE
-          }
+  
+  if (!wregValidation(missing(BasinChars), "eq", FALSE, "BasinChars must be provided as input.",
+                        warnFlag = TRUE)) {
+  
+    if (!wregValidation(!is.data.frame(BasinChars), "eq", FALSE,
+                        paste("'BasinChars' must be provided as a data frame with elements",
+                              "named 'Station.ID', 'Lat' and 'Long' for standard deivation,",
+                              "deviate and skew, respectively."),
+                        warnFlag = TRUE)) {
+      
+      if (!wregValidation(sum(is.element(c("Station.ID","Lat","Long"),names(BasinChars)))!=3, "eq", FALSE,
+                          paste("In valid elements: The names of the elements in",
+                                      "BasinChars are",names(BasinChars),
+                                      ".  'BasinChars' must be provided as a data frame with elements",
+                                      "named 'Station.ID', 'Lat' and 'Long' for standard deivation,",
+                                      "deviate and skew, respectively."),
+                          warnFlag = TRUE)) {
+
+        if (!wregValidation((length(unique(apply(cbind(BasinChars$Lat,BasinChars$Long),FUN=class,MARGIN=2)))!=1)|
+                            (unique(apply(cbind(BasinChars$Lat,BasinChars$Long),FUN=class,MARGIN=2))!="numeric"), "eq", FALSE,
+                            "latitudes and longitudes must be provided as class numeric.",
+                            warnFlag = TRUE)) {
+          
+          wregValidation(sum(is.na(c(BasinChars$Lat,BasinChars$Long))), "eq", 0,
+                          paste0("Some latitudes and longitudes contain missing ",
+                                "values.  These must be removed."),
+                         warnFlag = TRUE)
+          
+          wregValidation(sum(is.infinite(c(BasinChars$Lat,BasinChars$Long))), "eq", 0,
+                         paste0("Some latitudes and longitudes contain infinite ",
+                                "values.  These must be removed."),
+                         warnFlag = TRUE)
         }
       }
     }
   }
   
   ## Add controls to meet legacy demands
-  if (!is.logical(Legacy)) {
-    warning("Legacy must be either TRUE to force matching with previous",
-      "versions or FALSE for correct computations.")
-    err <- TRUE
-  }
+  wregValidation(!is.logical(Legacy), "eq", FALSE,
+                 paste("Legacy must be either TRUE to force matching with previous",
+                       "versions or FALSE for correct computations."), warnFlag = TRUE)
+  
   ##    NOTE: Legacy forces program to return the same results as WREG v 1.05.
   if (Legacy) { # If legacy is indicated, override custom inputs.
     TY <- 2 # WREG v1.05 does not read this input correctly.
     DistMeth <- 1 # WREG v1.05 uses "Nautical Mile" approximation
   }
   
-  if (err) {
-    stop("Invalid inputs were provided.  See warnings().")
+  if (warn("check")) {
+    stop("Invalid inputs were provided.  See warnings().", warn("get"))
   }
   
   

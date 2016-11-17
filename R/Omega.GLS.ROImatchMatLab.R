@@ -230,7 +230,8 @@ Omega.GLS.ROImatchMatLab <- function(alpha=0.01,theta=0.98,Independent,X,Y,
     }
   }
   
-  if (!wregValidation(missing(LP3.all), "eq", FALSE, "MSEGR must be a single value",
+  if (!wregValidation(missing(LP3.all), "eq", FALSE, "LP3.all must be provided as a data frame with elements named",
+                      "'S', 'K' and 'G' for standard deivation, deviate and skew, respectively.",
                       warnFlag = TRUE)){
     if (!SkewAdj){
       

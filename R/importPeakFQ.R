@@ -113,9 +113,8 @@ importPeakFQ <- function(pfqPath,gisFile,sites='') {
   ###Get sites that are not in GIS file for warning message
   droppedSites <- gisData$Station.ID[which(!(gisData$Station.ID %in% EXP_SiteID[,2]))]
   
-  if(length(droppedSites) <= 0)
+  if(length(droppedSites) > 0)
   {
-    droppedSites <- list(1,2,3)
     warning(c("The following sites are in the GIS file and not found in EXP files in the Peak FQ output directory: ",
                   paste0(droppedSites, collapse=","))
     )

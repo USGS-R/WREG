@@ -24,7 +24,7 @@ wregValidation <- function(input, mode, compare=NULL, message=NULL, warnFlag = F
   }
   
   numeric <- function(x) {
-    if(is.list(x)){
+    if(length(x) > 1){
       if(!Reduce('&',lapply(x, is.numeric))){
         error("Input needs to be numeric")
       }
@@ -35,8 +35,20 @@ wregValidation <- function(input, mode, compare=NULL, message=NULL, warnFlag = F
     }
   }
   
+  infinite <- function(x) {
+    if(length(x) > 1){
+      if(Reduce('|',lapply(x, is.infinite))){
+        error("Input cannot be infinite")
+      }
+    }else{
+      if(is.infinite(x)){
+        error("Input cannot be infinite")
+      }
+    }
+  }
+  
   greaterThan <- function(x){
-    if(is.list(x)){
+    if(length(x) > 1){
       if(!Reduce('&',lapply(x, function(y) {return(y > compare)}))){
         error(paste0("Input needs to be greater than ", compare))
       } 
@@ -49,7 +61,7 @@ wregValidation <- function(input, mode, compare=NULL, message=NULL, warnFlag = F
   }
   
   greaterThanEq <- function(x){
-    if(is.list(x)){
+    if(length(x) > 1){
       if(!Reduce('&',lapply(x, function(y) {return(y >= compare)}))){
         error(paste0("Input needs to be greater than equal to", compare))
       } 
@@ -62,7 +74,7 @@ wregValidation <- function(input, mode, compare=NULL, message=NULL, warnFlag = F
   }
   
   lessThan <- function(x){
-    if(is.list(x)){
+    if(length(x) > 1){
       if(!Reduce('&',lapply(x, function(y) {return(y < compare)}))){
         error(paste0("Input needs to be less than ", compare))
       } 
@@ -75,7 +87,7 @@ wregValidation <- function(input, mode, compare=NULL, message=NULL, warnFlag = F
   }
   
   lessThanEq <- function(x){
-    if(is.list(x)){
+    if(length(x) > 1){
       if(!Reduce('&',lapply(x, function(y) {return(y <= compare)}))){
         error(paste0("Input needs to be less than ", compare))
       } 
@@ -88,7 +100,7 @@ wregValidation <- function(input, mode, compare=NULL, message=NULL, warnFlag = F
   }
   
   eq <- function(x){
-    if(is.list(x)){
+    if(length(x) > 1){
       if(!Reduce('&',lapply(x, function(y) {return(y == compare)}))){
         error(paste0("Input needs to be equal to ", compare))
       } 
@@ -101,7 +113,7 @@ wregValidation <- function(input, mode, compare=NULL, message=NULL, warnFlag = F
   }
   
   notEq <- function(x){
-    if(is.list(x)){
+    if(length(x) > 1){
       if(!Reduce('&',lapply(x, function(y) {return(y != compare)}))){
         error(paste0("Input cannot be equal to ", compare))
       } 
@@ -140,6 +152,11 @@ wregValidation <- function(input, mode, compare=NULL, message=NULL, warnFlag = F
   
   if(mode == "numeric"){
     numeric(input)
+    return(invalid)
+  }
+  
+  if(mode == "infinite"){
+    infinite(input)
     return(invalid)
   }
   

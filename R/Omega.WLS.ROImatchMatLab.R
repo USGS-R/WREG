@@ -84,114 +84,103 @@ Omega.WLS.ROImatchMatLab <- function(Y.all,X.all,LP3.all,RecordLengths.all,NDX) 
   # The mean inverse record length is implemented with all sites
   
   # Some upfront error handling
-  err <- FALSE
-  if ((!missing(X.all)&!missing(Y.all))&&
-      (length(Y.all)!=nrow(X.all))) {
-    warning(paste0("The length of Y.all must be the same as ",
-      "the number of rows in X.all."))
-    err <- TRUE
-  }
-  if (missing(Y.all)) {
-    warning("Dependent variable (Y.all) must be provided.")
-    err <- TRUE
-  } else {
-    if (!is.numeric(Y.all)) {
-      warning("Dependent variable (Y.all) must be provided as class numeric.")
-      err <- TRUE
-    } else {
-      if (sum(is.na(Y.all))>0) {
-        warning(paste0("The depedent variable (Y.all) contains missing ",
-          "values.  These must be removed."))
-        err <- TRUE
-      }
-      if (sum(is.infinite(Y.all))>0) {
-        warning(paste0("The depedent variable (Y.all) contains infinite ",
-          "values.  These must be removed."))
-        err <- TRUE
-      }
+  
+  wregValidation((!missing(X.all)&!missing(Y.all))&&
+                   (length(Y.all)!=nrow(X.all)), "eq", FALSE,
+                 paste0("The length of Y.all must be the same as ",
+                        "the number of rows in X.all."), warnFlag = TRUE)
+  
+  if (!wregValidation(missing(Y.all), "eq", FALSE,
+                      "Dependent variable (Y.all) must be provided.", warnFlag = TRUE)) {
+    
+    if (!wregValidation(Y.all, "numeric", message = 
+                        "Dependent variable (Y.all) must be provided as class numeric.",
+                        warnFlag = TRUE)) {
+      
+      wregValidation(sum(is.na(Y.all)), "eq", 0 ,
+                     paste0("The depedent variable (Y.all) contains missing ",
+                            "values.  These must be removed."),
+                     warnFlag = TRUE)
+      
+      wregValidation(sum(is.infinite(Y.all)), "eq", 0 ,
+                     paste0("The depedent variable (Y.all) contains infinite ",
+                            "values.  These must be removed."),
+                     warnFlag = TRUE)
     }
   }
-  if (missing(X.all)) {
-    warning("Independent variables (X.all) must be provided.")
-    err <- TRUE
-  } else {
-    if ((length(unique(apply(X.all,FUN=class,MARGIN=2)))!=1)|
-        (unique(apply(X.all,FUN=class,MARGIN=2))!="numeric")) {
-      warning("Independent variables (X.all) must be provided as class numeric.")
-      err <- TRUE
-    } else {
-      if (sum(is.na(as.matrix(X.all)))>0) {
-        warning(paste0("Some independent variables (X.all) contain missing ",
-          "values.  These must be removed."))
-        err <- TRUE
-      }
-      if (sum(is.infinite(as.matrix(X.all)))>0) {
-        warning(paste0("Some independent variables (X.all) contain infinite ",
-          "values.  These must be removed."))
-        err <- TRUE
-      }
+  
+  if (!wregValidation(missing(X.all), "eq", FALSE,
+                      "Dependent variable (X.all) must be provided.", warnFlag = TRUE)) {
+    
+    if (!wregValidation(X.all, "numeric", message = 
+                        "Dependent variable (X.all) must be provided as class numeric.",
+                        warnFlag = TRUE)) {
+      
+      wregValidation(sum(is.na(X.all)), "eq", 0 ,
+                     paste0("The depedent variable (X.all) contains missing ",
+                            "values.  These must be removed."),
+                     warnFlag = TRUE)
+      
+      wregValidation(sum(is.infinite(X.all)), "eq", 0 ,
+                     paste0("The depedent variable (X.all) contains infinite ",
+                            "values.  These must be removed."),
+                     warnFlag = TRUE)
     }
   }
-  if (missing(NDX) | !is.numeric(NDX) | !is.vector(NDX)) {
-    warning(paste0("NDX must be provided as a numeric vector."))
-    err <- TRUE
-  }
-  if (!sum(is.element(NDX, 1:length(Y))) == length(NDX)) {
-    warning(paste0("NDX must be valid indices of inputs like Y.all"))
-    err <- TRUE
-  }
+  
+  wregValidation(missing(NDX) | !is.numeric(NDX) | !is.vector(NDX), "eq", FALSE,
+                 paste0("NDX must be provided as a numeric vector."),
+                 warnFlag = TRUE)
+  
+  wregValidation(!sum(is.element(NDX, 1:length(Y))) == length(NDX), "eq", FALSE,
+                 paste0("NDX must be valid indices of inputs like Y.all"),
+                 warnFlag = TRUE)
+ 
   # Error checking LP3
-  if (missing(LP3.all)) {
-    warning("LP3.all must be provided as an input.")
-    err <- TRUE
-  } else {
-      if (!is.data.frame(LP3.all)) {
-        warning(paste("LP3.all must be provided as a data frame with elements named",
-          "'S', 'K' and 'G' for standard deivation, deviate and skew,",
-          "respectively."))
-        err <- TRUE
-      } else {
-        if (sum(is.element(c("S","K","G"),names(LP3.all)))!=3) {
-          warning(paste("In valid elements: The names of the elements in LP3.all are",
-            names(LP3.all),". LP3.all must be provided as a data frame with elements named",
-            "'S', 'K' and 'G' for standard deivation, deviate and skew,",
-            "respectively."))
-          err <- TRUE
-        }
-        if ((length(unique(apply(cbind(LP3.all$S,LP3.all$K,LP3.all$G),FUN=class,MARGIN=2)))!=1)|
-            (unique(apply(cbind(LP3.all$S,LP3.all$K,LP3.all$G),FUN=class,MARGIN=2))!="numeric")) {
-          warning("LP3.all must be provided as a numeric array")
-          err <- TRUE
-        } else {
-          if (sum(is.infinite(LP3.all$S),is.infinite(LP3.all$K),is.infinite(LP3.all$G))>0) {
-            warning(paste0("Some elements of LP3.all$S, LP3.all$K, and LP3.all$G contain infinite ",
-              "values.  These must be removed."))
-            err <- TRUE
-          }
-          if (sum(is.na(LP3.all$S),is.na(LP3.all$K),is.na(LP3.all$G))>0) {
-            warning(paste0("Some elements of LP3.all$S, LP3.all$K, and LP3.all$G contain missing ",
-              "values.  These must be removed."))
-            err <- TRUE
-          }
+  if (!wregValidation(missing(LP3.all), "eq", FALSE, "LP3.all must be provided as a data frame with elements named",
+                                "'S', 'K' and 'G' for standard deivation, deviate and skew, respectively.",
+                      warnFlag = TRUE)){
+    
+      
+      if (!wregValidation(!is.data.frame(LP3.all), "eq", FALSE, 
+                          paste("LP3.all must be provided as a data frame with elements named",
+                                "'S', 'K' and 'G' for standard deivation, deviate and skew,",
+                                "respectively."), warnFlag = TRUE)){
+        
+        wregValidation(sum(is.element(c("S","K","G"),names(LP3.all))), "eq", 3, 
+                       paste("In valid elements: The names of the elements in LP3.all are",
+                             names(LP3.all),". LP3.all must be provided as a data frame with elements named",
+                             "'S', 'K' and 'G' for standard deivation, deviate and skew,",
+                             "respectively."), warnFlag = TRUE)
+        
+        if(wregValidation((length(unique(apply(cbind(LP3.all$S,LP3.all$K,LP3.all$G),FUN=class,MARGIN=2)))!=1)|
+                          (unique(apply(cbind(LP3.all$S,LP3.all$K,LP3.all$G),FUN=class,MARGIN=2))!="numeric"), "eq", FALSE,
+                          "LP3.all must be provided as a numeric array", warnFlag = TRUE)){
+          
+          wregValidation(sum(is.infinite(LP3.all$S),is.infinite(LP3.all$K),is.infinite(LP3.all$G)), "eq", 0,
+                         "LP3.all must be provided as a numeric array", warnFlag = TRUE)
+          
+          wregValidation(sum(is.na(LP3.all$S),is.na(LP3.all$K),is.na(LP3.all$G)), "eq", 0,
+                         paste0("Some elements of LP3.all$S, LP3.all$K, and LP3.all$G contain missing ",
+                                "values.  These must be removed."), warnFlag = TRUE)
         }
       }
+    } 
+  
 
+  if(!wregValidation(missing(RecordLengths.all), "eq", FALSE,
+                     "A matrix of RecordLengths.all must be provided as input.", warnFlag = TRUE)){
+    
+    wregValidation(ncol(RecordLengths.all), "eq", nrow(RecordLengths.all),
+                   "RecordLengths.all must be provided as a square array", warnFlag = TRUE)
+    
+    wregValidation(missing(RecordLengths.all), "numeric", message =
+                     "RecordLengths.all must be provided as a numeric array", warnFlag = TRUE)
+    
   }
-  if (missing(RecordLengths.all)) {
-    warning("A matrix of RecordLengths.all must be provided as input.")
-    err <- TRUE
-  } else {
-    if (ncol(RecordLengths.all)!=nrow(RecordLengths.all)) {
-      warning("RecordLengths.all must be provided as a square array")
-      err <- TRUE
-    }
-    if (!is.numeric(RecordLengths.all)) {
-      warning("RecordLengths.all must be provided as a numeric array")
-      err <- TRUE
-    }
-  }
-  if (err) {
-    stop("Invalid inputs were provided.  See warnings().")
+
+  if (warn("check")) {
+    stop("Invalid inputs were provided.  See warnings().", warn("get"))
   }
   
   ## Get the subset parameters

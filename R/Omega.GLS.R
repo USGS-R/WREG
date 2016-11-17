@@ -210,7 +210,7 @@ Omega.GLS <- function(alpha=0.01,theta=0.98,independent,X,Y,recordLengths,
   
   # Error checking LP3
   
-  if (!wregValidation(missing(LP3), "eq", FALSE, "MSEGR must be a single value",
+  if (!wregValidation(missing(LP3), "eq", FALSE, "LP3 must be provided as input",
                       warnFlag = TRUE)){
     if (!SkewAdj){
       

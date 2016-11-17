@@ -66,87 +66,80 @@
 #'@import stats
 #'  
 #' @examples
-#' # Import some example data
-#' peakFQdir <- paste0(
-#'   file.path(system.file("exampleDirectory", package = "WREG"),
-#'     "pfqImport"))
-#' gisFilePath <- file.path(peakFQdir, "pfqSiteInfo.txt")
-#' importedData <- importPeakFQ(pfqPath = peakFQdir, gisFile = gisFilePath)
-#' 
-#' # Organizing input data
-#' Y <- importedData$Y$AEP_0.5
-#' X <- importedData$X[c("Sand", "OutletElev", "Slope")]
-#' transY <- "none"
-#' 
-#' # Make simple weighting using inverse record lengths
-#' inverseRecLen <- diag(1 / diag(importedData$recLen))
-#' 
-#' # Run user-weights regression
-#' result <- WREG.UW(Y, X, customWeight = inverseRecLen, transY)
+# # Import some example data
+# peakFQdir <- paste0(
+#   file.path(system.file("exampleDirectory", package = "WREG"),
+#     "pfqImport"))
+# gisFilePath <- file.path(peakFQdir, "pfqSiteInfo.txt")
+# importedData <- importPeakFQ(pfqPath = peakFQdir, gisFile = gisFilePath)
+# 
+# # Organizing input data
+# Y <- importedData$Y$AEP_0.5
+# X <- importedData$X[c("Sand", "OutletElev", "Slope")]
+# transY <- "none"
+# 
+# # Make simple weighting using inverse record lengths
+# inverseRecLen <- diag(1 / diag(importedData$recLen))
+# 
+# # Run user-weights regression
+# result <- WREG.UW(Y, X, customWeight = inverseRecLen, transY)
 #' 
 #'@export
 WREG.UW <- function(Y,X,customWeight,transY,x0=NA) {
   # William Farmer, USGS, January 05, 2015
+  # Greg PEtrochenkov, USGS, November 14, 2016 :  Changed validation scheme
 
+  warn("clear")
   # Some upfront error handling
-  err <- FALSE
-  if ((!missing(X)&!missing(Y))&&
-      (length(Y)!=nrow(X))) {
-    warning(paste0("The length of Y must be the same as ",
-      "the number of rows in X."))
-    err <- TRUE
-  }
-  if (missing(Y)) {
-    warning("Dependent variable (Y) must be provided.")
-    err <- TRUE
-  } else {
-    if (!is.numeric(Y)) {
-      warning("Dependent variable (Y) must be provided as class numeric.")
-      err <- TRUE
-    } else {
-      if (sum(is.na(Y))>0) {
-        warning(paste0("The depedent variable (Y) contains missing ",
-          "values.  These must be removed."))
-        err <- TRUE
-      }
-      if (sum(is.infinite(Y))>0) {
-        warning(paste0("The depedent variable (Y) contains infinite ",
-          "values.  These must be removed."))
-        err <- TRUE
-      }
+  wregValidation((!missing(X)&!missing(Y))&&(length(Y)!=nrow(X)), "eq", FALSE,
+                 paste0("The length of Y must be the same as ",
+                        "the number of rows in X."), warnFlag = TRUE)
+  
+  if (!wregValidation(missing(Y), "eq", FALSE,
+                      "Dependent variable (Y) must be provided", warnFlag = TRUE)) {
+    
+    if (!wregValidation(Y, "numeric", message = 
+                        "Dependent variable (Y) must be provided as class numeric",
+                        warnFlag = TRUE)) {
+      
+      wregValidation(sum(is.na(Y)), "eq", 0 ,
+                     paste0("The depedent variable (Y) contains missing ",
+                            "values.  These must be removed."),
+                     warnFlag = TRUE)
+      
+      wregValidation(sum(is.infinite(Y)), "eq", 0 ,
+                     paste0("The depedent variable (Y) contains infinite ",
+                            "values.  These must be removed."),
+                     warnFlag = TRUE)
     }
   }
-  if (missing(X)) {
-    warning("Independent variables (X) must be provided.")
-    err <- TRUE
-  } else {
-    if ((length(unique(apply(X,FUN=class,MARGIN=2)))!=1)|
-        (unique(apply(X,FUN=class,MARGIN=2))!="numeric")) {
-      warning("Independent variables (X) must be provided as class numeric.")
-      err <- TRUE
-    } else {
-      if (sum(is.na(as.matrix(X)))>0) {
-        warning(paste0("Some independent variables (X) contain missing ",
-          "values.  These must be removed."))
-        err <- TRUE
-      }
-      if (sum(is.infinite(as.matrix(X)))>0) {
-        warning(paste0("Some independent variables (X) contain infinite ",
-          "values.  These must be removed."))
-        err <- TRUE
-      }
+  
+  if (!wregValidation(missing(X), "eq", FALSE,
+                      "Independent variables (X) must be provided.", warnFlag = TRUE)) {
+    
+    if (!wregValidation((length(unique(apply(X,FUN=class,MARGIN=2)))!=1)|
+                        (unique(apply(X,FUN=class,MARGIN=2))!="numeric"), "eq", FALSE,
+                        "Independent variables (X) must be provided as class numeric.", warnFlag = TRUE)){
+      
+      wregValidation(sum(is.na(as.matrix(X))), "eq", 0,
+                     paste0("Some independent variables (X) contain missing ",
+                            "values.  These must be removed."), warnFlag = TRUE)
+      
+      wregValidation(sum(is.infinite(as.matrix(X))), "eq", 0,
+                     paste0("Some independent variables (X) contain infinite ",
+                            "values.  These must be removed."), warnFlag = TRUE)
     }
   }
-  if(missing(transY)|!is.character(transY)) {
-    warning("transY must be included as a character string.")
-    err <- TRUE
-  } else if (!is.element(transY,c("none","log10","ln"))) {
-    warning("transY must be either 'none', 'log10' or 'ln'.")
-    err <- TRUE
+  
+  if(!wregValidation(missing(transY)|!is.character(transY),"eq", FALSE,
+                     "transY must be included as a character string.", warnFlag=TRUE)){
+    
+    wregValidation(!is.element(transY,c("none","log10","ln")), "eq", FALSE,
+                   "transY must be either 'none', 'log10' or 'ln'.", warnFlag = TRUE)
   }
-  if(missing(customWeight)|(!is.matrix(customWeight)&!is.list(customWeight))) {
-    warning("Custom weighting matrix must be provided as a list or matrix.")
-  }
+  
+  wregValidation(missing(customWeight)|(!is.matrix(customWeight)&!is.list(customWeight)), "eq", FALSE,
+                 "Custom weighting matrix must be provided as a list or matrix.", warnFlag = TRUE)
   
   ## Determine if ROI is being applied
   if (is.na(sum(x0))) { # ROI regression is not used.
@@ -170,13 +163,13 @@ WREG.UW <- function(Y,X,customWeight,transY,x0=NA) {
     var.modelerror.k <- NA # NULL custom k-variable model-error variance to control for errors.
     var.modelerror.0 <- NA # NULL custom constant-model model-error variance to control for errors.
   }
-  if (det(Omega)==0) {
-    warning(paste("The weighting matrix is singular and, therefore,",
-      "cannot be inverted.  Reconsider the weighting matrix."))
-    err <- TRUE
-  }
-  if (err) {
-    stop('Invalid inputs were provided. See warnings().')
+  
+  wregValidation(det(Omega), "notEq", 0,
+                 paste("The weighting matrix is singular and, therefore,",
+                       "cannot be inverted.  Reconsider the weighting matrix."), warnFlag = TRUE)
+  
+  if (warn("check")) {
+    stop('Invalid inputs were provided. See warnings().', warn("get"))
   }
   
   #Convert X and Y from dataframes to matrices to work with matrix operations below

@@ -2,15 +2,21 @@
 
 warn <- function(mode, w=NULL){
 
-  init <- function(){
-    tryCatch({
-      length(hasWarnings)
-    },
-    error =  function(err){
+  init <- function(clear=FALSE){
+    
+    if(clear){
       wregWarnings <<- list()
       hasWarnings <<- FALSE
-      return(hasWarnings)
-    })
+    }else{
+    tryCatch({
+        length(hasWarnings)
+      },
+      error =  function(err){
+        wregWarnings <<- list()
+        hasWarnings <<- FALSE
+        return(hasWarnings)
+      })
+    }
   }
   
   if(mode =="initialize"){
@@ -43,6 +49,10 @@ warn <- function(mode, w=NULL){
     return(hasWarnings)
   }
   
+  if(mode == "clear"){
+    init(TRUE)
+    return(hasWarnings)
+  }
   
  
 }

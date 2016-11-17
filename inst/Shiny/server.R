@@ -185,6 +185,16 @@ shinyServer(function(input, output,session) {
   )
   
   ##############################
+  #Reset site selection
+  observeEvent(input$resetSites,
+               {
+                 proxy = dataTableProxy("siteCharTable")
+                 
+                 DT::selectRows(proxy, NULL)
+    
+               }
+  )
+  ##############################
   #Select and transform variables
   
   
@@ -293,8 +303,11 @@ shinyServer(function(input, output,session) {
                          #C4
                          input$YvarC4
                      )
-                     #check to see if y transfer variable is infinity
-                     wregValidation(Yinput, "notEq", -Inf, "Y Tansfer equation equals infinity")
+                     
+                     wregValidation(Yinput, "infinite", message = "Y Tansfer equation equals infinity")
+                     
+                     regEquationFormat(input$Y, input$YvarC1, input$YvarC2, input$YvarC3, 
+                                               input$YvarC4, "log10", "Y")
                      
                      transY <<- "log10"
                      Yinput <<- as.data.frame(cbind(selectData$Y$Station.ID,Yinput))
@@ -312,8 +325,11 @@ shinyServer(function(input, output,session) {
                          #C4
                          input$YvarC4
                      )
-                     #check to see if y transfer variable is infinity
-                     wregValidation(Yinput, "notEq", -Inf, "Y Tansfer equation equals infinity")
+                    
+                     wregValidation(Yinput, "infinite", message = "Y Tansfer equation equals infinity")
+                     
+                     regEquationFormat(input$Y, input$YvarC1, input$YvarC2, input$YvarC3, 
+                                               input$YvarC4, "ln", "Y")
                      
                      transY <<- "ln"
                      Yinput <<- as.data.frame(cbind(selectData$Y$Station.ID,Yinput))
@@ -333,19 +349,33 @@ shinyServer(function(input, output,session) {
                          input$YvarC4
                        
                      )
+                     
+                     wregValidation(Yinput, "infinite", message = "Y Tansfer equation equals infinity")
+                     
+                     
+                     regEquationFormat(input$Y, input$YvarC1, input$YvarC2, input$YvarC3, 
+                                               input$YvarC4, "exp", "Y")
+                     
                      transY <<- "exp"
                      Yinput <<- as.data.frame(cbind(selectData$Y$Station.ID,Yinput))
                    } else if(input$YvarTransType == "none")
                    {
                      Yinput <<- selectData$Y[[input$Y]]
+                     
+                     regEquationFormat(input$Y, mode="none", var="Y")
+                     
                      Yinput <<- as.data.frame(cbind(selectData$Y$Station.ID,Yinput))
                      transY <<- "none"
                    }
                    
+                   #check to see if y transfer variable is infinity
+                   
+                   
                    #check to see if any x trans variables are selected
                    wregValidation(Reduce('|',is.null(input$X)), "eq", FALSE, 
                                   "No X variables selected for transformation")
-                
+                    
+                   xEq <<- NULL
                    Xinput <<- lapply(1:length(input$X), function(i) {
                      
                      #check for numeric input
@@ -354,9 +384,17 @@ shinyServer(function(input, output,session) {
                                          input[[paste0(input$X[i],"_XvarC3")]],
                                          input[[paste0(input$X[i],"_XvarC4")]]
                                          ), "numeric")
+                    
                      
                      if(input[[paste0(input$X[i],"XvarTransType")]] == "log10")
                      {
+                       
+                       regEquationFormat(input$X[i], 
+                                         input[[paste0(input$X[i],"_XvarC1")]], 
+                                         input[[paste0(input$X[i],"_XvarC2")]], 
+                                         input[[paste0(input$X[i],"_XvarC3")]], 
+                                         input[[paste0(input$X[i],"_XvarC4")]], "log10", "X")
+                       
                        log10(
                          #C1
                          (input[[paste0(input$X[i],"_XvarC1")]] *
@@ -371,6 +409,12 @@ shinyServer(function(input, output,session) {
                        )
                      } else if(input[[paste0(input$X[i],"XvarTransType")]] == "ln")
                      {
+                       regEquationFormat(input$X[i], 
+                                         input[[paste0(input$X[i],"_XvarC1")]], 
+                                         input[[paste0(input$X[i],"_XvarC2")]], 
+                                         input[[paste0(input$X[i],"_XvarC3")]], 
+                                         input[[paste0(input$X[i],"_XvarC4")]], "ln", "X")
+                      
                        log(
                          #C1
                          (input[[paste0(input$X[i],"_XvarC1")]] *
@@ -385,6 +429,11 @@ shinyServer(function(input, output,session) {
                        )
                      } else if(input[[paste0(input$X[i],"XvarTransType")]] == "exp")
                      {
+                       regEquationFormat(input$X[i], 
+                                         input[[paste0(input$X[i],"_XvarC1")]], 
+                                         input[[paste0(input$X[i],"_XvarC2")]], 
+                                         input[[paste0(input$X[i],"_XvarC3")]], 
+                                         input[[paste0(input$X[i],"_XvarC4")]], "exp", "X")
                        exp(
                          #C1
                          (input[[paste0(input$X[i],"_XvarC1")]] *
@@ -399,14 +448,17 @@ shinyServer(function(input, output,session) {
                        )
                      } else if(input[[paste0(input$X[i],"XvarTransType")]] == "none")
                      {
+                       xString <- sprintf("%s", input$X[i])
+                       regEquationFormat(input$X[i], mode="none", var="X")
                        selectData$X[[input$X[i]]]
                      }
-                     
-                     
                    })
                    
-                   #check to see if any of the variables equal infinity
-                   wregValidation(Xinput,"notEq", -Inf, "One or more x transfer variables equal infinity")
+                   for (x in Xinput){
+                     #check to see if any of the variables equal infinity
+                     wregValidation(x,"infinite", message = "One or more x transfer variables equal infinity")
+                   }
+                  
                    
                    ##Combine list into dataframe
                    Xinput <<- do.call(cbind,Xinput)
@@ -445,7 +497,6 @@ shinyServer(function(input, output,session) {
                    
                  })
               
-  
                })
   ####################################
   ###Select the type of regression and do plot
@@ -537,11 +588,23 @@ shinyServer(function(input, output,session) {
                    #####################################
                    ###Render priunt summary and plots
                    output$wregPrint <- renderPrint(print(wregOUT))
+                   output$regressionEquation <- renderUI({
+                                                          withMathJax(paste(regressionEquation, collapse=""))
+                   })
+                     
+                   ylim <- max(c(max(wregOUT$residuals),abs(wregOUT$residuals)))
+                   ybounds <- c(ylim*-1,ylim)
                    output$wregFitVsRes <- renderPlot({
                      layout(rbind(1,2), heights=c(7,1))
                      plot(wregOUT$fitted.values,wregOUT$residuals,
                           xlab="Fitted values",ylab="Residuals",
-                          main="Fitted vs Residual")
+                          main="Fitted vs Residual",
+                          ylim=ybounds
+                          )
+                     par(mar=c(0, 0, 0, 0))
+                     # c(bottom, left, top, right)
+                     abline(h=0,lty=2,col="grey")
+                     plot.new()
                    })
                    
                    output$wregYVsLev <- renderPlot({

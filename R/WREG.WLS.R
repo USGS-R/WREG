@@ -85,6 +85,7 @@
 WREG.WLS <- function(Y,X,recordLengths,LP3,transY,x0=NA) {
   # 11/9/16 Greg Petrochenkov: Changed validation scheme
   
+  warn("clear")
   # Some upfront error handling
   wregValidation((!missing(X)&!missing(Y))&&(length(Y)!=nrow(X)), "eq", FALSE,
                  paste0("The length of Y must be the same as ",
