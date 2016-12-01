@@ -284,7 +284,13 @@ print(temp)
 }
 
 createEquation <- function(coeffs){
+
   xSide <- NULL
+  if(length(coeffs)>length(xEq)){
+    xSide <- sprintf("\n\\\\%.2f + ",coeffs[1])
+    coeffs <- coeffs[-1]
+  }
+  
   for(x in 1:length(coeffs)){
     if(x == length(coeffs)){
       if(is.null(xSide)){

@@ -376,6 +376,8 @@ shinyServer(function(input, output,session) {
                                   "No X variables selected for transformation")
                     
                    xEq <<- NULL
+                   
+                   
                    Xinput <<- lapply(1:length(input$X), function(i) {
                      
                      #check for numeric input
@@ -458,14 +460,26 @@ shinyServer(function(input, output,session) {
                      #check to see if any of the variables equal infinity
                      wregValidation(x,"infinite", message = "One or more x transfer variables equal infinity")
                    }
-                  
                    
-                   ##Combine list into dataframe
                    Xinput <<- do.call(cbind,Xinput)
-                   Xinput <<- as.data.frame(cbind(selectData$X$Station.ID,Xinput))
                    
-                   ##Set column names
-                   colnames(Xinput) <<- c("Station.ID",input$X)
+                   if(input$includeConstant){
+                     ##Combine list into dataframe
+                     Xinput <<- as.data.frame(cbind(selectData$X$Station.ID,
+                                                    1,
+                                                    Xinput))
+                     
+                     ##Set column names
+                     colnames(Xinput) <<- c("Station.ID","constant",input$X)
+                   }else{
+                     ##Combine list into dataframe
+                     Xinput <<- as.data.frame(cbind(selectData$X$Station.ID,Xinput))
+                     
+                     ##Set column names
+                     colnames(Xinput) <<- c("Station.ID",input$X)
+                   }
+                   
+                   
                    
                    ##Set column classes
                    Xinput$Station.ID <<- as.character(Xinput$Station.ID)

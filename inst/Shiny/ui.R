@@ -1,7 +1,7 @@
 
 shinyUI(fluidPage(theme="theme.css",title="WREG",
                   tags$head(tags$link(rel = "icon", type = "image/png", href = "favicon-16x16.png")),
-                  tags$style(type="text/css", ".shiny-output-error-errorMessage{ color:red; }"),
+                  tags$style(type="text/css", ".shiny-output-error-errorMessage{ color:red; } .leftAlign{ text-align: left !important }"),
                   navbarPage(img(src="Logo.png", width="80px",height = "40px"),"WREG",
                              tabPanel("Welcome",
                                       titlePanel("Weighted-Multiple-Linear Regression Program"),
@@ -118,6 +118,7 @@ shinyUI(fluidPage(theme="theme.css",title="WREG",
                                                                             "Select all sites in dataset")
                                                    ),
                                                    actionButton("selectSites",label="Submit"),
+                                                   actionButton("resetSites",label="Reset Selection"),
                                                    verbatimTextOutput("selSites"),
                                                    DT::dataTableOutput("siteCharTable")
                                                    
@@ -129,6 +130,7 @@ shinyUI(fluidPage(theme="theme.css",title="WREG",
                                                                  sidebarPanel(
                                                                    selectInput("Y","Y-variable",choices = NA),
                                                                    selectInput("X","X-variables",choices = NA,multiple=TRUE),
+                                                                   checkboxInput("includeConstant", label="Include Constant"),
                                                                    #actionButton("selectVars","Select variables"),
                                                                    actionButton("transVars","Apply transform"),
                                                                    verbatimTextOutput("transformNote")
@@ -209,7 +211,12 @@ shinyUI(fluidPage(theme="theme.css",title="WREG",
                              tabPanel("Run WREG",
                                       pageWithSidebar(headerPanel("Run WREG"),
                                                       sidebarPanel(
-                                                        actionButton("runWREG",label="Run WREG")
+                                                        actionButton("runWREG",label="Run WREG"),
+                                                        withMathJax(uiOutput(
+                                                          outputId="regressionEquation",
+                                                          class="leftAlign",
+                                                          width="400px",
+                                                          height="4000px"))
                                                       ),
                                                       mainPanel(
                                                         verbatimTextOutput("wregPrint")
