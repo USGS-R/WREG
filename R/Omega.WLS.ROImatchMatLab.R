@@ -174,7 +174,7 @@ Omega.WLS.ROImatchMatLab <- function(Y.all,X.all,LP3.all,RecordLengths.all,NDX) 
     wregValidation(ncol(RecordLengths.all), "eq", nrow(RecordLengths.all),
                    "RecordLengths.all must be provided as a square array", warnFlag = TRUE)
     
-    wregValidation(missing(RecordLengths.all), "numeric", message =
+    wregValidation(RecordLengths.all, "numeric", message =
                      "RecordLengths.all must be provided as a numeric array", warnFlag = TRUE)
     
   }

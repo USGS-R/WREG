@@ -293,6 +293,9 @@ Omega.GLS.ROImatchMatLab <- function(alpha=0.01,theta=0.98,Independent,X,Y,
   if(!wregValidation(missing(RecordLengths), "eq", FALSE, 
                      "A matrix of recordLengths must be provided as input.", warnFlag = TRUE)){
     
+    wregValidation(ncol(RecordLengths.all), "eq", nrow(RecordLengths.all),
+                   "RecordLengths.all must be provided as a square array", warnFlag = TRUE)
+    
     wregValidation(RecordLengths, "numeric", message =
                      "recordLengths must be provided as a numeric array", warnFlag = TRUE)
     
