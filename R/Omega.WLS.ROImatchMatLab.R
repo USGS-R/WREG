@@ -137,8 +137,8 @@ Omega.WLS.ROImatchMatLab <- function(Y.all,X.all,LP3.all,RecordLengths.all,NDX) 
                  warnFlag = TRUE)
  
   # Error checking LP3
-  if (!wregValidation(missing(LP3.all), "eq", FALSE, "LP3.all must be provided as a data frame with elements named",
-                                "'S', 'K' and 'G' for standard deivation, deviate and skew, respectively.",
+  if (!wregValidation(missing(LP3.all), "eq", FALSE, "LP3.all must be provided as a data frame with elements named
+                                'S', 'K' and 'G' for standard deivation, deviate and skew, respectively.",
                       warnFlag = TRUE)){
     
       
