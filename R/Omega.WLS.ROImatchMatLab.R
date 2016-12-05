@@ -121,7 +121,7 @@ Omega.WLS.ROImatchMatLab <- function(Y.all,X.all,LP3.all,RecordLengths.all,NDX) 
                             "values.  These must be removed."),
                      warnFlag = TRUE)
       
-      wregValidation(sum(is.infinite(X.all)), "eq", 0 ,
+      wregValidation(X.all, "infinite", message=
                      paste0("The depedent variable (X.all) contains infinite ",
                             "values.  These must be removed."),
                      warnFlag = TRUE)
