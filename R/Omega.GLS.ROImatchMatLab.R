@@ -21,7 +21,7 @@
 #'  the same order as \code{Y}.  Required only for \dQuote{GLS} and
 #'  \dQuote{GLSskew}.  This includes only sites in the current region of
 #'  influence.
-#'@param X The independent variables in the regression, with any transformations
+#'@param X The Independent variables in the regression, with any transformations
 #'  already applied.  Each row represents a site and each column represents a
 #'  particular independe variable.  (If a leading constant is used, it should be
 #'  included here as a leading column of ones.)  The rows must be in the same
@@ -50,10 +50,10 @@
 #'@param TY A number.  The return period of the event being modeled.  Required
 #'  only for \dQuote{GLSskew}.  The default value is \code{2}.  (See the
 #'  \code{Legacy} details below.)
-#'@param Peak A logical.  Indicates if the event being modeled is a peak flow
-#'  event or a low-flow event.  \code{TRUE} indicates a peak flow, while
+#'@param Peak A logical.  Indicates if the event being modeled is a Peak flow
+#'  event or a low-flow event.  \code{TRUE} indicates a Peak flow, while
 #'  \code{FALSE} indicates a low-flow event.
-#'@param X.all The independent variables for all sites in the network, with any 
+#'@param X.all The Independent variables for all sites in the network, with any 
 #'  transformations already applied.  Each row represents a site and each column
 #'  represents a particular independe variable.  (If a leading constant is used,
 #'  it should be included here as a leading column of ones.)
@@ -61,7 +61,7 @@
 #'  deviate, standard deviation and skew for all sites in the network.  The
 #'  names of this data frame are \code{S}, \code{K} and \code{G}.  For
 #'  \dQuote{GLSskew}, the regional skew value must also be provided in a
-#'  variable called \code{GR}.  The order of the rows must be the same as
+#'  variable called \code{GR}.  The order of the rows must be the same
 #'  \code{Y}.
 #'@param DistMeth Required for \dQuote{GLS} and \dQuote{GLSskew}.  A value of
 #'  \code{1} indicates that the "Nautical Mile" approximation should be used to
@@ -87,11 +87,11 @@
 #'  
 #' @examples
 #' # Import some example data
-#' peakFQdir <- paste0(
+#' PeakFQdir <- paste0(
 #'   file.path(system.file("exampleDirectory", package = "WREG"),
 #'     "pfqImport"))
-#' gisFilePath <- file.path(peakFQdir, "pfqSiteInfo.txt")
-#' importedData <- importPeakFQ(pfqPath = peakFQdir, gisFile = gisFilePath)
+#' gisFilePath <- file.path(PeakFQdir, "pfqSiteInfo.txt")
+#' importedData <- importPeakFQ(pfqPath = PeakFQdir, gisFile = gisFilePath)
 #' 
 #' # Organizing input data
 #' lp3Data <- importedData$LP3f
@@ -145,8 +145,8 @@ Omega.GLS.ROImatchMatLab <- function(alpha=0.01,theta=0.98,Independent,X,Y,
   
   # Some upfront error handling
   wregValidation(!is.logical(regSkew), "eq", FALSE,
-                 "regSkew must be either TRUE to for skew correction",
-                 "or FALSE for no skew correction.", warnFlag = TRUE)
+                 "regSkew must be either TRUE to for skew correction 
+                 or FALSE for no skew correction.", warnFlag = TRUE)
   
   ## Determining if skew adjustment is requested
   SkewAdj<-regSkew # default: no skew adjustment
@@ -161,11 +161,11 @@ Omega.GLS.ROImatchMatLab <- function(alpha=0.01,theta=0.98,Independent,X,Y,
                         "Independent variables (X) must be provided as class numeric.", warnFlag = TRUE)){
       
       wregValidation(sum(is.na(as.matrix(X))), "eq", 0,
-                     paste0("Some independent variables (X) contain missing ",
+                     paste0("Some Independent variables (X) contain missing ",
                             "values.  These must be removed."), warnFlag = TRUE)
       
       wregValidation(sum(is.infinite(as.matrix(X))), "eq", 0,
-                     paste0("Some independent variables (X) contain infinite ",
+                     paste0("Some Independent variables (X) contain infinite ",
                             "values.  These must be removed."), warnFlag = TRUE)
     }
   }
@@ -230,8 +230,8 @@ Omega.GLS.ROImatchMatLab <- function(alpha=0.01,theta=0.98,Independent,X,Y,
     }
   }
   
-  if (!wregValidation(missing(LP3.all), "eq", FALSE, "LP3.all must be provided as a data frame with elements named",
-                      "'S', 'K' and 'G' for standard deivation, deviate and skew, respectively.",
+  if (!wregValidation(missing(LP3.all), "eq", FALSE, "LP3.all must be provided as a data frame with elements named
+                      'S', 'K' and 'G' for standard deivation, deviate and skew, respectively.",
                       warnFlag = TRUE)){
     if (!SkewAdj){
       
@@ -290,13 +290,10 @@ Omega.GLS.ROImatchMatLab <- function(alpha=0.01,theta=0.98,Independent,X,Y,
     }
   }
   
-  if(!wregValidation(missing(recordLengths), "eq", FALSE, 
+  if(!wregValidation(missing(RecordLengths), "eq", FALSE, 
                      "A matrix of recordLengths must be provided as input.", warnFlag = TRUE)){
     
-    wregValidation(missing(recordLengths), "eq", FALSE, 
-                   "recordLengths must be provided as a square array", warnFlag = TRUE)
-    
-    wregValidation(recordLengths, "numeric", message =
+    wregValidation(RecordLengths, "numeric", message =
                      "recordLengths must be provided as a numeric array", warnFlag = TRUE)
     
   }
@@ -322,41 +319,41 @@ Omega.GLS.ROImatchMatLab <- function(alpha=0.01,theta=0.98,Independent,X,Y,
                    "theta must be a single value", warnFlag = TRUE)
   }
   
-  wregValidation(!is.logical(peak), "eq", FALSE,
-                 paste("The input 'peak' must be either TRUE when estimating a",
+  wregValidation(!is.logical(Peak), "eq", FALSE,
+                 paste("The input 'Peak' must be either TRUE when estimating a",
                        "maximum event or FALSE when estimatinga minimum event."), warnFlag = TRUE)
   
-  wregValidation(length(peak), "eq", 1,
-                 "peak must be a single value", warnFlag = TRUE)
+  wregValidation(length(Peak), "eq", 1,
+                 "Peak must be a single value", warnFlag = TRUE)
   
-  wregValidation(!is.element(distMeth,c(1,2)), "eq", FALSE,
-                 paste("distMeth must be either 1 for use of a nautical mile ",
+  wregValidation(!is.element(DistMeth,c(1,2)), "eq", FALSE,
+                 paste("DistMeth must be either 1 for use of a nautical mile ",
                        "approximation or 2 for use of the haversine formula."), warnFlag = TRUE)
   
-  if (!wregValidation(missing(independent), "eq", FALSE,
-                      "independent must be provided as input.", warnFlag = TRUE)) {
+  if (!wregValidation(missing(Independent), "eq", FALSE,
+                      "Independent must be provided as input.", warnFlag = TRUE)) {
     
-    if (!wregValidation(!is.data.frame(independent), "eq", FALSE,
-                        paste("'independent' must be provided as a data frame with elements",
+    if (!wregValidation(!is.data.frame(Independent), "eq", FALSE,
+                        paste("'Independent' must be provided as a data frame with elements",
                               "named 'Station.ID', 'Lat' and 'Long' for standard deivation,",
                               "deviate and skew, respectively."), warnFlag = TRUE)){
       
-      if (!wregValidation(sum(is.element(c("Station.ID","Lat","Long"),names(independent))), "eq", 3,
+      if (!wregValidation(sum(is.element(c("Station.ID","Lat","Long"),names(Independent))), "eq", 3,
                           paste("In valid elements: The names of the elements in",
-                                "independent are",names(independent),
-                                ".  'independent' must be provided as a data frame with elements",
+                                "Independent are",names(Independent),
+                                ".  'Independent' must be provided as a data frame with elements",
                                 "named 'Station.ID', 'Lat' and 'Long"), warnFlag = TRUE)){
         
-        if (!wregValidation((length(unique(apply(cbind(independent$Lat,independent$Long),FUN=class,MARGIN=2)))!=1)|
-                            (unique(apply(cbind(independent$Lat,independent$Long),FUN=class,MARGIN=2))!="numeric"),
+        if (!wregValidation((length(unique(apply(cbind(Independent$Lat,Independent$Long),FUN=class,MARGIN=2)))!=1)|
+                            (unique(apply(cbind(Independent$Lat,Independent$Long),FUN=class,MARGIN=2))!="numeric"),
                             "eq", FALSE,
                             "latitudes and longitudes must be provided as class numeric.", warnFlag = TRUE)){
           
-          wregValidation(sum(is.na(c(independent$Lat,independent$Long))), "eq", 0,
+          wregValidation(sum(is.na(c(Independent$Lat,Independent$Long))), "eq", 0,
                          paste0("Some latitudes and longitudes contain missing ",
                                 "values.  These must be removed."), warnFlag = TRUE)
           
-          wregValidation(sum(is.infinite(c(independent$Lat,independent$Long))), "eq", 0,
+          wregValidation(sum(is.infinite(c(Independent$Lat,Independent$Long))), "eq", 0,
                          paste0("Some latitudes and longitudes contain infinite ",
                                 "values.  These must be removed."), warnFlag = TRUE)
           
@@ -379,7 +376,7 @@ Omega.GLS.ROImatchMatLab <- function(alpha=0.01,theta=0.98,Independent,X,Y,
     MSEg <- vector(length=length(Y)) # Empty vector for mean squared-error of at-site skew
     Varg <- vector(length=length(Y)) # Empty vector for variance of at-site skew
     ### Convert return period into probability
-    if (Peak) { # if a peak flow is being estimated
+    if (Peak) { # if a Peak flow is being estimated
       Zp <- -stats::qnorm(1/TY) 
     } else { # if a low flow is being estimated
       Zp <- stats::qnorm(1/TY)

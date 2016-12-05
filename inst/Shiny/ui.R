@@ -130,7 +130,7 @@ shinyUI(fluidPage(theme="theme.css",title="WREG",
                                                                  sidebarPanel(
                                                                    selectInput("Y","Y-variable",choices = NA),
                                                                    selectInput("X","X-variables",choices = NA,multiple=TRUE),
-                                                                   checkboxInput("includeConstant", label="Include Constant"),
+                                                                   checkboxInput("includeConstant", label="Include Constant", value=TRUE),
                                                                    #actionButton("selectVars","Select variables"),
                                                                    actionButton("transVars","Apply transform"),
                                                                    verbatimTextOutput("transformNote")

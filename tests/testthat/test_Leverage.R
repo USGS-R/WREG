@@ -26,6 +26,7 @@ test_that("leverage ROI = FALSE",{
 
 test_that("leverage error checking",{
   # Import some example data
+
   expect_silent({
     
     load(paste0(system.file("testData", package = "WREG"),"/staticData_peakFQ.rda"))
@@ -43,8 +44,7 @@ test_that("leverage error checking",{
                                Omega = result$Weighting))
   expect_error(
     leverageResult <- Leverage(X,
-                               Omega = "jazandapus"),
-    "Invalid inputs were provided.  See warnings()."
+                               Omega = "jazandapus")
   )
   
 })

@@ -3,10 +3,9 @@
 
 wregValidation <- function(input, mode, compare=NULL, message=NULL, warnFlag = FALSE){
 
-  invalid <- FALSE
+  invalid <<- FALSE
   
   error <- function(default){
-    print(warnFlag)
     if(warnFlag){
       #print for command line
       print(paste0("Warning ",ifelse(
@@ -15,7 +14,7 @@ wregValidation <- function(input, mode, compare=NULL, message=NULL, warnFlag = F
       #add warning
       warn("add", ifelse(
         is.null(message),default,message))
-      invalid <- TRUE
+      invalid <<- TRUE
     }else{
       #halt program (to be caught or stopped in command line)
       stop(ifelse(

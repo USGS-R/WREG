@@ -285,31 +285,39 @@ print(temp)
 
 createEquation <- function(coeffs){
 
-  xSide <- NULL
-  if(length(coeffs)>length(xEq)){
-    xSide <- sprintf("\n\\\\%.2f + ",coeffs[1])
-    coeffs <- coeffs[-1]
-  }
-  
-  for(x in 1:length(coeffs)){
-    if(x == length(coeffs)){
-      if(is.null(xSide)){
-        xSide <- sprintf("\n\\\\%.2f * %s",coeffs[x],xEq[x])
-      }else{
-        xSide <- c(xSide, sprintf("\n\\\\%.2f * %s",coeffs[x],xEq[x]))
-      }
-    } else{
-      if(is.null(xSide)){
-        xSide <- sprintf("\n\\\\%.2f * %s + ",coeffs[x],xEq[x])
-      }else{
-        xSide <- c(xSide, sprintf("\n\\\\%.2f * %s + ",coeffs[x],xEq[x]))
+  #if run from command line it is unkown how the equation was transformed
+  #return empty string
+  tryCatch({
+    xSide <- NULL
+    
+    if(length(coeffs)>length(xEq)){
+      xSide <- sprintf("\n\\\\%.2f + ",coeffs[1])
+      coeffs <- coeffs[-1]
+    }
+    
+    for(x in 1:length(coeffs)){
+      if(x == length(coeffs)){
+        if(is.null(xSide)){
+          xSide <- sprintf("\n\\\\%.2f * %s",coeffs[x],xEq[x])
+        }else{
+          xSide <- c(xSide, sprintf("\n\\\\%.2f * %s",coeffs[x],xEq[x]))
+        }
+      } else{
+        if(is.null(xSide)){
+          xSide <- sprintf("\n\\\\%.2f * %s + ",coeffs[x],xEq[x])
+        }else{
+          xSide <- c(xSide, sprintf("\n\\\\%.2f * %s + ",coeffs[x],xEq[x]))
+        }
       }
     }
-  }
-  
-  xSide <- paste(xSide, collapse="")
-  
-  regressionEquation <<- sprintf("%s%s%s%s", "$$", yEq,xSide, "$$")
-  return(c( yEq,gsub("\\\\","",xSide)))
+    
+    xSide <- paste(xSide, collapse="")
+    
+    regressionEquation <<- sprintf("%s%s%s%s", "$$", yEq,xSide, "$$")
+    return(c( yEq,gsub("\\\\","",xSide)))
+  },
+  error = function(e){
+    return("")
+  })
 }
 

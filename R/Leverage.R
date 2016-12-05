@@ -56,18 +56,21 @@ Leverage <- function(X,Omega,Ch=NA,x0=NA,ROI=FALSE) {
   # Some upfront error handling
   if(!wregValidation(missing(X), "eq", FALSE,
                      "Independent variables (X) must be provided.", warnFlag = TRUE)){
-    
-    if(!wregValidation((length(unique(apply(X,FUN=class,MARGIN=2)))!=1)|
-                       (unique(apply(X,FUN=class,MARGIN=2))!="numeric"), "eq", FALSE,
-                       "Independent variables (X) must be provided as class numeric.", warnFlag = TRUE)){
+  
+    if(!wregValidation(X, "numeric", message="X must be numeric", warnFlag = TRUE)){
       
-      if(!wregValidation(sum(is.na(as.matrix(X))), "eq", 0,
-                         paste0("Some independent variables (X) contain missing ",
-                                "values.  These must be removed."), warnFlag = TRUE)){
+      if(!wregValidation((length(unique(apply(X,FUN=class,MARGIN=2)))!=1)|
+                         (unique(apply(X,FUN=class,MARGIN=2))!="numeric"), "eq", FALSE,
+                         "Independent variables (X) must be provided as class numeric.", warnFlag = TRUE)){
         
-        wregValidation(sum(is.infinite(as.matrix(X))), "eq", 0,
-                       paste0("Some independent variables (X) contain infinite ",
-                              "values.  These must be removed."), warnFlag = TRUE)
+        if(!wregValidation(sum(is.na(as.matrix(X))), "eq", 0,
+                           paste0("Some independent variables (X) contain missing ",
+                                  "values.  These must be removed."), warnFlag = TRUE)){
+          
+          wregValidation(sum(is.infinite(as.matrix(X))), "eq", 0,
+                         paste0("Some independent variables (X) contain infinite ",
+                                "values.  These must be removed."), warnFlag = TRUE)
+        }
       }
     }
   }
@@ -86,6 +89,7 @@ Leverage <- function(X,Omega,Ch=NA,x0=NA,ROI=FALSE) {
       }
     }
   }
+  
   
   if (warn("check")) {
     stop("Invalid inputs were provided.  See warnings().", warn("get"))

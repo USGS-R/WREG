@@ -223,7 +223,7 @@ WREG.RoI <- function(Y,X,Reg,transY=NA,
     
     if (!wregValidation(missing(LP3), "eq", FALSE, "LP3 must be provided as input",
                         warnFlag = TRUE)){
-      if (!SkewAdj){
+      if (!regSkew){
         
         if (!wregValidation(!is.data.frame(LP3), "eq", FALSE, 
                             paste("LP3 must be provided as a data frame with elements named",
