@@ -1,4 +1,21 @@
-#quick functions to add and remove warnings
+#' Utility function to add and remove warnings without halting execution
+#' 
+#' @description
+#' The \code{warn} handles warnings
+#' for WREG-R.
+#' 
+#' @param mode Whether to initialize, check, get, add, or clear warnings
+#' @param w (optional) Message for adding warning
+#' 
+#' @details
+#' This functions is a warning scheme that does not halt execution.
+#' 
+#' @return Nothing, hasWarnings, or string list of warnings
+#' 
+#'@examples
+#'hasWarnings <- warn("check")
+#'
+#'@export
 
 warn <- function(mode, w=NULL){
 

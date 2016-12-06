@@ -77,16 +77,23 @@ importWREG_General <- function(wregPath,sites='') {
   zero_append <- which(nchar(siteInfo$stationID) != 8)
   siteInfo$stationID[zero_append] <- paste0("0",siteInfo$stationID[zero_append])
 
+  
   BasChars <- siteInfo[,is.element(names(siteInfo),
-                                     c('stationID','Lat','Long'))]
+                                     c('stationID',	'latitude',	'longitude'))]
+  names(BasChars) <- c('Station.ID', 'Lat', 'Long')
+  
   X <- siteInfo[,c(1,26:ncol(siteInfo))]
+  names(X)[1] <- 'Station.ID'
+  
   sitesOut <- siteInfo$stationID
   Y <- siteInfo[,c(1,7:14)]
+  names(Y) <- c('Station.ID','Q2','Q5','Q10', 'Q25', 'Q50', 'Q100', 'Q200', 'Q500')
+  
   lp3g <- siteInfo[,c(1,5)]
   lp3k <- siteInfo[,c(1,15:23)]
   lp3s <- siteInfo[,c(1,6)]
   
-  LP3f <- data.frame(stationID=sitesOut,S=lp3s[,2],G=lp3g[,2],
+  LP3f <- data.frame(Station.ID=sitesOut,S=lp3s[,2],G=lp3g[,2],
                      GR=siteInfo$regionalSkew)
   LP3k <- lp3k
   uwls <- NULL

@@ -1,5 +1,23 @@
-#quick functions to validate inputs
-#returns FALSE for warnings if the input is valid and TRUE if the if the input is not valid
+#' Validation Scheme for WREG
+#' 
+#' @description
+#' The \code{wregValidation} function validates input in WREG-R.
+#' 
+#' @param input A value to validate.
+#' @param mode Method of validation
+#' @param compare (optional) Value to compare against if mode requires comparison
+#' @param message (optional) Custom message for warning/error
+#' @param warnFlag (optional) Whether or not invalid input should throw a warning/error
+#' 
+#' @details
+#' This functions streamlines validation for the programmer so less lines of code are written
+#' 
+#' @return TRUE or FALSE depending on validity of input or throws an error
+#' 
+#'@examples
+#'invalid <- wregValidation(0, "eq", 0)
+#'
+#'@export
 
 wregValidation <- function(input, mode, compare=NULL, message=NULL, warnFlag = FALSE){
 

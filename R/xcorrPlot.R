@@ -41,9 +41,10 @@ xcorPlot <- function(object,alpha,theta,concurrentMin,
   # William Farmer, October 22, 2015
   # Revised by WHF, March 02, 2016
   
+  #change the value to 10 if value less than 10 is selected (warn later so plot still shows up)
+  xCorrWarn <- FALSE
   if (concurrentMin < 10) {
-    warn("add",paste0('It is not reccommended to use a concurrent record',
-      ' length less than 10 years. The value has been increased to 10.'))
+    xCorrWarn <- TRUE
     concurrentMin <- 10
   }
   
@@ -81,6 +82,12 @@ xcorPlot <- function(object,alpha,theta,concurrentMin,
   
   nse <- 1 - sum((estRhos-plotData[,2])^2)/
     sum((plotData[,2]-mean(plotData[,2]))^2)
+  
+  #warn after processing so the plot still shows up
+  if(xCorrWarn){
+    warn("add",paste0('It is not reccommended to use a concurrent record',
+                      ' length less than 10 years. The value has been increased to 10.'))
+  }
   
   if (plot) {
     ny <- round((maxcor-mincor)/0.1)

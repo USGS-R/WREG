@@ -100,7 +100,7 @@ shinyServer(function(input, output,session) {
                      
                     
                      
-                         importData <- importWREG_General(wregPath = input$wregPath_General)
+                         importData <<- importWREG_General(wregPath = input$wregPath_General)
                                       
                            
                          #Set select data to import data so that it defuaults to all sites if none selected in gui
@@ -143,15 +143,20 @@ shinyServer(function(input, output,session) {
   observeEvent(input$selectSites,
                {
                  tryCatch({
+                   proxy = dataTableProxy("siteCharTable")
+                   
+                   
                    if(input$siteSelOption == "Select individual sites")
                    {
                      selSites <<- as.numeric(input$siteCharTable_rows_selected)
                    } else if (input$siteSelOption == "Select all sites on current table page")
                    {
                      selSites <<- as.numeric(input$siteCharTable_rows_current)
+                     DT::selectRows(proxy, selSites)
                    } else if (input$siteSelOption == "Select all sites in dataset") 
                    {
                      selSites <<- seq(from=1,to=length(siteChars$Station.ID))
+                     DT::selectRows(proxy, selSites)
                    }
                    
                    #check if sites were selected
@@ -199,7 +204,7 @@ shinyServer(function(input, output,session) {
   
   
   ##This big chunk of code reactively builds the UI depending on variabls chosen
-  observeEvent(input$selectVars,
+  observeEvent(input$Y,
                {
                  output$YvarTrans <- renderUI({
                    

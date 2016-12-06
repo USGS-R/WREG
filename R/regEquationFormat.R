@@ -1,5 +1,26 @@
-#utility function to format the regression equation
-
+#' Utility function to format the regression equation
+#' 
+#' @description
+#' The \code{regEquationFormat} function formats 
+#' the regression equation for WREG-R.
+#' 
+#' @param X The X/Y variable
+#' @param C1 (optional) Constant 1 for transform
+#' @param C2 (optional) Constant 2 for transform
+#' @param C3 (optional) Constant 3 for transform
+#' @param C4 (optional) Constant 4 for transform
+#' @param mode Type of transform on X/Y variable
+#' @param var Whether or not method applies to the X or Y variable
+#' 
+#' @details
+#' This functions formats the regression equation based on input for WREG output.
+#' 
+#' @return Nothing, strings are added to list xEq
+#' 
+#'@examples
+#'regEquationFormat("P", mode="none", var="X")
+#'
+#'@export
 
 regEquationFormat <- function(X, C1 = NULL, C2 = NULL, C3 = NULL, C4 = NULL, mode, var){
   if(mode == "none"){
