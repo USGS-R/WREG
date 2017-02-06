@@ -9,7 +9,8 @@ Description: This program represents an R implementation of WREG v. 1.05. (USGS)
 License: GPL (>=2)
 Suggests:
     knitr,
-    testthat
+    testthat,
+    rmarkdown
 Imports:
   DT,
   shiny,
@@ -18,4 +19,4 @@ Depends:
   R (>= 2.10)
 VignetteBuilder: knitr
 LazyData: true
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.0
