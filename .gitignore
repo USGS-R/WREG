@@ -6,3 +6,4 @@ inst/doc
 .travis.yml
 appveyor.yml
 README.md
+WREG.Rproj

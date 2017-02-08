@@ -1,6 +1,7 @@
-#' @title Print summary of WREG results
+#' Print summary of WREG results
+#' 
 #' @description Print methods for WREG output lists
-#' @name print
+#' 
 #' @aliases print.OLS
 #' @aliases print.WLS
 #' @aliases print.GLS
@@ -13,7 +14,6 @@
 #' \cr
 #' If called, \code{print} displays a summary of the output from WREG functions
 #'
-#' @rdname print
 #' @export
 #' 
 #' @rdname print
