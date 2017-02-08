@@ -1,49 +1,49 @@
-#' Import Data from Old WREG Format
-#' 
-#' @description
-#' The \code{importWREG} function reads the WREG inputs from a directory 
-#' set up for the old WREG program.
-#' 
-#' @param wregPath A directory that contains all of the files needed to 
-#' implement the MatLab version of WREG.
-#' @param sites (optional) A vetor of sites that should be return.  Allows for 
-#' data subsetting.
-#' 
-#' @details
-#' This functions allows users to use the legacy format of WREG.  This includes
-#' an established directory that contains valid \dQuote{SiteInfo.txt}, 
-#' \dQuote{FlowChar.txt}, \dQuote{LP3G.txt}, \dQuote{LP3K.txt}, 
-#' \dQuote{LP3s.txt} and \dQuote{USGS##########.txt}, multiple files 
-#' containing time series for each site.  The file \dQuote{UserWLS.txt} is 
-#' optional.  For further information on the format of these files, see the 
-#' program manual (Techniques and Methods 4-A8).  Files that are not valid 
-#' inputs files for the WREG version describe therein will not be accepted.
-#' 
-#' @return All outputs are returned as part of a list.  The list includes:
-#' \item{sites}{A vector of site IDs.}
-#' \item{Y}{A data frame whose comlumns represent unique frequency events, 
-#' while the row represent particular sites in the same order as \code{sites}.}
-#' \item{X}{A data frame whose columns represent basin characteristics to be used
-#'  as dependent variables and whose rows represent sites corresponding 
-#'  to \code{sites}.}
-#' \item{LP3f}{A matrix containing the fitted LP# parameters that are fixed 
-#' across exceedence probability.  These include the standard deviation, 
-#' skew and regional skew for each site.}
-#' \item{LP3k}{A matrix of the fitted kappa parameters of the LP3 distribution
-#'  for each \code{AEP}.}
-#' \item{BasChars}{A matrix containing the site IDs, latitudes and longitudes.}
-#' \item{recLen}{A square matrix indicating the number of overlapping years
-#'  for each site pair.}
-#' \item{recCor}{A matrix of the correlaiton between site paris.}
-#' \item{UW}{A matrix of user weights, if included.}
-#' 
+#'Import Data from Generic (v1.06) Files
+#'
+#'@description The \code{importWREG_General} function reads the WREG inputs from
+#'a directory set up with new generic file formats.
+#'
+#'@param wregPath A directory that contains all of the files needed to implement
+#'  the MatLab version of WREG.
+#'  
+#'@details This function allows users to use a more streamlined data format: 
+#'  only two or three files are required.  This includes the 
+#'  \dQuote{SiteInfo.txt}, \dQuote{USGSAnnualTimeSeries.txt}, and, optionally, 
+#'  \dQuote{UserWLS.txt}.  The \dQuote{SiteInfo.txt} file should contain the
+#'  following columns (with headers in parentheses): the station identification
+#'  number (stationID), the latitude and longitude of the stations (latitude and
+#'  longitude), the regional skew computed for each site (regionalSkew), the 
+#'  at-site skew value (skew), the standard deviation of the Log-Pearson 
+#'  Type-III distribution used to fit the series (standardDeviation), a series 
+#'  of streamflow characteristics to be evaluated (Q#, where # indicates a 
+#'  specific return period), Q#.k (the characteristic-specific kappa value from 
+#'  the fitted Log-Pearson Type-III distribution, where again # specifies a 
+#'  certain return period), and any explanatory variables to be used for 
+#'  analysis.  The \dQuote{USGSAnnualTimeSeries.txt} and \dQuote{UserWLS.txt}
+#'  files follow the format outlined in USGS Techniques and Methods 4-A8.
+#'  
+#'@return All outputs are returned as part of a list.  The list includes: 
+#'  \item{sites}{A vector of site IDs.} \item{Y}{A data frame whose comlumns
+#'  represent unique frequency events, while the row represent particular sites
+#'  in the same order as \code{sites}.} \item{X}{A data frame whose columns
+#'  represent basin characteristics to be used as dependent variables and whose
+#'  rows represent sites corresponding to \code{sites}.} \item{LP3f}{A matrix
+#'  containing the fitted LP# parameters that are fixed across exceedence
+#'  probability.  These include the standard deviation, skew and regional skew
+#'  for each site.} \item{LP3k}{A matrix of the fitted kappa parameters of the
+#'  LP3 distribution for each \code{AEP}.} \item{BasChars}{A matrix containing
+#'  the site IDs, latitudes and longitudes.} \item{recLen}{A square matrix
+#'  indicating the number of overlapping years for each site pair.} 
+#'  \item{recCor}{A matrix of the correlaiton between site paris.} \item{UW}{A
+#'  matrix of user weights, if included.}
+#'  
 #'@examples
 #'wregDir <- file.path(system.file("exampleDirectory", package = "WREG"),
 #'  "matlabImport")
 #'importedData <- importWREG(wregPath = wregDir)
 #'
 #'@export
-importWREG_General <- function(wregPath,sites='') {
+importWREG_General <- function(wregPath) {
   # Developed by William Farmer, 10 February 2016
   #
   # In this format, the user must indicate the AEP and MSEGR manually.
@@ -51,24 +51,22 @@ importWREG_General <- function(wregPath,sites='') {
   # wregPath <- file.path('..','SampleInputFiles')
   # sites <- c('5314900','5316900','5316920','5317845','5317850')
   
+  site2screen <- sites
+  
   # Load and parse SiteInfo.txt
   siteInfoFile <- file.path(wregPath,'SiteInfo.txt')
   if (!file.exists(siteInfoFile)) {
     stop(paste('Could not find',siteInfoFile))
   }
   
-  
-  # siteInfo <- read.table(siteInfoFile,sep='\t',header=T,
-  #                        colClasses = list(Station.ID='character'))
   siteInfo <- read.table(siteInfoFile,sep='\t',header=T,fill=TRUE)
   
-  # Check to see if the file has standard column names, otherwise rename the first three columns to the apropriate name
-  if (Reduce('&',(is.element(names(siteInfo)[1:25], c('stationID',	'latitude',	'longitude',	'regionalSkew',	'skew',	'standardDeviation',	'flowCharQ2',
-                                                'flowCharQ5',	'flowCharQ10',	'flowCharQ25',	'flowCharQ50',	'flowCharQ100',	'flowCharQ200',	'flowCharQ500',
-                                                'flowCharQ2.K',	'flowCharQ5.K',	'flowCharQ10.K',	'flowCharQ25.K',	'flowCharQ50.K',	'flowCharQ100.K',	
-                                                'flowCharQ200.K',	'flowCharQ500.K',	'zero.1.nonZero.2',	'freqZero',	'Cont.1.PR.2'	)))) == FALSE){
-    stop(paste("Please check naming conventions of the general file format"))
-  } 
+  # Check to see if the file has standard column names, 
+  # otherwise rename the first three columns to the apropriate name
+  if (sum(is.element(names(siteInfo), c('stationID',	'latitude',	'longitude',
+    'regionalSkew',	'skew',	'standardDeviation'))) != 6) {
+    stop("Please check naming conventions of the general file format")
+  }
   
   #convert stationID to character class
   siteInfo$stationID <- toupper(as(siteInfo$stationID, 'character'))
@@ -77,36 +75,81 @@ importWREG_General <- function(wregPath,sites='') {
   zero_append <- which(nchar(siteInfo$stationID) != 8)
   siteInfo$stationID[zero_append] <- paste0("0",siteInfo$stationID[zero_append])
 
-  
-  BasChars <- siteInfo[,is.element(names(siteInfo),
-                                     c('stationID',	'latitude',	'longitude'))]
+  # Grab basic basin characteristics
+  BasChars <- siteInfo[, c('stationID',	'latitude',	'longitude')]
   names(BasChars) <- c('Station.ID', 'Lat', 'Long')
+  sitesOut <- siteInfo$stationID
   
-  X <- siteInfo[,c(1,26:ncol(siteInfo))]
+  # Check if flow characteristics have been provided correctly
+  flowChars <- grep(pattern = "Q[[:digit:]]+", x = names(siteInfo)) != 
+    grep(pattern = "Q[[:digit:]]+.k", x = names(siteInfo))
+  flowChars <- grep(pattern = "Q[[:digit:]]+", x = names(siteInfo), 
+    value = TRUE)[flowChars]
+  if (length(flowChars) == 0) {
+    stop(paste("Either no flow characteristics were provided or the table", 
+      "headings in SiteInfo.txt were incorrect.  Please label flow", 
+      "characteristics as Q# where # represents a return period."))
+  }
+  Y <- siteInfo[, c("stationID", flowChars)]
+  
+  # Check if kappa values were provided, make LP3 files
+  kappas <- grep(pattern = "Q[[:digit:]]+.k", x = names(siteInfo), 
+    value = TRUE)
+  if (length(kappas) == 0) {
+    stop(paste("Either no kappa values were provided or the table headings",
+      "in SiteInfo.txt were incorrect.  Please label kappa values as Q#.k",
+      "where # represents a return period."))
+  }
+  LP3k <- siteInfo[, c("stationID", kappas)]
+  names(LP3k)[1] <- "Station.ID"
+  kappas <- grep(pattern = "Q[[:digit:]]+.k", x = names(LP3k))
+  names(LP3k)[kappas] <- unlist(lapply(names(LP3k)[kappas],
+    FUN = strsplit, split = ".k"))
+  LP3f <- siteInfo[, c("stationID", "standardDeviation", "skew",
+    "regionalSkew")]
+  names(LP3f) <- c("Station.ID", "S", "G", "GR")
+  
+  # Check for explanatory variables
+  X <- which(!is.element(names(siteInfo), c('stationID',	'latitude',
+    'longitude',	'regionalSkew',	'skew',	'standardDeviation', 
+    grep(pattern = "Q[[:digit:]]+", x = names(siteInfo), value = TRUE))))
+  if (length(X) == 0) {
+    stop("No explanatory variables were found in the SiteInfo.txt file.")
+  }
+  X <- siteInfo[,c("stationID", names(siteInfo)[X])]
   names(X)[1] <- 'Station.ID'
   
-  sitesOut <- siteInfo$stationID
-  Y <- siteInfo[,c(1,7:14)]
-  names(Y) <- c('Station.ID','Q2','Q5','Q10', 'Q25', 'Q50', 'Q100', 'Q200', 'Q500')
-  
-  lp3g <- siteInfo[,c(1,5)]
-  lp3k <- siteInfo[,c(1,15:23)]
-  lp3s <- siteInfo[,c(1,6)]
-  
-  LP3f <- data.frame(Station.ID=sitesOut,S=lp3s[,2],G=lp3g[,2],
-                     GR=siteInfo$regionalSkew)
-  LP3k <- lp3k
+  # Load and parse UserWLS.txt (if available)
+  uwlsFile <- file.path(wregPath,'UserWLS.txt')
   uwls <- NULL
+  if (file.exists(uwlsFile)) {
+    uwls <- read.table(uwlsFile,sep='\t',header=F)
+    if (nrow(uwls)!=ncol(uwls)) {
+      stop('UserWLS.txt must be a square matrix.')
+    }
+    if (!(identical(site1,site2)&identical(site1,site3a)&
+        identical(site1,site3b)&identical(site1,site3c))) {
+      uwls <- matrix(NA,ncol=length(site1),nrow=length(site2))
+      warning(paste0('Because the input files have a different order of sites,',
+        ' the user-provided weighting matrix is invalid.',
+        ' It has been replaced with NAs.'))
+    } else if (nrow(uwls)!=n2) {
+      uwls <- uwls[ndx,ndx]
+      warning(paste0('UserWLS.txt was ammended to match sites in arguments.',
+        ' (Note: Be sure weights do not depend on sites that were removed.)'))
+    }
+    uwls <- as.matrix(uwls)
+    row.names(uwls) <- colnames(uwls) <- sitesOut
+  }
  
-  # Load and parse USGS*.txt files
+  # Load and parse time series files
   siteTS <- list()
-  
   # See if a USGS Annual time series file exists, if so read it in
   # Otherwise get data from each individual file
   usgs_annual_file = file.path(wregPath,'USGSAnnualTimeSeries.txt')
   if (!file.exists(usgs_annual_file)) {
-    stop(paste("Please include a USGS Annual Time Series file with the following name,
-               \"USGSAnnualTimeSeries.txt\""))
+    stop(paste("Please include a USGS Annual Time Series file with",
+      "the following name: \"USGSAnnualTimeSeries.txt\""))
   }
     
   # split the files in to a list of tables based on site id 
@@ -119,7 +162,8 @@ importWREG_General <- function(wregPath,sites='') {
   }
     
   if (length(siteTS) == 0){
-    stop(paste("There are no timeseries files to process.  Check ts naming convetions."))
+    stop(paste("There are no timeseries files to process.  Check ts naming", 
+      "convetions."))
   }
   
   recLen <- recCor <- matrix(NA,ncol=length(siteTS),nrow=length(siteTS))
@@ -138,7 +182,8 @@ importWREG_General <- function(wregPath,sites='') {
       
       #check to see if the data has the proper dimensions to be correlated
       if (length(ijdata) != length(jidata)){
-        stop(paste('Overlap in data matrix caused by multiple entries for a year and site.  Revisit data.'))
+        stop(paste('Overlap in data matrix caused by multiple entries',
+          'for a year and site.  Revisit data.'))
       }
       
       recCor[i,j] <- recCor[j,i] <- cor(ijdata,jidata)
@@ -147,7 +192,6 @@ importWREG_General <- function(wregPath,sites='') {
   
   row.names(recLen) <- row.names(recCor) <- colnames(recLen) <- 
     colnames(recCor) <- sitesOut
-  names(LP3k) <- names(Y)
   
   # Output result
   result <- list(
