@@ -11,6 +11,7 @@
 #' @param C4 (optional) Constant 4 for transform
 #' @param mode Type of transform on X/Y variable
 #' @param var Whether or not method applies to the X or Y variable
+#' @param xEq The vector containing the elements making up the regression equation.
 #' 
 #' @details
 #' This functions formats the regression equation based on input for WREG output.
@@ -22,10 +23,10 @@
 #'
 #'@export
 
-regEquationFormat <- function(X, C1 = NULL, C2 = NULL, C3 = NULL, C4 = NULL, mode, var){
+regEquationFormat <- function(X, C1 = NULL, C2 = NULL, C3 = NULL, C4 = NULL, mode, var, xEq = NULL){
   if(mode == "none"){
     if(var == "X"){
-      addXEquation(X)
+      addXEquation(X, xEq = xEq)
     }else{
       yEq <<- sprintf("%s = ", X)
     }
@@ -42,7 +43,7 @@ regEquationFormat <- function(X, C1 = NULL, C2 = NULL, C3 = NULL, C4 = NULL, mod
     bracket3 <- "}"
     
     if (var == "X"){
-      addXEquation(paste(c(part1, bracket1, c1, c2, c3, bracket2, c4, bracket3), collapse=""))
+      addXEquation(paste(c(part1, bracket1, c1, c2, c3, bracket2, c4, bracket3), collapse=""), xEq = xEq)
     }else{
       yEq <<- sprintf("%s = ", paste(c(part1, bracket1, c1, c2, c3, bracket2, c4, bracket3), collapse=""))
     }
@@ -50,7 +51,7 @@ regEquationFormat <- function(X, C1 = NULL, C2 = NULL, C3 = NULL, C4 = NULL, mod
   }
 }
 
-addXEquation = function(equation){
+addXEquation = function(equation, xEq = NULL){
   if(is.null(xEq)){
     xEq <<- equation
   }else{

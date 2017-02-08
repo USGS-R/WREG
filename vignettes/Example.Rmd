@@ -20,8 +20,11 @@ In the development of the WREG package, several improvements on the WREG program
 
 ## 2 Package and example data
 Once installed, the WREG package is loaded in the standard way:
-```{r}
+```{r eval = FALSE}
 library(WREG)
+```
+```{r echo = FALSE}
+suppressWarnings(library(WREG))
 ```
 The package contains same sample input files formatted for the MatLab version of WREG.  The input files have been condensed into list objects for easy manipulation and storage.  The data can be loaded with the following command:
 ```{r}

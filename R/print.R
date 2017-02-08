@@ -1,4 +1,4 @@
-#' @title print.WREG
+#' @title Print summary of WREG results
 #' @description Print methods for WREG output lists
 #' @name print
 #' @aliases print.OLS
@@ -6,19 +6,17 @@
 #' @aliases print.GLS
 #' @aliases print.GLSs
 #'
-#' @title print.WREG
-#'
 #' @param x An output list from one of the WREG functions
 #' @param ... further arguments passed to or from other methods. 
 #'
 #' @note \code{print} is a generic name for the functions documented.
 #' \cr
-#' If called, \code{print} displays a summary of the output from WREG... functions
+#' If called, \code{print} displays a summary of the output from WREG functions
 #'
 #' @rdname print
 #' @export
 #' 
-#' @rdname print.OLS
+#' @rdname print
 #' @return \code{print.WREG.OLS} Prints a summary of output list from WREG.OLS
 #' @examples 
 #' ## print.WREG.OLS
@@ -40,7 +38,7 @@ print.WREG.OLS <- function(x, ...) {
   object <- x
   cat(paste0("Regression Model for ",names(object$Y),'\n'))
   cat('Coefficients fit by ordinary least-squares.\n')
-  cat("\nCall:\n", createEquation(object$Coefs$Coefficient),'\n\n')
+  cat("\nEquation:\n", createEquation(object$Coefs$Coefficient),'\n\n')
   cat(paste0('\nPerformance Metrics\n(Note: Units are based',
              ' on the transformation of the dependent variable.)\n'))
   cat('Mean Squared Error:\t',
@@ -97,7 +95,7 @@ print.WREG.WLS <- function(x, ...) {
   object <- x
   cat(paste0("Regression Model for ",names(object$Y),'\n'))
   cat('Coefficients fit by weighted least-squares.\n')
-  cat("\nCall:\n", createEquation(object$Coefs$Coefficient),'\n\n')
+  cat("\nEquation:\n", createEquation(object$Coefs$Coefficient),'\n\n')
   cat(paste0('\nPerformance Metrics\n(Note: Units are based',
              ' on the transformation of the dependent variable.)\n'))
   cat('Mean Squared Error:\t',
@@ -168,7 +166,7 @@ print.WREG.GLS <- function(x, ...) {
   object <- x
   cat(paste0("Regression Model for ",names(object$Y),'\n'))
   cat('Coefficients fit by generalized least-squares.\n')
-  cat("\nCall:\n", createEquation(object$Coefs$Coefficient),'\n\n')
+  cat("\nEquation:\n", createEquation(object$Coefs$Coefficient),'\n\n')
   cat(paste0('\nPerformance Metrics\n(Note: Units are based',
              ' on the transformation of the dependent variable.)\n'))
   cat('Mean Squared Error:\t',
@@ -241,7 +239,7 @@ print.WREG.GLSs <- function(x, ...) {
 cat(paste0("Regression Model for ",names(object$Y),'\n'))
 cat(paste0('Coefficients fit by generalized least-squares with an \n',
            'adjustment for uncertainty in regional skew.\n'))
-cat("\nCall:\n", createEquation(object$Coefs$Coefficient),'\n\n')
+cat("\nEquation:\n", createEquation(object$Coefs$Coefficient),'\n\n')
 cat(paste0('\nPerformance Metrics\n(Note: Units are based',
            ' on the transformation of the dependent variable.)\n'))
 cat('Mean Squared Error:\t',

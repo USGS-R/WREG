@@ -312,7 +312,7 @@ shinyServer(function(input, output,session) {
                      wregValidation(Yinput, "infinite", message = "Y Tansfer equation equals infinity")
                      
                      regEquationFormat(input$Y, input$YvarC1, input$YvarC2, input$YvarC3, 
-                                               input$YvarC4, "log10", "Y")
+                                               input$YvarC4, "log10", "Y", xEq = xEq)
                      
                      transY <<- "log10"
                      Yinput <<- as.data.frame(cbind(selectData$Y$Station.ID,Yinput))
@@ -334,7 +334,7 @@ shinyServer(function(input, output,session) {
                      wregValidation(Yinput, "infinite", message = "Y Tansfer equation equals infinity")
                      
                      regEquationFormat(input$Y, input$YvarC1, input$YvarC2, input$YvarC3, 
-                                               input$YvarC4, "ln", "Y")
+                                               input$YvarC4, "ln", "Y", xEq = xEq)
                      
                      transY <<- "ln"
                      Yinput <<- as.data.frame(cbind(selectData$Y$Station.ID,Yinput))
@@ -359,7 +359,7 @@ shinyServer(function(input, output,session) {
                      
                      
                      regEquationFormat(input$Y, input$YvarC1, input$YvarC2, input$YvarC3, 
-                                               input$YvarC4, "exp", "Y")
+                                               input$YvarC4, "exp", "Y", xEq = xEq)
                      
                      transY <<- "exp"
                      Yinput <<- as.data.frame(cbind(selectData$Y$Station.ID,Yinput))
@@ -367,7 +367,7 @@ shinyServer(function(input, output,session) {
                    {
                      Yinput <<- selectData$Y[[input$Y]]
                      
-                     regEquationFormat(input$Y, mode="none", var="Y")
+                     regEquationFormat(input$Y, mode="none", var="Y", xEq = xEq)
                      
                      Yinput <<- as.data.frame(cbind(selectData$Y$Station.ID,Yinput))
                      transY <<- "none"
@@ -382,26 +382,25 @@ shinyServer(function(input, output,session) {
                     
                    xEq <<- NULL
                    
-                   
                    Xinput <<- lapply(1:length(input$X), function(i) {
-                     
+
                      #check for numeric input
                      wregValidation(list(input[[paste0(input$X[i],"_XvarC1")]],
                                          input[[paste0(input$X[i],"_XvarC2")]],
                                          input[[paste0(input$X[i],"_XvarC3")]],
                                          input[[paste0(input$X[i],"_XvarC4")]]
                                          ), "numeric")
-                    
-                     
+
+
                      if(input[[paste0(input$X[i],"XvarTransType")]] == "log10")
                      {
-                       
-                       regEquationFormat(input$X[i], 
-                                         input[[paste0(input$X[i],"_XvarC1")]], 
-                                         input[[paste0(input$X[i],"_XvarC2")]], 
-                                         input[[paste0(input$X[i],"_XvarC3")]], 
-                                         input[[paste0(input$X[i],"_XvarC4")]], "log10", "X")
-                       
+
+                       regEquationFormat(input$X[i],
+                                         input[[paste0(input$X[i],"_XvarC1")]],
+                                         input[[paste0(input$X[i],"_XvarC2")]],
+                                         input[[paste0(input$X[i],"_XvarC3")]],
+                                         input[[paste0(input$X[i],"_XvarC4")]], "log10", "X", xEq = xEq)
+
                        log10(
                          #C1
                          (input[[paste0(input$X[i],"_XvarC1")]] *
@@ -416,12 +415,12 @@ shinyServer(function(input, output,session) {
                        )
                      } else if(input[[paste0(input$X[i],"XvarTransType")]] == "ln")
                      {
-                       regEquationFormat(input$X[i], 
-                                         input[[paste0(input$X[i],"_XvarC1")]], 
-                                         input[[paste0(input$X[i],"_XvarC2")]], 
-                                         input[[paste0(input$X[i],"_XvarC3")]], 
-                                         input[[paste0(input$X[i],"_XvarC4")]], "ln", "X")
-                      
+                       regEquationFormat(input$X[i],
+                                         input[[paste0(input$X[i],"_XvarC1")]],
+                                         input[[paste0(input$X[i],"_XvarC2")]],
+                                         input[[paste0(input$X[i],"_XvarC3")]],
+                                         input[[paste0(input$X[i],"_XvarC4")]], "ln", "X", xEq = xEq)
+
                        log(
                          #C1
                          (input[[paste0(input$X[i],"_XvarC1")]] *
@@ -436,11 +435,11 @@ shinyServer(function(input, output,session) {
                        )
                      } else if(input[[paste0(input$X[i],"XvarTransType")]] == "exp")
                      {
-                       regEquationFormat(input$X[i], 
-                                         input[[paste0(input$X[i],"_XvarC1")]], 
-                                         input[[paste0(input$X[i],"_XvarC2")]], 
-                                         input[[paste0(input$X[i],"_XvarC3")]], 
-                                         input[[paste0(input$X[i],"_XvarC4")]], "exp", "X")
+                       regEquationFormat(input$X[i],
+                                         input[[paste0(input$X[i],"_XvarC1")]],
+                                         input[[paste0(input$X[i],"_XvarC2")]],
+                                         input[[paste0(input$X[i],"_XvarC3")]],
+                                         input[[paste0(input$X[i],"_XvarC4")]], "exp", "X", xEq = xEq)
                        exp(
                          #C1
                          (input[[paste0(input$X[i],"_XvarC1")]] *
@@ -456,7 +455,7 @@ shinyServer(function(input, output,session) {
                      } else if(input[[paste0(input$X[i],"XvarTransType")]] == "none")
                      {
                        xString <- sprintf("%s", input$X[i])
-                       regEquationFormat(input$X[i], mode="none", var="X")
+                       regEquationFormat(input$X[i], mode="none", var="X", xEq = xEq)
                        selectData$X[[input$X[i]]]
                      }
                    })

@@ -5,7 +5,7 @@
 \title{Utility function to format the regression equation}
 \usage{
 regEquationFormat(X, C1 = NULL, C2 = NULL, C3 = NULL, C4 = NULL, mode,
-  var)
+  var, xEq = NULL)
 }
 \arguments{
 \item{X}{The X/Y variable}
@@ -21,6 +21,8 @@ regEquationFormat(X, C1 = NULL, C2 = NULL, C3 = NULL, C4 = NULL, mode,
 \item{mode}{Type of transform on X/Y variable}
 
 \item{var}{Whether or not method applies to the X or Y variable}
+
+\item{xEq}{The vector containing the elements making up the regression equation.}
 }
 \value{
 Nothing, strings are added to list xEq

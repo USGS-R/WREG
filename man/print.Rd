@@ -7,7 +7,7 @@
 \alias{print.WREG.WLS}
 \alias{print.WREG.GLS}
 \alias{print.WREG.GLSs}
-\title{print.WREG}
+\title{Print summary of WREG results}
 \usage{
 \method{print}{WREG.OLS}(x, ...)
 
@@ -38,7 +38,7 @@ Print methods for WREG output lists
 \note{
 \code{print} is a generic name for the functions documented.
 \cr
-If called, \code{print} displays a summary of the output from WREG... functions
+If called, \code{print} displays a summary of the output from WREG functions
 }
 \examples{
 ## print.WREG.OLS
