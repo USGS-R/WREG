@@ -178,3 +178,21 @@ The support for region-of-influence regression is described in the
  idiosyncrasies, see the notes for the \code{Legacy} input and the links to
  other functions in this package.
 }
+\examples{
+# Import some example data
+peakFQdir <- paste0(
+  file.path(system.file("exampleDirectory", package = "WREG"),
+    "pfqImport"))
+gisFilePath <- file.path(peakFQdir, "pfqSiteInfo.txt")
+importedData <- importPeakFQ(pfqPath = peakFQdir, gisFile = gisFilePath)
+
+# Run a simple regression
+Y <- importedData$Y$AEP_0.5
+X <- importedData$X[c("A")]
+transY <- "none"
+basinChars <- importedData$BasChars
+#result <- WREG.OLS(Y, X, transY)
+
+result <- WREG.RoI(Y, X, Reg = "OLS", transY, BasinChars = basinChars,
+  ROI='GRoI', n = 10L)
+}
