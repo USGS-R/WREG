@@ -39,8 +39,8 @@
 #'  
 #'@examples
 #'wregDir <- file.path(system.file("exampleDirectory", package = "WREG"),
-#'  "matlabImport")
-#'importedData <- importWREG(wregPath = wregDir)
+#'  "generalImport")
+#'importedData <- importWREG_General(wregPath = wregDir)
 #'
 #'@export
 importWREG_General <- function(wregPath) {
@@ -49,9 +49,6 @@ importWREG_General <- function(wregPath) {
   # In this format, the user must indicate the AEP and MSEGR manually.
   
   # wregPath <- file.path('..','SampleInputFiles')
-  # sites <- c('5314900','5316900','5316920','5317845','5317850')
-  
-  site2screen <- sites
   
   # Load and parse SiteInfo.txt
   siteInfoFile <- file.path(wregPath,'SiteInfo.txt')

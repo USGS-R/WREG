@@ -49,7 +49,7 @@ This function allows users to use a more streamlined data format:
 }
 \examples{
 wregDir <- file.path(system.file("exampleDirectory", package = "WREG"),
- "matlabImport")
-importedData <- importWREG(wregPath = wregDir)
+ "generalImport")
+importedData <- importWREG_General(wregPath = wregDir)
 
 }
