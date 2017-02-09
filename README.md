@@ -51,7 +51,7 @@ To run the WREG app:
 2. In the Console (lower-left window of RStudio) paste the following:
 
 ```r
-library(toxEval)
+library(WREG)
 WREGgui()
 ```
 
