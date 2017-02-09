@@ -1,7 +1,7 @@
 Package: WREG
 Type: Package
-Title: USGS WREG v. 1.05
-Version: 1.05-02
+Title: USGS WREG v. 1.06
+Version: 1.06
 Date: 2015-02-06
 Author: William Farmer
 Maintainer: William Farmer <wfarmer@usgs.gov>
