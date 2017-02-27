@@ -38,7 +38,7 @@ Useful links:
 This section should also only have to be done once. It assumes the USGS R repository (GRAN) was added to your R profile as described above.
 
 ```r
-install.packages("toxEval")
+install.packages("WREG")
 ```
 
 Regularly, it is a good idea to update *ALL* your packages in R. If using RStudio, this is quite easy, there's an Update button in the "Packages" tab. This checks CRAN and GRAN for updates. It is a good idea to click this update regularly.
