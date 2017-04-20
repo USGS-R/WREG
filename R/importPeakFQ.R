@@ -52,14 +52,11 @@ importPeakFQ <- function(pfqPath,gisFile,sites='') {
   # Load GIS file
   gisData <- read.table(file=gisFile,sep='\t',header=T)
   
-  # Check to see if the file has standard column names, otherwise rename the first three columns to the apropriate name
-  if (Reduce('&',(is.element(names(gisData), c('Station.ID', 'Lat', 'Long')))) == FALSE){
-    names(gisData)[1:10] <- c('Station.ID',	'Lat',	'Long',	'No..Annual.Series',	'Zero.1.NonZero.2',	'FreqZero',
-                               'Regional.Skew',	'Cont.1.PR.2',	'A',	'P1006')
-    
-    gisData <- shiftColumns(gisData, 11)
-    
-  } 
+  # Check to see if the file has standard column names, 
+  # otherwise rename the first three columns to the apropriate name
+  if (sum(is.element(names(gisData), c('Station.ID',	'Lat',	'Long'))) != 3) {
+    stop("Please check naming conventions of the site infromation file format")
+  }
   
   #convert Station.ID to character class
   gisData$Station.ID <- toupper(as(gisData$Station.ID, 'character'))
@@ -67,14 +64,6 @@ importPeakFQ <- function(pfqPath,gisFile,sites='') {
   #check to see if any sites need a zero appended
   zero_append <- which(nchar(gisData$Station.ID) != 8)
   gisData$Station.ID[zero_append] <- paste0("0",gisData$Station.ID[zero_append])
-  
-  # Remove old WREG variables that are reproduced elsewhere
-  remNDX <- -which(is.element(names(gisData), c('No..Annual.Series',
-    'Zero.1.NonZero.2',
-    'FreqZero',
-    'Regional.Skew',
-    'Cont.1.PR.2')))
-  gisData <- gisData[, remNDX]
   
   # subset to specified sites
   if (sites!='') {

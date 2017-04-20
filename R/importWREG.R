@@ -58,19 +58,13 @@ importWREG <- function(wregPath,sites='') {
   }
   
   
-  # siteInfo <- read.table(siteInfoFile,sep='\t',header=T,
-  #                        colClasses = list(Station.ID='character'))
-  siteInfo <- read.table(siteInfoFile,sep='\t',header=T,fill=TRUE)
-  
-  # Check to see if the file has standard column names, otherwise rename the first three columns to the apropriate name
-  if (Reduce('&',(is.element(names(siteInfo), c('Station.ID', 'Lat', 'Long')))) == FALSE){
-    names(siteInfo)[1:10] <- c('Station.ID',	'Lat',	'Long',	'No..Annual.Series',	'Zero.1.NonZero.2',	'FreqZero',
-                              'Regional.Skew',	'Cont.1.PR.2',	'A',	'P1006')
-    
-    siteInfo <- shiftColumns(siteInfo, 11)
-    
-  } 
-  
+  # Check to see if the file has standard column names, 
+  # otherwise rename the first three columns to the apropriate name
+  if (sum(is.element(names(siteInfo), c('Station.ID',	'Lat',	'Long',
+    'No..Annual.Series',	'Zero.1.NonZero.2',	'FreqZero',
+    'Regional.Skew',	'Cont.1.PR.2'))) != 8) {
+    stop("Please check naming conventions of the Matlab file format")
+  }
   
   #convert Station.ID to character class
   siteInfo$Station.ID <- toupper(as(siteInfo$Station.ID, 'character'))
