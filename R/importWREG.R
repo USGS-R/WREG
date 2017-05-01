@@ -57,6 +57,7 @@ importWREG <- function(wregPath,sites='') {
     stop(paste('Could not find',siteInfoFile))
   }
   
+  siteInfo <- read.table(siteInfoFile, sep = '\t', header = TRUE, fill = TRUE)
   
   # Check to see if the file has standard column names, 
   # otherwise rename the first three columns to the apropriate name
