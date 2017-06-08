@@ -12,11 +12,11 @@ Suggests:
     testthat,
     rmarkdown
 Imports:
-  DT,
-  shiny,
+  DT (>= 0.2.0),
+  shiny (>= 1.0.0),
   rmarkdown
 Depends:
-  R (>= 2.10)
+  R (>= 3.2.0)
 VignetteBuilder: knitr
 LazyData: true
 RoxygenNote: 6.0.0
