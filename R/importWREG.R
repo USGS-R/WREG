@@ -57,7 +57,8 @@ importWREG <- function(wregPath,sites='') {
     stop(paste('Could not find',siteInfoFile))
   }
   
-  siteInfo <- read.table(siteInfoFile, sep = '\t', header = TRUE, fill = TRUE)
+  siteInfo <- read.table(siteInfoFile, sep = '\t', header = TRUE, fill = TRUE,
+    colClasses = c("Station.ID" = "character"))
   
   # Check to see if the file has standard column names, 
   # otherwise rename the first three columns to the apropriate name
@@ -104,7 +105,8 @@ importWREG <- function(wregPath,sites='') {
   if (!file.exists(flowCharFile)) {
     stop(paste('Could not find',flowCharFile))
   }
-  Y <- read.table(flowCharFile,sep='\t',header=T)
+  Y <- read.table(flowCharFile, sep = '\t', header = TRUE,
+    colClasses = c("Station.ID" = "character"))
   if(!is.element('Station.ID', names(Y))){
     names(Y)[1] <- 'Station.ID'
     
@@ -129,7 +131,8 @@ importWREG <- function(wregPath,sites='') {
   if (!file.exists(lp3gFile)) {
     stop(paste('Could not find',lp3gFile))
   }
-  lp3g <- read.table(lp3gFile,sep='\t',header=T)
+  lp3g <- read.table(lp3gFile, sep = '\t', header = TRUE,
+    colClasses = c("Station.ID" = "character"))
   if(!is.element('Station.ID', names(lp3g))){
     names(lp3g)[1] <- 'Station.ID'
     
@@ -156,7 +159,8 @@ importWREG <- function(wregPath,sites='') {
   if (!file.exists(lp3kFile)) {
     stop(paste('Could not find',lp3kFile))
   }
-  lp3k <- read.table(lp3kFile,sep='\t',header=T)
+  lp3k <- read.table(lp3kFile, sep = '\t', header = TRUE,
+    colClasses = c("Station.ID" = "character"))
   if(!is.element('Station.ID', names(lp3k))){
     names(lp3k)[1] <- 'Station.ID'
     
@@ -176,7 +180,8 @@ importWREG <- function(wregPath,sites='') {
   if (!file.exists(lp3sFile)) {
     stop(paste('Could not find',lp3sFile))
   }
-  lp3s <- read.table(lp3sFile,sep='\t',header=T)
+  lp3s <- read.table(lp3sFile, sep = '\t', header = TRUE,
+    colClasses = c("Station.ID" = "character"))
   if(!is.element('Station.ID', names(lp3s))){
     names(lp3s)[1] <- 'Station.ID'
     
@@ -208,7 +213,7 @@ importWREG <- function(wregPath,sites='') {
   uwlsFile <- file.path(wregPath,'UserWLS.txt')
   uwls <- NULL
   if (file.exists(uwlsFile)) {
-    uwls <- read.table(uwlsFile,sep='\t',header=F)
+    uwls <- read.table(uwlsFile, sep = '\t', header = FALSE)
     if (nrow(uwls)!=ncol(uwls)) {
       stop('UserWLS.txt must be a square matrix.')
     }
