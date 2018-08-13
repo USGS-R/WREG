@@ -2,7 +2,7 @@
 shinyUI(fluidPage(theme="theme.css",title="WREG",
                   tags$head(tags$link(rel = "icon", type = "image/png", href = "favicon-16x16.png")),
                   tags$style(type="text/css", ".shiny-output-error-errorMessage{ color:red; } .leftAlign{ text-align: left !important }"),
-                  navbarPage(img(src="Logo.png", width="80px",height = "40px"),#"WREG",
+                  navbarPage(img(src="Logo.png", width="80px",height = "40px"),
                              tabPanel("Welcome",
                                       titlePanel("Weighted-Multiple-Linear Regression Program"),
                                       h3("WREG Version 2.02"),
